@@ -235,6 +235,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'midwest-bungalow-brick',
+      treeCoverage: { canopyCover: 0.33, streetTreeDensity: 1.2, streetTreeSpacing: 18.3, parkTreeDensity: 1.22, foliageScale: 1.18 },
+      housingDensity: { form: 'suburban', buildingsPerKm2: 1351, footprintCoverage: 0.28, wallEnclosure: 0.43, lotInfill: 0.2, rowhouseAttachment: 0.04, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.22, shrubDensity: 1.28 },
       residential: {
         walls: { clapboard: 0.44, brick: 0.42, stone: 0.04, stucco: 0.04, shake: 0.06 },
         roofs: { flat: 0.04, hip: 0.38, gable: 0.56, gambrel: 0.02 },
@@ -249,9 +251,13 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         downtown_royal_oak: {
+          treeCoverage: { canopyCover: 0.16, streetTreeDensity: 0.68, streetTreeSpacing: 32.4, parkTreeDensity: 1.08, foliageScale: 1.11 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1002, footprintCoverage: 0.4, wallEnclosure: 0.28, lotInfill: 0.2, rowhouseAttachment: 0.74, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 0.79, shrubDensity: 0.74 },
           midrise: { stoneColor: 0x9c4a38, trimColor: 0xded6c4, windowWidth: 2.5, floorHeight: 3.7, storefronts: true }
         },
         vinsetta: {
+          treeCoverage: { canopyCover: 0.33, streetTreeDensity: 1.38, streetTreeSpacing: 15.9, parkTreeDensity: 1.22, foliageScale: 1.2 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1540, footprintCoverage: 0.23, wallEnclosure: 0.28, lotInfill: 0.2, rowhouseAttachment: 0.04, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.32, shrubDensity: 1.38 },
           residential: {
             walls: { clapboard: 0.22, brick: 0.54, stone: 0.14, stucco: 0.06, shake: 0.04 },
             roofs: { flat: 0.02, hip: 0.32, gable: 0.64, gambrel: 0.02 },
@@ -259,6 +265,8 @@ const CITY_PACKS = {
           }
         },
         shrine_northwood: {
+          treeCoverage: { canopyCover: 0.35, streetTreeDensity: 1.23, streetTreeSpacing: 17.9, parkTreeDensity: 1.24, foliageScale: 1.18 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1420, footprintCoverage: 0.21, wallEnclosure: 0.28, lotInfill: 0.2, rowhouseAttachment: 0.04, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.22, shrubDensity: 1.28 },
           residential: {
             walls: { clapboard: 0.38, brick: 0.48, stone: 0.06, stucco: 0.04, shake: 0.04 },
             pitch: { hip: 0.38, gable: 0.48, historic: 0.54 }
@@ -409,6 +417,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'east-bay-craftsman-stucco',
+      treeCoverage: { canopyCover: 0.19, streetTreeDensity: 0.84, streetTreeSpacing: 26.2, parkTreeDensity: 1.05, foliageScale: 1.02 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 1385, footprintCoverage: 0.41, wallEnclosure: 0.65, lotInfill: 0.22, rowhouseAttachment: 0.22, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.08, shrubDensity: 1.05 },
       residential: {
         walls: { clapboard: 0.42, brick: 0.03, stone: 0.02, stucco: 0.40, shake: 0.13 },
         roofs: { flat: 0.28, hip: 0.36, gable: 0.35, gambrel: 0.01 },
@@ -422,6 +432,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         old_oakland: {
+          treeCoverage: { canopyCover: 0.15, streetTreeDensity: 0.79, streetTreeSpacing: 27.8, parkTreeDensity: 1.01, foliageScale: 1.01 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1130, footprintCoverage: 0.4, wallEnclosure: 0.48, lotInfill: 0.22, rowhouseAttachment: 0.22, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.08, shrubDensity: 1.05 },
           style: 'victorian-italianate-commercial-row',
           residential: {
             walls: { clapboard: 0.65, brick: 0.15, stone: 0.05, stucco: 0.10, shake: 0.05 },
@@ -431,6 +443,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xb85c42, trimColor: 0xeadbc4, storefronts: true, fireEscapes: true }
         },
         west_oakland: {
+          treeCoverage: { canopyCover: 0.25, streetTreeDensity: 0.92, streetTreeSpacing: 23.9, parkTreeDensity: 1.12, foliageScale: 1.03 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1508, footprintCoverage: 0.43, wallEnclosure: 0.75, lotInfill: 0.22, rowhouseAttachment: 0.22, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.08, shrubDensity: 1.05 },
           style: 'queen-anne-victorian-cottages',
           residential: {
             walls: { clapboard: 0.72, brick: 0.02, stone: 0.01, stucco: 0.15, shake: 0.10 },
@@ -439,14 +453,20 @@ const CITY_PACKS = {
           }
         },
         chinatown: {
+          treeCoverage: { canopyCover: 0.1, streetTreeDensity: 0.49, streetTreeSpacing: 38.0, parkTreeDensity: 0.95, foliageScale: 0.98 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1159, footprintCoverage: 0.49, wallEnclosure: 0.53, lotInfill: 0.22, rowhouseAttachment: 0.74, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.7, shrubDensity: 0.61 },
           style: 'oakland-chinatown-masonry-shopfronts',
           midrise: { stoneColor: 0xc86446, trimColor: 0xe2b857, storefronts: true, fireEscapes: true }
         },
         uptown: {
+          treeCoverage: { canopyCover: 0.18, streetTreeDensity: 0.83, streetTreeSpacing: 26.5, parkTreeDensity: 1.04, foliageScale: 1.02 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1154, footprintCoverage: 0.44, wallEnclosure: 0.88, lotInfill: 0.22, rowhouseAttachment: 0.22, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.08, shrubDensity: 1.05 },
           style: 'art-deco-terracotta-theater-district',
           midrise: { stoneColor: 0x7a9e95, trimColor: 0xd9c282, storefronts: true, fireEscapes: true }
         },
         piedmont_ave: {
+          treeCoverage: { canopyCover: 0.34, streetTreeDensity: 1.22, streetTreeSpacing: 18.0, parkTreeDensity: 1.22, foliageScale: 1.07 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1680, footprintCoverage: 0.26, wallEnclosure: 0.39, lotInfill: 0.22, rowhouseAttachment: 0.14, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.21, shrubDensity: 1.21 },
           style: 'east-bay-craftsman-bungalow',
           residential: {
             walls: { clapboard: 0.45, brick: 0.03, stone: 0.04, stucco: 0.22, shake: 0.26 },
@@ -591,6 +611,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'midwest-collegiate-clapboard',
+      treeCoverage: { canopyCover: 0.31, streetTreeDensity: 1.14, streetTreeSpacing: 19.3, parkTreeDensity: 1.24, foliageScale: 1.18 },
+      housingDensity: { form: 'suburban', buildingsPerKm2: 1180, footprintCoverage: 0.29, wallEnclosure: 0.62, lotInfill: 0.25, rowhouseAttachment: 0.08, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.24, shrubDensity: 1.25 },
       residential: {
         walls: { clapboard: 0.62, brick: 0.22, stone: 0.04, stucco: 0.06, shake: 0.06 },
         roofs: { flat: 0.04, hip: 0.36, gable: 0.56, gambrel: 0.04 },
@@ -604,6 +626,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         old_west_side: {
+          treeCoverage: { canopyCover: 0.48, streetTreeDensity: 1.38, streetTreeSpacing: 15.9, parkTreeDensity: 1.39, foliageScale: 1.21 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1180, footprintCoverage: 0.19, wallEnclosure: 0.46, lotInfill: 0.25, rowhouseAttachment: 0.05, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.32, shrubDensity: 1.38 },
           residential: {
             walls: { clapboard: 0.72, brick: 0.18, stone: 0.02, stucco: 0.04, shake: 0.04 },
             roofs: { flat: 0.02, hip: 0.28, gable: 0.66, gambrel: 0.04 },
@@ -612,9 +636,13 @@ const CITY_PACKS = {
           }
         },
         kerrytown: {
+          treeCoverage: { canopyCover: 0.32, streetTreeDensity: 1.15, streetTreeSpacing: 19.1, parkTreeDensity: 1.25, foliageScale: 1.18 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1180, footprintCoverage: 0.24, wallEnclosure: 0.43, lotInfill: 0.25, rowhouseAttachment: 0.08, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.24, shrubDensity: 1.25 },
           midrise: { stoneColor: 0x8e4232, trimColor: 0xd9ccb0, windowWidth: 2.3, floorHeight: 3.6, storefronts: true }
         },
         central_campus: {
+          treeCoverage: { canopyCover: 0.15, streetTreeDensity: 0.65, streetTreeSpacing: 33.8, parkTreeDensity: 1.1, foliageScale: 1.11 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1180, footprintCoverage: 0.46, wallEnclosure: 0.74, lotInfill: 0.25, rowhouseAttachment: 0.74, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 0.81, shrubDensity: 0.72 },
           midrise: { stoneColor: 0x8a4632, trimColor: 0xd9ccb0, windowWidth: 2.2, floorHeight: 4.2 }
         }
       },
@@ -771,6 +799,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'manhattan-brownstone-prewar',
+      treeCoverage: { canopyCover: 0.21, streetTreeDensity: 0.68, streetTreeSpacing: 32.4, parkTreeDensity: 1.28, foliageScale: 0.81 },
+      housingDensity: { form: 'highrise', buildingsPerKm2: 3200, footprintCoverage: 0.58, wallEnclosure: 0.62, lotInfill: 0.1, rowhouseAttachment: 0.88, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.42, shrubDensity: 0.35 },
       residential: {
         walls: { clapboard: 0.08, brick: 0.64, stone: 0.22, stucco: 0.04, shake: 0.02 },
         roofs: { flat: 0.86, hip: 0.06, gable: 0.06, gambrel: 0.02 },
@@ -785,15 +815,23 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         harlem: {
+          treeCoverage: { canopyCover: 0.15, streetTreeDensity: 0.59, streetTreeSpacing: 37.3, parkTreeDensity: 1.15, foliageScale: 0.8 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3200, footprintCoverage: 0.6, wallEnclosure: 0.43, lotInfill: 0.1, rowhouseAttachment: 0.88, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.42, shrubDensity: 0.35 },
           midrise: { stoneColor: 0x6e4232, trimColor: 0xb8a894, windowWidth: 2.2, floorHeight: 3.5, fireEscapes: true, waterTowerProb: 0.30 }
         },
         village: {
+          treeCoverage: { canopyCover: 0.12, streetTreeDensity: 0.54, streetTreeSpacing: 38.0, parkTreeDensity: 1.08, foliageScale: 0.79 },
+          housingDensity: { form: 'highrise', buildingsPerKm2: 3200, footprintCoverage: 0.6, wallEnclosure: 0.78, lotInfill: 0.1, rowhouseAttachment: 0.88, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.42, shrubDensity: 0.35 },
           midrise: { stoneColor: 0x8e3e2e, trimColor: 0xd8cfc0, windowWidth: 2.2, floorHeight: 3.4, fireEscapes: true, storefronts: true, waterTowerProb: 0.32 }
         },
         soho: {
+          treeCoverage: { canopyCover: 0.12, streetTreeDensity: 0.54, streetTreeSpacing: 38.0, parkTreeDensity: 1.08, foliageScale: 0.79 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3200, footprintCoverage: 0.68, wallEnclosure: 0.78, lotInfill: 0.1, rowhouseAttachment: 0.88, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.42, shrubDensity: 0.35 },
           midrise: { stoneColor: 0xd8d2c6, trimColor: 0x585c62, windowWidth: 2.8, floorHeight: 4.1, fireEscapes: true, storefronts: true, waterTowerProb: 0.34 }
         },
         uws: {
+          treeCoverage: { canopyCover: 0.12, streetTreeDensity: 0.54, streetTreeSpacing: 38.0, parkTreeDensity: 1.08, foliageScale: 0.79 },
+          housingDensity: { form: 'highrise', buildingsPerKm2: 3200, footprintCoverage: 0.6, wallEnclosure: 0.78, lotInfill: 0.1, rowhouseAttachment: 0.88, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.42, shrubDensity: 0.35 },
           midrise: { stoneColor: 0xb88468, trimColor: 0xd8cdb8, windowWidth: 2.4, floorHeight: 3.6, fireEscapes: true, waterTowerProb: 0.28 }
         }
       },
@@ -937,6 +975,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'florida-coastal-stucco-tile',
+      treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.94, streetTreeSpacing: 23.4, parkTreeDensity: 1.07, foliageScale: 1.07 },
+      housingDensity: { form: 'suburban', buildingsPerKm2: 835, footprintCoverage: 0.3, wallEnclosure: 0.37, lotInfill: 0.68, rowhouseAttachment: 0.06, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 0.95, shrubDensity: 1.22 },
       residential: {
         walls: { clapboard: 0.08, brick: 0.02, stone: 0.04, stucco: 0.84, shake: 0.02 },
         roofs: { flat: 0.34, hip: 0.50, gable: 0.16, gambrel: 0.0 },
@@ -952,9 +992,13 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         pompano_beach_fisher_family_pier: {
+          treeCoverage: { canopyCover: 0.13, streetTreeDensity: 0.81, streetTreeSpacing: 27.2, parkTreeDensity: 0.96, foliageScale: 1.06 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1150, footprintCoverage: 0.21, wallEnclosure: 0.27, lotInfill: 0.68, rowhouseAttachment: 0.06, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 0.95, shrubDensity: 1.22 },
           midrise: { stoneColor: 0xf4f2ec, trimColor: 0x52b8c4, windowWidth: 3.2, floorHeight: 3.6, storefronts: true }
         },
         harbor_village_finger_canals: {
+          treeCoverage: { canopyCover: 0.31, streetTreeDensity: 1.23, streetTreeSpacing: 17.9, parkTreeDensity: 1.15, foliageScale: 1.11 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 963, footprintCoverage: 0.19, wallEnclosure: 0.27, lotInfill: 0.68, rowhouseAttachment: 0.04, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.06, shrubDensity: 1.38 },
           residential: {
             walls: { clapboard: 0.04, brick: 0.02, stone: 0.04, stucco: 0.88, shake: 0.02 },
             roofs: { flat: 0.24, hip: 0.64, gable: 0.12, gambrel: 0.0 },
@@ -962,6 +1006,8 @@ const CITY_PACKS = {
           }
         },
         old_town_pompano: {
+          treeCoverage: { canopyCover: 0.31, streetTreeDensity: 1.05, streetTreeSpacing: 21.0, parkTreeDensity: 1.15, foliageScale: 1.09 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 835, footprintCoverage: 0.27, wallEnclosure: 0.28, lotInfill: 0.68, rowhouseAttachment: 0.06, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 0.95, shrubDensity: 1.22 },
           midrise: { stoneColor: 0xe6d4be, trimColor: 0xc86448, windowWidth: 2.6, floorHeight: 3.5, storefronts: true }
         }
       },
@@ -1159,6 +1205,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'sf-victorian-edwardian-marina',
+      treeCoverage: { canopyCover: 0.13, streetTreeDensity: 0.67, streetTreeSpacing: 32.8, parkTreeDensity: 1.0, foliageScale: 0.88 },
+      housingDensity: { form: 'rowhouse', buildingsPerKm2: 1952, footprintCoverage: 0.51, wallEnclosure: 0.66, lotInfill: 0.15, rowhouseAttachment: 0.78, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.65, shrubDensity: 0.58 },
       residential: {
         walls: { clapboard: 0.48, brick: 0.04, stone: 0.02, stucco: 0.42, shake: 0.04 },
         roofs: { flat: 0.46, hip: 0.24, gable: 0.28, gambrel: 0.02 },
@@ -1174,9 +1222,13 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         chinatown: {
+          treeCoverage: { canopyCover: 0.05, streetTreeDensity: 0.37, streetTreeSpacing: 38.0, parkTreeDensity: 0.87, foliageScale: 0.85 },
+          housingDensity: { form: 'highrise', buildingsPerKm2: 2187, footprintCoverage: 0.64, wallEnclosure: 0.98, lotInfill: 0.15, rowhouseAttachment: 0.78, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.42, shrubDensity: 0.34 },
           midrise: { stoneColor: 0xc44b38, trimColor: 0xe8be52, windowWidth: 2.2, floorHeight: 3.5, storefronts: true, fireEscapes: true }
         },
         alamo_square_painted_ladies: {
+          treeCoverage: { canopyCover: 0.16, streetTreeDensity: 0.72, streetTreeSpacing: 30.6, parkTreeDensity: 1.05, foliageScale: 0.89 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2198, footprintCoverage: 0.52, wallEnclosure: 0.6, lotInfill: 0.15, rowhouseAttachment: 0.78, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.65, shrubDensity: 0.58 },
           residential: {
             walls: { clapboard: 0.78, brick: 0.02, stone: 0.02, stucco: 0.14, shake: 0.04 },
             roofs: { flat: 0.16, hip: 0.24, gable: 0.58, gambrel: 0.02 },
@@ -1185,6 +1237,8 @@ const CITY_PACKS = {
           }
         },
         haight_ashbury: {
+          treeCoverage: { canopyCover: 0.16, streetTreeDensity: 0.72, streetTreeSpacing: 30.6, parkTreeDensity: 1.05, foliageScale: 0.89 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2413, footprintCoverage: 0.52, wallEnclosure: 0.6, lotInfill: 0.15, rowhouseAttachment: 0.78, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.65, shrubDensity: 0.58 },
           residential: {
             walls: { clapboard: 0.74, brick: 0.04, stone: 0.02, stucco: 0.16, shake: 0.04 },
             roofs: { flat: 0.18, hip: 0.26, gable: 0.54, gambrel: 0.02 },
@@ -1194,6 +1248,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xc97b58, trimColor: 0xf2ece0, windowWidth: 2.3, floorHeight: 3.6, storefronts: true }
         },
         marina_palace_of_fine_arts: {
+          treeCoverage: { canopyCover: 0.16, streetTreeDensity: 0.72, streetTreeSpacing: 30.6, parkTreeDensity: 1.05, foliageScale: 0.89 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2850, footprintCoverage: 0.46, wallEnclosure: 0.6, lotInfill: 0.15, rowhouseAttachment: 0.78, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.65, shrubDensity: 0.58 },
           residential: {
             walls: { clapboard: 0.18, brick: 0.04, stone: 0.02, stucco: 0.74, shake: 0.02 },
             roofs: { flat: 0.56, hip: 0.34, gable: 0.10, gambrel: 0.0 },
@@ -1201,6 +1257,8 @@ const CITY_PACKS = {
           }
         },
         sunset_district: {
+          treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.98, streetTreeSpacing: 22.4, parkTreeDensity: 1.16, foliageScale: 0.92 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2702, footprintCoverage: 0.39, wallEnclosure: 0.6, lotInfill: 0.15, rowhouseAttachment: 0.51, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.73, shrubDensity: 0.67 },
           residential: {
             walls: { clapboard: 0.16, brick: 0.02, stone: 0.02, stucco: 0.78, shake: 0.02 },
             roofs: { flat: 0.64, hip: 0.26, gable: 0.10, gambrel: 0.0 },
@@ -1208,9 +1266,13 @@ const CITY_PACKS = {
           }
         },
         north_beach_little_italy: {
+          treeCoverage: { canopyCover: 0.12, streetTreeDensity: 0.66, streetTreeSpacing: 33.3, parkTreeDensity: 0.98, foliageScale: 0.88 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2760, footprintCoverage: 0.62, wallEnclosure: 0.77, lotInfill: 0.15, rowhouseAttachment: 0.78, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.65, shrubDensity: 0.58 },
           midrise: { stoneColor: 0xe8dcc4, trimColor: 0x3b6e52, windowWidth: 2.3, floorHeight: 3.5, storefronts: true, fireEscapes: true }
         },
         south_of_market_soma: {
+          treeCoverage: { canopyCover: 0.1, streetTreeDensity: 0.43, streetTreeSpacing: 38.0, parkTreeDensity: 0.95, foliageScale: 0.86 },
+          housingDensity: { form: 'highrise', buildingsPerKm2: 1770, footprintCoverage: 0.62, wallEnclosure: 0.4, lotInfill: 0.15, rowhouseAttachment: 0.78, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.42, shrubDensity: 0.34 },
           midrise: { stoneColor: 0x9c4836, trimColor: 0xb8b2a6, windowWidth: 2.8, floorHeight: 4.0, storefronts: true }
         }
       },
@@ -1356,6 +1418,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'sydney-sandstone-federation-terrace',
+      treeCoverage: { canopyCover: 0.18, streetTreeDensity: 0.8, streetTreeSpacing: 27.5, parkTreeDensity: 1.08, foliageScale: 1.02 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 1950, footprintCoverage: 0.45, wallEnclosure: 0.68, lotInfill: 0.3, rowhouseAttachment: 0.52, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.88, shrubDensity: 0.92 },
       residential: {
         walls: { clapboard: 0.16, brick: 0.42, stone: 0.14, stucco: 0.26, shake: 0.02 },
         roofs: { flat: 0.24, hip: 0.44, gable: 0.32, gambrel: 0.0 },
@@ -1372,6 +1436,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         the_rocks: {
+          treeCoverage: { canopyCover: 0.28, streetTreeDensity: 0.93, streetTreeSpacing: 23.7, parkTreeDensity: 1.2, foliageScale: 1.04 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 1950, footprintCoverage: 0.48, wallEnclosure: 0.53, lotInfill: 0.3, rowhouseAttachment: 0.74, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.88, shrubDensity: 0.92 },
           style: 'colonial-sydney-sandstone-bond-stores',
           residential: {
             walls: { clapboard: 0.04, brick: 0.36, stone: 0.48, stucco: 0.12, shake: 0.0 },
@@ -1381,6 +1447,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xd6bc8c, trimColor: 0x9c8258, storefronts: true }
         },
         potts_point_woolloomooloo: {
+          treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.87, streetTreeSpacing: 25.3, parkTreeDensity: 1.14, foliageScale: 1.03 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1950, footprintCoverage: 0.37, wallEnclosure: 0.48, lotInfill: 0.3, rowhouseAttachment: 0.52, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.88, shrubDensity: 0.92 },
           style: 'victorian-filigree-terrace-art-deco',
           residential: {
             walls: { clapboard: 0.05, brick: 0.35, stone: 0.10, stucco: 0.50, shake: 0.0 },
@@ -1390,6 +1458,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x9c4632, trimColor: 0xf2ead8, storefronts: true }
         },
         milsons_point_kirribilli: {
+          treeCoverage: { canopyCover: 0.2, streetTreeDensity: 0.83, streetTreeSpacing: 26.5, parkTreeDensity: 1.1, foliageScale: 1.03 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1950, footprintCoverage: 0.47, wallEnclosure: 0.72, lotInfill: 0.3, rowhouseAttachment: 0.52, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.88, shrubDensity: 0.92 },
           style: 'federation-queen-anne-redbrick-terrace',
           residential: {
             walls: { clapboard: 0.08, brick: 0.68, stone: 0.08, stucco: 0.16, shake: 0.0 },
@@ -1533,6 +1603,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'venetian-gothic-terracotta-plaster',
+      treeCoverage: { canopyCover: 0.05, streetTreeDensity: 0.21, streetTreeSpacing: 38.0, parkTreeDensity: 0.5, foliageScale: 0.76 },
+      housingDensity: { form: 'rowhouse', buildingsPerKm2: 3650, footprintCoverage: 0.57, wallEnclosure: 0.68, lotInfill: 0.15, rowhouseAttachment: 0.94, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.25, shrubDensity: 0.28 },
       residential: {
         walls: { clapboard: 0.0, brick: 0.28, stone: 0.10, stucco: 0.62, shake: 0.0 },
         roofs: { flat: 0.06, hip: 0.66, gable: 0.28, gambrel: 0.0 },
@@ -1549,6 +1621,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         rialto_bridge_grand_canal: {
+          treeCoverage: { canopyCover: 0.05, streetTreeDensity: 0.21, streetTreeSpacing: 38.0, parkTreeDensity: 0.5, foliageScale: 0.76 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3650, footprintCoverage: 0.62, wallEnclosure: 0.8, lotInfill: 0.15, rowhouseAttachment: 0.94, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.25, shrubDensity: 0.28 },
           style: 'grand-canal-istrian-stone-palazzi',
           residential: {
             walls: { clapboard: 0.0, brick: 0.18, stone: 0.28, stucco: 0.54, shake: 0.0 },
@@ -1557,6 +1631,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xe8d8be, trimColor: 0xf7f4ec, storefronts: true }
         },
         cannaregio_jewish_ghetto: {
+          treeCoverage: { canopyCover: 0.05, streetTreeDensity: 0.21, streetTreeSpacing: 38.0, parkTreeDensity: 0.5, foliageScale: 0.76 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3650, footprintCoverage: 0.68, wallEnclosure: 0.8, lotInfill: 0.15, rowhouseAttachment: 0.94, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.25, shrubDensity: 0.28 },
           style: 'cannaregio-tall-brick-sestiere',
           residential: {
             walls: { clapboard: 0.0, brick: 0.45, stone: 0.05, stucco: 0.50, shake: 0.0 },
@@ -1565,6 +1641,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xb8523b, trimColor: 0xeadcc6, storefronts: true }
         },
         arsenale_castello: {
+          treeCoverage: { canopyCover: 0.05, streetTreeDensity: 0.21, streetTreeSpacing: 38.0, parkTreeDensity: 0.5, foliageScale: 0.76 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3650, footprintCoverage: 0.62, wallEnclosure: 0.8, lotInfill: 0.15, rowhouseAttachment: 0.94, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.25, shrubDensity: 0.28 },
           style: 'venetian-arsenale-red-brick-fortress',
           residential: {
             walls: { clapboard: 0.0, brick: 0.62, stone: 0.08, stucco: 0.30, shake: 0.0 }
@@ -1707,6 +1785,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'dutch-canal-gabled-brick',
+      treeCoverage: { canopyCover: 0.24, streetTreeDensity: 0.97, streetTreeSpacing: 22.7, parkTreeDensity: 1.1, foliageScale: 0.98 },
+      housingDensity: { form: 'rowhouse', buildingsPerKm2: 2950, footprintCoverage: 0.53, wallEnclosure: 0.69, lotInfill: 0.2, rowhouseAttachment: 0.9, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.38, shrubDensity: 0.52 },
       residential: {
         walls: { clapboard: 0.04, brick: 0.86, stone: 0.06, stucco: 0.04, shake: 0.0 },
         roofs: { flat: 0.06, hip: 0.08, gable: 0.68, gambrel: 0.18 },
@@ -1722,6 +1802,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         grachtengordel_canal_ring: {
+          treeCoverage: { canopyCover: 0.21, streetTreeDensity: 0.93, streetTreeSpacing: 23.7, parkTreeDensity: 1.07, foliageScale: 0.97 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2950, footprintCoverage: 0.56, wallEnclosure: 0.64, lotInfill: 0.2, rowhouseAttachment: 0.9, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.38, shrubDensity: 0.52 },
           style: 'golden-age-step-and-bell-gabled-canal-houses',
           residential: {
             walls: { clapboard: 0.0, brick: 0.90, stone: 0.08, stucco: 0.02, shake: 0.0 },
@@ -1732,6 +1814,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x6e2e24, trimColor: 0xf7f5ef, storefronts: true }
         },
         jordaan_westerkerk: {
+          treeCoverage: { canopyCover: 0.21, streetTreeDensity: 0.93, streetTreeSpacing: 23.7, parkTreeDensity: 1.07, foliageScale: 0.97 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2950, footprintCoverage: 0.56, wallEnclosure: 0.64, lotInfill: 0.2, rowhouseAttachment: 0.9, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.38, shrubDensity: 0.52 },
           style: 'jordaan-artisan-brick-gable-rows',
           residential: {
             walls: { clapboard: 0.02, brick: 0.92, stone: 0.02, stucco: 0.04, shake: 0.0 },
@@ -1741,6 +1825,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x85382a, trimColor: 0xf2eee4, storefronts: true }
         },
         de_pijp_albert_cuyp: {
+          treeCoverage: { canopyCover: 0.21, streetTreeDensity: 0.93, streetTreeSpacing: 23.7, parkTreeDensity: 1.07, foliageScale: 0.97 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2950, footprintCoverage: 0.56, wallEnclosure: 0.64, lotInfill: 0.2, rowhouseAttachment: 0.9, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.38, shrubDensity: 0.52 },
           style: 'amsterdam-school-expressionist-brick',
           midrise: { stoneColor: 0x94422e, trimColor: 0xdfd8c8, storefronts: true }
         }
@@ -1878,6 +1964,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'hong-kong-subtropical-podium-tower',
+      treeCoverage: { canopyCover: 0.11, streetTreeDensity: 0.4, streetTreeSpacing: 38.0, parkTreeDensity: 1.14, foliageScale: 0.8 },
+      housingDensity: { form: 'highrise', buildingsPerKm2: 2600, footprintCoverage: 0.58, wallEnclosure: 0.82, lotInfill: 0.12, rowhouseAttachment: 0.82, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.28, shrubDensity: 0.42 },
       residential: {
         walls: { clapboard: 0.02, brick: 0.06, stone: 0.08, stucco: 0.84, shake: 0.0 },
         roofs: { flat: 0.84, hip: 0.10, gable: 0.06, gambrel: 0.0 },
@@ -1892,6 +1980,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         soho_mid_levels_escalator: {
+          treeCoverage: { canopyCover: 0.2, streetTreeDensity: 0.48, streetTreeSpacing: 38.0, parkTreeDensity: 1.28, foliageScale: 0.81 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2600, footprintCoverage: 0.64, wallEnclosure: 0.74, lotInfill: 0.12, rowhouseAttachment: 0.82, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.28, shrubDensity: 0.42 },
           style: 'tong-lau-verandah-shophouses',
           residential: {
             walls: { clapboard: 0.0, brick: 0.12, stone: 0.08, stucco: 0.80, shake: 0.0 },
@@ -1901,6 +1991,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xd8c8b4, trimColor: 0x4a6b5c, storefronts: true }
         },
         victoria_peak_the_peak: {
+          treeCoverage: { canopyCover: 0.36, streetTreeDensity: 0.72, streetTreeSpacing: 30.6, parkTreeDensity: 1.54, foliageScale: 0.83 },
+          housingDensity: { form: 'highrise', buildingsPerKm2: 2600, footprintCoverage: 0.57, wallEnclosure: 0.74, lotInfill: 0.12, rowhouseAttachment: 0.82, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.28, shrubDensity: 0.48 },
           style: 'peak-subtropical-hillside-villas',
           residential: {
             walls: { clapboard: 0.0, brick: 0.05, stone: 0.25, stucco: 0.70, shake: 0.0 },
@@ -1909,6 +2001,8 @@ const CITY_PACKS = {
           }
         },
         tsim_sha_tsui_avenue_of_stars: {
+          treeCoverage: { canopyCover: 0.12, streetTreeDensity: 0.28, streetTreeSpacing: 38.0, parkTreeDensity: 1.15, foliageScale: 0.79 },
+          housingDensity: { form: 'highrise', buildingsPerKm2: 2600, footprintCoverage: 0.7, wallEnclosure: 0.74, lotInfill: 0.12, rowhouseAttachment: 0.82, maxHouseHeight: 8.8, maxHouseFootprint: 240, porchProbScale: 0.25, shrubDensity: 0.24 },
           style: 'kowloon-neon-podium-commercial',
           midrise: { stoneColor: 0xd4cfc4, trimColor: 0x8c8478, storefronts: true, waterTowerProb: 0.14 }
         }
@@ -2053,6 +2147,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'haussmann-limestone-zinc-mansard',
+      treeCoverage: { canopyCover: 0.11, streetTreeDensity: 0.73, streetTreeSpacing: 30.1, parkTreeDensity: 0.95, foliageScale: 0.93 },
+      housingDensity: { form: 'rowhouse', buildingsPerKm2: 3400, footprintCoverage: 0.64, wallEnclosure: 0.83, lotInfill: 0.15, rowhouseAttachment: 0.92, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.32, shrubDensity: 0.45 },
       residential: {
         walls: { clapboard: 0.0, brick: 0.08, stone: 0.64, stucco: 0.28, shake: 0.0 },
         roofs: { flat: 0.12, hip: 0.56, gable: 0.14, gambrel: 0.18 },
@@ -2068,6 +2164,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         le_marais_hotel_de_ville: {
+          treeCoverage: { canopyCover: 0.19, streetTreeDensity: 0.86, streetTreeSpacing: 25.6, parkTreeDensity: 1.06, foliageScale: 0.94 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3400, footprintCoverage: 0.64, wallEnclosure: 0.74, lotInfill: 0.15, rowhouseAttachment: 0.92, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.32, shrubDensity: 0.45 },
           style: 'marais-17th-century-hotels-particuliers',
           residential: {
             walls: { clapboard: 0.0, brick: 0.24, stone: 0.56, stucco: 0.20, shake: 0.0 },
@@ -2078,6 +2176,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xdfd3ba, trimColor: 0xf4eee0, storefronts: true }
         },
         opera_garnier_grands_boulevards: {
+          treeCoverage: { canopyCover: 0.19, streetTreeDensity: 0.86, streetTreeSpacing: 25.6, parkTreeDensity: 1.06, foliageScale: 0.94 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3400, footprintCoverage: 0.57, wallEnclosure: 0.74, lotInfill: 0.15, rowhouseAttachment: 0.92, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.32, shrubDensity: 0.45 },
           style: 'grand-haussmann-boulevard-limestone',
           residential: {
             walls: { clapboard: 0.0, brick: 0.02, stone: 0.82, stucco: 0.16, shake: 0.0 },
@@ -2086,6 +2186,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xefe8d5, trimColor: 0x4c5866, storefronts: true }
         },
         latin_quarter_pantheon: {
+          treeCoverage: { canopyCover: 0.19, streetTreeDensity: 0.86, streetTreeSpacing: 25.6, parkTreeDensity: 1.06, foliageScale: 0.94 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3400, footprintCoverage: 0.64, wallEnclosure: 0.74, lotInfill: 0.15, rowhouseAttachment: 0.92, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.32, shrubDensity: 0.45 },
           style: 'rive-gauche-sorbonne-plaster-stone',
           midrise: { stoneColor: 0xe2d6be, trimColor: 0xa89c86, storefronts: true }
         }
@@ -2226,6 +2328,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'london-georgian-brick-portland-stone',
+      treeCoverage: { canopyCover: 0.16, streetTreeDensity: 0.75, streetTreeSpacing: 29.3, parkTreeDensity: 1.09, foliageScale: 0.99 },
+      housingDensity: { form: 'rowhouse', buildingsPerKm2: 2750, footprintCoverage: 0.53, wallEnclosure: 0.87, lotInfill: 0.22, rowhouseAttachment: 0.84, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.52, shrubDensity: 0.68 },
       residential: {
         walls: { clapboard: 0.02, brick: 0.68, stone: 0.14, stucco: 0.16, shake: 0.0 },
         roofs: { flat: 0.16, hip: 0.42, gable: 0.36, gambrel: 0.06 },
@@ -2242,6 +2346,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         westminster_big_ben: {
+          treeCoverage: { canopyCover: 0.17, streetTreeDensity: 0.76, streetTreeSpacing: 28.9, parkTreeDensity: 1.1, foliageScale: 0.99 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2750, footprintCoverage: 0.59, wallEnclosure: 0.98, lotInfill: 0.22, rowhouseAttachment: 0.84, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.52, shrubDensity: 0.68 },
           style: 'whitehall-portland-stone-imperial',
           residential: {
             walls: { clapboard: 0.0, brick: 0.35, stone: 0.45, stucco: 0.20, shake: 0.0 }
@@ -2249,6 +2355,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xe6e0d4, trimColor: 0xb5afa2, storefronts: false }
         },
         soho_covent_garden_west_end: {
+          treeCoverage: { canopyCover: 0.22, streetTreeDensity: 0.83, streetTreeSpacing: 26.5, parkTreeDensity: 1.17, foliageScale: 1.0 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2750, footprintCoverage: 0.54, wallEnclosure: 0.62, lotInfill: 0.22, rowhouseAttachment: 0.84, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.52, shrubDensity: 0.68 },
           style: 'soho-georgian-london-stock-brick',
           residential: {
             walls: { clapboard: 0.0, brick: 0.82, stone: 0.08, stucco: 0.10, shake: 0.0 },
@@ -2257,6 +2365,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x8e4232, trimColor: 0xf4f0e6, storefronts: true }
         },
         buckingham_palace_st_james_s_park: {
+          treeCoverage: { canopyCover: 0.41, streetTreeDensity: 1.26, streetTreeSpacing: 17.5, parkTreeDensity: 1.41, foliageScale: 1.05 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2750, footprintCoverage: 0.48, wallEnclosure: 0.62, lotInfill: 0.22, rowhouseAttachment: 0.84, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.52, shrubDensity: 0.78 },
           style: 'belgravia-regency-cream-stucco-terrace',
           residential: {
             walls: { clapboard: 0.0, brick: 0.24, stone: 0.26, stucco: 0.50, shake: 0.0 },
@@ -2398,6 +2508,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'tokyo-modern-tile-kawara',
+      treeCoverage: { canopyCover: 0.16, streetTreeDensity: 0.65, streetTreeSpacing: 33.8, parkTreeDensity: 1.14, foliageScale: 0.84 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 3800, footprintCoverage: 0.47, wallEnclosure: 0.48, lotInfill: 0.28, rowhouseAttachment: 0.62, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.38, shrubDensity: 0.54 },
       residential: {
         walls: { clapboard: 0.18, brick: 0.04, stone: 0.06, stucco: 0.62, shake: 0.10 },
         roofs: { flat: 0.38, hip: 0.32, gable: 0.30, gambrel: 0.0 },
@@ -2413,14 +2525,20 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         ginza_yurakucho: {
+          treeCoverage: { canopyCover: 0.05, streetTreeDensity: 0.33, streetTreeSpacing: 38.0, parkTreeDensity: 0.93, foliageScale: 0.81 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 3800, footprintCoverage: 0.63, wallEnclosure: 0.99, lotInfill: 0.28, rowhouseAttachment: 0.74, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.25, shrubDensity: 0.31 },
           style: 'ginza-curtain-wall-commercial-blocks',
           midrise: { stoneColor: 0xe6e4dc, trimColor: 0x6e7378, storefronts: true }
         },
         tokyo_station_marunouchi: {
+          treeCoverage: { canopyCover: 0.09, streetTreeDensity: 0.37, streetTreeSpacing: 38.0, parkTreeDensity: 1.01, foliageScale: 0.81 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 3800, footprintCoverage: 0.66, wallEnclosure: 0.69, lotInfill: 0.28, rowhouseAttachment: 0.74, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.25, shrubDensity: 0.31 },
           style: 'marunouchi-red-brick-and-granite-financial',
           midrise: { stoneColor: 0x9e4838, trimColor: 0xebe8e0, storefronts: true }
         },
         tokyo_tower_shiba_park: {
+          treeCoverage: { canopyCover: 0.21, streetTreeDensity: 0.86, streetTreeSpacing: 25.6, parkTreeDensity: 1.23, foliageScale: 0.87 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 3800, footprintCoverage: 0.45, wallEnclosure: 0.01, lotInfill: 0.28, rowhouseAttachment: 0.62, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.38, shrubDensity: 0.62 },
           style: 'shiba-zojoji-kawara-tile-temple-precinct',
           residential: {
             walls: { clapboard: 0.28, brick: 0.02, stone: 0.08, stucco: 0.44, shake: 0.18 },
@@ -2563,6 +2681,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'catalan-modernisme-eixample-stone',
+      treeCoverage: { canopyCover: 0.14, streetTreeDensity: 0.81, streetTreeSpacing: 27.2, parkTreeDensity: 0.94, foliageScale: 0.94 },
+      housingDensity: { form: 'rowhouse', buildingsPerKm2: 3100, footprintCoverage: 0.58, wallEnclosure: 0.94, lotInfill: 0.18, rowhouseAttachment: 0.88, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.35, shrubDensity: 0.48 },
       residential: {
         walls: { clapboard: 0.0, brick: 0.16, stone: 0.36, stucco: 0.48, shake: 0.0 },
         roofs: { flat: 0.64, hip: 0.24, gable: 0.12, gambrel: 0.0 },
@@ -2578,6 +2698,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         passeig_de_gracia_eixample: {
+          treeCoverage: { canopyCover: 0.2, streetTreeDensity: 0.9, streetTreeSpacing: 24.4, parkTreeDensity: 1.01, foliageScale: 0.95 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3100, footprintCoverage: 0.62, wallEnclosure: 0.71, lotInfill: 0.18, rowhouseAttachment: 0.88, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.35, shrubDensity: 0.48 },
           style: 'cerda-eixample-chamfered-modernisme',
           residential: {
             walls: { clapboard: 0.0, brick: 0.08, stone: 0.54, stucco: 0.38, shake: 0.0 },
@@ -2587,6 +2709,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xe2cfb2, trimColor: 0xa89578, storefronts: true }
         },
         barri_gotic_cathedral: {
+          treeCoverage: { canopyCover: 0.2, streetTreeDensity: 0.9, streetTreeSpacing: 24.4, parkTreeDensity: 1.01, foliageScale: 0.95 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3100, footprintCoverage: 0.62, wallEnclosure: 0.71, lotInfill: 0.18, rowhouseAttachment: 0.88, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.35, shrubDensity: 0.48 },
           style: 'gothic-quarter-montjuic-sandstone-lanes',
           residential: {
             walls: { clapboard: 0.0, brick: 0.18, stone: 0.62, stucco: 0.20, shake: 0.0 },
@@ -2595,6 +2719,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xc4b092, trimColor: 0x8a7960, storefronts: true }
         },
         la_barceloneta_mediterranean_beach: {
+          treeCoverage: { canopyCover: 0.2, streetTreeDensity: 0.9, streetTreeSpacing: 24.4, parkTreeDensity: 1.01, foliageScale: 0.95 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 3100, footprintCoverage: 0.55, wallEnclosure: 0.71, lotInfill: 0.18, rowhouseAttachment: 0.88, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.35, shrubDensity: 0.48 },
           style: 'barceloneta-maritime-narrow-balcony-blocks',
           residential: {
             walls: { clapboard: 0.0, brick: 0.12, stone: 0.08, stucco: 0.80, shake: 0.0 },
@@ -2735,6 +2861,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'carioca-tropical-modernist-stucco',
+      treeCoverage: { canopyCover: 0.32, streetTreeDensity: 0.96, streetTreeSpacing: 22.9, parkTreeDensity: 1.38, foliageScale: 1.13 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 2250, footprintCoverage: 0.39, wallEnclosure: 0.43, lotInfill: 0.32, rowhouseAttachment: 0.58, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.68, shrubDensity: 1.08 },
       residential: {
         walls: { clapboard: 0.04, brick: 0.14, stone: 0.08, stucco: 0.74, shake: 0.0 },
         roofs: { flat: 0.44, hip: 0.36, gable: 0.20, gambrel: 0.0 },
@@ -2750,6 +2878,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         copacabana_avenida_atlantica: {
+          treeCoverage: { canopyCover: 0.31, streetTreeDensity: 0.95, streetTreeSpacing: 23.2, parkTreeDensity: 1.37, foliageScale: 1.13 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 2250, footprintCoverage: 0.43, wallEnclosure: 0.55, lotInfill: 0.32, rowhouseAttachment: 0.58, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.68, shrubDensity: 1.08 },
           style: 'avenida-atlantica-art-deco-beachfront-wall',
           residential: {
             walls: { clapboard: 0.0, brick: 0.06, stone: 0.10, stucco: 0.84, shake: 0.0 },
@@ -2759,10 +2889,14 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xf2ece0, trimColor: 0xb8afa0, storefronts: true }
         },
         ipanema_arpoador: {
+          treeCoverage: { canopyCover: 0.33, streetTreeDensity: 0.97, streetTreeSpacing: 22.7, parkTreeDensity: 1.39, foliageScale: 1.14 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 2250, footprintCoverage: 0.39, wallEnclosure: 0.11, lotInfill: 0.32, rowhouseAttachment: 0.58, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.68, shrubDensity: 1.08 },
           style: 'ipanema-carioca-modernist-pilotis-blocks',
           midrise: { stoneColor: 0xebe5d8, trimColor: 0x8c98a0, storefronts: true }
         },
         pao_de_acucar_sugarloaf_urca: {
+          treeCoverage: { canopyCover: 0.31, streetTreeDensity: 0.95, streetTreeSpacing: 23.2, parkTreeDensity: 1.37, foliageScale: 1.13 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 2250, footprintCoverage: 0.43, wallEnclosure: 0.55, lotInfill: 0.32, rowhouseAttachment: 0.58, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.68, shrubDensity: 1.08 },
           style: 'urca-lowrise-spanish-revival-waterfront',
           residential: {
             walls: { clapboard: 0.0, brick: 0.12, stone: 0.08, stucco: 0.80, shake: 0.0 },
@@ -2907,6 +3041,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'vancouverism-cedar-craftsman-glass',
+      treeCoverage: { canopyCover: 0.26, streetTreeDensity: 1.06, streetTreeSpacing: 20.8, parkTreeDensity: 1.27, foliageScale: 1.16 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 1850, footprintCoverage: 0.37, wallEnclosure: 0.65, lotInfill: 0.26, rowhouseAttachment: 0.32, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.04, shrubDensity: 1.18 },
       residential: {
         walls: { clapboard: 0.46, brick: 0.06, stone: 0.06, stucco: 0.18, shake: 0.24 },
         roofs: { flat: 0.18, hip: 0.34, gable: 0.46, gambrel: 0.02 },
@@ -2921,6 +3057,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         gastown_steam_clock: {
+          treeCoverage: { canopyCover: 0.33, streetTreeDensity: 1.15, streetTreeSpacing: 19.1, parkTreeDensity: 1.34, foliageScale: 1.17 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1850, footprintCoverage: 0.32, wallEnclosure: 0.41, lotInfill: 0.26, rowhouseAttachment: 0.32, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.04, shrubDensity: 1.18 },
           style: 'gastown-edwardian-redbrick-cornice-warehouses',
           residential: {
             walls: { clapboard: 0.08, brick: 0.78, stone: 0.08, stucco: 0.06, shake: 0.0 },
@@ -2930,6 +3068,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x964a38, trimColor: 0xd8cfc0, storefronts: true, fireEscapes: true }
         },
         west_end_english_bay: {
+          treeCoverage: { canopyCover: 0.29, streetTreeDensity: 1.1, streetTreeSpacing: 20.0, parkTreeDensity: 1.3, foliageScale: 1.16 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1850, footprintCoverage: 0.39, wallEnclosure: 0.81, lotInfill: 0.26, rowhouseAttachment: 0.32, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.04, shrubDensity: 1.18 },
           style: 'west-end-craftsman-and-midcentury-point-towers',
           residential: {
             walls: { clapboard: 0.52, brick: 0.06, stone: 0.04, stucco: 0.14, shake: 0.24 },
@@ -2938,6 +3078,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xdfe4e8, trimColor: 0x6c7c74, storefronts: true }
         },
         granville_island_false_creek: {
+          treeCoverage: { canopyCover: 0.33, streetTreeDensity: 1.15, streetTreeSpacing: 19.1, parkTreeDensity: 1.34, foliageScale: 1.17 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1850, footprintCoverage: 0.32, wallEnclosure: 0.41, lotInfill: 0.26, rowhouseAttachment: 0.32, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.04, shrubDensity: 1.18 },
           style: 'granville-industrial-timber-sheds-and-lofts',
           midrise: { stoneColor: 0xb87a4b, trimColor: 0x3b4852, storefronts: true }
         }
@@ -3074,6 +3216,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'cape-dutch-bo-kaap-stucco',
+      treeCoverage: { canopyCover: 0.26, streetTreeDensity: 0.84, streetTreeSpacing: 26.2, parkTreeDensity: 1.14, foliageScale: 1.0 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 1720, footprintCoverage: 0.35, wallEnclosure: 0.43, lotInfill: 0.34, rowhouseAttachment: 0.48, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.86, shrubDensity: 0.95 },
       residential: {
         walls: { clapboard: 0.04, brick: 0.12, stone: 0.08, stucco: 0.76, shake: 0.0 },
         roofs: { flat: 0.42, hip: 0.28, gable: 0.30, gambrel: 0.0 },
@@ -3089,6 +3233,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         bo_kaap_malay_quarter: {
+          treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.81, streetTreeSpacing: 27.2, parkTreeDensity: 1.11, foliageScale: 1.0 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1720, footprintCoverage: 0.34, wallEnclosure: 0.44, lotInfill: 0.34, rowhouseAttachment: 0.48, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.86, shrubDensity: 0.95 },
           style: 'bo-kaap-bright-polychrome-flat-parapet-terraces',
           residential: {
             walls: { clapboard: 0.0, brick: 0.02, stone: 0.02, stucco: 0.96, shake: 0.0 },
@@ -3098,10 +3244,14 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0xffbe0b, trimColor: 0xf7f5ef, storefronts: true }
         },
         v_a_waterfront: {
+          treeCoverage: { canopyCover: 0.16, streetTreeDensity: 0.72, streetTreeSpacing: 30.6, parkTreeDensity: 1.03, foliageScale: 0.99 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1720, footprintCoverage: 0.28, wallEnclosure: 0.44, lotInfill: 0.34, rowhouseAttachment: 0.48, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.86, shrubDensity: 0.95 },
           style: 'victorian-harbour-clocktower-warehouses',
           midrise: { stoneColor: 0xb8523b, trimColor: 0xf5f2ea, storefronts: true }
         },
         company_s_garden_parliament: {
+          treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.81, streetTreeSpacing: 27.2, parkTreeDensity: 1.11, foliageScale: 1.0 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1720, footprintCoverage: 0.34, wallEnclosure: 0.44, lotInfill: 0.34, rowhouseAttachment: 0.48, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.86, shrubDensity: 0.95 },
           style: 'cape-dutch-whitewashed-gabled-manor',
           residential: {
             walls: { clapboard: 0.0, brick: 0.08, stone: 0.08, stucco: 0.84, shake: 0.0 },
@@ -3245,6 +3395,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'chicago-school-brick-greystone-miesian',
+      treeCoverage: { canopyCover: 0.19, streetTreeDensity: 0.81, streetTreeSpacing: 27.2, parkTreeDensity: 1.05, foliageScale: 0.96 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 2450, footprintCoverage: 0.46, wallEnclosure: 0.63, lotInfill: 0.22, rowhouseAttachment: 0.64, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.78, shrubDensity: 0.72 },
       residential: {
         walls: { clapboard: 0.16, brick: 0.62, stone: 0.18, stucco: 0.02, shake: 0.02 },
         roofs: { flat: 0.64, hip: 0.18, gable: 0.16, gambrel: 0.02 },
@@ -3259,10 +3411,14 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         the_loop_state_madison: {
+          treeCoverage: { canopyCover: 0.13, streetTreeDensity: 0.5, streetTreeSpacing: 38.0, parkTreeDensity: 0.98, foliageScale: 0.92 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 2450, footprintCoverage: 0.55, wallEnclosure: 0.57, lotInfill: 0.22, rowhouseAttachment: 0.74, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.51, shrubDensity: 0.42 },
           style: 'chicago-school-terracotta-bay-window-commercial',
           midrise: { stoneColor: 0x964836, trimColor: 0xd4cab8, storefronts: true, fireEscapes: true, waterTowerProb: 0.24 }
         },
         river_north_merchandise_mart: {
+          treeCoverage: { canopyCover: 0.2, streetTreeDensity: 0.83, streetTreeSpacing: 26.5, parkTreeDensity: 1.07, foliageScale: 0.96 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 2450, footprintCoverage: 0.44, wallEnclosure: 0.57, lotInfill: 0.22, rowhouseAttachment: 0.64, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.78, shrubDensity: 0.72 },
           style: 'river-north-heavy-timber-brick-lofts',
           residential: {
             walls: { clapboard: 0.04, brick: 0.78, stone: 0.16, stucco: 0.02, shake: 0.0 },
@@ -3271,6 +3427,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x8e4232, trimColor: 0xc8bca8, storefronts: true, fireEscapes: true, waterTowerProb: 0.22 }
         },
         magnificent_mile_875_n_michigan: {
+          treeCoverage: { canopyCover: 0.2, streetTreeDensity: 0.83, streetTreeSpacing: 26.5, parkTreeDensity: 1.07, foliageScale: 0.96 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 2450, footprintCoverage: 0.44, wallEnclosure: 0.57, lotInfill: 0.22, rowhouseAttachment: 0.64, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 0.78, shrubDensity: 0.72 },
           style: 'michigan-ave-limestone-beaux-arts-and-miesian',
           midrise: { stoneColor: 0xe6dfd0, trimColor: 0x9e9585, storefronts: true }
         }
@@ -3412,6 +3570,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'boston-beacon-hill-redbrick-triple-decker',
+      treeCoverage: { canopyCover: 0.19, streetTreeDensity: 0.83, streetTreeSpacing: 26.5, parkTreeDensity: 1.06, foliageScale: 0.98 },
+      housingDensity: { form: 'rowhouse', buildingsPerKm2: 2680, footprintCoverage: 0.44, wallEnclosure: 0.63, lotInfill: 0.2, rowhouseAttachment: 0.76, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.72, shrubDensity: 0.74 },
       residential: {
         walls: { clapboard: 0.42, brick: 0.44, stone: 0.06, stucco: 0.02, shake: 0.06 },
         roofs: { flat: 0.34, hip: 0.24, gable: 0.34, gambrel: 0.08 },
@@ -3426,6 +3586,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         public_garden_beacon_hill: {
+          treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.89, streetTreeSpacing: 24.7, parkTreeDensity: 1.11, foliageScale: 0.99 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2680, footprintCoverage: 0.52, wallEnclosure: 0.6, lotInfill: 0.2, rowhouseAttachment: 0.76, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.72, shrubDensity: 0.74 },
           style: 'beacon-hill-federal-redbrick-rowhouses',
           residential: {
             walls: { clapboard: 0.04, brick: 0.88, stone: 0.06, stucco: 0.02, shake: 0.0 },
@@ -3435,6 +3597,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x8e382a, trimColor: 0xf2eee4, storefronts: false, fireEscapes: true }
         },
         copley_square_back_bay: {
+          treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.89, streetTreeSpacing: 24.7, parkTreeDensity: 1.11, foliageScale: 0.99 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2680, footprintCoverage: 0.52, wallEnclosure: 0.6, lotInfill: 0.2, rowhouseAttachment: 0.76, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.72, shrubDensity: 0.74 },
           style: 'back-bay-victorian-brownstone-mansard-rows',
           residential: {
             walls: { clapboard: 0.0, brick: 0.52, stone: 0.46, stucco: 0.02, shake: 0.0 },
@@ -3444,6 +3608,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x7a382c, trimColor: 0xd8cfc0, storefronts: true, fireEscapes: true }
         },
         north_end_paul_revere_mall: {
+          treeCoverage: { canopyCover: 0.23, streetTreeDensity: 0.89, streetTreeSpacing: 24.7, parkTreeDensity: 1.11, foliageScale: 0.99 },
+          housingDensity: { form: 'rowhouse', buildingsPerKm2: 2680, footprintCoverage: 0.52, wallEnclosure: 0.6, lotInfill: 0.2, rowhouseAttachment: 0.76, maxHouseHeight: 12.2, maxHouseFootprint: 310, porchProbScale: 0.72, shrubDensity: 0.74 },
           style: 'north-end-colonial-narrow-brick-tenements',
           residential: {
             walls: { clapboard: 0.14, brick: 0.80, stone: 0.04, stucco: 0.02, shake: 0.0 },
@@ -3587,6 +3753,8 @@ const CITY_PACKS = {
     },
     archetypes: {
       style: 'pnw-craftsman-cedar-timber',
+      treeCoverage: { canopyCover: 0.27, streetTreeDensity: 1.07, streetTreeSpacing: 20.6, parkTreeDensity: 1.26, foliageScale: 1.15 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 1780, footprintCoverage: 0.36, wallEnclosure: 0.5, lotInfill: 0.25, rowhouseAttachment: 0.28, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.06, shrubDensity: 1.16 },
       residential: {
         walls: { clapboard: 0.48, brick: 0.08, stone: 0.06, stucco: 0.12, shake: 0.26 },
         roofs: { flat: 0.16, hip: 0.32, gable: 0.50, gambrel: 0.02 },
@@ -3601,6 +3769,8 @@ const CITY_PACKS = {
       },
       neighborhoods: {
         pioneer_square_lumen_field: {
+          treeCoverage: { canopyCover: 0.32, streetTreeDensity: 1.13, streetTreeSpacing: 19.5, parkTreeDensity: 1.31, foliageScale: 1.16 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1780, footprintCoverage: 0.31, wallEnclosure: 0.4, lotInfill: 0.25, rowhouseAttachment: 0.28, maxHouseHeight: 10.5, maxHouseFootprint: 285, porchProbScale: 1.06, shrubDensity: 1.16 },
           style: 'pioneer-square-romanesque-revival-redbrick',
           residential: {
             walls: { clapboard: 0.06, brick: 0.82, stone: 0.10, stucco: 0.02, shake: 0.0 },
@@ -3609,6 +3779,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x8a3e2e, trimColor: 0xcab9a0, storefronts: true, fireEscapes: true }
         },
         capitol_hill: {
+          treeCoverage: { canopyCover: 0.36, streetTreeDensity: 1.38, streetTreeSpacing: 15.9, parkTreeDensity: 1.35, foliageScale: 1.19 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1780, footprintCoverage: 0.31, wallEnclosure: 0.37, lotInfill: 0.25, rowhouseAttachment: 0.18, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.19, shrubDensity: 1.33 },
           style: 'capitol-hill-brick-courtyard-apartments-and-foursquares',
           residential: {
             walls: { clapboard: 0.44, brick: 0.24, stone: 0.04, stucco: 0.06, shake: 0.22 },
@@ -3617,6 +3789,8 @@ const CITY_PACKS = {
           midrise: { stoneColor: 0x9c4a38, trimColor: 0xe6dfd0, storefronts: true, fireEscapes: true }
         },
         queen_anne_kerry_park: {
+          treeCoverage: { canopyCover: 0.6, streetTreeDensity: 1.38, streetTreeSpacing: 15.9, parkTreeDensity: 1.55, foliageScale: 1.19 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1780, footprintCoverage: 0.25, wallEnclosure: 0.12, lotInfill: 0.25, rowhouseAttachment: 0.18, maxHouseHeight: 9.8, maxHouseFootprint: 285, porchProbScale: 1.19, shrubDensity: 1.33 },
           style: 'queen-anne-hillside-shingle-and-craftsman',
           residential: {
             walls: { clapboard: 0.50, brick: 0.08, stone: 0.04, stucco: 0.06, shake: 0.32 },

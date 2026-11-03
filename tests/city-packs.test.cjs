@@ -48,9 +48,27 @@ describe('Multi-City Pack Manifest & Assets', () => {
       assert.ok(pack.scenicStarts && pack.scenicStarts.car && pack.scenicStarts.person, `Missing scenicStarts for ${cityId}`);
       assert.ok(pack.archetypes && pack.archetypes.residential && pack.archetypes.midrise, `Missing regional building archetypes for ${cityId}`);
       assert.ok(
+        pack.archetypes.treeCoverage &&
+          Number.isFinite(pack.archetypes.treeCoverage.canopyCover) &&
+          Number.isFinite(pack.archetypes.treeCoverage.streetTreeDensity) &&
+          Number.isFinite(pack.archetypes.treeCoverage.foliageScale),
+        `Missing or invalid treeCoverage for ${cityId}`
+      );
+      assert.ok(
+        pack.archetypes.housingDensity &&
+          typeof pack.archetypes.housingDensity.form === 'string' &&
+          Number.isFinite(pack.archetypes.housingDensity.buildingsPerKm2) &&
+          Number.isFinite(pack.archetypes.housingDensity.footprintCoverage),
+        `Missing or invalid housingDensity for ${cityId}`
+      );
+      assert.ok(
         pack.archetypes.neighborhoods && Object.keys(pack.archetypes.neighborhoods).length >= 2,
         `Missing neighborhood archetypes for ${cityId}`
       );
+      for (const [nbKey, nbSpec] of Object.entries(pack.archetypes.neighborhoods)) {
+        assert.ok(nbSpec.treeCoverage && Number.isFinite(nbSpec.treeCoverage.streetTreeDensity), `Missing treeCoverage on neighborhood ${nbKey} in ${cityId}`);
+        assert.ok(nbSpec.housingDensity && typeof nbSpec.housingDensity.form === 'string', `Missing housingDensity on neighborhood ${nbKey} in ${cityId}`);
+      }
       assert.ok(
         pack.archetypes.landmarks && Object.keys(pack.archetypes.landmarks).length >= 3,
         `Missing landmark archetypes for ${cityId}`

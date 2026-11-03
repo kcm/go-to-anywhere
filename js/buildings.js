@@ -524,7 +524,12 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
     const use = landUseAt(b.cx, b.cz);
     const smallShed = footArea < 70 && b.height < 6;
     const isHouseParcel = use !== LAND_USE.SHOPS && use !== LAND_USE.MIXED_USE && use !== LAND_USE.INDUSTRY;
-    if (((b.kind || 1) === 1 && b.height <= 9.5 && footArea < 280 && isHouseParcel) || smallShed) {
+    const nbId = districtAt(b.cx, b.cz);
+    const nbEntry = archNeighborhoods[nbId] || null;
+    const localHouseDens = (nbEntry && nbEntry.housingDensity) || archRoot.housingDensity || null;
+    const maxHouseH = (localHouseDens && localHouseDens.maxHouseHeight) || 9.5;
+    const maxHouseArea = (localHouseDens && localHouseDens.maxHouseFootprint) || 280;
+    if (((b.kind || 1) === 1 && b.height <= maxHouseH && footArea < maxHouseArea && isHouseParcel) || smallShed) {
       b.ground = minGround;
       b.maxGround = maxGround;
       const record = { ...b, tone, ground: minGround, maxGround, garage: smallShed && (b.kind || 1) !== 1 };
@@ -552,8 +557,7 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
               : (b.height < 40 ? (tone < 0.55 ? 1 : 0) : (tone < 0.5 ? 0 : 3));
     // Lamp: the city's land use and historic districts: old brick and stone in a historic district (the University's
     // own buildings keep theirs), stone or brick for churches, plain tan brick for industry and research
-    const nbId = districtAt(b.cx, b.cz);
-    const nbMid = (archNeighborhoods[nbId] && archNeighborhoods[nbId].midrise) || null;
+    const nbMid = (nbEntry && nbEntry.midrise) || null;
     if (kind !== 5 && nbMatIndex.has(nbId) && b.height < (nbMid.maxHeight ?? 38) && tone < (nbMid.prob ?? 0.72)) {
       mat = nbMatIndex.get(nbId);
     } else if (kind !== 5 && historicDistrictAt(b.cx, b.cz) && b.height < 30) mat = tone < 0.68 ? 1 : 0;
@@ -625,6 +629,7 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
   {
     const plazas = pavedPlazaRects || [];
     const sites = parkTreeSites;
+    const cityTreeCov = archRoot.treeCoverage || null;
     const hit = (r, x0, x1, z0, z1) => r.minX < x1 && r.maxX > x0 && r.minZ < z1 && r.maxZ > z0;
     for (const s of (sites && sidewalkBlocks) || []) {
       const x0 = s.cx - s.w / 2;
@@ -636,9 +641,13 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
       if (narrow < 8 || narrow > 26 || Math.max(s.w, s.d) < 20) continue;
       if (allBlocks.some((b) => hit(b, x0 + 2, x1 - 2, z0 + 2, z1 - 2)) || plazas.some((r) => hit(r, x0, x1, z0, z1))) continue;
       if (overlapsParkOrLandmark(x0, x1, z0, z1)) continue;
+      const nbId = districtAt(s.cx, s.cz);
+      const localTreeCov = (archNeighborhoods[nbId] && archNeighborhoods[nbId].treeCoverage) || cityTreeCov;
+      const parkDens = localTreeCov?.parkTreeDensity ?? 1.0;
+      const fScale = localTreeCov?.foliageScale ?? 1.0;
       const alongX = s.w > s.d;
       const len = alongX ? s.w : s.d;
-      const n = Math.max(1, Math.floor((len - 6) / 8));
+      const n = Math.max(1, Math.round(Math.floor((len - 6) / 8) * Math.min(1.4, Math.max(0.5, parkDens))));
       const lanes = narrow >= 15 ? [-narrow / 4, narrow / 4] : [0];
       for (let i = 0; i < n; i++) {
         const t = (i + 0.5) / n - 0.5;
@@ -647,7 +656,7 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
           const x = alongX ? s.cx + u : s.cx + o;
           const z = alongX ? s.cz + o : s.cz + u;
           const h = Math.abs(Math.sin(x * 12.9898 + z * 78.233) * 43758.5453) % 1;
-          sites.push({ x, y: 0.22, z, scale: 0.8 + h * 0.3, species: h < 0.55 ? 1 : 0, tier: 1 });
+          sites.push({ x, y: 0.22, z, scale: (0.8 + h * 0.3) * fScale, species: h < 0.55 ? 1 : 0, tier: 1 });
         }
       }
     }

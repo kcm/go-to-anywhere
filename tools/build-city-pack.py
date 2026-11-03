@@ -2393,6 +2393,129 @@ out body;
                         seen_addr.add(key)
                         addresses.extend([r1(x), r1(z), num])
 
+    # Load Street View + Satellite + OSM sampled archetypes (housingDensity & treeCoverage)
+    sampled_arch_path = os.path.join(CACHE_DIR, f"{city_id}_archetypes.json")
+    sampled_archetypes = {}
+    if os.path.isfile(sampled_arch_path):
+        try:
+            with open(sampled_arch_path, 'r', encoding='utf-8') as f:
+                sampled_archetypes = json.load(f)
+        except Exception:
+            sampled_archetypes = {}
+
+    city_tree_cov = sampled_archetypes.get('treeCoverage') or {
+        'canopyCover': 0.22, 'streetTreeDensity': 0.88, 'streetTreeSpacing': 22.0, 'parkTreeDensity': 1.0, 'foliageScale': 1.0
+    }
+    city_housing_dens = sampled_archetypes.get('housingDensity') or {
+        'form': 'urban', 'buildingsPerKm2': 1800, 'footprintCoverage': 0.38, 'lotInfill': 0.25, 'rowhouseAttachment': 0.30
+    }
+    nb_arch_list = []
+    for nb_id, nb_prof in (sampled_archetypes.get('neighborhoods') or {}).items():
+        c_pt = nb_prof.get('center')
+        if isinstance(c_pt, list) and len(c_pt) == 2:
+            nb_arch_list.append((float(c_pt[0]), float(c_pt[1]), nb_prof.get('treeCoverage') or city_tree_cov, nb_prof.get('housingDensity') or city_housing_dens))
+
+    def local_tree_and_housing(x, z):
+        best_d = 650.0
+        best_tc = city_tree_cov
+        best_hd = city_housing_dens
+        for nx, nz, tc, hd in nb_arch_list:
+            d = math.hypot(x - nx, z - nz)
+            if d < best_d:
+                best_d = d
+                best_tc = tc
+                best_hd = hd
+        return best_tc, best_hd
+
+    # Synthesize residential lot infill along unmapped residential street segments when OSM building footprints are sparse
+    lot_infill_prob = float(city_housing_dens.get('lotInfill', 0.20))
+    if len(buildings) < 28000 and lot_infill_prob > 0.25:
+        existing_cells = defaultdict(list)
+        for b in buildings:
+            existing_cells[(int(b['cx'] // 32), int(b['cz'] // 32))].append((b['cx'], b['cz']))
+
+        def has_nearby_bldg(x, z, min_dist=15.0):
+            gx, gz = int(x // 32), int(z // 32)
+            md2 = min_dist * min_dist
+            for dx in (-1, 0, 1):
+                for dz in (-1, 0, 1):
+                    for bx, bz in existing_cells.get((gx + dx, gz + dz), ()):
+                        if (x - bx) ** 2 + (z - bz) ** 2 < md2:
+                            return True
+            return False
+
+        infill_rng = random.Random(cfg['rng_seed'] + 701)
+        water_infill_prep = prep(water_open.buffer(6.0)) if not water_open.is_empty else None
+        road_infill_prep = prep(road_union.buffer(2.5)) if not road_union.is_empty else None
+        green_infill_union = unary_union([g['geom'] for g in green_spaces]) if green_spaces else Polygon()
+        green_infill_prep = prep(green_infill_union.buffer(2.0)) if not green_infill_union.is_empty else None
+        infill_added = 0
+
+        for r in drive:
+            if r['bridge'] or r['cls'] != 4:
+                continue
+            pts = r['pts']
+            lot_step = 22.0
+            setback = r['w'] * 0.5 + 11.5
+            dist_acc = 0.0
+            next_lot_d = 12.0
+            for i in range(len(pts) - 1):
+                x0, z0 = pts[i]
+                x1, z1 = pts[i + 1]
+                seg_len = math.hypot(x1 - x0, z1 - z0)
+                if seg_len < 2.0:
+                    continue
+                tx, tz = (x1 - x0) / seg_len, (z1 - z0) / seg_len
+                nx, nz = -tz, tx
+                while next_lot_d <= dist_acc + seg_len - 6.0:
+                    local_d = next_lot_d - dist_acc
+                    bx, bz = x0 + tx * local_d, z0 + tz * local_d
+                    _, local_hd = local_tree_and_housing(bx, bz)
+                    p_infill = float(local_hd.get('lotInfill', lot_infill_prob))
+                    for side in (-1, 1):
+                        if infill_rng.random() > p_infill:
+                            continue
+                        lx = bx + nx * setback * side
+                        lz = bz + nz * setback * side
+                        if not (W_X + 25 <= lx <= E_X - 25 and N_Z + 25 <= lz <= S_Z - 25):
+                            continue
+                        if dt_x0 <= lx <= dt_x1 and dt_z0 <= lz <= dt_z1:
+                            continue
+                        if has_nearby_bldg(lx, lz, 15.5):
+                            continue
+                        pt_l = Point(lx, lz)
+                        if water_infill_prep and water_infill_prep.contains(pt_l):
+                            continue
+                        if road_infill_prep and road_infill_prep.contains(pt_l):
+                            continue
+                        if green_infill_prep and green_infill_prep.contains(pt_l):
+                            continue
+                        hw = infill_rng.uniform(5.2, 6.8)
+                        hd_depth = infill_rng.uniform(4.4, 5.8)
+                        corners = [
+                            (lx - tx * hw - nx * hd_depth, lz - tz * hw - nz * hd_depth),
+                            (lx + tx * hw - nx * hd_depth, lz + tz * hw - nz * hd_depth),
+                            (lx + tx * hw + nx * hd_depth, lz + tz * hw + nz * hd_depth),
+                            (lx - tx * hw + nx * hd_depth, lz - tz * hw + nz * hd_depth),
+                        ]
+                        corners.append(corners[0])
+                        poly = Polygon(corners)
+                        h_house = 4 if infill_rng.random() < 0.72 else 7
+                        buildings.append({
+                            'geom': poly,
+                            'cx': lx,
+                            'cz': lz,
+                            'height': h_house,
+                            'kind': 1,
+                            'name': '',
+                        })
+                        existing_cells[(int(lx // 32), int(lz // 32))].append((lx, lz))
+                        infill_added += 1
+                    next_lot_d += lot_step
+                dist_acc += seg_len
+        if infill_added:
+            print(f"  Synthesized {infill_added} residential infill house footprints based on housingDensity={lot_infill_prob}")
+
     packed_bldgs = []
     for b in buildings:
         polys = quantize_bldg(b['geom'].simplify(0.25))
@@ -2674,12 +2797,16 @@ out body;
         minx, minz, maxx, maxz = b['geom'].bounds
         for bx in range(int(minx // 40), int(maxx // 40) + 1):
             for bz in range(int(minz // 40), int(maxz // 40) + 1):
-                bldg_boxes[(bx, bz)].append((minx - 2.0, minz - 2.0, maxx + 2.0, maxz + 2.0))
+                bldg_boxes[(bx, bz)].append((minx - 0.6, minz - 0.6, maxx + 0.6, maxz + 0.6, b['geom']))
 
     def hits_building(x, z):
-        for minx, minz, maxx, maxz in bldg_boxes.get((int(x // 40), int(z // 40)), ()):
+        pt = None
+        for minx, minz, maxx, maxz, bgeom in bldg_boxes.get((int(x // 40), int(z // 40)), ()):
             if minx <= x <= maxx and minz <= z <= maxz:
-                return True
+                if pt is None:
+                    pt = Point(x, z)
+                if bgeom.distance(pt) < 0.6:
+                    return True
         return False
 
     water_prep_trees = prep(water_open.buffer(3.0)) if not water_open.is_empty else None
@@ -2694,26 +2821,39 @@ out body;
                     tree_dict[(qx, qz)] = (k, h_q)
                 woods_flat += [r1(x), r1(z), 1]
 
+    base_tree_spacing = float(city_tree_cov.get('streetTreeSpacing', 22.0))
+    base_tree_density = float(city_tree_cov.get('streetTreeDensity', 0.88))
+    base_foliage_scale = float(city_tree_cov.get('foliageScale', 1.0))
+
     for r in drive:
         if r['bridge'] or r['cls'] not in (2, 3, 4):
             continue
         pts = r['pts']
-        spacing = 22.0 if r['cls'] == 4 else 28.0
+        if len(pts) < 2:
+            continue
+        mx, mz = pts[len(pts) // 2]
+        local_tc, _ = local_tree_and_housing(mx, mz)
+        loc_spacing = float(local_tc.get('streetTreeSpacing', base_tree_spacing))
+        loc_density = float(local_tc.get('streetTreeDensity', base_tree_density))
+        loc_fscale = float(local_tc.get('foliageScale', base_foliage_scale))
+        spacing = loc_spacing if r['cls'] == 4 else loc_spacing * 1.28
+        keep_prob = min(0.88, max(0.18, 0.64 * loc_density))
         offset = r['w'] * 0.5 + 2.0
+        dist_acc = 0.0
+        next_tree_d = spacing * 0.55
         for i in range(len(pts) - 1):
             x0, z0 = pts[i]
             x1, z1 = pts[i + 1]
             seg_len = math.hypot(x1 - x0, z1 - z0)
-            if seg_len < 15.0:
+            if seg_len < 1.5:
                 continue
             tx, tz = (x1 - x0) / seg_len, (z1 - z0) / seg_len
             nx, nz = -tz, tx
-            steps = int(seg_len // spacing)
-            for s in range(1, steps + 1):
-                d = s * spacing - spacing * 0.4
-                bx, bz = x0 + tx * d, z0 + tz * d
+            while next_tree_d <= dist_acc + seg_len - 2.5:
+                local_d = next_tree_d - dist_acc
+                bx, bz = x0 + tx * local_d, z0 + tz * local_d
                 for side in (-1, 1):
-                    if rng.random() < 0.35:
+                    if rng.random() > keep_prob:
                         continue
                     px = bx + nx * offset * side + rng.uniform(-0.3, 0.3)
                     pz = bz + nz * offset * side + rng.uniform(-0.3, 0.3)
@@ -2726,16 +2866,19 @@ out body;
                     qx, qz = int(round(px * 2)), int(round(pz * 2))
                     if (qx, qz) not in tree_dict:
                         sp = rng.choice([0, 1, 2, 3, 3, 4, 4, 5, 6])
-                        h_q = int(round(rng.uniform(8.0, 17.5) * 4))
+                        h_q = min(255, int(round(rng.uniform(8.0, 17.5) * loc_fscale * 4)))
                         tree_dict[(qx, qz)] = (sp, h_q)
+                next_tree_d += spacing
+            dist_acc += seg_len
 
+    park_density_mult = float(city_tree_cov.get('parkTreeDensity', 1.0))
     for gs in green_spaces:
         gp = gs['geom']
         if gp.is_empty or gp.area < 400:
             continue
-        density = 0.0018 if gs['kind'] == 'wood' else 0.0005
+        density = (0.0018 if gs['kind'] == 'wood' else 0.0005) * park_density_mult
         minx, minz, maxx, maxz = gp.bounds
-        n_trees = min(400, int(gp.area * density))
+        n_trees = min(500, int(gp.area * density))
         gp_prep = prep(gp)
         w_kind = 0 if gs['kind'] == 'wood' else 1
         for _ in range(n_trees):
@@ -2905,8 +3048,13 @@ out body;
     ]
 
     landmarks_out = []
-    for lm in cfg['landmarks_meta']:
-        lm_copy = dict(lm)
+    lm_items = (
+        list(cfg['landmarks_meta'].items())
+        if isinstance(cfg['landmarks_meta'], dict)
+        else [(m.get('name', ''), m) for m in cfg['landmarks_meta']]
+    )
+    for lm_name, lm in lm_items:
+        lm_copy = {'name': lm_name, **lm}
         lx, lz = float(lm.get('x', 0)), float(lm.get('z', 0))
         nearby_parts = [
             {
@@ -2970,6 +3118,7 @@ out body;
         'driveways': [],
         'garageDoors': [],
         'landmarks': landmarks_out,
+        'sampledArchetypes': sampled_archetypes,
     }
 
     geodata_js_path = os.path.join(out_dir, 'city-geodata.js')
@@ -3033,9 +3182,16 @@ out body;
     with open(os.path.join(data_dir, 'street-furniture.json'), 'w', encoding='utf-8') as f:
         json.dump({'hydrants': hydrants, 'amenities': park_amenities, 'courts': courts_flat}, f, separators=(',', ':'))
 
-    historic_out = list(cfg.get('historic_districts', []))
+    historic_out = [
+        h if isinstance(h, dict) else {'name': h[0], 'rings': [h[1:]]}
+        for h in cfg.get('historic_districts', [])
+    ]
     with open(os.path.join(data_dir, 'districts.json'), 'w', encoding='utf-8') as f:
         json.dump({'historic': historic_out, 'landuse': landuse_out[:1600]}, f, separators=(',', ':'))
+
+    if sampled_archetypes:
+        with open(os.path.join(data_dir, 'archetypes.json'), 'w', encoding='utf-8') as f:
+            json.dump(sampled_archetypes, f, indent=2)
 
     # Amtrak timetable from cached tools/.cache/amtrak_gtfs.zip
     amtrak_trips = []

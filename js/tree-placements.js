@@ -1,4 +1,6 @@
-import { blockAt } from './city-config.js';
+import { blockAt, districtAt } from './city-config.js';
+import { GEO } from './city-geodata.js';
+import { CITY_PACK } from './city-packs.js';
 
 function hashPos(x, y, z) {
   const s = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453;
@@ -8,6 +10,10 @@ function hashPos(x, y, z) {
 // Fit surveyed street trees to the modeled curbs, preserving nearby park and plaza trees.
 // kinds and heights (tree-geodata.js): each surveyed tree's kind (trees.js SPECIES, 255 not known) and height (m, 0 not known)
 function placeStreetTrees(points, existingSites, isClear, kinds = null, heights = null) {
+  const arch = (GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {};
+  const cityTreeCov = arch.treeCoverage || null;
+  const nbMap = arch.neighborhoods || null;
+
   const cells = new Map();
   const insert = (site) => {
     const key = Math.floor(site.x / 4) + ',' + Math.floor(site.z / 4);
@@ -15,12 +21,12 @@ function placeStreetTrees(points, existingSites, isClear, kinds = null, heights 
     cells.get(key).push(site);
   };
   for (const site of existingSites) insert(site);
-  const occupied = (x, z) => {
+  const occupied = (x, z, minDist2 = 9) => {
     const cx = Math.floor(x / 4), cz = Math.floor(z / 4);
     for (let ix = cx - 1; ix <= cx + 1; ix++) {
       for (let iz = cz - 1; iz <= cz + 1; iz++) {
         for (const s of cells.get(ix + ',' + iz) || []) {
-          if ((s.x - x) ** 2 + (s.z - z) ** 2 < 9) return true;
+          if ((s.x - x) ** 2 + (s.z - z) ** 2 < minDist2) return true;
         }
       }
     }
@@ -30,6 +36,12 @@ function placeStreetTrees(points, existingSites, isClear, kinds = null, heights 
   const sites = [];
   for (let i = 0; i < points.length; i += 2) {
     const sourceX = points[i], sourceZ = points[i + 1];
+    const nbId = nbMap ? districtAt(sourceX, sourceZ) : null;
+    const localTreeCov = (nbId && nbMap[nbId] && nbMap[nbId].treeCoverage) || cityTreeCov;
+    const streetDensity = localTreeCov?.streetTreeDensity ?? 1.0;
+    const foliageScale = localTreeCov?.foliageScale ?? 1.0;
+    if (streetDensity < 0.96 && hashPos(sourceX, 9.3, sourceZ) > streetDensity) continue;
+
     const originalBlock = blockAt(sourceX, sourceZ);
     if (originalBlock && (originalBlock.park > 0.6 || originalBlock.median)) continue;
     const blocks = new Set();
@@ -65,7 +77,8 @@ function placeStreetTrees(points, existingSites, isClear, kinds = null, heights 
     const x = move ? edge.x + nx * inset : sourceX;
     const z = move ? edge.z + nz * inset : sourceZ;
     if ((x - sourceX) ** 2 + (z - sourceZ) ** 2 > 9 || blockAt(x, z) !== edge.block) continue;
-    if (!isClear(x, z) || occupied(x, z)) continue;
+    const minDist2 = streetDensity > 1.08 ? 6.25 : (streetDensity < 0.65 ? 16.0 : 9.0);
+    if (!isClear(x, z) || occupied(x, z, minDist2)) continue;
 
     const crossStreet = Math.abs(edge.dx) > Math.abs(edge.dz);
     const narrow = crossStreet && !!blockAt(x - nx * 14, z - nz * 14);
@@ -81,18 +94,18 @@ function placeStreetTrees(points, existingSites, isClear, kinds = null, heights 
     const kind = kinds ? kinds[i / 2] : 255, height = heights ? heights[i / 2] : 0;
     const real = (site) => {
       if (kind !== 255) site.species = kind;
-      if (height > 0) site.height = height;
+      if (height > 0) site.height = height * foliageScale;
       return site;
     };
     const yaw = Math.atan2(edge.dx, edge.dz);
     if (treeLawn) {
-      const site = real({ x, y: 0.22, z, scale: 0.72 + r * 0.3, species: species < 0.45 ? 0 : species < 0.8 ? 2 : 1,
+      const site = real({ x, y: 0.22, z, scale: (0.72 + r * 0.3) * foliageScale, species: species < 0.45 ? 0 : species < 0.8 ? 2 : 1,
         yaw, sx: 1, tier: 1, noPit: true });
       sites.push(site);
       insert(site);
       continue;
     }
-    const site = real({ x, y: 0.22, z, scale: narrow ? 0.54 + r * 0.1 : 0.6 + r * 0.2,
+    const site = real({ x, y: 0.22, z, scale: (narrow ? 0.54 + r * 0.1 : 0.6 + r * 0.2) * foliageScale,
       species: narrow ? 1 : species < 0.4 ? 0 : species < 0.75 ? 1 : 2,
       yaw, sx: 0.82, tier: crossStreet ? 2 : 1, pitRot: yaw, grate: !crossStreet, pitS });
     sites.push(site);

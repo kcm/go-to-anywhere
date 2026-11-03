@@ -831,18 +831,24 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     const M = rects[0], wingRects = rects.slice(1);
     wings += wingRects.length;
 
-    // Storeys from the surveyed height (the LiDAR roof average, which reads low), a storey and a half where the
-    // second floor lives under the roof
-    const h = Math.max(3, r.height);
-    const storeys = garage ? 0 : h < 4.6 ? 1 : h < 6.6 ? 1.5 : h < 10 ? 2 : 3;
-    const ranch = storeys === 1 && !historic;
-    let fh = garage ? 0.12 : historic ? 0.75 + 0.3 * id(21) : ranch ? 0.3 + 0.2 * id(21) : 0.5 + 0.35 * id(21);
-
     // Walls & regional/neighborhood palette from city pack / sampled Street View archetypes (GEO.archetypes || CITY_PACK.archetypes)
     const archRoot = (GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {};
     const archResBase = archRoot.residential || {};
     const nbId = districtAt(r.cx, r.cz);
-    const nbRes = (archRoot.neighborhoods && archRoot.neighborhoods[nbId] && archRoot.neighborhoods[nbId].residential) || null;
+    const nbEntry = (archRoot.neighborhoods && archRoot.neighborhoods[nbId]) || null;
+    const nbRes = (nbEntry && nbEntry.residential) || null;
+    const localHousingDensity = (nbEntry && nbEntry.housingDensity) || archRoot.housingDensity || {};
+    const rowhouseAttach = localHousingDensity.rowhouseAttachment ?? 0.25;
+    const porchProbScale = localHousingDensity.porchProbScale ?? 1.0;
+    const shrubDensity = localHousingDensity.shrubDensity ?? 1.0;
+
+    // Storeys from the surveyed height (the LiDAR roof average, which reads low), a storey and a half where the
+    // second floor lives under the roof; rowhouse districts favor 2-3 storey attached massing.
+    const h = Math.max(3, r.height);
+    const storeys = garage ? 0 : (rowhouseAttach >= 0.65 && h >= 5.6) ? (h < 8.6 ? 2 : 3) : (h < 4.6 ? 1 : h < 6.6 ? 1.5 : h < 10 ? 2 : 3);
+    const ranch = storeys === 1 && !historic;
+    let fh = garage ? 0.12 : historic ? 0.75 + 0.3 * id(21) : ranch ? 0.3 + 0.2 * id(21) : 0.5 + 0.35 * id(21);
+
     const archRes = nbRes
       ? {
           ...archResBase,
@@ -1137,7 +1143,9 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
       const estSteps = Math.max(1, Math.min(6, Math.round(fh / 0.18)));
       const stepReserve = estSteps * stepDepth + 0.15;
       const craftsman = storeys === 1.5 || (!historic && storeys === 1 && id(17) < 0.3);
-      const hasPorch = maxProj >= 2.35 + stepReserve && segLen >= 3.4 && id(8) < (historic ? 0.85 : ranch ? 0.3 : 0.65);
+      const basePorchProb = (historic ? 0.85 : ranch ? 0.3 : 0.65) * porchProbScale;
+      const hasPorch = maxProj >= 2.35 + stepReserve && segLen >= 3.4 && id(8) < basePorchProb;
+      const shrubScale = 0.85 + 0.15 * Math.min(1.4, shrubDensity);
       const sw = craftsman ? 1.8 : 1.5;
       let outD = 0;
       if (hasPorch) {
@@ -1187,13 +1195,14 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
         }
         // shrubs either side of the steps, and at the porch's ends
         for (const s of [-1, 1]) {
-          const rad = 0.5 + id(24 + s) * 0.3;
+          if (id(25 + s) > shrubDensity) continue;
+          const rad = (0.5 + id(24 + s) * 0.3) * shrubScale;
           if (pd + 0.6 + rad <= maxProj) {
             const p = Q(doorT + s * (sw / 2 + 0.75), pd + 0.6);
             shrubs.push(p.x, groundHeight(p.x, p.z) + 0.42, p.z, rad, ...lin(pick(SHRUBS, id(26 + s))));
           }
           const t = s < 0 ? t0 - 0.9 : t1 + 0.9;
-          const qRad = 0.6 + id(28 + s) * 0.35;
+          const qRad = (0.6 + id(28 + s) * 0.35) * shrubScale;
           if (t > 0.6 && t < S.L - 0.6 && 0.8 + qRad <= maxProj) {
             const q = Q(t, 0.8);
             shrubs.push(q.x, groundHeight(q.x, q.z) + 0.42, q.z, qRad, ...lin(pick(SHRUBS, id(29 + s))));
@@ -1207,7 +1216,8 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
         const stoopBase = Math.min(g, ...sCorners.map((p) => groundHeight(p.x, p.z) + 0.42)) - 0.45;
         addBox(c, stPt, dir.x, dir.z, 1.9, outD, stoopBase, deckY, lin(CONCRETE));
         for (const s of [-1, 1]) for (const t of [doorT + s * 1.9, doorT + s * 3.4]) {
-          const rad = 0.45 + id(31 + t) * 0.3;
+          if (id(30 + s) > shrubDensity) continue;
+          const rad = (0.45 + id(31 + t) * 0.3) * shrubScale;
           if (t < 0.6 || t > S.L - 0.6 || 0.75 + rad > maxProj) continue;
           const p = Q(t, 0.75);
           shrubs.push(p.x, groundHeight(p.x, p.z) + 0.42, p.z, rad, ...lin(pick(SHRUBS, id(33 + t))));
