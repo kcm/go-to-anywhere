@@ -52,6 +52,170 @@ async function loadCityJson(relPath, fallback = null) {
   }
 }
 
+async function probeServerConfig() {
+  try {
+    const res = await fetch('/api/server-config', { cache: 'no-store' });
+    if (!res.ok) return { allowCityRequests: false, locked: true };
+    const data = await res.json();
+    return {
+      allowCityRequests: Boolean(data && data.allowCityRequests),
+      locked: Boolean(!data || data.locked || !data.allowCityRequests)
+    };
+  } catch {
+    return { allowCityRequests: false, locked: true };
+  }
+}
+
+async function triggerServerCityBuild(payload, onUpdate) {
+  const res = await fetch('/api/cities/build', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const initData = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(initData.error || `Server returned ${res.status}`);
+  }
+  const cityId = initData.id || payload.id;
+  for (;;) {
+    await new Promise((r) => setTimeout(r, 1200));
+    const stRes = await fetch(`/api/cities/status?id=${encodeURIComponent(cityId)}`, { cache: 'no-store' });
+    if (!stRes.ok) continue;
+    const job = await stRes.json();
+    if (onUpdate) onUpdate(job);
+    if (job.status === 'done') return cityId;
+    if (job.status === 'error') throw new Error(job.error || 'City pack build failed.');
+  }
+}
+
+function setupNewCityModal() {
+  const modal = document.getElementById('new-city-modal');
+  const closeBtn = document.getElementById('new-city-close');
+  const searchInput = document.getElementById('new-city-search');
+  const searchBtn = document.getElementById('new-city-search-btn');
+  const resultsBox = document.getElementById('new-city-results');
+  const nameInput = document.getElementById('new-city-name');
+  const idInput = document.getElementById('new-city-id');
+  const latInput = document.getElementById('new-city-lat');
+  const lonInput = document.getElementById('new-city-lon');
+  const radiusInput = document.getElementById('new-city-radius');
+  const stateInput = document.getElementById('new-city-state');
+  const submitBtn = document.getElementById('new-city-submit');
+  const progressBox = document.getElementById('new-city-progress');
+  const stepEl = document.getElementById('new-city-step');
+  const logsEl = document.getElementById('new-city-logs');
+  if (!modal) return () => {};
+
+  const openModal = () => {
+    modal.classList.remove('hidden');
+    searchInput?.focus();
+  };
+  const closeModal = () => {
+    modal.classList.add('hidden');
+  };
+
+  closeBtn?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  nameInput?.addEventListener('input', () => {
+    if (!idInput.dataset.manual) {
+      const base = nameInput.value.split(',')[0] || '';
+      idInput.value = base.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 24);
+    }
+  });
+  idInput?.addEventListener('input', () => {
+    idInput.dataset.manual = idInput.value ? '1' : '';
+  });
+
+  async function runGeocode() {
+    const q = (searchInput?.value || '').trim();
+    if (q.length < 2 || !resultsBox) return;
+    resultsBox.hidden = false;
+    resultsBox.textContent = 'Searching OpenStreetMap Nominatim...';
+    try {
+      const res = await fetch(`/api/cities/geocode?q=${encodeURIComponent(q)}`);
+      const data = await res.json();
+      const list = data.results || [];
+      if (!list.length) {
+        resultsBox.textContent = 'No matching places found.';
+        return;
+      }
+      resultsBox.replaceChildren(
+        ...list.map((item) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'new-city-result-item';
+          btn.textContent = `${item.name} (${item.lat}, ${item.lon}) - ${item.fullLabel}`;
+          btn.addEventListener('click', () => {
+            if (nameInput) nameInput.value = item.name;
+            if (idInput) {
+              idInput.value = item.id;
+              idInput.dataset.manual = '1';
+            }
+            if (latInput) latInput.value = String(item.lat);
+            if (lonInput) lonInput.value = String(item.lon);
+            if (stateInput) stateInput.value = item.stateCode || '';
+            resultsBox.hidden = true;
+          });
+          return btn;
+        })
+      );
+    } catch (err) {
+      resultsBox.textContent = `Search failed: ${err.message}`;
+    }
+  }
+
+  searchBtn?.addEventListener('click', runGeocode);
+  searchInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      runGeocode();
+    }
+  });
+
+  submitBtn?.addEventListener('click', async () => {
+    const id = (idInput?.value || '').trim().toLowerCase().replace(/[^a-z0-9_-]+/g, '');
+    const name = (nameInput?.value || '').trim() || id;
+    const lat = parseFloat(latInput?.value || '');
+    const lon = parseFloat(lonInput?.value || '');
+    const radiusKm = parseFloat(radiusInput?.value || '2.0') || 2.0;
+    const stateCode = (stateInput?.value || '').trim();
+    if (!id || !Number.isFinite(lat) || !Number.isFinite(lon)) {
+      if (progressBox) progressBox.hidden = false;
+      if (stepEl) stepEl.textContent = 'Please search for a city or enter a valid Pack ID, Latitude, and Longitude.';
+      return;
+    }
+    submitBtn.disabled = true;
+    if (progressBox) progressBox.hidden = false;
+    if (stepEl) stepEl.textContent = `Building ${name} (${id})...`;
+    if (logsEl) logsEl.textContent = '';
+    try {
+      const builtId = await triggerServerCityBuild(
+        { id, name, lat, lon, radiusKm, stateCode },
+        (job) => {
+          if (stepEl && job.step) stepEl.textContent = job.step;
+          if (logsEl && Array.isArray(job.logs)) {
+            logsEl.textContent = job.logs.slice(-18).join('\n');
+            logsEl.scrollTop = logsEl.scrollHeight;
+          }
+        }
+      );
+      switchCity(builtId);
+    } catch (err) {
+      if (stepEl) stepEl.textContent = `Build error: ${err.message}`;
+      submitBtn.disabled = false;
+    }
+  });
+
+  for (const btnId of ['btn-new-city', 'map-btn-new-city']) {
+    const btn = document.getElementById(btnId);
+    if (btn) btn.addEventListener('click', openModal);
+  }
+  return openModal;
+}
+
 async function probeInstalledCities() {
   await loadLocalCityPacks(null, { fetchManifest: true });
   const entries = await Promise.all(
@@ -90,6 +254,7 @@ async function initApp() {
       btn.addEventListener('click', () => switchTier(btn.dataset.tier));
     }
   }
+  const openNewCityModal = setupNewCityModal();
   for (const selId of ['city-select', 'map-city-select']) {
     const sel = document.getElementById(selId);
     if (sel) {
@@ -102,26 +267,46 @@ async function initApp() {
         })
       );
       sel.value = ACTIVE_CITY_ID;
-      sel.addEventListener('change', (e) => switchCity(e.target.value));
+      sel.addEventListener('change', (e) => {
+        if (e.target.value === '__new_city__') {
+          e.target.value = ACTIVE_CITY_ID;
+          openNewCityModal();
+          return;
+        }
+        switchCity(e.target.value);
+      });
     }
   }
-  probeInstalledCities().then((installedMap) => {
+  Promise.all([probeInstalledCities(), probeServerConfig()]).then(([installedMap, serverCfg]) => {
+    const canRequestCity = Boolean(serverCfg && serverCfg.allowCityRequests);
+    for (const btnId of ['btn-new-city', 'map-btn-new-city']) {
+      const btn = document.getElementById(btnId);
+      if (btn) btn.hidden = !canRequestCity;
+    }
     for (const selId of ['city-select', 'map-city-select']) {
       const sel = document.getElementById(selId);
       if (!sel) continue;
-      sel.replaceChildren(
-        ...Object.values(CITY_PACKS).map((pack) => {
-          const opt = document.createElement('option');
-          opt.value = pack.id;
-          const isInstalled = installedMap[pack.id];
-          if (pack.isLocal) {
-            opt.textContent = isInstalled ? `${pack.displayName} (local)` : `${pack.displayName} (local, not installed)`;
-          } else {
-            opt.textContent = isInstalled ? pack.displayName : `${pack.displayName} (not installed)`;
-          }
-          return opt;
-        })
+      const visiblePacks = Object.values(CITY_PACKS).filter(
+        (pack) => canRequestCity || installedMap[pack.id] || pack.id === ACTIVE_CITY_ID
       );
+      const options = visiblePacks.map((pack) => {
+        const opt = document.createElement('option');
+        opt.value = pack.id;
+        const isInstalled = installedMap[pack.id];
+        if (pack.isLocal) {
+          opt.textContent = isInstalled ? `${pack.displayName} (local)` : `${pack.displayName} (local, not installed)`;
+        } else {
+          opt.textContent = isInstalled ? pack.displayName : `${pack.displayName} (not installed)`;
+        }
+        return opt;
+      });
+      if (canRequestCity) {
+        const addOpt = document.createElement('option');
+        addOpt.value = '__new_city__';
+        addOpt.textContent = '+ Request / Build New City...';
+        options.push(addOpt);
+      }
+      sel.replaceChildren(...options);
       sel.value = ACTIVE_CITY_ID;
     }
   });
@@ -132,34 +317,79 @@ async function initApp() {
     const loadingTrack = loadingOverlay?.querySelector('.loader-track');
     if (loadingTrack) loadingTrack.style.display = 'none';
     if (loadingStatus) {
-      loadingStatus.textContent = `Local city pack "${ACTIVE_CITY_ID}" is not installed yet.`;
+      const [installedMap, serverCfg] = await Promise.all([probeInstalledCities(), probeServerConfig()]);
+      const canRequestCity = Boolean(serverCfg && serverCfg.allowCityRequests);
+      loadingStatus.textContent = canRequestCity
+        ? `Local city pack "${ACTIVE_CITY_ID}" is not installed yet.`
+        : `City pack "${ACTIVE_CITY_ID}" is not available on this locked public server.`;
       const box = document.createElement('div');
       box.className = 'loader-missing-pack';
-      const buildCmd = CITY_PACK.isLocal
-        ? `npm run city:build -- --city ${ACTIVE_CITY_ID} --name "${CITY_PACK.displayName}" --lat ${CITY_PACK.lat} --lon ${CITY_PACK.lon}`
-        : `npm run city:install -- ${ACTIVE_CITY_ID}`;
-      const line1 = document.createElement('div');
-      const strong1 = document.createElement('strong');
-      strong1.textContent = 'City data is stored locally (like npm packages) and does not need to be synced with the repo.';
-      line1.appendChild(strong1);
+      if (canRequestCity) {
+        const buildCmd = CITY_PACK.isLocal
+          ? `npm run city:build -- --city ${ACTIVE_CITY_ID} --name "${CITY_PACK.displayName}" --lat ${CITY_PACK.lat} --lon ${CITY_PACK.lon}`
+          : `npm run city:install -- ${ACTIVE_CITY_ID}`;
+        const line1 = document.createElement('div');
+        const strong1 = document.createElement('strong');
+        strong1.textContent = 'Local Server Unlocked: You can build & install this city right now or from the terminal.';
+        line1.appendChild(strong1);
 
-      const line2 = document.createElement('div');
-      line2.append('To download and build ');
-      const strong2 = document.createElement('strong');
-      strong2.textContent = CITY_PACK.displayName;
-      line2.append(strong2, ' locally, run:');
+        const buildNowBtn = document.createElement('button');
+        buildNowBtn.type = 'button';
+        buildNowBtn.className = 'new-city-submit';
+        buildNowBtn.style.marginTop = '10px';
+        buildNowBtn.style.width = '100%';
+        buildNowBtn.textContent = `Download & Build ${CITY_PACK.displayName} Now`;
 
-      const code1 = document.createElement('code');
-      code1.textContent = buildCmd;
+        const liveStep = document.createElement('div');
+        liveStep.style.fontSize = '12px';
+        liveStep.style.color = 'var(--taxi)';
+        liveStep.style.marginTop = '8px';
+        liveStep.hidden = true;
 
-      const line3 = document.createElement('div');
-      line3.textContent = 'or with Python / uv:';
+        const liveLogs = document.createElement('pre');
+        liveLogs.className = 'new-city-logs';
+        liveLogs.style.marginTop = '6px';
+        liveLogs.hidden = true;
 
-      const code2 = document.createElement('code');
-      code2.textContent = `uv run --with shapely --with numpy --with pillow python3 tools/build-city-pack.py --city ${ACTIVE_CITY_ID}`;
+        buildNowBtn.addEventListener('click', async () => {
+          buildNowBtn.disabled = true;
+          liveStep.hidden = false;
+          liveLogs.hidden = false;
+          liveStep.textContent = `Starting build for ${CITY_PACK.displayName}...`;
+          try {
+            const payload = CITY_PACK.isLocal
+              ? { id: ACTIVE_CITY_ID, name: CITY_PACK.displayName, lat: CITY_PACK.lat, lon: CITY_PACK.lon }
+              : { id: ACTIVE_CITY_ID };
+            await triggerServerCityBuild(payload, (job) => {
+              if (job.step) liveStep.textContent = job.step;
+              if (Array.isArray(job.logs)) {
+                liveLogs.textContent = job.logs.slice(-16).join('\n');
+                liveLogs.scrollTop = liveLogs.scrollHeight;
+              }
+            });
+            globalThis.location.reload();
+          } catch (err) {
+            liveStep.textContent = `Build failed: ${err.message}`;
+            buildNowBtn.disabled = false;
+          }
+        });
 
-      box.replaceChildren(line1, line2, code1, line3, code2);
-      const installedMap = await probeInstalledCities();
+        const line2 = document.createElement('div');
+        line2.style.marginTop = '10px';
+        line2.textContent = 'Or run in your terminal:';
+        const code1 = document.createElement('code');
+        code1.textContent = buildCmd;
+        box.replaceChildren(line1, buildNowBtn, liveStep, liveLogs, line2, code1);
+      } else {
+        const line1 = document.createElement('div');
+        const strong1 = document.createElement('strong');
+        strong1.textContent = 'This public instance is locked to pre-built city packs.';
+        line1.appendChild(strong1);
+        const line2 = document.createElement('div');
+        line2.style.marginTop = '6px';
+        line2.textContent = 'To build and explore new cities anywhere on Earth, run the server locally (npm start).';
+        box.replaceChildren(line1, line2);
+      }
       const installedIds = Object.keys(installedMap).filter((id) => installedMap[id]);
       if (installedIds.length) {
         const actions = document.createElement('div');

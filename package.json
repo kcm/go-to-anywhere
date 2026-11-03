@@ -5,7 +5,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "python3 -m http.server 8000",
+    "start": "python3 tools/serve.py 8000",
+    "start:locked": "python3 tools/serve.py --locked 8000",
     "city:list": "python3 tools/build-city-pack.py --list",
     "city:install": "python3 tools/build-city-pack.py",
     "city:build": "python3 tools/build-city-pack.py",

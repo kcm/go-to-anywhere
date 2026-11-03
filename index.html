@@ -176,6 +176,133 @@
       font-weight: 500;
       color: var(--text-3);
     }
+    .new-city-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 9px;
+      border-radius: 8px;
+      background: rgba(239, 178, 30, 0.16);
+      border: 1px solid rgba(239, 178, 30, 0.42);
+      color: var(--taxi);
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.2;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .new-city-btn:hover {
+      background: rgba(239, 178, 30, 0.28);
+      border-color: rgba(239, 178, 30, 0.7);
+    }
+    .new-city-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      background: rgba(8, 9, 12, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .new-city-modal.hidden {
+      display: none;
+    }
+    .new-city-dialog {
+      width: min(500px, calc(100vw - 32px));
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--text);
+    }
+    .new-city-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .new-city-header h2 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .new-city-search-row {
+      display: flex;
+      gap: 8px;
+    }
+    .new-city-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      padding: 8px 11px;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 13px;
+    }
+    .new-city-results {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .new-city-result-item {
+      text-align: left;
+      padding: 7px 10px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12.5px;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .new-city-result-item:hover {
+      background: rgba(239, 178, 30, 0.18);
+      border-color: rgba(239, 178, 30, 0.45);
+    }
+    .new-city-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .new-city-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11.5px;
+      color: var(--text-2);
+    }
+    .new-city-submit {
+      padding: 10px 14px;
+      border-radius: 9px;
+      background: var(--taxi);
+      color: var(--taxi-ink);
+      font-weight: 750;
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .new-city-submit:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+    .new-city-logs {
+      max-height: 130px;
+      overflow-y: auto;
+      padding: 8px 10px;
+      border-radius: 7px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #a5f3fc;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
@@ -347,6 +474,7 @@
             <button id="tier-full" class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
             <button id="tier-lite" class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
           </div>
+          <button id="btn-new-city" class="new-city-btn" type="button" title="Request &amp; build a new local city pack from OpenStreetMap" hidden>+ City</button>
           <a class="repo-link" href="https://github.com/kcm/go-to-anywhere" target="_blank" rel="noopener noreferrer" aria-label="Go To Anywhere (GTA) on GitHub (opens in your browser)">GitHub <span aria-hidden="true">&#8599;</span></a>
         </div>
       </div>
@@ -553,6 +681,7 @@
           <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
           <button class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
         </div>
+        <button id="map-btn-new-city" class="new-city-btn" type="button" title="Request &amp; build a new local city pack from OpenStreetMap" hidden>+ City</button>
       </div>
       <label class="panel fullmap-search-wrap">
         <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
@@ -598,6 +727,57 @@
       <span class="legend-item"><span class="legend-swatch gps-swatch"></span>GPS route</span>
       <span class="legend-item"><span class="legend-swatch bridge-swatch"></span>Bridge / Hwy</span>
       <span id="fullmap-counts" class="legend-counts"></span>
+    </div>
+  </section>
+
+  <!-- Request / Build New Local City Modal (only enabled when server allows city requests) -->
+  <section id="new-city-modal" class="new-city-modal hidden" role="dialog" aria-modal="true" aria-label="Request &amp; Build a New City Pack">
+    <div class="panel new-city-dialog">
+      <div class="new-city-header">
+        <h2>Build a New Local City Pack</h2>
+        <button id="new-city-close" class="icon-btn" type="button" title="Close" aria-label="Close">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-2); line-height: 1.45;">
+        Search any city or town in the world to download its OpenStreetMap streets, buildings, parks, and AWS terrain elevation into a local pack (<code>cities/&lt;id&gt;/</code>).
+      </p>
+      <div class="new-city-search-row">
+        <input id="new-city-search" class="new-city-input" type="text" placeholder="Search city (e.g. Boulder, CO or Kyoto, Japan)..." autocomplete="off" />
+        <button id="new-city-search-btn" class="tool-btn" type="button">Search</button>
+      </div>
+      <div id="new-city-results" class="new-city-results" hidden></div>
+      <div class="new-city-grid">
+        <label class="new-city-field">
+          <span>Display Name</span>
+          <input id="new-city-name" class="new-city-input" type="text" placeholder="Boulder, CO" />
+        </label>
+        <label class="new-city-field">
+          <span>Pack ID (slug)</span>
+          <input id="new-city-id" class="new-city-input" type="text" placeholder="boulder" />
+        </label>
+        <label class="new-city-field">
+          <span>Center Latitude</span>
+          <input id="new-city-lat" class="new-city-input" type="number" step="0.0001" placeholder="40.0150" />
+        </label>
+        <label class="new-city-field">
+          <span>Center Longitude</span>
+          <input id="new-city-lon" class="new-city-input" type="number" step="0.0001" placeholder="-105.2705" />
+        </label>
+        <label class="new-city-field">
+          <span>Radius (km)</span>
+          <input id="new-city-radius" class="new-city-input" type="number" step="0.5" min="1.0" max="5.0" value="2.0" />
+        </label>
+        <label class="new-city-field">
+          <span>State / Country Code</span>
+          <input id="new-city-state" class="new-city-input" type="text" maxlength="3" placeholder="CO" />
+        </label>
+      </div>
+      <button id="new-city-submit" class="new-city-submit" type="button">Build &amp; Launch City</button>
+      <div id="new-city-progress" hidden>
+        <div id="new-city-step" style="font-size: 12px; font-weight: 600; margin-bottom: 6px; color: var(--taxi);">Starting build...</div>
+        <pre id="new-city-logs" class="new-city-logs"></pre>
+      </div>
     </div>
   </section>
 

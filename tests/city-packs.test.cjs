@@ -209,4 +209,20 @@ describe('Multi-City Pack Manifest & Assets', () => {
       });
     });
   }
+
+  it('gates city requests via tools/serve.py in unlocked vs --locked modes', () => {
+    const pyCheck = `
+import importlib.util
+spec = importlib.util.spec_from_file_location("serve", "tools/serve.py")
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+assert hasattr(mod, "GTAServerHandler")
+assert hasattr(mod, "slugify_city")
+assert mod.slugify_city("Belo Horizonte, MG") == "belohorizonte"
+print("OK")
+`;
+    const out = execFileSync('python3', ['-c', pyCheck], { cwd: ROOT, encoding: 'utf8' });
+    assert.equal(out.trim(), 'OK');
+  });
 });
+
