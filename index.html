@@ -128,6 +128,50 @@
       gap: 8px;
       margin-top: 10px;
     }
+    .tier-switch {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      gap: 2px;
+      flex: none;
+    }
+    .tier-btn {
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .tier-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .tier-btn.active {
+      background: var(--taxi);
+      color: var(--taxi-ink);
+      font-weight: 750;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    }
+    .loader-tier-wrap {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-2);
+    }
+    .loader-tier-label {
+      font-weight: 500;
+      color: var(--text-3);
+    }
   </style>
 </head>
 <body>
@@ -171,6 +215,13 @@
       <div id="loader-subtitle" class="loader-subtitle">San Francisco, CA</div>
       <div class="loader-track is-indeterminate" aria-hidden="true"><span id="loading-progress" class="loader-fill"></span></div>
       <div id="loading-status">Loading city code and data...</div>
+      <div class="loader-tier-wrap">
+        <span class="loader-tier-label">Mode:</span>
+        <div id="loader-tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
+          <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
+          <button class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -191,7 +242,8 @@
         newyork:      { name: 'New York, NY',      icon: 'img/icon-newyork.svg' },
         pompanobeach: { name: 'Pompano Beach, FL', icon: 'img/icon-pompanobeach.svg' }
       };
-      const raw = new URLSearchParams(location.search).get('city') || '';
+      const params = new URLSearchParams(location.search);
+      const raw = params.get('city') || '';
       const id = aliases[String(raw).trim().toLowerCase()] || 'sanfrancisco';
       const cur = meta[id] || meta.sanfrancisco;
       document.title = `Go To Anywhere (GTA) - ${cur.name}`;
@@ -201,6 +253,26 @@
       if (sub) sub.textContent = cur.name;
       const img = document.querySelector('#loading-overlay .loader-bullet');
       if (img) img.src = cur.icon;
+
+      let activeTier = String(params.get('tier') || '').trim().toLowerCase();
+      if (!activeTier) {
+        try { activeTier = String(localStorage.getItem('gta-tier') || '').trim().toLowerCase(); } catch {}
+      }
+      const isFull = activeTier === 'full';
+      document.addEventListener('DOMContentLoaded', () => {
+        for (const btn of document.querySelectorAll('.tier-btn[data-tier]')) {
+          const btnFull = btn.dataset.tier === 'full';
+          btn.classList.toggle('active', btnFull === isFull);
+          btn.setAttribute('aria-pressed', String(btnFull === isFull));
+          btn.addEventListener('click', () => {
+            const target = btn.dataset.tier === 'full' ? 'full' : 'lite';
+            try { localStorage.setItem('gta-tier', target === 'full' ? 'full' : 'light'); } catch {}
+            const url = new URL(location.href);
+            url.searchParams.set('tier', target);
+            location.href = url.toString();
+          });
+        }
+      });
     })();
   </script>
 
@@ -222,6 +294,10 @@
             <option value="newyork">New York, NY</option>
             <option value="pompanobeach">Pompano Beach, FL</option>
           </select>
+          <div id="tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
+            <button id="tier-full" class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
+            <button id="tier-lite" class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
+          </div>
           <a class="repo-link" href="https://github.com/kcm/go-to-anywhere" target="_blank" rel="noopener noreferrer" aria-label="Go To Anywhere (GTA) on GitHub (opens in your browser)">GitHub <span aria-hidden="true">&#8599;</span></a>
         </div>
       </div>
@@ -409,6 +485,10 @@
           <option value="newyork">New York, NY</option>
           <option value="pompanobeach">Pompano Beach, FL</option>
         </select>
+        <div id="map-tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
+          <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
+          <button class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
+        </div>
       </div>
       <label class="panel fullmap-search-wrap">
         <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>

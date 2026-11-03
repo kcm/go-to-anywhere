@@ -25,7 +25,7 @@ import { ThirdPersonControllerManager } from './controllers.js';
 import { TouchControls } from './touch-controls.js';
 import { reportMemory } from './memory-report.js';
 import { gpuOnly, releaseUploaded, useRenderer } from './gpu-only.js';
-import { TIER } from './device-tier.js';
+import { TIER, switchTier } from './device-tier.js';
 import { GamepadControls } from './gamepad-controls.js';
 import { CameraSystem, CAMERA_PRESETS } from './cameras.js';
 import { LightingSystem, sunTimes } from './lighting.js';
@@ -99,6 +99,16 @@ async function initApp() {
     if (fav) fav.href = CITY_PACK.icon;
     for (const logoEl of document.querySelectorAll('.app-logo')) {
       logoEl.src = CITY_PACK.icon;
+    }
+  }
+  const isFullTier = TIER.name === 'full';
+  for (const btn of document.querySelectorAll('.tier-btn[data-tier]')) {
+    const btnIsFull = btn.dataset.tier === 'full';
+    btn.classList.toggle('active', btnIsFull === isFullTier);
+    btn.setAttribute('aria-pressed', String(btnIsFull === isFullTier));
+    if (!btn.dataset.tierBound) {
+      btn.dataset.tierBound = '1';
+      btn.addEventListener('click', () => switchTier(btn.dataset.tier));
     }
   }
   for (const selId of ['city-select', 'map-city-select']) {
