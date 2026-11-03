@@ -135,8 +135,12 @@ Then build and optionally sample Street View / Satellite archetypes:
 
 ```bash
 npm run city:build -- traversecity
-npm run city:archetypes -- --city traversecity --write-geodata
+GOOGLE_MAPS_API_KEY="your-api-key" npm run city:archetypes -- --city traversecity --write-geodata
 ```
+
+> **Optional `GOOGLE_MAPS_API_KEY` for Street View & Satellite Calibration:**
+> - Core city pack builds (`npm run city:install` / `npm run city:build`) only use public OpenStreetMap Overpass and AWS Terrain Tiles—no API key is required.
+> - To calibrate neighborhood facade palettes, roof colors, housing density, and tree canopy coverage from real imagery via `npm run city:archetypes` ([`tools/sample-city-archetypes.py`](tools/sample-city-archetypes.py)), set `GOOGLE_MAPS_API_KEY` in your environment (with **Street View Static API** and **Maps Static API** enabled on the key). Without a key, `city:archetypes` automatically falls back to OpenStreetMap building/material/tree tags.
 
 See [`cities/README.md`](cities/README.md) for the full specification of `cities/<id>/city-pack.json`, `cities/local-packs.json`, and the binary formats (`NYB1`, `NYT2`, `ELV2`, `RIV1`).
 

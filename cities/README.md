@@ -99,7 +99,20 @@ npm run city:build -- traversecity
 
 The builder automatically generates all 13 city pack files in `cities/<id>/`, writes the complete descriptor to `cities/<id>/city-pack.json`, and registers `<id>` in `cities/local-packs.json` so it appears in the in-game city switcher dropdown and `npm run city:list`.
 
-### 3. Dropping In a Prebuilt Local City Pack Folder
+### 3. Optional Street View & Satellite Archetype Calibration (`GOOGLE_MAPS_API_KEY`)
+
+Core city builds (`npm run city:build`) do not require any API keys. If you have a Google Maps API key with **Street View Static API** and **Maps Static API** enabled, you can sample real street-level facade colors, overhead satellite roof colors, housing density, and tree canopy coverage for your city's neighborhoods and landmarks:
+
+```bash
+export GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
+npm run city:archetypes -- --city traversecity --write-geodata
+# Re-run city:build afterward if you want synthesized residential infill and tree counts calibrated to the sampled density:
+npm run city:build -- traversecity
+```
+
+If `GOOGLE_MAPS_API_KEY` is not set, `npm run city:archetypes` still runs using OpenStreetMap `building:material`, `building:colour`, `roof:shape`, and `natural=tree` tags.
+
+### 4. Dropping In a Prebuilt Local City Pack Folder
 
 If you copy a prebuilt `cities/<id>/` directory onto your machine:
 - Open `http://localhost:8000/?city=<id>` directly in your browser (it loads immediately even before registration), or
