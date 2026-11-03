@@ -6,7 +6,11 @@ const zlib = require('node:zlib');
 const { execFileSync } = require('node:child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const CITIES = ['sanfrancisco', 'royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach'];
+const CITIES = [
+  'sanfrancisco', 'royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach',
+  'sydney', 'venice', 'amsterdam', 'hongkong', 'paris', 'london', 'tokyo',
+  'barcelona', 'rio', 'vancouver', 'capetown', 'chicago', 'boston', 'seattle'
+];
 
 const REQUIRED_FILES = [
   'city-geodata.js',
@@ -25,7 +29,7 @@ const REQUIRED_FILES = [
 ];
 
 describe('Multi-City Pack Manifest & Assets', () => {
-  it('exports all 6 city packs with sanfrancisco as default in js/city-packs.js', async () => {
+  it('exports all 20 city packs with sanfrancisco as default and regional archetypes in js/city-packs.js', async () => {
     const mod = await import(path.join(ROOT, 'js/city-packs.js'));
     assert.ok(mod.CITY_PACKS, 'CITY_PACKS should be exported');
     assert.equal(mod.ACTIVE_CITY_ID, 'sanfrancisco', 'Default ACTIVE_CITY_ID should be sanfrancisco');
@@ -42,6 +46,7 @@ describe('Multi-City Pack Manifest & Assets', () => {
       assert.ok(Array.isArray(pack.landmarks) && pack.landmarks.length >= 6, `Insufficient landmarks for ${cityId}`);
       assert.ok(Array.isArray(pack.cameraPresets) && pack.cameraPresets.length >= 5, `Insufficient cameraPresets for ${cityId}`);
       assert.ok(pack.scenicStarts && pack.scenicStarts.car && pack.scenicStarts.person, `Missing scenicStarts for ${cityId}`);
+      assert.ok(pack.archetypes && pack.archetypes.residential && pack.archetypes.midrise, `Missing regional building archetypes for ${cityId}`);
     }
   });
 

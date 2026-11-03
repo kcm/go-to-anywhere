@@ -1,5 +1,7 @@
 // Multi-city registry & active city pack configuration.
-// Supports 'sanfrancisco' (default), 'royaloak', 'oakland', 'annarbor', 'newyork', and 'pompanobeach'.
+// Supports 20 worldwide cities: 'sanfrancisco' (default), 'royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach',
+// 'sydney', 'venice', 'amsterdam', 'hongkong', 'paris', 'london', 'tokyo', 'barcelona', 'rio', 'vancouver',
+// 'capetown', 'chicago', 'boston', and 'seattle'.
 
 const CITY_ALIASES = {
   sanfrancisco: 'sanfrancisco',
@@ -23,7 +25,44 @@ const CITY_ALIASES = {
   'pompano-beach': 'pompanobeach',
   pompano: 'pompanobeach',
   pb: 'pompanobeach',
-  fl: 'pompanobeach'
+  fl: 'pompanobeach',
+  sydney: 'sydney',
+  syd: 'sydney',
+  venice: 'venice',
+  venezia: 'venice',
+  ven: 'venice',
+  amsterdam: 'amsterdam',
+  ams: 'amsterdam',
+  hongkong: 'hongkong',
+  'hong-kong': 'hongkong',
+  hk: 'hongkong',
+  hkg: 'hongkong',
+  paris: 'paris',
+  par: 'paris',
+  london: 'london',
+  lon: 'london',
+  ldn: 'london',
+  tokyo: 'tokyo',
+  tyo: 'tokyo',
+  barcelona: 'barcelona',
+  bcn: 'barcelona',
+  rio: 'rio',
+  'rio-de-janeiro': 'rio',
+  riodejaneiro: 'rio',
+  rdj: 'rio',
+  vancouver: 'vancouver',
+  van: 'vancouver',
+  yvr: 'vancouver',
+  capetown: 'capetown',
+  'cape-town': 'capetown',
+  cpt: 'capetown',
+  chicago: 'chicago',
+  chi: 'chicago',
+  ord: 'chicago',
+  boston: 'boston',
+  bos: 'boston',
+  seattle: 'seattle',
+  sea: 'seattle'
 };
 
 function resolveActiveCityId() {
@@ -193,6 +232,21 @@ const CITY_PACKS = {
       cyclist:    { x: 140,   z: -65,  heading: Math.PI },
       helicopter: { x: 180,   z: 420,  heading: Math.PI + 0.35, above: 130 },
       kayak:      { x: -1820, z: 1620, heading: Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'midwest-bungalow-brick',
+      residential: {
+        walls: { clapboard: 0.44, brick: 0.42, stone: 0.04, stucco: 0.04, shake: 0.06 },
+        roofs: { flat: 0.04, hip: 0.38, gable: 0.56, gambrel: 0.02 },
+        pitch: { hip: 0.36, gable: 0.44, historic: 0.52 },
+        bricks: [0x8e4232, 0x9c4e3c, 0x7a382a, 0x6e4836, 0xa86448, 0xb87b56]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xb87452, trimColor: 0xd8d0c0, windowWidth: 2.6, floorHeight: 3.6 },
+        historic: { stoneColor: 0x8e4232, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.6 },
+        waterTowerProb: 0.03,
+        fireEscapes: true
+      }
     }
   },
 
@@ -328,6 +382,20 @@ const CITY_PACKS = {
       cyclist:    { x: 820,  z: -420, heading: 0.5 },
       helicopter: { x: 1100, z: 300,  heading: -Math.PI / 2, above: 130 },
       kayak:      { x: 1050, z: -200, heading: 0 }
+    },
+    archetypes: {
+      style: 'east-bay-craftsman-stucco',
+      residential: {
+        walls: { clapboard: 0.42, brick: 0.03, stone: 0.02, stucco: 0.40, shake: 0.13 },
+        roofs: { flat: 0.28, hip: 0.36, gable: 0.35, gambrel: 0.01 },
+        pitch: { hip: 0.34, gable: 0.38, historic: 0.50 }
+      },
+      midrise: {
+        masonry: { stoneColor: 0xd8cdb8, trimColor: 0x9e937f, windowWidth: 2.6, floorHeight: 3.7 },
+        historic: { stoneColor: 0xa45a45, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.5 },
+        waterTowerProb: 0.05,
+        fireEscapes: true
+      }
     }
   },
 
@@ -454,6 +522,20 @@ const CITY_PACKS = {
       cyclist:    { x: 660, z: 529,  heading: Math.PI / 2 },
       helicopter: { x: -30, z: 1950, heading: Math.PI, above: 130 },
       kayak:      { x: 325, z: -1228, heading: Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'midwest-collegiate-clapboard',
+      residential: {
+        walls: { clapboard: 0.62, brick: 0.22, stone: 0.04, stucco: 0.06, shake: 0.06 },
+        roofs: { flat: 0.04, hip: 0.36, gable: 0.56, gambrel: 0.04 },
+        pitch: { hip: 0.36, gable: 0.44, historic: 0.54 }
+      },
+      midrise: {
+        masonry: { stoneColor: 0x8a4632, trimColor: 0xd9ccb0, windowWidth: 2.3, floorHeight: 4.0 },
+        historic: { stoneColor: 0xa45a45, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.5 },
+        waterTowerProb: 0.04,
+        fireEscapes: true
+      }
     }
   },
 
@@ -599,6 +681,21 @@ const CITY_PACKS = {
       cyclist:    { x: -18.2, z: 312,  heading: Math.PI },
       helicopter: { x: -140,  z: 400,  heading: 2.6, above: 96 },
       kayak:      { x: -1750, z: 180,  heading: 0 }
+    },
+    archetypes: {
+      style: 'manhattan-brownstone-prewar',
+      residential: {
+        walls: { clapboard: 0.08, brick: 0.64, stone: 0.22, stucco: 0.04, shake: 0.02 },
+        roofs: { flat: 0.86, hip: 0.06, gable: 0.06, gambrel: 0.02 },
+        pitch: { hip: 0.32, gable: 0.38, historic: 0.44 },
+        bricks: [0x7c3b2c, 0x6b3e2e, 0x8e4a38, 0x5c3426, 0x9a5240, 0x7b5944]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xd8cdb8, trimColor: 0x9e937f, windowWidth: 2.6, floorHeight: 3.7 },
+        historic: { stoneColor: 0xa45a45, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.5 },
+        waterTowerProb: 0.26,
+        fireEscapes: true
+      }
     }
   },
 
@@ -731,6 +828,22 @@ const CITY_PACKS = {
       cyclist:    { x: 1580, z: -200, heading: 0 },
       helicopter: { x: 1650, z: -250, heading: -0.4, above: 120 },
       kayak:      { x: 1120, z: 60,   heading: 0 }
+    },
+    archetypes: {
+      style: 'florida-coastal-stucco-tile',
+      residential: {
+        walls: { clapboard: 0.08, brick: 0.02, stone: 0.04, stucco: 0.84, shake: 0.02 },
+        roofs: { flat: 0.34, hip: 0.50, gable: 0.16, gambrel: 0.0 },
+        pitch: { hip: 0.24, gable: 0.26, historic: 0.30 },
+        stucco: [0xf5efe2, 0xf2dfd3, 0xe8d8bf, 0xd8ebe4, 0xf4e3b8, 0xebe6dc, 0xe2c7b8],
+        shingles: [0xb85238, 0xc45e40, 0xd6cfc2, 0x8c4a38, 0x9ea3a8, 0xa84c34]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xefe9dd, trimColor: 0xc8c0b0, windowWidth: 3.0, floorHeight: 3.6 },
+        historic: { stoneColor: 0xe6d2bd, trimColor: 0xf5f2eb, windowWidth: 2.8, floorHeight: 3.5 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
     }
   },
 
@@ -917,6 +1030,1996 @@ const CITY_PACKS = {
       cyclist:    { x: 1145,  z: -845,  heading: Math.PI },
       helicopter: { x: 1450,  z: -1050, heading: -1.8, above: 165 },
       kayak:      { x: -1350, z: -2120, heading: Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'sf-victorian-edwardian-marina',
+      residential: {
+        walls: { clapboard: 0.48, brick: 0.04, stone: 0.02, stucco: 0.42, shake: 0.04 },
+        roofs: { flat: 0.46, hip: 0.24, gable: 0.28, gambrel: 0.02 },
+        pitch: { hip: 0.34, gable: 0.42, historic: 0.54 },
+        siding: [0xf4efe6, 0xe8d8b8, 0xd9bf72, 0x9fb5a5, 0x7b98b2, 0xc98b78, 0xd8a8b0, 0x8899a6, 0xe6dcc4, 0x6b8299],
+        stucco: [0xf2ece1, 0xe8dec8, 0xdfd1b8, 0xf5e6d3, 0xd8e2dc, 0xeeddd3]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xe2d9c5, trimColor: 0xa69b86, windowWidth: 2.5, floorHeight: 3.6 },
+        historic: { stoneColor: 0xad5d45, trimColor: 0xd8c8b0, windowWidth: 2.4, floorHeight: 3.6 },
+        waterTowerProb: 0.05,
+        fireEscapes: true
+      }
+    }
+  },
+
+  sydney: {
+    id: 'sydney',
+    title: 'Sydney',
+    stateCode: 'NSW',
+    stateLabel: 'New South Wales',
+    displayName: 'Sydney, Australia',
+    icon: 'img/icon-sydney.svg',
+    subtitle: 'Sydney Opera House, Harbour Bridge, Circular Quay, The Rocks & Darling Harbour',
+    countyLabel: 'NEW SOUTH WALES',
+    cityLabel: 'SYDNEY',
+    searchPlaceholder: 'Street or landmark (George St, Opera House, Harbour Bridge, Circular Quay, The Rocks...)',
+    loadingStages: {
+      streets: 'Building George Street, Circular Quay, The Rocks and Darling Harbour...',
+      outskirts: 'Laying out Port Jackson, North Sydney and Pyrmont...',
+      landmarks: 'Building the Sydney Opera House, Harbour Bridge and Sydney Tower Eye...'
+    },
+    timeZone: 'Australia/Sydney',
+    lat: -33.8615,
+    lon: 151.2108,
+    baseElev: 0.0,
+    weatherStation: 'YSSY',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 400,
+    kayakLaunch: { x: 180, z: -480 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'NSWPF',
+      doorTop: 'NSW',
+      doorBottom: 'POLICE',
+      doorSub: 'SYDNEY CITY PAC',
+      badgeTitle: 'NSWPF',
+      baseColor: 0xf4f7fa,
+      stripeColor: 0x0047ab
+    },
+    plate: {
+      state: 'NEW SOUTH WALES',
+      slogan: 'THE PREMIER STATE',
+      sample: 'SYD 02A',
+      bg: '#f7c816',
+      topBand: null,
+      text: '#141414',
+      scriptColor: '#141414',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'Transport for NSW',
+      shortName: 'SYDNEY BUSES',
+      bodyColor: 0xf4f7fa,
+      bandColor: 0x0098cd,
+      accentColor: 0x005aa3
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x0077b6,
+      plateText: 'SYD 02A',
+      state: 'NSW'
+    },
+    areas: [
+      [0, 0, 'Circular Quay'],
+      [388, -534, 'Bennelong Point & Opera House'],
+      [-120, -1045, 'Sydney Harbour Bridge'],
+      [-231, -244, 'The Rocks'],
+      [-212, 667, 'CBD & Martin Place'],
+      [-860, 1056, 'Darling Harbour'],
+      [416, 1089, 'Royal Botanic Garden'],
+      [-814, -44, 'Barangaroo'],
+      [1156, 1467, 'Potts Point & Woolloomooloo'],
+      [-55, -2034, 'Milsons Point & Kirribilli']
+    ],
+    landmarks: [
+      { id: 'circularquay', name: 'Circular Quay Ferry Wharves',           short: 'Circular Quay',        x: 0,     z: 0,     heading: 0 },
+      { id: 'operahouse',   name: 'Sydney Opera House (Bennelong Point)',  short: 'Sydney Opera House',   x: 388,   z: -534,  heading: Math.PI },
+      { id: 'harbourbridge',name: 'Sydney Harbour Bridge',                 short: 'Harbour Bridge',       x: -120,  z: -1045, heading: 0 },
+      { id: 'therocks',     name: 'The Rocks & George Street',             short: 'The Rocks',            x: -231,  z: -244,  heading: 0 },
+      { id: 'sydneytower',  name: 'Sydney Tower Eye & Pitt Street Mall',   short: 'Sydney Tower Eye',     x: -175,  z: 989,   heading: 0 },
+      { id: 'darling',      name: 'Darling Harbour & Pyrmont Bridge',      short: 'Darling Harbour',      x: -860,  z: 1056,  heading: Math.PI / 2 },
+      { id: 'botanic',      name: 'Royal Botanic Garden & Mrs Macquaries', short: 'Botanic Garden',       x: 680,   z: 520,   heading: -Math.PI / 2 },
+      { id: 'barangaroo',   name: 'Barangaroo Reserve & Crown Sydney',     short: 'Barangaroo',           x: -814,  z: -44,   heading: Math.PI / 2 }
+    ],
+    teleportIds: ['circularquay', 'operahouse', 'harbourbridge', 'therocks', 'sydneytower', 'darling', 'botanic', 'barangaroo'],
+    modelledLandmarks: [
+      'Sydney Opera House',
+      'Sydney Harbour Bridge',
+      'Sydney Tower Eye'
+    ],
+    areaLabels: [
+      ['SYDNEY', -100, 600, 0],
+      ['SYDNEY HARBOUR (PORT JACKSON)', 450, -1100, 1],
+      ['DARLING HARBOUR', -920, 900, 1],
+      ['CIRCULAR QUAY', 0, 0, 2],
+      ['SYDNEY OPERA HOUSE', 388, -534, 2],
+      ['HARBOUR BRIDGE', -120, -1045, 2],
+      ['THE ROCKS', -231, -244, 2],
+      ['BARANGAROO', -814, -44, 2],
+      ['MARTIN PLACE \u00b7 CBD', -175, 680, 2],
+      ['ROYAL BOTANIC GARDEN', 650, 750, 2],
+      ['PYRMONT', -1550, 1100, 2],
+      ['MILSONS POINT \u00b7 NORTH SYDNEY', -120, -2100, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'operaHouse',    name: 'Sydney Opera House & Quay',   category: 'scenic', fov: 48 },
+      { id: 'harbourBridge', name: 'Sydney Harbour Bridge Span',  category: 'scenic', fov: 48 },
+      { id: 'circularQuay',  name: 'Circular Quay Wharves',       category: 'scenic', fov: 50 },
+      { id: 'theRocks',      name: 'The Rocks & Dawes Point',     category: 'scenic', fov: 50 },
+      { id: 'darlingHarbour',name: 'Darling Harbour Skyline',     category: 'scenic', fov: 48 },
+      { id: 'harbourAerial', name: 'Port Jackson Aerial',         category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      operaHouse:    { pos: [190, 14, -340],     look: [388, 28, -534],     ampPos: [8, 0.5, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      harbourBridge: { pos: [140, 28, -680],     look: [-120, 65, -1045],   ampPos: [10, 0.8, 10], ampLook: [6, 2, 6],   freq: 0.10 },
+      circularQuay:  { pos: [-45, 11, 80],       look: [40, 12, -120],      ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.13 },
+      theRocks:      { pos: [-180, 12, -160],    look: [-240, 14, -320],    ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.13 },
+      darlingHarbour:{ pos: [-960, 18, 920],     look: [-420, 42, 980],     ampPos: [8, 0.5, 8],   ampLook: [6, 1, 6],   freq: 0.11 },
+      harbourAerial: { pos: [820, 165, -920],    look: [120, 35, -420],     ampPos: [20, 2.0, 20], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 18,   z: 24,   heading: 0 },
+      car:        { x: -120, z: 240,  heading: 0 },
+      cyclist:    { x: 240,  z: -320, heading: 0 },
+      helicopter: { x: 640,  z: -780, heading: -2.2, above: 155 },
+      kayak:      { x: 180,  z: -480, heading: 0 }
+    },
+    archetypes: {
+      style: 'sydney-sandstone-federation-terrace',
+      residential: {
+        walls: { clapboard: 0.16, brick: 0.42, stone: 0.14, stucco: 0.26, shake: 0.02 },
+        roofs: { flat: 0.24, hip: 0.44, gable: 0.32, gambrel: 0.0 },
+        pitch: { hip: 0.32, gable: 0.38, historic: 0.46 },
+        bricks: [0x9c4632, 0x8a3b2a, 0xb0583c, 0x7d3a2c, 0xc47a52],
+        stucco: [0xf2ead8, 0xe8dcc2, 0xd8c6a4, 0xf6f2e8, 0xcfd8dc],
+        shingles: [0xb84a32, 0x6e7880, 0x4a5258, 0x9e3e28, 0x3b4045]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xdcc59a, trimColor: 0xa89068, windowWidth: 2.6, floorHeight: 3.8 },
+        historic: { stoneColor: 0x9e4834, trimColor: 0xe6dcc4, windowWidth: 2.4, floorHeight: 3.6 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  venice: {
+    id: 'venice',
+    title: 'Venice',
+    stateCode: 'VE',
+    stateLabel: 'Veneto, Italy',
+    displayName: 'Venice, Italy',
+    icon: 'img/icon-venice.svg',
+    subtitle: 'Grand Canal, Rialto Bridge, Piazza San Marco, Doge\'s Palace & Venetian Lagoon',
+    countyLabel: 'CITTA DI VENEZIA',
+    cityLabel: 'VENEZIA',
+    searchPlaceholder: 'Canal or landmark (Rialto, San Marco, Grand Canal, Accademia, Murano...)',
+    loadingStages: {
+      streets: 'Building the Grand Canal, calli, campi and footbridges of Venice...',
+      outskirts: 'Laying out the Venetian Lagoon, Giudecca and San Giorgio Maggiore...',
+      landmarks: 'Building Rialto Bridge, St Mark\'s Campanile and Doge\'s Palace...'
+    },
+    timeZone: 'Europe/Rome',
+    lat: 45.4380,
+    lon: 12.3359,
+    baseElev: 0.0,
+    weatherStation: 'LIPZ',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 150,
+    kayakLaunch: { x: -45, z: 35 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'POLIZIA',
+      doorTop: 'POLIZIA',
+      doorBottom: 'LOCALE',
+      doorSub: 'COMUNE DI VENEZIA',
+      badgeTitle: 'VE',
+      baseColor: 0x5698d4,
+      stripeColor: 0xffffff
+    },
+    plate: {
+      state: 'ITALIA',
+      slogan: 'VENEZIA',
+      sample: 'VE 421A',
+      bg: '#f4f6f8',
+      topBand: '#003399',
+      text: '#141414',
+      scriptColor: '#003399',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'ACTV Vaporetto',
+      shortName: 'ACTV',
+      bodyColor: 0xf4f5f0,
+      bandColor: 0x1b365d,
+      accentColor: 0xe87722
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0xc81d25,
+      plateText: 'VE 421A',
+      state: 'ITALIA'
+    },
+    areas: [
+      [0, 0, 'Rialto Bridge & Grand Canal'],
+      [251, 412, 'Piazza San Marco'],
+      [-376, 656, 'Ponte dell\'Accademia & Dorsoduro'],
+      [-251, 89, 'San Polo & Frari'],
+      [-1034, -400, 'Santa Lucia Station & Piazzale Roma'],
+      [1190, 689, 'Arsenale & Castello'],
+      [-548, -500, 'Cannaregio & Jewish Ghetto'],
+      [407, 1023, 'San Giorgio Maggiore'],
+      [-141, 1278, 'Giudecca Canal & Redentore']
+    ],
+    landmarks: [
+      { id: 'rialto',      name: 'Ponte di Rialto & Grand Canal',          short: 'Rialto Bridge',        x: 0,     z: 0,     heading: 0 },
+      { id: 'sanmarco',    name: 'Piazza San Marco & Campanile',           short: 'Piazza San Marco',     x: 251,   z: 412,   heading: Math.PI / 2 },
+      { id: 'dogespalace', name: 'Doge\'s Palace & Riva degli Schiavoni',  short: 'Doge\'s Palace',       x: 345,   z: 489,   heading: Math.PI },
+      { id: 'accademia',   name: 'Ponte dell\'Accademia & Grand Canal',    short: 'Accademia Bridge',     x: -376,  z: 656,   heading: 0 },
+      { id: 'salute',      name: 'Basilica di Santa Maria della Salute',   short: 'La Salute',            x: -86,   z: 767,   heading: 0 },
+      { id: 'arsenale',    name: 'Venezia Arsenale & Historic Gates',      short: 'Arsenale',             x: 1190,  z: 689,   heading: -Math.PI / 2 },
+      { id: 'piazzaleroma',name: 'Piazzale Roma & Ponte della Costituzione',short: 'Piazzale Roma',       x: -1150, z: 0,     heading: Math.PI / 2 },
+      { id: 'sangiorgio',  name: 'Isola di San Giorgio Maggiore',          short: 'San Giorgio Maggiore', x: 407,   z: 1023,  heading: 0 }
+    ],
+    teleportIds: ['rialto', 'sanmarco', 'dogespalace', 'accademia', 'salute', 'arsenale', 'piazzaleroma', 'sangiorgio'],
+    modelledLandmarks: [
+      'St Mark\'s Campanile',
+      'Ponte di Rialto',
+      'Basilica di San Marco'
+    ],
+    areaLabels: [
+      ['VENEZIA', 0, 200, 0],
+      ['CANAL GRANDE', -180, 280, 1],
+      ['CANALE DELLA GIUDECCA', -200, 1050, 1],
+      ['BACINO DI SAN MARCO', 520, 720, 1],
+      ['PONTE DI RIALTO', 0, 0, 2],
+      ['PIAZZA SAN MARCO', 251, 412, 2],
+      ['SAN POLO', -251, 89, 2],
+      ['DORSODURO \u00b7 ACCADEMIA', -376, 656, 2],
+      ['CANNAREGIO', -548, -500, 2],
+      ['CASTELLO \u00b7 ARSENALE', 1190, 689, 2],
+      ['SANTA CROCE \u00b7 PIAZZALE ROMA', -1034, -100, 2],
+      ['GIUDECCA', -141, 1278, 2],
+      ['SAN GIORGIO MAGGIORE', 407, 1023, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'rialtoBridge', name: 'Ponte di Rialto & Grand Canal', category: 'scenic', fov: 48 },
+      { id: 'sanMarco',     name: 'Piazza San Marco & Campanile',  category: 'scenic', fov: 48 },
+      { id: 'accademia',    name: 'Accademia & Santa Maria Salute',category: 'scenic', fov: 50 },
+      { id: 'bacino',       name: 'Bacino di San Marco Lagoon',    category: 'scenic', fov: 48 },
+      { id: 'veniceAerial', name: 'Venetian Lagoon Aerial',        category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      rialtoBridge: { pos: [-65, 11, 75],       look: [10, 12, -15],       ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.12 },
+      sanMarco:     { pos: [175, 12, 420],      look: [280, 32, 412],      ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.12 },
+      accademia:    { pos: [-376, 12, 656],     look: [-86, 24, 767],      ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.11 },
+      bacino:       { pos: [380, 16, 780],      look: [260, 28, 440],      ampPos: [10, 0.5, 10], ampLook: [6, 1, 6],   freq: 0.10 },
+      veniceAerial: { pos: [620, 155, 920],     look: [120, 18, 320],      ampPos: [20, 2.0, 20], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 18,    z: 12,   heading: Math.PI },
+      car:        { x: -1150, z: 0,    heading: Math.PI / 2 },
+      cyclist:    { x: 251,   z: 412,  heading: 0 },
+      helicopter: { x: 480,   z: 820,  heading: -2.5, above: 145 },
+      kayak:      { x: -45,   z: 35,   heading: 0.4 }
+    },
+    archetypes: {
+      style: 'venetian-gothic-terracotta-plaster',
+      residential: {
+        walls: { clapboard: 0.0, brick: 0.28, stone: 0.10, stucco: 0.62, shake: 0.0 },
+        roofs: { flat: 0.06, hip: 0.66, gable: 0.28, gambrel: 0.0 },
+        pitch: { hip: 0.28, gable: 0.30, historic: 0.32 },
+        stucco: [0xd9825b, 0xe3a869, 0xc85a42, 0xead4b4, 0xd46f54, 0xe8be82, 0xf0e4ce],
+        bricks: [0xa64432, 0x943b2b, 0xb8523b, 0x823426],
+        shingles: [0xb84a2e, 0xc45638, 0x9e3e26, 0xad4830, 0x8c3822]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xd47a55, trimColor: 0xf2eadc, windowWidth: 2.3, floorHeight: 3.8 },
+        historic: { stoneColor: 0xe3b278, trimColor: 0xf5efe4, windowWidth: 2.2, floorHeight: 3.7 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  amsterdam: {
+    id: 'amsterdam',
+    title: 'Amsterdam',
+    stateCode: 'NH',
+    stateLabel: 'North Holland, NL',
+    displayName: 'Amsterdam, Netherlands',
+    icon: 'img/icon-amsterdam.svg',
+    subtitle: 'Canal Ring (Grachtengordel), Dam Square, Rijksmuseum, Jordaan & Amstel River',
+    countyLabel: 'GEMEENTE AMSTERDAM',
+    cityLabel: 'AMSTERDAM',
+    searchPlaceholder: 'Canal or landmark (Dam Square, Herengracht, Prinsengracht, Rijksmuseum, Vondelpark...)',
+    loadingStages: {
+      streets: 'Building Herengracht, Keizersgracht, Prinsengracht and canal bridges...',
+      outskirts: 'Laying out the IJ Waterfront, Jordaan, De Pijp and Vondelpark...',
+      landmarks: 'Building Royal Palace, Rijksmuseum, Westerkerk and Amsterdam Centraal...'
+    },
+    timeZone: 'Europe/Amsterdam',
+    lat: 52.3731,
+    lon: 4.8926,
+    baseElev: 0.0,
+    weatherStation: 'EHAM',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 220,
+    kayakLaunch: { x: -340, z: 120 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'POLITIE',
+      doorTop: 'POLITIE',
+      doorBottom: 'AMSTERDAM',
+      doorSub: 'WAAKZAAM EN DIENSTBAAR',
+      badgeTitle: 'NL',
+      baseColor: 0xf4f6f8,
+      stripeColor: 0x003882
+    },
+    plate: {
+      state: 'NEDERLAND',
+      slogan: 'AMSTERDAM XXX',
+      sample: 'AMS-20-N',
+      bg: '#f2b705',
+      topBand: '#003399',
+      text: '#141414',
+      scriptColor: '#141414',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'GVB Amsterdam',
+      shortName: 'GVB',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0x004b93,
+      accentColor: 0x009fe3
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0xff6b00,
+      plateText: 'AMS-20-N',
+      state: 'NEDERLAND'
+    },
+    areas: [
+      [0, 0, 'Dam Square & Royal Palace'],
+      [531, -667, 'Amsterdam Centraal & IJ Waterfront'],
+      [-586, -156, 'Jordaan & Westerkerk'],
+      [-320, 480, 'Grachtengordel (Canal Ring)'],
+      [-265, 1479, 'Museumplein & Rijksmuseum'],
+      [-1130, 1668, 'Vondelpark'],
+      [348, 867, 'Amstel River & Magere Brug'],
+      [220, 1780, 'De Pijp & Albert Cuyp'],
+      [1212, -233, 'NEMO & Oosterdok']
+    ],
+    landmarks: [
+      { id: 'damsquare',   name: 'Dam Square & Royal Palace',              short: 'Dam Square',           x: 0,     z: 0,     heading: 0 },
+      { id: 'centraal',    name: 'Amsterdam Centraal Station',             short: 'Amsterdam Centraal',   x: 531,   z: -667,  heading: Math.PI },
+      { id: 'westerkerk',  name: 'Westerkerk & Anne Frank House (Prinsengracht)', short: 'Westerkerk & Jordaan', x: -586, z: -156, heading: 0 },
+      { id: 'rijksmuseum', name: 'Rijksmuseum & Museumplein',              short: 'Rijksmuseum',          x: -265,  z: 1479,  heading: 0 },
+      { id: 'vondelpark',  name: 'Vondelpark Pavilion',                    short: 'Vondelpark',           x: -1130, z: 1668,  heading: Math.PI / 2 },
+      { id: 'magerebrug',  name: 'Magere Brug (Skinny Bridge) on Amstel',  short: 'Magere Brug',          x: 688,   z: 1112,  heading: 0 },
+      { id: 'rembrandt',   name: 'Rembrandtplein & Golden Bend',           short: 'Rembrandtplein',       x: 260,   z: 780,   heading: 0 },
+      { id: 'nemo',        name: 'NEMO Science Museum & Oosterdok',        short: 'NEMO & Oosterdok',     x: 1212,  z: -233,  heading: -Math.PI / 2 }
+    ],
+    teleportIds: ['damsquare', 'centraal', 'westerkerk', 'rijksmuseum', 'vondelpark', 'magerebrug', 'rembrandt', 'nemo'],
+    modelledLandmarks: [
+      'Royal Palace Amsterdam',
+      'Rijksmuseum',
+      'Westerkerk'
+    ],
+    areaLabels: [
+      ['AMSTERDAM', 0, 400, 0],
+      ['HET IJ', 600, -1100, 1],
+      ['AMSTEL', 688, 1200, 1],
+      ['PRINSENGRACHT \u00b7 KEIZERSGRACHT', -480, 420, 1],
+      ['DE DAM', 0, 0, 2],
+      ['AMSTERDAM CENTRAAL', 531, -667, 2],
+      ['JORDAAN', -820, -180, 2],
+      ['GRACHTENGORDEL (CANAL RING)', -240, 580, 2],
+      ['REMBRANDTPLEIN', 260, 780, 2],
+      ['MUSEUMPLEIN \u00b7 RIJKSMUSEUM', -265, 1479, 2],
+      ['VONDELPARK', -1130, 1668, 2],
+      ['DE PIJP', 220, 1850, 2],
+      ['OOSTERDOK \u00b7 PLANTAGE', 1212, 180, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'canalRing',     name: 'Prinsengracht & Westerkerk',  category: 'scenic', fov: 48 },
+      { id: 'damSquare',     name: 'Dam Square & Royal Palace',   category: 'scenic', fov: 50 },
+      { id: 'rijksmuseum',   name: 'Rijksmuseum & Museumplein',   category: 'scenic', fov: 48 },
+      { id: 'amstelBridge',  name: 'Magere Brug & Amstel River',  category: 'scenic', fov: 50 },
+      { id: 'amsterdamAerial',name: 'Concentric Canal Ring Aerial',category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      canalRing:       { pos: [-510, 11, -60],    look: [-586, 26, -156],   ampPos: [5, 0.3, 5],   ampLook: [3, 1, 3],   freq: 0.12 },
+      damSquare:       { pos: [45, 11, 55],       look: [-35, 18, -10],     ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.13 },
+      rijksmuseum:     { pos: [-340, 12, 1620],   look: [-265, 24, 1479],   ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.11 },
+      amstelBridge:    { pos: [620, 10, 1180],    look: [688, 9, 1112],     ampPos: [6, 0.3, 6],   ampLook: [3, 0, 3],   freq: 0.12 },
+      amsterdamAerial: { pos: [-420, 165, 920],   look: [-120, 14, 240],    ampPos: [20, 2.0, 20], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 18,   z: 14,   heading: Math.PI },
+      car:        { x: -240, z: 320,  heading: 0 },
+      cyclist:    { x: -520, z: -80,  heading: 0 },
+      helicopter: { x: -320, z: 780,  heading: 0.2, above: 145 },
+      kayak:      { x: -340, z: 120,  heading: 0 }
+    },
+    archetypes: {
+      style: 'dutch-canal-gabled-brick',
+      residential: {
+        walls: { clapboard: 0.04, brick: 0.86, stone: 0.06, stucco: 0.04, shake: 0.0 },
+        roofs: { flat: 0.06, hip: 0.08, gable: 0.68, gambrel: 0.18 },
+        pitch: { hip: 0.48, gable: 0.68, historic: 0.76 },
+        bricks: [0x6e2e24, 0x85382a, 0x383230, 0x9c4430, 0x542c24, 0x7a4232],
+        shingles: [0x2b2d30, 0x9e3e28, 0x3b3e42, 0x8c3824]
+      },
+      midrise: {
+        masonry: { stoneColor: 0x7a3428, trimColor: 0xf2eee4, windowWidth: 2.2, floorHeight: 3.5 },
+        historic: { stoneColor: 0x3d3532, trimColor: 0xf5f2ea, windowWidth: 2.1, floorHeight: 3.6 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  hongkong: {
+    id: 'hongkong',
+    title: 'Hong Kong',
+    stateCode: 'HK',
+    stateLabel: 'Hong Kong SAR',
+    displayName: 'Hong Kong',
+    icon: 'img/icon-hongkong.svg',
+    subtitle: 'Victoria Harbour, Central Skyline, Bank of China, Victoria Peak & Tsim Sha Tsui',
+    countyLabel: 'HONG KONG SAR',
+    cityLabel: 'HONG KONG',
+    searchPlaceholder: 'Street or landmark (Central, Victoria Peak, Star Ferry, Tsim Sha Tsui, Wan Chai...)',
+    loadingStages: {
+      streets: 'Building Central, Admiralty, Wan Chai and Tsim Sha Tsui...',
+      outskirts: 'Laying out Victoria Harbour, Kowloon and Victoria Peak...',
+      landmarks: 'Building Bank of China Tower, IFC, ICC and Star Ferry Piers...'
+    },
+    timeZone: 'Asia/Hong_Kong',
+    lat: 22.2855,
+    lon: 114.1577,
+    baseElev: 0.0,
+    weatherStation: 'VHHH',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 500,
+    kayakLaunch: { x: 260, z: -280 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'HKPF',
+      doorTop: 'HONG KONG',
+      doorBottom: 'POLICE',
+      doorSub: 'CENTRAL DISTRICT',
+      badgeTitle: 'HKPF',
+      baseColor: 0xf4f7fa,
+      stripeColor: 0x003893
+    },
+    plate: {
+      state: 'HONG KONG',
+      slogan: 'ASIA WORLD CITY',
+      sample: 'HK 852',
+      bg: '#f7b500',
+      topBand: null,
+      text: '#141414',
+      scriptColor: '#141414',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'Citybus / KMB',
+      shortName: 'HK BUS',
+      bodyColor: 0xf5c400,
+      bandColor: 0xd92626,
+      accentColor: 0x0055a5
+    },
+    ownCar: {
+      kind: 'taxi',
+      hex: 0xd91e2a,
+      plateText: 'HK 852',
+      state: 'HONG KONG'
+    },
+    areas: [
+      [0, 0, 'Central & IFC'],
+      [402, 689, 'Bank of China & Admiralty'],
+      [-515, 222, 'SoHo & Mid-Levels Escalator'],
+      [-1154, 1656, 'Victoria Peak (The Peak)'],
+      [1762, 622, 'Wan Chai & Convention Centre'],
+      [2720, 622, 'Causeway Bay'],
+      [1236, -967, 'Tsim Sha Tsui & Avenue of Stars'],
+      [412, -1934, 'West Kowloon & ICC']
+    ],
+    landmarks: [
+      { id: 'central',      name: 'Central & International Finance Centre (IFC)', short: 'Central & IFC',   x: 0,     z: 0,     heading: 0 },
+      { id: 'boctower',     name: 'Bank of China Tower & Chater Garden',          short: 'Bank of China',   x: 402,   z: 689,   heading: 0 },
+      { id: 'starferry',    name: 'Central Star Ferry Pier & Harbourfront',       short: 'Star Ferry Pier', x: 240,   z: -120,  heading: 0 },
+      { id: 'thepeak',      name: 'Victoria Peak (Peak Tower & Lugard Road)',     short: 'Victoria Peak',   x: -1154, z: 1656,  heading: 0 },
+      { id: 'tst',          name: 'Tsim Sha Tsui Promenade & Clock Tower',        short: 'Tsim Sha Tsui',   x: 1236,  z: -967,  heading: Math.PI },
+      { id: 'wanchai',      name: 'Hong Kong Convention Centre & Wan Chai',       short: 'Wan Chai',        x: 1762,  z: 245,   heading: 0 },
+      { id: 'soho',         name: 'Lan Kwai Fong & Mid-Levels',                   short: 'SoHo / LKF',      x: -240,  z: 480,   heading: 0 },
+      { id: 'icc',          name: 'International Commerce Centre (West Kowloon)', short: 'ICC Kowloon',     x: 412,   z: -1934, heading: Math.PI }
+    ],
+    teleportIds: ['central', 'boctower', 'starferry', 'thepeak', 'tst', 'wanchai', 'soho', 'icc'],
+    modelledLandmarks: [
+      'Bank of China Tower',
+      'Two International Finance Centre',
+      'Hong Kong Convention Centre'
+    ],
+    areaLabels: [
+      ['HONG KONG', 200, 400, 0],
+      ['KOWLOON', 1200, -1600, 0],
+      ['VICTORIA HARBOUR', 800, -520, 1],
+      ['CENTRAL', 0, 200, 2],
+      ['ADMIRALTY \u00b7 BANK OF CHINA', 520, 689, 2],
+      ['SOHO \u00b7 MID-LEVELS', -515, 520, 2],
+      ['VICTORIA PEAK', -1154, 1656, 2],
+      ['SHEUNG WAN', -950, -100, 2],
+      ['WAN CHAI', 1762, 622, 2],
+      ['CAUSEWAY BAY', 2720, 622, 2],
+      ['TSIM SHA TSUI', 1236, -1100, 2],
+      ['WEST KOWLOON \u00b7 ICC', 412, -1934, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'victoriaHarbour', name: 'Victoria Harbour & Central',  category: 'scenic', fov: 46 },
+      { id: 'bankOfChina',     name: 'Bank of China Prism Tower',   category: 'scenic', fov: 48 },
+      { id: 'victoriaPeak',    name: 'Victoria Peak Panorama',      category: 'scenic', fov: 46 },
+      { id: 'tsimShaTsui',     name: 'Tsim Sha Tsui Waterfront',    category: 'scenic', fov: 48 },
+      { id: 'harbourAerial',   name: 'Hong Kong Harbour Aerial',    category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      victoriaHarbour: { pos: [980, 18, -760],    look: [220, 95, 240],      ampPos: [12, 0.6, 12], ampLook: [8, 2, 8],   freq: 0.10 },
+      bankOfChina:     { pos: [260, 18, 480],     look: [402, 135, 689],     ampPos: [6, 0.4, 6],   ampLook: [4, 3, 4],   freq: 0.11 },
+      victoriaPeak:    { pos: [-1080, 42, 1520],  look: [200, 65, 100],      ampPos: [12, 1.0, 12], ampLook: [15, 0, 15], freq: 0.08 },
+      tsimShaTsui:     { pos: [1180, 14, -920],   look: [380, 85, 320],      ampPos: [8, 0.4, 8],   ampLook: [6, 2, 6],   freq: 0.11 },
+      harbourAerial:   { pos: [1450, 195, -820],  look: [350, 80, 350],      ampPos: [22, 2.0, 22], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 180,  z: -60,  heading: 0 },
+      car:        { x: 60,   z: 180,  heading: Math.PI / 2 },
+      cyclist:    { x: 1180, z: -920, heading: -Math.PI / 2 },
+      helicopter: { x: 880,  z: -520, heading: -2.4, above: 185 },
+      kayak:      { x: 260,  z: -280, heading: 0.5 }
+    },
+    archetypes: {
+      style: 'hong-kong-subtropical-podium-tower',
+      residential: {
+        walls: { clapboard: 0.02, brick: 0.06, stone: 0.08, stucco: 0.84, shake: 0.0 },
+        roofs: { flat: 0.84, hip: 0.10, gable: 0.06, gambrel: 0.0 },
+        pitch: { hip: 0.24, gable: 0.26, historic: 0.32 },
+        stucco: [0xe8e4dc, 0xd8d2c6, 0xf2ded6, 0xd4e2dc, 0xe6d8c4, 0xc9d2d8]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xded9ce, trimColor: 0x9c968c, windowWidth: 2.4, floorHeight: 3.4 },
+        historic: { stoneColor: 0xc8b8a6, trimColor: 0x8c7e70, windowWidth: 2.3, floorHeight: 3.4 },
+        waterTowerProb: 0.08,
+        fireEscapes: false
+      }
+    }
+  },
+
+  paris: {
+    id: 'paris',
+    title: 'Paris',
+    stateCode: '75',
+    stateLabel: 'Ile-de-France',
+    displayName: 'Paris, France',
+    icon: 'img/icon-paris.svg',
+    subtitle: 'Eiffel Tower, River Seine, Louvre, Notre-Dame, Champs-Elysees & Haussmann Boulevards',
+    countyLabel: 'VILLE DE PARIS',
+    cityLabel: 'PARIS',
+    searchPlaceholder: 'Boulevard or monument (Tour Eiffel, Louvre, Notre-Dame, Champs-Elysees, Seine...)',
+    loadingStages: {
+      streets: 'Building the River Seine bridges, Champs-Elysees and Haussmann boulevards...',
+      outskirts: 'Laying out Ile de la Cite, Saint-Germain, Le Marais and Trocadero...',
+      landmarks: 'Building the Eiffel Tower, Louvre Pyramid, Arc de Triomphe and Notre-Dame...'
+    },
+    timeZone: 'Europe/Paris',
+    lat: 48.8606,
+    lon: 2.3376,
+    baseElev: 28.0,
+    weatherStation: 'LFPG',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.5,
+    usualCfs: 8500,
+    kayakLaunch: { x: -420, z: 120 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'POLICE',
+      doorTop: 'POLICE',
+      doorBottom: 'NATIONALE',
+      doorSub: 'PREFECTURE DE PARIS',
+      badgeTitle: '75',
+      baseColor: 0xf4f6f8,
+      stripeColor: 0x002654
+    },
+    plate: {
+      state: 'FRANCE',
+      slogan: 'ILE-DE-FRANCE 75',
+      sample: 'PR-075-FR',
+      bg: '#f4f6f8',
+      topBand: '#003399',
+      text: '#141414',
+      scriptColor: '#003399',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'RATP Bus',
+      shortName: 'RATP',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0x00a88f,
+      accentColor: 0x0055a4
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x0055a4,
+      plateText: 'PR-075-FR',
+      state: 'FRANCE'
+    },
+    areas: [
+      [0, 0, 'Musee du Louvre & Tuileries'],
+      [-3168, 256, 'Tour Eiffel & Champ de Mars'],
+      [907, 845, 'Ile de la Cite & Notre-Dame'],
+      [-1200, -490, 'Place de la Concorde'],
+      [-3116, -1467, 'Arc de Triomphe & Etoile'],
+      [-337, 45, 'Musee d\'Orsay & Saint-Germain'],
+      [1240, 220, 'Le Marais & Hotel de Ville'],
+      [797, 1590, 'Latin Quarter & Pantheon'],
+      [-406, 1701, 'Jardin du Luxembourg'],
+      [-150, -1250, 'Opera Garnier & Grands Boulevards']
+    ],
+    landmarks: [
+      { id: 'louvre',      name: 'Musee du Louvre & Glass Pyramid',       short: 'Louvre Pyramid',       x: 0,     z: 0,     heading: -Math.PI / 2 },
+      { id: 'eiffel',      name: 'Tour Eiffel & Champ de Mars',           short: 'Eiffel Tower',         x: -3168, z: 256,   heading: 0 },
+      { id: 'notredame',   name: 'Cathedrale Notre-Dame de Paris',        short: 'Notre-Dame',           x: 907,   z: 845,   heading: -Math.PI / 2 },
+      { id: 'concorde',    name: 'Place de la Concorde & Luxor Obelisk',  short: 'Place de la Concorde', x: -1200, z: -490,  heading: -Math.PI / 2 },
+      { id: 'arctriomphe', name: 'Arc de Triomphe & Champs-Elysees',      short: 'Arc de Triomphe',      x: -3116, z: -1467, heading: Math.PI / 2 },
+      { id: 'orsay',       name: 'Musee d\'Orsay & Pont Royal',           short: 'Musee d\'Orsay',       x: -337,  z: 45,    heading: 0 },
+      { id: 'pantheon',    name: 'Pantheon & Latin Quarter',              short: 'The Pantheon',         x: 797,   z: 1590,  heading: 0 },
+      { id: 'luxembourg',  name: 'Jardin du Luxembourg & Palais',         short: 'Luxembourg Gardens',   x: -406,  z: 1701,  heading: 0 }
+    ],
+    teleportIds: ['eiffel', 'louvre', 'notredame', 'concorde', 'arctriomphe', 'orsay', 'pantheon', 'luxembourg'],
+    modelledLandmarks: [
+      'Tour Eiffel',
+      'Louvre Pyramid',
+      'Arc de Triomphe',
+      'Cathedrale Notre-Dame de Paris'
+    ],
+    areaLabels: [
+      ['PARIS', -600, 200, 0],
+      ['LA SEINE', -800, 120, 1],
+      ['LA SEINE', 650, 780, 1],
+      ['MUSEE DU LOUVRE \u00b7 TUILERIES', -350, -150, 2],
+      ['TOUR EIFFEL \u00b7 CHAMP DE MARS', -3050, 480, 2],
+      ['TROCADERO', -3620, -220, 2],
+      ['CHAMPS-ELYSEES', -2150, -980, 2],
+      ['ARC DE TRIOMPHE', -3116, -1467, 2],
+      ['PLACE DE LA CONCORDE', -1200, -490, 2],
+      ['ILE DE LA CITE \u00b7 NOTRE-DAME', 907, 845, 2],
+      ['SAINT-GERMAIN-DES-PRES', -250, 680, 2],
+      ['QUARTIER LATIN \u00b7 PANTHEON', 797, 1590, 2],
+      ['JARDIN DU LUXEMBOURG', -406, 1701, 2],
+      ['LE MARAIS', 1350, 120, 2],
+      ['OPERA \u00b7 VENDOME', -380, -1080, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'eiffelTower',   name: 'Tour Eiffel & Pont d\'Iena',  category: 'scenic', fov: 48 },
+      { id: 'louvrePyramid', name: 'Louvre Cour Napoleon',        category: 'scenic', fov: 50 },
+      { id: 'notreDame',     name: 'Notre-Dame & Ile de la Cite', category: 'scenic', fov: 48 },
+      { id: 'champsElysees', name: 'Champs-Elysees & Arc',        category: 'scenic', fov: 48 },
+      { id: 'seineBridges',  name: 'Pont Alexandre III & Seine',  category: 'scenic', fov: 50 },
+      { id: 'parisAerial',   name: 'Paris & River Seine Aerial',  category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      eiffelTower:   { pos: [-3360, 18, -20],    look: [-3168, 120, 256],   ampPos: [10, 0.6, 10], ampLook: [5, 3, 5],   freq: 0.10 },
+      louvrePyramid: { pos: [-95, 11, -20],      look: [0, 14, 0],          ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.13 },
+      notreDame:     { pos: [760, 12, 810],      look: [907, 32, 845],      ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.12 },
+      champsElysees: { pos: [-2720, 14, -1240],  look: [-3116, 36, -1467],  ampPos: [8, 0.4, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      seineBridges:  { pos: [-1420, 14, -120],   look: [-1420, 16, 280],    ampPos: [8, 0.4, 8],   ampLook: [6, 1, 6],   freq: 0.11 },
+      parisAerial:   { pos: [-2450, 195, -420],  look: [-3168, 95, 256],    ampPos: [22, 2.0, 22], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -3260, z: 120,  heading: 2.5 },
+      car:        { x: -1200, z: -490, heading: -Math.PI / 2 },
+      cyclist:    { x: -240,  z: 45,   heading: -Math.PI / 2 },
+      helicopter: { x: -2650, z: -280, heading: -2.3, above: 175 },
+      kayak:      { x: -420,  z: 120,  heading: -Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'haussmann-limestone-zinc-mansard',
+      residential: {
+        walls: { clapboard: 0.0, brick: 0.08, stone: 0.64, stucco: 0.28, shake: 0.0 },
+        roofs: { flat: 0.12, hip: 0.56, gable: 0.14, gambrel: 0.18 },
+        pitch: { hip: 0.44, gable: 0.48, historic: 0.56 },
+        stucco: [0xefe8d5, 0xe6dec8, 0xddd3bc, 0xf4eee0, 0xd8ccb4],
+        shingles: [0x4c5866, 0x3e4a56, 0x586573, 0x434d59, 0x626f7d]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xe8dec8, trimColor: 0xb8ae98, windowWidth: 2.2, floorHeight: 3.7 },
+        historic: { stoneColor: 0xdfd3ba, trimColor: 0x9c927e, windowWidth: 2.1, floorHeight: 3.8 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  london: {
+    id: 'london',
+    title: 'London',
+    stateCode: 'UK',
+    stateLabel: 'Greater London, UK',
+    displayName: 'London, UK',
+    icon: 'img/icon-london.svg',
+    subtitle: 'Big Ben & Westminster, River Thames, London Eye, Trafalgar Square, Soho & The Shard',
+    countyLabel: 'GREATER LONDON',
+    cityLabel: 'LONDON',
+    searchPlaceholder: 'Street or landmark (Westminster, Big Ben, Trafalgar Square, Thames, St Paul\'s, Soho...)',
+    loadingStages: {
+      streets: 'Building Westminster, Whitehall, the Strand, Soho and South Bank...',
+      outskirts: 'Laying out the River Thames, St James\'s Park and the City of London...',
+      landmarks: 'Building Big Ben, Palace of Westminster, London Eye and St Paul\'s...'
+    },
+    timeZone: 'Europe/London',
+    lat: 51.5055,
+    lon: -0.1168,
+    baseElev: 0.0,
+    weatherStation: 'EGLL',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.5,
+    usualCfs: 6000,
+    kayakLaunch: { x: -80, z: 120 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'MET POLICE',
+      doorTop: 'METROPOLITAN',
+      doorBottom: 'POLICE',
+      doorSub: 'SCOTLAND YARD',
+      badgeTitle: 'MET',
+      baseColor: 0xf4f7fa,
+      stripeColor: 0x003399
+    },
+    plate: {
+      state: 'UNITED KINGDOM',
+      slogan: 'GREATER LONDON',
+      sample: 'LDN 20A',
+      bg: '#f5c400',
+      topBand: null,
+      text: '#141414',
+      scriptColor: '#141414',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'Transport for London',
+      shortName: 'LONDON BUSES',
+      bodyColor: 0xdc241f,
+      bandColor: 0xffffff,
+      accentColor: 0x0019a8
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x004225,
+      plateText: 'LDN 20A',
+      state: 'UK'
+    },
+    areas: [
+      [0, 0, 'Waterloo Bridge & Savoy'],
+      [-542, 534, 'Westminster & Big Ben'],
+      [-156, 200, 'London Eye & South Bank'],
+      [-780, -289, 'Trafalgar Square & Whitehall'],
+      [-1704, 489, 'Buckingham Palace & St James\'s Park'],
+      [-920, -820, 'Soho, Covent Garden & West End'],
+      [1273, -934, 'St Paul\'s Cathedral & Fleet Street'],
+      [924, -67, 'Tate Modern & Millennium Bridge'],
+      [2100, 111, 'London Bridge & The Shard']
+    ],
+    landmarks: [
+      { id: 'bigben',      name: 'Big Ben (Elizabeth Tower) & Westminster', short: 'Big Ben & Parliament', x: -542,  z: 534,   heading: 0 },
+      { id: 'londoneye',   name: 'London Eye & South Bank Promenade',       short: 'London Eye',           x: -156,  z: 245,   heading: -Math.PI / 2 },
+      { id: 'trafalgar',   name: 'Trafalgar Square & Nelson\'s Column',     short: 'Trafalgar Square',     x: -780,  z: -289,  heading: 0 },
+      { id: 'buckingham',  name: 'Buckingham Palace & The Mall',            short: 'Buckingham Palace',    x: -1704, z: 489,   heading: Math.PI / 2 },
+      { id: 'stpauls',     name: 'St Paul\'s Cathedral',                    short: 'St Paul\'s Cathedral', x: 1273,  z: -934,  heading: -Math.PI / 2 },
+      { id: 'tatemodern',  name: 'Tate Modern & Millennium Bridge',         short: 'Tate Modern',          x: 924,   z: -67,   heading: 0 },
+      { id: 'coventgarden',name: 'Covent Garden Piazza & West End',         short: 'Covent Garden',        x: -380,  z: -680,  heading: 0 },
+      { id: 'theshard',    name: 'The Shard & London Bridge',               short: 'The Shard',            x: 2100,  z: 111,   heading: 0 }
+    ],
+    teleportIds: ['bigben', 'londoneye', 'trafalgar', 'buckingham', 'stpauls', 'tatemodern', 'coventgarden', 'theshard'],
+    modelledLandmarks: [
+      'Elizabeth Tower (Big Ben)',
+      'London Eye',
+      'St Paul\'s Cathedral',
+      'The Shard'
+    ],
+    areaLabels: [
+      ['LONDON', 0, -200, 0],
+      ['RIVER THAMES', -240, 150, 1],
+      ['RIVER THAMES', 1200, -350, 1],
+      ['WESTMINSTER \u00b7 BIG BEN', -542, 534, 2],
+      ['SOUTH BANK \u00b7 LONDON EYE', -156, 245, 2],
+      ['TRAFALGAR SQUARE', -780, -289, 2],
+      ['ST JAMES\'S PARK \u00b7 WHITEHALL', -1100, 280, 2],
+      ['BUCKINGHAM PALACE', -1704, 489, 2],
+      ['COVENT GARDEN \u00b7 STRAND', -380, -680, 2],
+      ['SOHO \u00b7 PICCADILLY', -1150, -780, 2],
+      ['CITY OF LONDON \u00b7 ST PAUL\'S', 1273, -934, 2],
+      ['BANKSIDE \u00b7 TATE MODERN', 924, -67, 2],
+      ['SOUTHWARK \u00b7 THE SHARD', 2100, 111, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'bigBen',          name: 'Big Ben & Westminster Bridge', category: 'scenic', fov: 48 },
+      { id: 'londonEye',       name: 'London Eye & River Thames',    category: 'scenic', fov: 50 },
+      { id: 'trafalgarSquare', name: 'Trafalgar Square & Whitehall', category: 'scenic', fov: 50 },
+      { id: 'stPauls',         name: 'St Paul\'s & Millennium Bridge',category: 'scenic', fov: 48 },
+      { id: 'thamesAerial',    name: 'Thames & Westminster Aerial',  category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      bigBen:          { pos: [-320, 14, 520],     look: [-542, 48, 534],     ampPos: [8, 0.4, 8],   ampLook: [4, 2, 4],   freq: 0.11 },
+      londonEye:       { pos: [-420, 14, 220],     look: [-156, 52, 245],     ampPos: [8, 0.4, 8],   ampLook: [4, 2, 4],   freq: 0.11 },
+      trafalgarSquare: { pos: [-780, 12, -180],    look: [-780, 24, -320],    ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.12 },
+      stPauls:         { pos: [1080, 16, -420],    look: [1273, 55, -934],    ampPos: [8, 0.4, 8],   ampLook: [4, 2, 4],   freq: 0.11 },
+      thamesAerial:    { pos: [140, 175, 680],     look: [-380, 35, 320],     ampPos: [20, 2.0, 20], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -390, z: 525, heading: -Math.PI / 2 },
+      car:        { x: -450, z: 525, heading: -Math.PI / 2 },
+      cyclist:    { x: -220, z: 180, heading: 0 },
+      helicopter: { x: 80,   z: 560, heading: -1.8, above: 165 },
+      kayak:      { x: -80,  z: 120, heading: 0.4 }
+    },
+    archetypes: {
+      style: 'london-georgian-brick-portland-stone',
+      residential: {
+        walls: { clapboard: 0.02, brick: 0.68, stone: 0.14, stucco: 0.16, shake: 0.0 },
+        roofs: { flat: 0.16, hip: 0.42, gable: 0.36, gambrel: 0.06 },
+        pitch: { hip: 0.38, gable: 0.46, historic: 0.54 },
+        bricks: [0x8e4232, 0xb89660, 0x7c382a, 0xa88652, 0x9c4c38, 0x6b3a2e],
+        stucco: [0xf4f0e6, 0xebe4d4, 0xe2dac6, 0xf7f5ef],
+        shingles: [0x383e45, 0x454c54, 0x2e3338, 0x525a63]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xe2dcd0, trimColor: 0xa69f92, windowWidth: 2.3, floorHeight: 3.8 },
+        historic: { stoneColor: 0x984634, trimColor: 0xe8e2d5, windowWidth: 2.3, floorHeight: 3.6 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  tokyo: {
+    id: 'tokyo',
+    title: 'Tokyo',
+    stateCode: '13',
+    stateLabel: 'Tokyo Metropolis',
+    displayName: 'Tokyo, Japan',
+    icon: 'img/icon-tokyo.svg',
+    subtitle: 'Tokyo Tower, Imperial Palace, Ginza, Roppongi Hills, Tokyo Station & Sumida River',
+    countyLabel: 'TOKYO METROPOLIS',
+    cityLabel: 'TOKYO',
+    searchPlaceholder: 'District or landmark (Tokyo Tower, Ginza, Roppongi, Imperial Palace, Tokyo Station...)',
+    loadingStages: {
+      streets: 'Building Ginza, Marunouchi, Roppongi, Shiba Park and the Imperial Palace moat...',
+      outskirts: 'Laying out Minato, Chiyoda, Chuo and Tokyo Bay...',
+      landmarks: 'Building Tokyo Tower, Roppongi Hills Mori Tower and Tokyo Station...'
+    },
+    timeZone: 'Asia/Tokyo',
+    lat: 35.6655,
+    lon: 139.7514,
+    baseElev: 0.0,
+    weatherStation: 'RJTT',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 900,
+    kayakLaunch: { x: 1620, z: -850 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'TMPD',
+      doorTop: 'METROPOLITAN',
+      doorBottom: 'POLICE',
+      doorSub: 'KEISHICHO TOKYO',
+      badgeTitle: 'TMPD',
+      baseColor: 0xf4f6f8,
+      stripeColor: 0x14171c
+    },
+    plate: {
+      state: 'TOKYO',
+      slogan: 'SHINAGAWA 300',
+      sample: 'TKO 33-88',
+      bg: '#f4f6f8',
+      topBand: null,
+      text: '#145a32',
+      scriptColor: '#145a32',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'Toei Bus',
+      shortName: 'TOEI BUS',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0x4ca626,
+      accentColor: 0xf39800
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0xef233c,
+      plateText: 'TKO 33-88',
+      state: 'TOKYO'
+    },
+    areas: [
+      [0, 0, 'Toranomon & Shimbashi'],
+      [-543, 767, 'Tokyo Tower & Shiba Park'],
+      [-1991, 567, 'Roppongi Hills & Azabu'],
+      [1014, -678, 'Ginza & Yurakucho'],
+      [1421, -1867, 'Tokyo Station & Marunouchi'],
+      [172, -2289, 'Imperial Palace & Chiyoda'],
+      [-652, -834, 'Akasaka & Nagatacho'],
+      [750, 950, 'Hamamatsucho & Takeshiba Bayfront']
+    ],
+    landmarks: [
+      { id: 'tokyotower',  name: 'Tokyo Tower & Zojo-ji Temple (Shiba Park)', short: 'Tokyo Tower',       x: -543,  z: 767,   heading: 0 },
+      { id: 'ginza',       name: 'Ginza Crossing (Chuo-dori & Harumi-dori)',  short: 'Ginza Crossing',    x: 1014,  z: -678,  heading: 0 },
+      { id: 'tokyostation',name: 'Tokyo Station & Marunouchi Plaza',          short: 'Tokyo Station',     x: 1421,  z: -1867, heading: -Math.PI / 2 },
+      { id: 'imperial',    name: 'Imperial Palace Outer Gardens & Nijubashi', short: 'Imperial Palace',   x: 480,   z: -1820, heading: -Math.PI / 2 },
+      { id: 'roppongi',    name: 'Roppongi Hills Mori Tower',                 short: 'Roppongi Hills',    x: -1991, z: 567,   heading: Math.PI / 2 },
+      { id: 'toranomon',   name: 'Toranomon Hills & Atago Shrine',            short: 'Toranomon Hills',   x: 0,     z: 0,     heading: 0 },
+      { id: 'akasaka',     name: 'Akasaka & National Diet Building',          short: 'National Diet',     x: -420,  z: -1120, heading: 0 },
+      { id: 'hamamatsucho',name: 'Hamarikyu Gardens & Sumida River Mouth',    short: 'Hamarikyu Gardens', x: 980,   z: 320,   heading: 0 }
+    ],
+    teleportIds: ['tokyotower', 'ginza', 'tokyostation', 'imperial', 'roppongi', 'toranomon', 'akasaka', 'hamamatsucho'],
+    modelledLandmarks: [
+      'Tokyo Tower',
+      'Roppongi Hills Mori Tower',
+      'Tokyo Station Marunouchi Building'
+    ],
+    areaLabels: [
+      ['TOKYO', 200, -400, 0],
+      ['IMPERIAL PALACE MOAT', 420, -1950, 1],
+      ['SUMIDA RIVER \u00b7 TOKYO BAY', 1650, 420, 1],
+      ['TOKYO TOWER \u00b7 SHIBA PARK', -543, 767, 2],
+      ['TORANOMON \u00b7 SHIMBASHI', 180, 0, 2],
+      ['GINZA \u00b7 YURAKUCHO', 1014, -678, 2],
+      ['MARUNOUCHI \u00b7 TOKYO STATION', 1421, -1867, 2],
+      ['IMPERIAL PALACE (KOKYO)', 172, -2289, 2],
+      ['KASUMIGASEKI \u00b7 NAGATACHO', -280, -1120, 2],
+      ['AKASAKA', -850, -834, 2],
+      ['ROPPONGI \u00b7 AZABU', -1991, 567, 2],
+      ['HAMAMATSUCHO \u00b7 SHIODOME', 750, 720, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'tokyoTower',    name: 'Tokyo Tower & Shiba Park',    category: 'scenic', fov: 48 },
+      { id: 'ginzaCrossing', name: 'Ginza Chuo-dori Boulevard',   category: 'scenic', fov: 50 },
+      { id: 'roppongiHills', name: 'Roppongi View of Tokyo Tower',category: 'scenic', fov: 46 },
+      { id: 'imperialMoat',  name: 'Imperial Palace & Marunouchi',category: 'scenic', fov: 48 },
+      { id: 'tokyoAerial',   name: 'Minato & Chiyoda Skyline',    category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      tokyoTower:    { pos: [-340, 16, 620],     look: [-543, 120, 767],    ampPos: [8, 0.5, 8],   ampLook: [4, 3, 4],   freq: 0.10 },
+      ginzaCrossing: { pos: [980, 12, -580],     look: [1040, 24, -740],    ampPos: [5, 0.3, 5],   ampLook: [3, 1, 3],   freq: 0.13 },
+      roppongiHills: { pos: [-1780, 48, 520],    look: [-543, 110, 767],    ampPos: [10, 0.8, 10], ampLook: [6, 2, 6],   freq: 0.09 },
+      imperialMoat:  { pos: [780, 14, -1820],    look: [1421, 38, -1867],   ampPos: [8, 0.4, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      tokyoAerial:   { pos: [180, 195, 1180],    look: [-320, 85, 420],     ampPos: [22, 2.0, 22], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -380, z: 680,  heading: -2.2 },
+      car:        { x: 0,    z: 0,    heading: 0 },
+      cyclist:    { x: 1014, z: -678, heading: 0 },
+      helicopter: { x: 120,  z: 960,  heading: -0.8, above: 185 },
+      kayak:      { x: 1620, z: -850, heading: 0 }
+    },
+    archetypes: {
+      style: 'tokyo-modern-tile-kawara',
+      residential: {
+        walls: { clapboard: 0.18, brick: 0.04, stone: 0.06, stucco: 0.62, shake: 0.10 },
+        roofs: { flat: 0.38, hip: 0.32, gable: 0.30, gambrel: 0.0 },
+        pitch: { hip: 0.28, gable: 0.34, historic: 0.42 },
+        stucco: [0xebe8e0, 0xd8d5cc, 0xc4c0b6, 0xf2f0ea, 0x8c887e, 0x52504c],
+        shingles: [0x2b2d30, 0x36393d, 0x222428, 0x45484d]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xdfdcd2, trimColor: 0x8a877e, windowWidth: 2.5, floorHeight: 3.5 },
+        historic: { stoneColor: 0x9e4838, trimColor: 0xe6e2d8, windowWidth: 2.4, floorHeight: 3.6 },
+        waterTowerProb: 0.04,
+        fireEscapes: false
+      }
+    }
+  },
+
+  barcelona: {
+    id: 'barcelona',
+    title: 'Barcelona',
+    stateCode: 'CAT',
+    stateLabel: 'Catalonia, Spain',
+    displayName: 'Barcelona, Spain',
+    icon: 'img/icon-barcelona.svg',
+    subtitle: 'Sagrada Familia, Eixample Octagonal Blocks, Passeig de Gracia, Barri Gotic & Barceloneta',
+    countyLabel: 'AJUNTAMENT DE BARCELONA',
+    cityLabel: 'BARCELONA',
+    searchPlaceholder: 'Street or landmark (Sagrada Familia, Passeig de Gracia, La Rambla, Barceloneta...)',
+    loadingStages: {
+      streets: 'Building Cerda\'s Eixample octagonal grid, Avinguda Diagonal and La Rambla...',
+      outskirts: 'Laying out the Mediterranean coast, Port Vell, Barceloneta and Montjuic...',
+      landmarks: 'Building La Sagrada Familia, Casa Batllo, Torre Glories and Columbus Monument...'
+    },
+    timeZone: 'Europe/Madrid',
+    lat: 41.3902,
+    lon: 2.1699,
+    baseElev: 0.0,
+    weatherStation: 'LEBL',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 180,
+    kayakLaunch: { x: 1050, z: 1650 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'MOSSOS',
+      doorTop: 'MOSSOS',
+      doorBottom: 'D\'ESQUADRA',
+      doorSub: 'GUARDIA URBANA BCN',
+      badgeTitle: 'BCN',
+      baseColor: 0x0b2545,
+      stripeColor: 0xd90429
+    },
+    plate: {
+      state: 'ESPANA',
+      slogan: 'BARCELONA CAT',
+      sample: '0801 BCN',
+      bg: '#f4f6f8',
+      topBand: '#003399',
+      text: '#141414',
+      scriptColor: '#003399',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'TMB Barcelona',
+      shortName: 'TMB BUS',
+      bodyColor: 0xd92626,
+      bandColor: 0xffffff,
+      accentColor: 0x1b263b
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0xe07a5f,
+      plateText: '0801 BCN',
+      state: 'ESPANA'
+    },
+    areas: [
+      [0, 0, 'Placa de Catalunya'],
+      [-351, -156, 'Passeig de Gracia & Eixample'],
+      [39, -1489, 'Sagrada Familia'],
+      [48, 867, 'Barri Gotic & Cathedral'],
+      [15, 1601, 'Port Vell & La Rambla'],
+      [1688, 1345, 'La Barceloneta & Mediterranean Beach'],
+      [1588, -1478, 'Torre Glories & Poblenou (22@)'],
+      [961, 300, 'Parc de la Ciutadella & Arc de Triomf'],
+      [-1580, 1280, 'Placa d\'Espanya & Montjuic']
+    ],
+    landmarks: [
+      { id: 'catalunya',   name: 'Placa de Catalunya & La Rambla',         short: 'Placa de Catalunya',   x: 0,     z: 0,     heading: 0 },
+      { id: 'sagrada',     name: 'Basilica de la Sagrada Familia',         short: 'Sagrada Familia',      x: 39,    z: -1489, heading: 0 },
+      { id: 'batllo',      name: 'Casa Batllo & Passeig de Gracia',        short: 'Passeig de Gracia',    x: -351,  z: -245,  heading: 0 },
+      { id: 'gotic',       name: 'Barri Gotic & Barcelona Cathedral',      short: 'Barri Gotic',          x: 48,    z: 745,   heading: 0 },
+      { id: 'portvell',    name: 'Columbus Monument & Port Vell',          short: 'Port Vell',            x: 68,    z: 1601,  heading: 0 },
+      { id: 'barceloneta', name: 'Platja de la Barceloneta & W Hotel',     short: 'Barceloneta Beach',    x: 1688,  z: 1345,  heading: Math.PI / 2 },
+      { id: 'glories',     name: 'Torre Glories & Avinguda Diagonal',      short: 'Torre Glories',        x: 1588,  z: -1478, heading: 0 },
+      { id: 'ciutadella',  name: 'Parc de la Ciutadella & Arc de Triomf',  short: 'Ciutadella Park',      x: 961,   z: 300,   heading: 0 }
+    ],
+    teleportIds: ['sagrada', 'catalunya', 'batllo', 'gotic', 'portvell', 'barceloneta', 'glories', 'ciutadella'],
+    modelledLandmarks: [
+      'Basilica de la Sagrada Familia',
+      'Torre Glories',
+      'Barcelona Cathedral'
+    ],
+    areaLabels: [
+      ['BARCELONA', 0, -200, 0],
+      ['MAR MEDITERRANIA', 2100, 1800, 1],
+      ['PORT VELL', 550, 1750, 1],
+      ['PLACA DE CATALUNYA', 0, 0, 2],
+      ['L\'EIXAMPLE \u00b7 PASSEIG DE GRACIA', -420, -480, 2],
+      ['SAGRADA FAMILIA', 39, -1489, 2],
+      ['BARRI GOTIC \u00b7 LA RAMBLA', 48, 867, 2],
+      ['EL BORN \u00b7 CIUTADELLA', 961, 550, 2],
+      ['LA BARCELONETA', 1688, 1345, 2],
+      ['EL RAVAL', -480, 920, 2],
+      ['GLORIES \u00b7 POBLENOU', 1588, -1478, 2],
+      ['SANT ANTONI \u00b7 MONTJUIC', -1200, 1100, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'sagradaFamilia', name: 'Basilica de la Sagrada Familia',category: 'scenic', fov: 48 },
+      { id: 'eixampleGrid',   name: 'Passeig de Gracia & Eixample',  category: 'scenic', fov: 50 },
+      { id: 'portVell',       name: 'Port Vell & Barceloneta',       category: 'scenic', fov: 48 },
+      { id: 'torreGlories',   name: 'Torre Glories & Diagonal',      category: 'scenic', fov: 48 },
+      { id: 'barcelonaAerial',name: 'Eixample Octagon Grid Aerial',  category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      sagradaFamilia: { pos: [-110, 18, -1340],   look: [39, 68, -1489],      ampPos: [8, 0.5, 8],   ampLook: [4, 2, 4],   freq: 0.11 },
+      eixampleGrid:   { pos: [-280, 14, -120],    look: [-420, 22, -380],     ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.12 },
+      portVell:       { pos: [420, 16, 1620],     look: [68, 28, 1601],       ampPos: [8, 0.4, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      torreGlories:   { pos: [1380, 18, -1360],   look: [1588, 65, -1478],    ampPos: [8, 0.5, 8],   ampLook: [4, 2, 4],   freq: 0.11 },
+      barcelonaAerial:{ pos: [-180, 185, -820],   look: [39, 45, -1489],      ampPos: [20, 2.0, 20], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -65,  z: -1380, heading: 0.5 },
+      car:        { x: -351, z: -156,  heading: 0 },
+      cyclist:    { x: 1580, z: 1345,  heading: 0 },
+      helicopter: { x: -240, z: -980,  heading: 0.4, above: 165 },
+      kayak:      { x: 1050, z: 1650,  heading: Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'catalan-modernisme-eixample-stone',
+      residential: {
+        walls: { clapboard: 0.0, brick: 0.16, stone: 0.36, stucco: 0.48, shake: 0.0 },
+        roofs: { flat: 0.64, hip: 0.24, gable: 0.12, gambrel: 0.0 },
+        pitch: { hip: 0.24, gable: 0.28, historic: 0.32 },
+        stucco: [0xead8be, 0xdfc49e, 0xd49a78, 0xf2e6d2, 0xc98262, 0xe6cdb0],
+        shingles: [0xb85234, 0xc45e3e, 0x9e442a, 0xa84c30]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xe2cfb2, trimColor: 0xa89578, windowWidth: 2.4, floorHeight: 3.7 },
+        historic: { stoneColor: 0xc97b5b, trimColor: 0xebe0ce, windowWidth: 2.3, floorHeight: 3.8 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  rio: {
+    id: 'rio',
+    title: 'Rio de Janeiro',
+    stateCode: 'RJ',
+    stateLabel: 'Rio de Janeiro, Brazil',
+    displayName: 'Rio de Janeiro, Brazil',
+    icon: 'img/icon-rio.svg',
+    subtitle: 'Copacabana Beach, Sugarloaf Mountain, Christ the Redeemer, Ipanema & Lagoa',
+    countyLabel: 'CIDADE MARAVILHOSA',
+    cityLabel: 'RIO DE JANEIRO',
+    searchPlaceholder: 'Beach or landmark (Copacabana, Pao de Acucar, Corcovado, Ipanema, Botafogo...)',
+    loadingStages: {
+      streets: 'Building Avenida Atlantica, Copacabana, Ipanema and Botafogo...',
+      outskirts: 'Laying out Sugarloaf Mountain, Corcovado, Lagoa and Guanabara Bay...',
+      landmarks: 'Building Christ the Redeemer, Pao de Acucar Cable Car and Copacabana Palace...'
+    },
+    timeZone: 'America/Sao_Paulo',
+    lat: -22.9619,
+    lon: -43.1806,
+    baseElev: 0.0,
+    weatherStation: 'SBRJ',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 320,
+    kayakLaunch: { x: 450, z: 920 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'PMERJ',
+      doorTop: 'POLICIA',
+      doorBottom: 'MILITAR RJ',
+      doorSub: 'RIO DE JANEIRO',
+      badgeTitle: 'RJ',
+      baseColor: 0xf4f6f8,
+      stripeColor: 0x004b87
+    },
+    plate: {
+      state: 'BRASIL',
+      slogan: 'RIO DE JANEIRO RJ',
+      sample: 'RIO 2A21',
+      bg: '#f4f6f8',
+      topBand: '#003399',
+      text: '#141414',
+      scriptColor: '#009b3a',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'SPPO Rio Onibus',
+      shortName: 'RIO ONIBUS',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0x009b3a,
+      accentColor: 0xfedf00
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0xffbe0b,
+      plateText: 'RIO 2A21',
+      state: 'BRASIL'
+    },
+    areas: [
+      [0, 0, 'Copacabana & Avenida Atlantica'],
+      [2534, -1256, 'Pao de Acucar (Sugarloaf) & Urca'],
+      [-3068, -1123, 'Corcovado & Cristo Redentor'],
+      [-2390, 2668, 'Ipanema & Arpoador'],
+      [-2842, 1345, 'Lagoa Rodrigo de Freitas'],
+      [15, -1556, 'Botafogo Bay'],
+      [965, 511, 'Leme Beach'],
+      [-1450, -320, 'Humaita & Jardim Botanico']
+    ],
+    landmarks: [
+      { id: 'copacabana',  name: 'Copacabana Beach & Avenida Atlantica',   short: 'Copacabana Beach',     x: 0,     z: 420,   heading: Math.PI / 2 },
+      { id: 'sugarloaf',   name: 'Pao de Acucar (Sugarloaf Mountain)',     short: 'Sugarloaf Mountain',   x: 2534,  z: -1256, heading: -Math.PI / 2 },
+      { id: 'cristo',      name: 'Cristo Redentor (Corcovado Summit)',     short: 'Christ the Redeemer',  x: -3068, z: -1123, heading: Math.PI / 2 },
+      { id: 'ipanema',     name: 'Praia de Ipanema & Posto 9',             short: 'Ipanema Beach',        x: -2390, z: 2668,  heading: 0 },
+      { id: 'botafogo',    name: 'Enseada de Botafogo & Marina View',      short: 'Botafogo Bay',         x: 15,    z: -1556, heading: Math.PI / 2 },
+      { id: 'lagoa',       name: 'Lagoa Rodrigo de Freitas',               short: 'Lagoa',                x: -2842, z: 1345,  heading: 0 },
+      { id: 'arpoador',    name: 'Pedra do Arpoador & Forte de Copacabana',short: 'Arpoador',             x: -1150, z: 2780,  heading: -Math.PI / 2 },
+      { id: 'leme',        name: 'Praia do Leme & Morro do Leme',          short: 'Leme Beach',           x: 965,   z: 511,   heading: -Math.PI / 2 }
+    ],
+    teleportIds: ['copacabana', 'sugarloaf', 'cristo', 'ipanema', 'botafogo', 'lagoa', 'arpoador', 'leme'],
+    modelledLandmarks: [
+      'Christ the Redeemer',
+      'Sugarloaf Cable Car Station',
+      'Copacabana Palace'
+    ],
+    areaLabels: [
+      ['RIO DE JANEIRO', -500, 200, 0],
+      ['OCEANO ATLANTICO', 600, 1800, 1],
+      ['ENSEADA DE BOTAFOGO', 520, -1650, 1],
+      ['LAGOA RODRIGO DE FREITAS', -2842, 1345, 1],
+      ['COPACABANA', 0, 420, 2],
+      ['PAO DE ACUCAR \u00b7 URCA', 2534, -1256, 2],
+      ['CORCOVADO \u00b7 CRISTO REDENTOR', -3068, -1123, 2],
+      ['IPANEMA \u00b7 ARPOADOR', -2100, 2668, 2],
+      ['BOTAFOGO', -120, -1450, 2],
+      ['LEME', 965, 511, 2],
+      ['HUMAITA \u00b7 JARDIM BOTANICO', -2100, -450, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'copacabana',    name: 'Copacabana Wave Promenade',    category: 'scenic', fov: 50 },
+      { id: 'sugarloaf',     name: 'Sugarloaf & Botafogo Bay',     category: 'scenic', fov: 46 },
+      { id: 'corcovado',     name: 'Christ the Redeemer Panorama', category: 'scenic', fov: 46 },
+      { id: 'ipanemaBeach',  name: 'Ipanema & Two Brothers View',  category: 'scenic', fov: 50 },
+      { id: 'rioAerial',     name: 'Guanabara & Atlantic Aerial',  category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      copacabana:   { pos: [120, 14, 580],       look: [-380, 22, 420],      ampPos: [8, 0.4, 8],   ampLook: [6, 1, 6],   freq: 0.11 },
+      sugarloaf:    { pos: [420, 18, -1520],     look: [2534, 180, -1256],   ampPos: [10, 0.8, 10], ampLook: [8, 4, 8],   freq: 0.09 },
+      corcovado:    { pos: [-2850, 48, -980],    look: [200, 45, 200],       ampPos: [12, 1.0, 12], ampLook: [15, 0, 15], freq: 0.08 },
+      ipanemaBeach: { pos: [-1980, 14, 2720],    look: [-2650, 18, 2668],    ampPos: [8, 0.4, 8],   ampLook: [6, 1, 6],   freq: 0.11 },
+      rioAerial:    { pos: [950, 215, 1180],     look: [200, 45, -200],      ampPos: [24, 2.0, 24], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 40,    z: 480,  heading: -Math.PI / 2 },
+      car:        { x: 0,     z: 420,  heading: -Math.PI / 2 },
+      cyclist:    { x: 80,    z: 495,  heading: -Math.PI / 2 },
+      helicopter: { x: 680,   z: 920,  heading: -0.6, above: 195 },
+      kayak:      { x: 450,   z: 920,  heading: -Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'carioca-tropical-modernist-stucco',
+      residential: {
+        walls: { clapboard: 0.04, brick: 0.14, stone: 0.08, stucco: 0.74, shake: 0.0 },
+        roofs: { flat: 0.44, hip: 0.36, gable: 0.20, gambrel: 0.0 },
+        pitch: { hip: 0.24, gable: 0.26, historic: 0.30 },
+        stucco: [0xf5efe2, 0xf2dfce, 0xe8d5b8, 0xd8ece4, 0xf4e2b0, 0xead2c4],
+        shingles: [0xb85234, 0xc45e3e, 0x9e442a, 0x8c422c]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xebe5d8, trimColor: 0xb5afa2, windowWidth: 2.8, floorHeight: 3.5 },
+        historic: { stoneColor: 0xdfc9ae, trimColor: 0xf5f0e6, windowWidth: 2.5, floorHeight: 3.6 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  vancouver: {
+    id: 'vancouver',
+    title: 'Vancouver',
+    stateCode: 'BC',
+    stateLabel: 'British Columbia, Canada',
+    displayName: 'Vancouver, Canada',
+    icon: 'img/icon-vancouver.svg',
+    subtitle: 'Stanley Park, Lions Gate Bridge, Coal Harbour, Canada Place, False Creek & English Bay',
+    countyLabel: 'METRO VANCOUVER',
+    cityLabel: 'VANCOUVER',
+    searchPlaceholder: 'Street or landmark (Stanley Park, Lions Gate Bridge, Canada Place, Granville Island...)',
+    loadingStages: {
+      streets: 'Building Robson Street, Stanley Park Seawall, Gastown and Yaletown...',
+      outskirts: 'Laying out Burrard Inlet, English Bay, False Creek and North Shore views...',
+      landmarks: 'Building Canada Place Sails, Lions Gate Bridge, Harbour Centre and Science World...'
+    },
+    timeZone: 'America/Vancouver',
+    lat: 49.2827,
+    lon: -123.1207,
+    baseElev: 0.0,
+    weatherStation: 'CYVR',
+    riverGaugeSite: '12210700',
+    riverGaugeBaseFt: 2.5,
+    usualCfs: 600,
+    kayakLaunch: { x: -420, z: -850 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'VPD',
+      doorTop: 'VANCOUVER',
+      doorBottom: 'POLICE',
+      doorSub: 'BEYOND THE CALL',
+      badgeTitle: 'VPD',
+      baseColor: 0x14171c,
+      stripeColor: 0x1b4d8c
+    },
+    plate: {
+      state: 'BRITISH COLUMBIA',
+      slogan: 'BEAUTIFUL BRITISH COLUMBIA',
+      sample: 'YVR 604',
+      bg: '#f4f7fa',
+      topBand: '#0047ab',
+      text: '#0047ab',
+      scriptColor: '#0047ab',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'TransLink',
+      shortName: 'TRANSLINK',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0x005da6,
+      accentColor: 0xfab600
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x2a9d8f,
+      plateText: 'YVR 604',
+      state: 'BC'
+    },
+    areas: [
+      [0, 0, 'Downtown Vancouver & Robson Square'],
+      [480, -689, 'Canada Place & Waterfront'],
+      [-760, -680, 'Coal Harbour & Seawall'],
+      [-2150, -1820, 'Stanley Park'],
+      [-2734, -3913, 'Lions Gate Bridge'],
+      [-1450, 280, 'West End & English Bay'],
+      [982, -200, 'Gastown & Steam Clock'],
+      [-996, 2001, 'Granville Island & False Creek'],
+      [1309, 1212, 'Science World & Olympic Village']
+    ],
+    landmarks: [
+      { id: 'robson',      name: 'Robson Square & Vancouver Art Gallery',  short: 'Robson Square',        x: 0,     z: 0,     heading: 0 },
+      { id: 'canadaplace', name: 'Canada Place Sails & Burrard Waterfront',short: 'Canada Place',         x: 480,   z: -689,  heading: 0 },
+      { id: 'stanleypark', name: 'Stanley Park Seawall & Brockton Point',  short: 'Stanley Park',         x: -1820, z: -1680, heading: 0 },
+      { id: 'lionsgate',   name: 'Lions Gate Suspension Bridge',           short: 'Lions Gate Bridge',    x: -2734, z: -3400, heading: 0 },
+      { id: 'gastown',     name: 'Gastown & Harbour Centre Lookout',       short: 'Gastown & Lookout',    x: 680,   z: -320,  heading: Math.PI / 2 },
+      { id: 'granville',   name: 'Granville Island & Burrard Bridge',      short: 'Granville Island',     x: -996,  z: 2001,  heading: 0 },
+      { id: 'englishbay',  name: 'English Bay Beach & Inukshuk',           short: 'English Bay',          x: -1620, z: 420,   heading: -Math.PI / 2 },
+      { id: 'scienceworld',name: 'Science World & False Creek',            short: 'Science World',        x: 1309,  z: 1212,  heading: -Math.PI / 2 }
+    ],
+    teleportIds: ['canadaplace', 'robson', 'stanleypark', 'lionsgate', 'gastown', 'granville', 'englishbay', 'scienceworld'],
+    modelledLandmarks: [
+      'Canada Place',
+      'Harbour Centre',
+      'Science World',
+      'Lions Gate Bridge'
+    ],
+    areaLabels: [
+      ['VANCOUVER', 0, 200, 0],
+      ['BURRARD INLET', -400, -1400, 1],
+      ['ENGLISH BAY', -2400, 800, 1],
+      ['FALSE CREEK', 200, 1650, 1],
+      ['DOWNTOWN \u00b7 ROBSON', 0, 0, 2],
+      ['CANADA PLACE \u00b7 WATERFRONT', 480, -689, 2],
+      ['COAL HARBOUR', -760, -680, 2],
+      ['STANLEY PARK', -2150, -1820, 2],
+      ['LIONS GATE BRIDGE', -2734, -3600, 2],
+      ['WEST END \u00b7 ENGLISH BAY', -1450, 280, 2],
+      ['GASTOWN \u00b7 CHINATOWN', 982, -100, 2],
+      ['YALETOWN', 80, 950, 2],
+      ['GRANVILLE ISLAND \u00b7 KITSILANO', -1200, 2100, 2],
+      ['FALSE CREEK \u00b7 SCIENCE WORLD', 1309, 1212, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'canadaPlace',   name: 'Canada Place & Coal Harbour',  category: 'scenic', fov: 48 },
+      { id: 'lionsGate',     name: 'Lions Gate Bridge & Narrows',  category: 'scenic', fov: 48 },
+      { id: 'stanleyPark',   name: 'Stanley Park Seawall View',    category: 'scenic', fov: 48 },
+      { id: 'falseCreek',    name: 'False Creek & Science World',  category: 'scenic', fov: 50 },
+      { id: 'vancouverAerial',name: 'Burrard Inlet & Skyline Aerial',category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      canadaPlace:     { pos: [280, 16, -820],     look: [480, 28, -689],     ampPos: [8, 0.4, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      lionsGate:       { pos: [-2420, 24, -3280],  look: [-2734, 65, -3650],  ampPos: [10, 0.6, 10], ampLook: [6, 2, 6],   freq: 0.10 },
+      stanleyPark:     { pos: [-1180, 12, -1240],  look: [120, 55, -380],     ampPos: [8, 0.4, 8],   ampLook: [6, 1, 6],   freq: 0.11 },
+      falseCreek:      { pos: [980, 14, 1260],     look: [1309, 32, 1212],    ampPos: [8, 0.4, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      vancouverAerial: { pos: [-820, 185, -1380],  look: [120, 55, -240],     ampPos: [22, 2.0, 22], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -12,   z: -45,  heading: 0 },
+      car:        { x: 0,     z: 0,    heading: 0 },
+      cyclist:    { x: -1180, z: -1180,heading: 1.8 },
+      helicopter: { x: -640,  z: -1120,heading: 2.2, above: 165 },
+      kayak:      { x: -420,  z: -850, heading: 0.5 }
+    },
+    archetypes: {
+      style: 'vancouverism-cedar-craftsman-glass',
+      residential: {
+        walls: { clapboard: 0.46, brick: 0.06, stone: 0.06, stucco: 0.18, shake: 0.24 },
+        roofs: { flat: 0.18, hip: 0.34, gable: 0.46, gambrel: 0.02 },
+        pitch: { hip: 0.36, gable: 0.44, historic: 0.52 },
+        siding: [0xe6e0d2, 0x6c7c74, 0x4d5d53, 0x8b9b90, 0x5a6e7f, 0xd8c8a8, 0x7a6855]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xd4cfc4, trimColor: 0x7d848a, windowWidth: 2.8, floorHeight: 3.7 },
+        historic: { stoneColor: 0x964a38, trimColor: 0xd8cfc0, windowWidth: 2.4, floorHeight: 3.6 },
+        waterTowerProb: 0.02,
+        fireEscapes: true
+      }
+    }
+  },
+
+  capetown: {
+    id: 'capetown',
+    title: 'Cape Town',
+    stateCode: 'WC',
+    stateLabel: 'Western Cape, South Africa',
+    displayName: 'Cape Town, South Africa',
+    icon: 'img/icon-capetown.svg',
+    subtitle: 'Table Mountain, V&A Waterfront, Lion\'s Head, Signal Hill, Bo-Kaap & Table Bay',
+    countyLabel: 'CITY OF CAPE TOWN',
+    cityLabel: 'CAPE TOWN',
+    searchPlaceholder: 'Street or landmark (Table Mountain, V&A Waterfront, Bo-Kaap, Long St, Sea Point...)',
+    loadingStages: {
+      streets: 'Building the City Bowl, Long Street, Bo-Kaap and V&A Waterfront...',
+      outskirts: 'Sculpting Table Mountain, Lion\'s Head, Signal Hill and Table Bay...',
+      landmarks: 'Building Table Mountain Cableway, Cape Wheel and City Hall...'
+    },
+    timeZone: 'Africa/Johannesburg',
+    lat: -33.9249,
+    lon: 18.4241,
+    baseElev: 0.0,
+    weatherStation: 'FACT',
+    riverGaugeSite: '01376520',
+    riverGaugeBaseFt: 2.0,
+    usualCfs: 180,
+    kayakLaunch: { x: -240, z: -2350 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'SAPS',
+      doorTop: 'SOUTH AFRICAN',
+      doorBottom: 'POLICE SERVICE',
+      doorSub: 'CAPE TOWN CENTRAL',
+      badgeTitle: 'SAPS',
+      baseColor: 0xf4f7fa,
+      stripeColor: 0x003882
+    },
+    plate: {
+      state: 'WESTERN CAPE',
+      slogan: 'MOTHER CITY',
+      sample: 'CA 421-80',
+      bg: '#f4f6f8',
+      topBand: null,
+      text: '#003882',
+      scriptColor: '#003882',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'MyCiTi',
+      shortName: 'MYCITI',
+      bodyColor: 0xd92626,
+      bandColor: 0xffffff,
+      accentColor: 0x0072ce
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x06d6a0,
+      plateText: 'CA 421-80',
+      state: 'CA'
+    },
+    areas: [
+      [0, 0, 'City Bowl & Greenmarket Square'],
+      [-35, -2356, 'V&A Waterfront'],
+      [-832, -8, 'Bo-Kaap (Malay Quarter)'],
+      [-2033, -722, 'Signal Hill'],
+      [-3189, 1189, 'Lion\'s Head'],
+      [-1924, 3556, 'Table Mountain Plateau & Cableway'],
+      [-289, 622, 'Company\'s Garden & Parliament'],
+      [-3650, -950, 'Sea Point & Atlantic Seaboard']
+    ],
+    landmarks: [
+      { id: 'citybowl',    name: 'Cape Town City Hall & Grand Parade',      short: 'City Hall',            x: 156,   z: 20,    heading: 0 },
+      { id: 'waterfront',  name: 'Victoria & Alfred (V&A) Waterfront',      short: 'V&A Waterfront',       x: -35,   z: -2156, heading: 0 },
+      { id: 'bokaap',      name: 'Bo-Kaap Colourful Terraces (Wale St)',    short: 'Bo-Kaap',              x: -832,  z: -8,    heading: Math.PI / 2 },
+      { id: 'tablemtn',    name: 'Table Mountain Upper Cableway Station',   short: 'Table Mountain',       x: -1924, z: 3450,  heading: 0 },
+      { id: 'signalhill',  name: 'Signal Hill Noon Gun & Lookout',          short: 'Signal Hill',          x: -2033, z: -722,  heading: Math.PI / 2 },
+      { id: 'lionshead',   name: 'Lion\'s Head Summit Trail',               short: 'Lion\'s Head',         x: -3189, z: 1189,  heading: Math.PI / 2 },
+      { id: 'gardens',     name: 'Company\'s Garden & Iziko Museum',        short: 'Company\'s Garden',    x: -289,  z: 622,   heading: 0 },
+      { id: 'seapoint',    name: 'Sea Point Promenade & Green Point',       short: 'Sea Point',            x: -2450, z: -2100, heading: 0 }
+    ],
+    teleportIds: ['waterfront', 'citybowl', 'bokaap', 'tablemtn', 'signalhill', 'lionshead', 'gardens', 'seapoint'],
+    modelledLandmarks: [
+      'Cape Town City Hall',
+      'Cape Wheel V&A Waterfront',
+      'Table Mountain Cableway'
+    ],
+    areaLabels: [
+      ['CAPE TOWN', 0, 200, 0],
+      ['TABLE BAY', 400, -2900, 1],
+      ['ATLANTIC OCEAN', -4100, -1800, 1],
+      ['CITY BOWL \u00b7 LONG STREET', 0, 0, 2],
+      ['V&A WATERFRONT', -35, -2250, 2],
+      ['BO-KAAP', -832, -8, 2],
+      ['SIGNAL HILL', -2033, -722, 2],
+      ['LION\'S HEAD', -3189, 1189, 2],
+      ['TABLE MOUNTAIN', -1500, 3556, 2],
+      ['GARDENS \u00b7 ORANJEZICHT', -289, 1200, 2],
+      ['GREEN POINT \u00b7 SEA POINT', -2450, -2100, 2],
+      ['WOODSTOCK \u00b7 FORESHORE', 1450, -350, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'tableMountain',  name: 'City Bowl & Table Mountain',  category: 'scenic', fov: 46 },
+      { id: 'vaWaterfront',   name: 'V&A Waterfront & Table Bay',  category: 'scenic', fov: 48 },
+      { id: 'boKaap',         name: 'Bo-Kaap Colourful Streets',   category: 'scenic', fov: 50 },
+      { id: 'signalHillView', name: 'Signal Hill Sunset Lookout',  category: 'scenic', fov: 48 },
+      { id: 'capeTownAerial', name: 'Mother City & Mesa Aerial',   category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      tableMountain:  { pos: [120, 22, -620],      look: [-650, 240, 2800],   ampPos: [10, 0.6, 10], ampLook: [10, 4, 10], freq: 0.09 },
+      vaWaterfront:   { pos: [-180, 14, -2280],    look: [-35, 22, -1980],    ampPos: [8, 0.4, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      boKaap:         { pos: [-740, 14, -40],      look: [-880, 18, 20],      ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.13 },
+      signalHillView: { pos: [-1880, 38, -680],    look: [100, 35, 400],      ampPos: [10, 0.8, 10], ampLook: [12, 0, 12], freq: 0.09 },
+      capeTownAerial: { pos: [420, 215, -1850],    look: [-650, 180, 1800],   ampPos: [24, 2.0, 24], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -35,  z: -2156, heading: Math.PI },
+      car:        { x: 0,    z: 0,     heading: Math.PI },
+      cyclist:    { x: -180, z: -2220, heading: Math.PI / 2 },
+      helicopter: { x: 240,  z: -1650, heading: 3.0, above: 195 },
+      kayak:      { x: -240, z: -2350, heading: 0 }
+    },
+    archetypes: {
+      style: 'cape-dutch-bo-kaap-stucco',
+      residential: {
+        walls: { clapboard: 0.04, brick: 0.12, stone: 0.08, stucco: 0.76, shake: 0.0 },
+        roofs: { flat: 0.42, hip: 0.28, gable: 0.30, gambrel: 0.0 },
+        pitch: { hip: 0.30, gable: 0.42, historic: 0.48 },
+        stucco: [0xf7f5ef, 0xf2ebe0, 0xffbe0b, 0xfb5607, 0x06d6a0, 0x3a86ff, 0xe8dec8, 0xf4a261],
+        shingles: [0x3b4045, 0x9e3e28, 0x525a63, 0x2e3338]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xebe4d4, trimColor: 0xa69e8e, windowWidth: 2.6, floorHeight: 3.7 },
+        historic: { stoneColor: 0xd9c29c, trimColor: 0xf5f2ea, windowWidth: 2.4, floorHeight: 3.8 },
+        waterTowerProb: 0.0,
+        fireEscapes: false
+      }
+    }
+  },
+
+  chicago: {
+    id: 'chicago',
+    title: 'Chicago',
+    stateCode: 'IL',
+    stateLabel: 'Illinois',
+    displayName: 'Chicago, IL',
+    icon: 'img/icon-chicago.svg',
+    subtitle: 'The Loop, Willis Tower, Chicago River Bascule Bridges, Millennium Park & Navy Pier',
+    countyLabel: 'COOK COUNTY',
+    cityLabel: 'CHICAGO',
+    searchPlaceholder: 'Street or landmark (Willis Tower, Michigan Ave, Millennium Park, Navy Pier, Wacker Dr...)',
+    loadingStages: {
+      streets: 'Building the Loop elevated tracks, Wacker Drive, Michigan Ave and Chicago River bridges...',
+      outskirts: 'Laying out Lake Michigan, Grant Park, River North and Streeterville...',
+      landmarks: 'Building Willis Tower, 875 N Michigan (Hancock), Cloud Gate and Navy Pier...'
+    },
+    timeZone: 'America/Chicago',
+    lat: 41.8827,
+    lon: -87.6278,
+    baseElev: 179.0,
+    weatherStation: 'KORD',
+    riverGaugeSite: '05536123',
+    riverGaugeBaseFt: 2.2,
+    usualCfs: 1800,
+    kayakLaunch: { x: 120, z: -480 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'CPD',
+      doorTop: 'CHICAGO',
+      doorBottom: 'POLICE',
+      doorSub: 'WE SERVE AND PROTECT',
+      badgeTitle: 'CPD',
+      baseColor: 0xf4f7fa,
+      stripeColor: 0x1e5aa8
+    },
+    plate: {
+      state: 'ILLINOIS',
+      slogan: 'LAND OF LINCOLN',
+      sample: 'CHI 312',
+      bg: '#f4f6f8',
+      topBand: '#1b365d',
+      text: '#1b365d',
+      scriptColor: '#b8292f',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'CTA',
+      shortName: 'CTA BUS',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0x00a1de,
+      accentColor: 0xc60c30
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x00a1de,
+      plateText: 'CHI 312',
+      state: 'ILLINOIS'
+    },
+    areas: [
+      [0, 0, 'The Loop (State & Madison)'],
+      [-672, 433, 'Willis Tower & West Loop'],
+      [357, 0, 'Millennium Park & Cloud Gate'],
+      [340, -645, 'Michigan Ave Bridge & Wrigley Bldg'],
+      [-240, -980, 'River North & Merchandise Mart'],
+      [1825, -990, 'Navy Pier & Streeterville'],
+      [415, -1812, 'Magnificent Mile & 875 N Michigan'],
+      [480, 1450, 'Grant Park & Museum Campus']
+    ],
+    landmarks: [
+      { id: 'theloop',     name: 'State & Madison (Heart of The Loop)',     short: 'The Loop',             x: 0,     z: 0,     heading: 0 },
+      { id: 'willis',      name: 'Willis (Sears) Tower & Skydeck',          short: 'Willis Tower',         x: -672,  z: 433,   heading: 0 },
+      { id: 'millennium',  name: 'Millennium Park & Cloud Gate (The Bean)', short: 'Millennium Park',      x: 357,   z: 0,     heading: -Math.PI / 2 },
+      { id: 'michiganbr',  name: 'DuSable (Michigan Ave) Bascule Bridge',   short: 'Michigan Ave Bridge',  x: 340,   z: -645,  heading: 0 },
+      { id: 'navypier',    name: 'Navy Pier & Centennial Wheel',            short: 'Navy Pier',            x: 1825,  z: -990,  heading: Math.PI / 2 },
+      { id: 'hancock',     name: '875 N Michigan (John Hancock Center)',    short: '875 N Michigan',       x: 415,   z: -1812, heading: Math.PI },
+      { id: 'merchmart',   name: 'Merchandise Mart & Riverwalk',            short: 'Riverwalk',            x: -560,  z: -640,  heading: Math.PI / 2 },
+      { id: 'grantpark',   name: 'Buckingham Fountain & Grant Park',        short: 'Buckingham Fountain',  x: 740,   z: 780,   heading: 0 }
+    ],
+    teleportIds: ['willis', 'millennium', 'michiganbr', 'navypier', 'hancock', 'theloop', 'merchmart', 'grantpark'],
+    modelledLandmarks: [
+      'Willis Tower',
+      '875 North Michigan Avenue',
+      'Wrigley Building',
+      'Cloud Gate'
+    ],
+    areaLabels: [
+      ['CHICAGO', 0, -200, 0],
+      ['LAKE MICHIGAN', 2200, 0, 1],
+      ['CHICAGO RIVER', -200, -560, 1],
+      ['THE LOOP', 0, 120, 2],
+      ['WILLIS TOWER', -672, 433, 2],
+      ['MILLENNIUM PARK', 450, 0, 2],
+      ['GRANT PARK', 620, 920, 2],
+      ['MICHIGAN AVE \u00b7 RIVERWALK', 340, -645, 2],
+      ['RIVER NORTH', -320, -1100, 2],
+      ['STREETERVILLE \u00b7 MAG MILE', 520, -1450, 2],
+      ['NAVY PIER', 1825, -990, 2],
+      ['WEST LOOP \u00b7 UNION STATION', -1150, 380, 2],
+      ['SOUTH LOOP', 80, 1750, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'willisTower',   name: 'Willis Tower & Wacker Dr',    category: 'scenic', fov: 46 },
+      { id: 'chicagoRiver',  name: 'Chicago River Canyon & Bridges',category: 'scenic', fov: 48 },
+      { id: 'millenniumPark',name: 'Millennium Park & Michigan Ave',category: 'scenic', fov: 50 },
+      { id: 'navyPier',      name: 'Navy Pier & Lakefront Skyline',category: 'scenic', fov: 46 },
+      { id: 'chicagoAerial', name: 'Loop & Lake Michigan Aerial', category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      willisTower:    { pos: [-880, 22, 220],     look: [-672, 165, 433],    ampPos: [8, 0.5, 8],   ampLook: [4, 4, 4],   freq: 0.10 },
+      chicagoRiver:   { pos: [120, 14, -560],     look: [340, 38, -645],     ampPos: [8, 0.4, 8],   ampLook: [4, 1, 4],   freq: 0.11 },
+      millenniumPark: { pos: [280, 12, 80],       look: [240, 42, -120],     ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.12 },
+      navyPier:       { pos: [1680, 22, -920],    look: [340, 85, -420],     ampPos: [10, 0.6, 10], ampLook: [8, 2, 8],   freq: 0.10 },
+      chicagoAerial:  { pos: [1350, 215, 480],    look: [-120, 95, -180],    ampPos: [24, 2.0, 24], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 340,  z: -580, heading: 0 },
+      car:        { x: 240,  z: 0,    heading: 0 },
+      cyclist:    { x: 920,  z: 120,  heading: 0 },
+      helicopter: { x: 1120, z: 320,  heading: -1.8, above: 195 },
+      kayak:      { x: 120,  z: -480, heading: Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'chicago-school-brick-greystone-miesian',
+      residential: {
+        walls: { clapboard: 0.16, brick: 0.62, stone: 0.18, stucco: 0.02, shake: 0.02 },
+        roofs: { flat: 0.64, hip: 0.18, gable: 0.16, gambrel: 0.02 },
+        pitch: { hip: 0.34, gable: 0.42, historic: 0.48 },
+        bricks: [0x8e4232, 0x9c4e3c, 0x7c382a, 0xb8865c, 0x6b4434, 0xa86448]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xd4cab8, trimColor: 0x8e8676, windowWidth: 2.7, floorHeight: 3.8 },
+        historic: { stoneColor: 0x964836, trimColor: 0xcfc2ae, windowWidth: 2.6, floorHeight: 3.7 },
+        waterTowerProb: 0.18,
+        fireEscapes: true
+      }
+    }
+  },
+
+  boston: {
+    id: 'boston',
+    title: 'Boston',
+    stateCode: 'MA',
+    stateLabel: 'Massachusetts',
+    displayName: 'Boston, MA',
+    icon: 'img/icon-boston.svg',
+    subtitle: 'Boston Common, Back Bay Brownstones, Beacon Hill, Zakim Bridge, Faneuil Hall & Charles River',
+    countyLabel: 'SUFFOLK COUNTY',
+    cityLabel: 'BOSTON',
+    searchPlaceholder: 'Street or landmark (Boston Common, Newbury St, Faneuil Hall, Zakim Bridge, MIT...)',
+    loadingStages: {
+      streets: 'Building Beacon Hill, Back Bay, the Freedom Trail and Charles River Esplanade...',
+      outskirts: 'Laying out Boston Harbor, Charlestown, Seaport and Cambridge...',
+      landmarks: 'Building Zakim Bridge, Custom House Tower, Massachusetts State House and Prudential...'
+    },
+    timeZone: 'America/New_York',
+    lat: 42.3584,
+    lon: -71.0636,
+    baseElev: 0.0,
+    weatherStation: 'KBOS',
+    riverGaugeSite: '01104500',
+    riverGaugeBaseFt: 2.5,
+    usualCfs: 420,
+    kayakLaunch: { x: -920, z: -220 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'BPD',
+      doorTop: 'BOSTON',
+      doorBottom: 'POLICE',
+      doorSub: 'CITY OF BOSTON',
+      badgeTitle: 'BPD',
+      baseColor: 0xf4f7fa,
+      stripeColor: 0x1b4d8c
+    },
+    plate: {
+      state: 'MASSACHUSETTS',
+      slogan: 'THE SPIRIT OF AMERICA',
+      sample: 'BOS 617',
+      bg: '#f4f6f8',
+      topBand: null,
+      text: '#9e1b32',
+      scriptColor: '#002868',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'MBTA',
+      shortName: 'MBTA BUS',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0xffc72c,
+      accentColor: 0x14171c
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x9e1b32,
+      plateText: 'BOS 617',
+      state: 'MASSACHUSETTS'
+    },
+    areas: [
+      [0, 0, 'Boston Common & Massachusetts State House'],
+      [-350, 180, 'Public Garden & Beacon Hill'],
+      [840, -189, 'Faneuil Hall & Quincy Market'],
+      [1046, -18, 'Custom House Tower & Waterfront'],
+      [780, -820, 'North End & Paul Revere Mall'],
+      [115, -1100, 'Zakim Bridge & TD Garden'],
+      [-1038, 667, 'Copley Square & Back Bay'],
+      [-1507, 1289, 'Prudential Center'],
+      [-1943, -12, 'MIT & Charles River Basin']
+    ],
+    landmarks: [
+      { id: 'common',      name: 'Boston Common & Massachusetts State House', short: 'Boston Common',     x: 0,     z: 0,     heading: 0 },
+      { id: 'faneuil',     name: 'Faneuil Hall & Quincy Market',              short: 'Faneuil Hall',      x: 840,   z: -189,  heading: Math.PI / 2 },
+      { id: 'customhouse', name: 'Custom House Tower & Long Wharf',           short: 'Custom House Tower',x: 1046,  z: -18,   heading: Math.PI / 2 },
+      { id: 'zakim',       name: 'Leonard P. Zakim Bunker Hill Bridge',       short: 'Zakim Bridge',      x: 115,   z: -1100, heading: 0 },
+      { id: 'copley',      name: 'Copley Square, Trinity Church & BPL',       short: 'Copley Square',     x: -1038, z: 667,   heading: -Math.PI / 2 },
+      { id: 'prudential',  name: 'Prudential Tower & Newbury Street',         short: 'Prudential Tower',  x: -1507, z: 1289,  heading: 0 },
+      { id: 'northend',    name: 'North End & Old North Church',              short: 'North End',         x: 880,   z: -860,  heading: 0 },
+      { id: 'charles',     name: 'Harvard Bridge & Charles River Esplanade',  short: 'Charles River',     x: -1943, z: 420,   heading: 0 }
+    ],
+    teleportIds: ['common', 'faneuil', 'customhouse', 'zakim', 'copley', 'prudential', 'northend', 'charles'],
+    modelledLandmarks: [
+      'Custom House Tower',
+      'Leonard P. Zakim Bunker Hill Bridge',
+      'Massachusetts State House',
+      'Prudential Tower'
+    ],
+    areaLabels: [
+      ['BOSTON', 0, 200, 0],
+      ['CHARLES RIVER BASIN', -1400, 120, 1],
+      ['BOSTON HARBOR', 1800, -200, 1],
+      ['BOSTON COMMON \u00b7 BEACON HILL', -120, -80, 2],
+      ['PUBLIC GARDEN', -420, 240, 2],
+      ['DOWNTOWN CROSSING \u00b7 FINANCIAL', 580, 240, 2],
+      ['FANEUIL HALL \u00b7 WATERFRONT', 920, -120, 2],
+      ['NORTH END', 840, -820, 2],
+      ['WEST END \u00b7 ZAKIM BRIDGE', 115, -1100, 2],
+      ['BACK BAY \u00b7 COPLEY SQUARE', -1038, 667, 2],
+      ['PRUDENTIAL \u00b7 SOUTH END', -1350, 1380, 2],
+      ['CAMBRIDGE \u00b7 MIT', -1943, -180, 2],
+      ['SEAPORT DISTRICT', 1650, 950, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'bostonCommon', name: 'State House & Boston Common',  category: 'scenic', fov: 50 },
+      { id: 'zakimBridge',  name: 'Zakim Bunker Hill Bridge',     category: 'scenic', fov: 48 },
+      { id: 'customHouse',  name: 'Custom House & Long Wharf',    category: 'scenic', fov: 48 },
+      { id: 'backBay',      name: 'Copley Square & Back Bay',     category: 'scenic', fov: 48 },
+      { id: 'bostonAerial', name: 'Charles River & Harbor Aerial',category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      bostonCommon: { pos: [-80, 12, 160],       look: [0, 24, -40],         ampPos: [6, 0.3, 6],   ampLook: [4, 1, 4],   freq: 0.12 },
+      zakimBridge:  { pos: [-120, 18, -920],     look: [115, 55, -1100],     ampPos: [8, 0.5, 8],   ampLook: [4, 2, 4],   freq: 0.11 },
+      customHouse:  { pos: [1280, 16, 40],       look: [1046, 65, -18],      ampPos: [8, 0.4, 8],   ampLook: [4, 2, 4],   freq: 0.11 },
+      backBay:      { pos: [-960, 14, 620],      look: [-1350, 85, 1120],    ampPos: [6, 0.4, 6],   ampLook: [6, 2, 6],   freq: 0.11 },
+      bostonAerial: { pos: [-1420, 185, 180],    look: [120, 55, 120],       ampPos: [22, 2.0, 22], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -45,  z: 80,   heading: 0 },
+      car:        { x: -180, z: 320,  heading: -Math.PI / 2 },
+      cyclist:    { x: -880, z: 120,  heading: -Math.PI / 2 },
+      helicopter: { x: -980, z: 240,  heading: 1.5, above: 165 },
+      kayak:      { x: -920, z: -220, heading: -Math.PI / 2 }
+    },
+    archetypes: {
+      style: 'boston-beacon-hill-redbrick-triple-decker',
+      residential: {
+        walls: { clapboard: 0.42, brick: 0.44, stone: 0.06, stucco: 0.02, shake: 0.06 },
+        roofs: { flat: 0.34, hip: 0.24, gable: 0.34, gambrel: 0.08 },
+        pitch: { hip: 0.38, gable: 0.48, historic: 0.56 },
+        bricks: [0x8e382a, 0x9c4232, 0x7a3024, 0x6e3628, 0xa84c38]
+      },
+      midrise: {
+        masonry: { stoneColor: 0x944030, trimColor: 0xe6dfd0, windowWidth: 2.3, floorHeight: 3.6 },
+        historic: { stoneColor: 0xd4cab6, trimColor: 0x8e8676, windowWidth: 2.4, floorHeight: 3.7 },
+        waterTowerProb: 0.06,
+        fireEscapes: true
+      }
+    }
+  },
+
+  seattle: {
+    id: 'seattle',
+    title: 'Seattle',
+    stateCode: 'WA',
+    stateLabel: 'Washington',
+    displayName: 'Seattle, WA',
+    icon: 'img/icon-seattle.svg',
+    subtitle: 'Space Needle, Pike Place Market, Elliott Bay Waterfront, South Lake Union & Capitol Hill',
+    countyLabel: 'KING COUNTY',
+    cityLabel: 'SEATTLE',
+    searchPlaceholder: 'Street or landmark (Space Needle, Pike Place Market, Alaskan Way, Lake Union...)',
+    loadingStages: {
+      streets: 'Building Pike Place, 1st Avenue, Alaskan Way Waterfront and Capitol Hill...',
+      outskirts: 'Laying out Elliott Bay, Lake Union, Queen Anne and Pioneer Square...',
+      landmarks: 'Building the Space Needle, Columbia Center, Smith Tower and Seattle Great Wheel...'
+    },
+    timeZone: 'America/Los_Angeles',
+    lat: 47.6101,
+    lon: -122.3421,
+    baseElev: 0.0,
+    weatherStation: 'KSEA',
+    riverGaugeSite: '12113390',
+    riverGaugeBaseFt: 2.5,
+    usualCfs: 750,
+    kayakLaunch: { x: -320, z: 180 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'SPD',
+      doorTop: 'SEATTLE',
+      doorBottom: 'POLICE',
+      doorSub: 'SERVICE PRIDE DEDICATION',
+      badgeTitle: 'SPD',
+      baseColor: 0x141e2e,
+      stripeColor: 0x4ca6e8
+    },
+    plate: {
+      state: 'WASHINGTON',
+      slogan: 'EVERGREEN STATE',
+      sample: 'SEA 206',
+      bg: '#e8eff5',
+      topBand: '#2b5876',
+      text: '#1b365d',
+      scriptColor: '#1e5631',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'King County Metro',
+      shortName: 'METRO',
+      bodyColor: 0xfab600,
+      bandColor: 0x006847,
+      accentColor: 0x1b365d
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x008080,
+      plateText: 'SEA 206',
+      state: 'WASHINGTON'
+    },
+    areas: [
+      [0, 0, 'Pike Place Market & 1st Ave'],
+      [-541, -1156, 'Seattle Center & Space Needle'],
+      [-150, 320, 'Elliott Bay Waterfront & Piers'],
+      [811, 700, 'Downtown & Columbia Center'],
+      [616, 111, 'Westlake & Denny Triangle'],
+      [480, -1820, 'South Lake Union'],
+      [1502, -456, 'Capitol Hill'],
+      [759, 1100, 'Pioneer Square & Lumen Field'],
+      [-850, -2100, 'Queen Anne & Kerry Park']
+    ],
+    landmarks: [
+      { id: 'pikeplace',   name: 'Pike Place Market & Public Market Sign', short: 'Pike Place Market',    x: 0,     z: 0,     heading: 0 },
+      { id: 'spaceneedle', name: 'Space Needle & Seattle Center',          short: 'Space Needle',         x: -541,  z: -1156, heading: Math.PI },
+      { id: 'greatwheel',  name: 'Seattle Great Wheel & Pier 57',          short: 'Waterfront & Pier 57', x: -120,  z: 280,   heading: -Math.PI / 2 },
+      { id: 'columbiactr', name: 'Columbia Center & 4th Ave',              short: 'Columbia Center',      x: 811,   z: 700,   heading: 0 },
+      { id: 'smithtower',  name: 'Smith Tower & Pioneer Square',           short: 'Pioneer Square',       x: 759,   z: 1050,  heading: 0 },
+      { id: 'lakeunion',   name: 'Lake Union Park & MOHAI',                short: 'South Lake Union',     x: 480,   z: -1820, heading: 0 },
+      { id: 'capitolhill', name: 'Capitol Hill & Cal Anderson Park',       short: 'Capitol Hill',         x: 1502,  z: -456,  heading: -Math.PI / 2 },
+      { id: 'kerrypark',   name: 'Kerry Park Skyline Viewpoint (Queen Anne)', short: 'Kerry Park',        x: -1250, z: -2280, heading: 2.5 }
+    ],
+    teleportIds: ['spaceneedle', 'pikeplace', 'greatwheel', 'columbiactr', 'smithtower', 'lakeunion', 'capitolhill', 'kerrypark'],
+    modelledLandmarks: [
+      'Space Needle',
+      'Columbia Center',
+      'Smith Tower',
+      'Seattle Great Wheel'
+    ],
+    areaLabels: [
+      ['SEATTLE', 400, 100, 0],
+      ['ELLIOTT BAY (PUGET SOUND)', -950, 400, 1],
+      ['LAKE UNION', 480, -2300, 1],
+      ['PIKE PLACE MARKET', 0, 0, 2],
+      ['SEATTLE CENTER \u00b7 SPACE NEEDLE', -541, -1156, 2],
+      ['ALASKAN WAY WATERFRONT', -150, 380, 2],
+      ['BELLTOWN', -220, -480, 2],
+      ['DOWNTOWN \u00b7 WESTLAKE', 580, 240, 2],
+      ['SOUTH LAKE UNION', 480, -1550, 2],
+      ['CAPITOL HILL', 1502, -456, 2],
+      ['PIONEER SQUARE', 759, 1100, 2],
+      ['QUEEN ANNE', -980, -2150, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'spaceNeedle',   name: 'Space Needle & Seattle Center',category: 'scenic', fov: 48 },
+      { id: 'pikePlace',     name: 'Pike Place & 1st Avenue',      category: 'scenic', fov: 50 },
+      { id: 'elliottBay',    name: 'Elliott Bay Waterfront & Piers',category: 'scenic', fov: 48 },
+      { id: 'kerryParkView', name: 'Kerry Park Skyline Panorama',  category: 'scenic', fov: 46 },
+      { id: 'seattleAerial', name: 'Puget Sound & Needle Aerial',  category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      spaceNeedle:   { pos: [-340, 18, -960],     look: [-541, 115, -1156],   ampPos: [8, 0.5, 8],   ampLook: [4, 3, 4],   freq: 0.10 },
+      pikePlace:     { pos: [45, 11, 65],         look: [-10, 14, -40],       ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.13 },
+      elliottBay:    { pos: [-480, 24, 340],      look: [320, 65, 380],       ampPos: [10, 0.6, 10], ampLook: [6, 2, 6],   freq: 0.10 },
+      kerryParkView: { pos: [-1180, 48, -2180],   look: [-200, 85, -400],     ampPos: [10, 0.8, 10], ampLook: [12, 0, 12], freq: 0.09 },
+      seattleAerial: { pos: [-820, 195, -480],    look: [120, 65, -240],      ampPos: [22, 2.0, 22], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 18,   z: 18,    heading: Math.PI },
+      car:        { x: 95,   z: 45,    heading: Math.PI },
+      cyclist:    { x: -110, z: 240,   heading: 0 },
+      helicopter: { x: -640, z: -620,  heading: 2.0, above: 175 },
+      kayak:      { x: -320, z: 180,   heading: 0 }
+    },
+    archetypes: {
+      style: 'pnw-craftsman-cedar-timber',
+      residential: {
+        walls: { clapboard: 0.48, brick: 0.08, stone: 0.06, stucco: 0.12, shake: 0.26 },
+        roofs: { flat: 0.16, hip: 0.32, gable: 0.50, gambrel: 0.02 },
+        pitch: { hip: 0.36, gable: 0.46, historic: 0.52 },
+        siding: [0x5d6d5e, 0x4a5d6e, 0x8a6d4b, 0xd8cdb8, 0x6b7378, 0x7b8c74, 0xe6dfd0]
+      },
+      midrise: {
+        masonry: { stoneColor: 0x9c4a38, trimColor: 0xd8cfc0, windowWidth: 2.5, floorHeight: 3.7 },
+        historic: { stoneColor: 0x8a3e2e, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.6 },
+        waterTowerProb: 0.04,
+        fireEscapes: true
+      }
     }
   }
 };

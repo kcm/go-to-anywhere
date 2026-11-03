@@ -6,6 +6,7 @@ import { nearestRoads } from './city-config.js';
 import { historicDistrictAt } from './districts.js';
 import { groundHeight } from './terrain.js';
 import { GEO } from './city-geodata.js';
+import { CITY_PACK } from './city-packs.js';
 
 // Ann Arbor's houses, from the city's surveyed footprints and heights. Each footprint is split into its main block and
 // up to three wings (the largest rectangles inside it), so L-shapes, side wings and back additions keep their shape.
@@ -837,18 +838,28 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     const ranch = storeys === 1 && !historic;
     let fh = garage ? 0.12 : historic ? 0.75 + 0.3 * id(21) : ranch ? 0.3 + 0.2 * id(21) : 0.5 + 0.35 * id(21);
 
-    // Walls: Oakland stucco (Mediterranean, Marina, Spanish Revival, mid-century), painted wood clapboard, and shingles
+    // Walls & regional palette from city pack / sampled Street View archetypes (GEO.archetypes || CITY_PACK.archetypes)
+    const archRes = ((GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {}).residential || {};
+    const wProbs = archRes.walls || { brick: 0.03, stone: 0.02, stucco: 0.40, shake: 0.13, clapboard: 0.42 };
+    const pBrick = wProbs.brick ?? 0.03;
+    const pStone = pBrick + (wProbs.stone ?? 0.02);
+    const pStucco = pStone + (wProbs.stucco ?? 0.40);
+    const pShake = pStucco + (wProbs.shake ?? 0.13);
     const m = id(2);
     let matKind = M_CLAP;
     if (!garage) {
-      if (m < 0.03) matKind = M_BRICK;
-      else if (m < 0.05) matKind = M_STONE;
-      else if (m < 0.45) matKind = M_STUCCO;
-      else if (m < 0.58) matKind = M_SHAKE;
+      if (m < pBrick) matKind = M_BRICK;
+      else if (m < pStone) matKind = M_STONE;
+      else if (m < pStucco) matKind = M_STUCCO;
+      else if (m < pShake) matKind = M_SHAKE;
     }
-    const sidingHex = matKind === M_BRICK ? pick(BRICKS, id(3)) : matKind === M_STONE ? pick(STONES, id(3))
-      : matKind === M_STUCCO ? pick(STUCCO, id(3)) : matKind === M_SHAKE ? pick(SHAKES, id(3))
-      : pick(historic && id(12) < 0.5 ? HERITAGE : SIDING, id(3));
+    const sidingPal = archRes.siding || SIDING;
+    const brickPal = archRes.bricks || BRICKS;
+    const stuccoPal = archRes.stucco || STUCCO;
+    const shinglePal = archRes.shingles || SHINGLES;
+    const sidingHex = matKind === M_BRICK ? pick(brickPal, id(3)) : matKind === M_STONE ? pick(STONES, id(3))
+      : matKind === M_STUCCO ? pick(stuccoPal, id(3)) : matKind === M_SHAKE ? pick(SHAKES, id(3))
+      : pick(historic && id(12) < 0.5 ? HERITAGE : sidingPal, id(3));
     // trim: white on most; dark on some light houses, contrasting colors on historic ones
     const tr = id(9);
     const light = luma(sidingHex) > 0.7;
@@ -926,11 +937,11 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     const hc = {
       c: cellOf(r.cx, r.cz), g, P, seed: id(4) * 100, sc: lin(sidingHex), style: [matKind, trim, accent, fh],
       doors: doorsNear(r.cx, r.cz), uDir: { x: fb.ax, z: fb.az }, vDir: { x: vx, z: vz },
-      trimRGB, soffitRGB: trimRGB.map((x) => x * 0.8), shade: lin(pick(SHINGLES, id(5)))
+      trimRGB, soffitRGB: trimRGB.map((x) => x * 0.8), shade: lin(pick(shinglePal, id(5)))
     };
     const c = hc.c;
 
-    // The main roof: as mapped, else from Oakland's mix of flat-parapet stucco/Marina/mid-century homes and low-pitched California bungalows
+    // The main roof: as mapped in OSM, else from the city's regional roof archetype distribution
     const tag = garage ? 0 : taggedRoof(ring, r.cx, r.cz);
     if (tag) tagged++;
     const mL = M.u1 - M.u0, mW = M.v1 - M.v0;
@@ -940,13 +951,22 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     const longer = mL >= mW ? 'u' : 'v';
     const ratio = Math.max(mL, mW) / Math.max(1, Math.min(mL, mW));
     const rr = id(11);
+    const rProbs = archRes.roofs || null;
     let type = 'gable', along = longer;
     if (garage) { type = rr < 0.55 ? 'flat' : 'gable'; along = longer; }
     else if (tag === 3) type = 'flat';
     else if (tag === 2) { type = 'hip'; along = longer; }
     else if (tag === 4) { type = 'gambrel'; along = frontAlong; }
     else if (tag === 1 || tag === 5 || tag === 6) along = fw <= depth * 1.05 ? deepAlong : frontAlong;
-    else if (matKind === M_STUCCO && rr < 0.55) type = 'flat';
+    else if (rProbs) {
+      const pFlat = rProbs.flat ?? 0.25;
+      const pHip = pFlat + (rProbs.hip ?? 0.35);
+      const pGambrel = pHip + (rProbs.gambrel ?? 0.02);
+      if (rr < pFlat || (matKind === M_STUCCO && rr < Math.min(0.85, pFlat + 0.18))) type = 'flat';
+      else if (rr < pHip) { type = 'hip'; along = longer; }
+      else if (rr < pGambrel) { type = 'gambrel'; along = frontAlong; }
+      else { type = 'gable'; along = fw <= depth * 1.05 ? deepAlong : frontAlong; }
+    } else if (matKind === M_STUCCO && rr < 0.55) type = 'flat';
     else if (!historic && storeys >= 2 && rr < 0.38) type = 'flat';
     else if (!historic && storeys === 1 && rr < 0.22) type = 'flat';
     else if (storeys >= 2 && ratio < 1.35 && rr < 0.78) { type = 'hip'; along = longer; }
@@ -954,7 +974,11 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     else if (storeys === 1) { if (rr < 0.6) { type = 'hip'; along = longer; } else along = frontAlong; }
     else if (rr < 0.65) { type = 'hip'; along = longer; }
     else along = frontAlong;
-    const pitch = garage ? 0.30 : type === 'hip' ? (ranch ? 0.28 : 0.36) : ranch ? 0.30 : historic ? 0.52 : 0.38;
+    const pCfg = archRes.pitch || {};
+    const hipPitch = pCfg.hip ?? 0.36;
+    const gablePitch = pCfg.gable ?? 0.38;
+    const histPitch = pCfg.historic ?? 0.52;
+    const pitch = garage ? 0.30 : type === 'hip' ? (ranch ? hipPitch * 0.82 : hipPitch) : ranch ? gablePitch * 0.8 : historic ? histPitch : gablePitch;
     const storeyH = storeys === 1.5 ? 3.25 : Math.floor(storeys) * 2.8 + 0.2;
     const mainTop = garage
       ? g + Math.max(2.4, Math.min(3, h - 1))

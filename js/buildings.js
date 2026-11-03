@@ -233,26 +233,29 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
     maxZ: TOWN_BOUNDS.maxZ + 50
   }, 6, 9);
   const allBlocks = [];
+  const archMid = ((GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {}).midrise || {};
+  const m0 = archMid.masonry || {};
+  const m1 = archMid.historic || {};
 
   const facades = [
-    // 0: Pre-War Limestone & Buff Brick (5th Ave / Madison Ave / Upper East Side style)
+    // 0: Regional Primary Masonry / Limestone / Plaster (from CITY_PACK.archetypes.midrise.masonry)
     [createPreWarBuildingMaterial, {
-      stoneColor: 0xd8cdb8,
-      trimColor: 0x9e937f,
+      stoneColor: m0.stoneColor ?? 0xd8cdb8,
+      trimColor: m0.trimColor ?? 0x9e937f,
       windowGlassColor: 0x1a2836,
-      windowWidth: 2.6,
-      floorHeight: 3.7,
+      windowWidth: m0.windowWidth ?? 2.6,
+      floorHeight: m0.floorHeight ?? 3.7,
       litProbability: 0.54,
       warmth: 0.80,
       seed: 12.4
     }],
-    // 1: Historic Warm Red/Terracotta Brick (Garment District / Chelsea / SoHo / Upper West Side)
+    // 1: Regional Historic Brick / Terracotta / Stone (from CITY_PACK.archetypes.midrise.historic)
     [createPreWarBuildingMaterial, {
-      stoneColor: 0xa45a45,
-      trimColor: 0xcab9a0,
+      stoneColor: m1.stoneColor ?? 0xa45a45,
+      trimColor: m1.trimColor ?? 0xcab9a0,
       windowGlassColor: 0x16222e,
-      windowWidth: 2.4,
-      floorHeight: 3.5,
+      windowWidth: m1.windowWidth ?? 2.4,
+      floorHeight: m1.floorHeight ?? 3.5,
       litProbability: 0.56,
       warmth: 0.86,
       seed: 27.8
@@ -552,14 +555,17 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
       detail.footprints.push({ h: top, pts: polygon.outer, holes: polygon.holes });
     }
     const neighbours = nearbyReserves(b, 6);
-    addSurveyedFireEscapes(b, detail, storeys[mat], neighbours);
+    if (archMid.fireEscapes !== false) {
+      addSurveyedFireEscapes(b, detail, storeys[mat], neighbours);
+    }
     detailsToPlace.push({ b: record, detail, masonry: mat < 2 || mat > 7, rand });
     allBlocks.push(detail);
   }
   // Reserve every fire escape before placing storefronts on neighbouring buildings.
+  const waterTowerProb = archMid.waterTowerProb ?? 0.04;
   for (const { b, detail, masonry, rand } of detailsToPlace) {
     const neighbours = nearbyReserves(b, 6);
-    for (const reserve of addBuildingDetails(b, detail, { masonry, rand, neighbours })) addReserve(reserve);
+    for (const reserve of addBuildingDetails(b, detail, { masonry, rand, neighbours, waterTowerProb })) addReserve(reserve);
     // Lamp: details were placed from street level (y = 0); lift them onto the building's ground, sheds onto the
     // sidewalk's where they stand
     for (const list of [detail.cornices, detail.waterTowers, detail.hvacUnits, detail.fireEscapes, detail.awnings]) {

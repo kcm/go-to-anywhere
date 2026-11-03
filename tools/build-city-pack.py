@@ -469,6 +469,888 @@ CITY_CONFIGS = {
         },
         'rng_seed': 415,
     },
+    'sydney': {
+        'id': 'sydney',
+        'name': 'Sydney, Australia',
+        'origin_desc': 'Circular Quay, Sydney NSW',
+        'lat0': -33.8615,
+        'lon0': 151.2108,
+        'bbox': (-33.8840, 151.1860, -33.8420, 151.2360),
+        'base_elev': 0.0,
+        'downtown_box': (-950, -600, 750, 1600),
+        'in_town_box': (-2100, -2100, 2100, 2300),
+        'metered_regex': re.compile(r'^(George|Pitt|Castlereagh|Elizabeth|Macquarie|Market|King|York|Clarence|Kent|Sussex|Oxford|William)\b', re.I),
+        'rail_default_name': 'Sydney Trains City Circle',
+        'rail_route_names': ['Sydney Trains T1 North Shore & T2 City Circle', 'Sydney Light Rail L2/L3 George St'],
+        'amtrak_stop_id': 'SYD',
+        'amtrak_station_name': 'Sydney Central & Circular Quay',
+        'amtrak_west_keywords': ('North Sydney', 'Chatswood', 'Hornsby', 'Parramatta'),
+        'amtrak_fallback': [
+            ['T1', 'west', 'North Shore Line to Hornsby via Harbour Bridge', 27000, 27120, '1111111', '20250101', '20301231'],
+            ['T2', 'east', 'City Circle via Circular Quay & St James', 32400, 32520, '1111111', '20250101', '20301231'],
+            ['T4', 'east', 'Eastern Suburbs & Illawarra to Bondi Junction', 43200, 43320, '1111111', '20250101', '20301231'],
+            ['T8', 'west', 'Airport & South Line via Circular Quay', 61200, 61320, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'tfnsw_sydney_2026',
+        'transit_prefix': 'syd',
+        'corridor_waypoints': [
+            ('333', '333 Circular Quay - Bondi via Oxford St', 'Bondi Beach', 'Circular Quay', '0098cd',
+             [(0, 0), (-150, 650), (-150, 1500), (850, 1950)]),
+            ('389', '389 Pyrmont - Circular Quay - Potts Point', 'Pyrmont Point', 'North Bondi', '005aa3',
+             [(-1450, 950), (-860, 1056), (-180, 680), (450, 980), (1156, 1467)]),
+            ('442', '442 Balmain - QVB George St', 'Queen Victoria Bldg', 'Balmain Wharf', 'f58220',
+             [(-1850, 1100), (-860, 950), (-212, 667), (-180, 120)]),
+        ],
+        'historic_districts': [
+            ['The Rocks Historic Precinct', -420, -520, -80, -520, -80, -80, -420, -80],
+            ['Macquarie Street Heritage Precinct', 180, 120, 420, 120, 420, 1100, 180, 1100],
+        ],
+        'neighborhood_places': [
+            ('Circular Quay', 0, 0, 350),
+            ('Sydney Opera House', 388, -534, 300),
+            ('The Rocks', -231, -244, 350),
+            ('Barangaroo', -814, -44, 420),
+            ('Sydney CBD', -175, 680, 550),
+            ('Darling Harbour', -860, 1056, 480),
+            ('Royal Botanic Garden', 650, 750, 520),
+            ('Woolloomooloo & Potts Point', 1156, 1467, 450),
+            ('Milsons Point & Kirribilli', -55, -2034, 450),
+        ],
+        'landmarks_meta': {
+            'Sydney Opera House': {
+                'x': 388, 'z': -534, 'w': 120, 'd': 185, 'h': 67, 'area': 22200,
+                'ring': [328, -626, 448, -626, 448, -442, 328, -442]
+            },
+            'Sydney Harbour Bridge': {
+                'x': -120, 'z': -1045, 'w': 52, 'd': 1149, 'h': 134, 'area': 59748,
+                'ring': [-146, -1620, -94, -1620, -94, -470, -146, -470]
+            },
+            'Sydney Tower Eye': {
+                'x': -175, 'z': 989, 'w': 56, 'd': 56, 'h': 309, 'area': 3136,
+                'ring': [-203, 961, -147, 961, -147, 1017, -203, 1017]
+            },
+        },
+        'rng_seed': 612,
+    },
+    'venice': {
+        'id': 'venice',
+        'name': 'Venice, Italy',
+        'origin_desc': 'Ponte di Rialto & Grand Canal, Venice',
+        'lat0': 45.4380,
+        'lon0': 12.3359,
+        'bbox': (45.4240, 12.3100, 45.4500, 12.3620),
+        'base_elev': 0.0,
+        'extra_drive_highways': ('pedestrian', 'footway'),
+        'downtown_box': (-1200, -800, 1400, 1100),
+        'in_town_box': (-1900, -1200, 1900, 1400),
+        'metered_regex': re.compile(r'^(Piazzale|Ponte|Riva|Fondamenta|Strada|Lista|Calle)\b', re.I),
+        'rail_default_name': 'Ferrovie dello Stato Venezia Santa Lucia',
+        'rail_route_names': ['Frecciarossa Venezia Santa Lucia', 'People Mover Tronchetto - Piazzale Roma'],
+        'amtrak_stop_id': 'VSL',
+        'amtrak_station_name': 'Venezia Santa Lucia Station',
+        'amtrak_west_keywords': ('Milano', 'Roma', 'Firenze', 'Torino'),
+        'amtrak_fallback': [
+            ['9409', 'west', 'Frecciarossa to Roma Termini via Firenze', 27900, 28080, '1111111', '20250101', '20301231'],
+            ['9715', 'west', 'Frecciarossa to Milano Centrale', 36000, 36180, '1111111', '20250101', '20301231'],
+            ['9426', 'east', 'Frecciarossa from Roma Termini', 54000, 54180, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'actv_venezia_2026',
+        'transit_prefix': 'ven',
+        'corridor_waypoints': [
+            ('1', 'ACTV Line 1 Grand Canal (P.le Roma - Rialto - San Marco)', 'San Marco & Lido', 'Piazzale Roma', '1b365d',
+             [(-1150, 0), (-548, -500), (0, 0), (-376, 656), (251, 412), (1190, 689)]),
+            ('2', 'ACTV Line 2 Giudecca & San Marco Express', 'San Giorgio Maggiore', 'Santa Lucia', 'e87722',
+             [(-1034, -400), (-1150, 0), (-376, 656), (251, 412), (407, 1023)]),
+        ],
+        'historic_districts': [
+            ['San Marco & Rialto Historic Sestiere', -450, -350, 750, -350, 750, 750, -450, 750],
+            ['Dorsoduro & San Polo Historic Sestiere', -950, -250, -100, -250, -100, 850, -950, 850],
+        ],
+        'neighborhood_places': [
+            ('Ponte di Rialto', 0, 0, 280),
+            ('Piazza San Marco', 251, 412, 320),
+            ('San Polo', -251, 89, 320),
+            ('Dorsoduro & Accademia', -376, 656, 380),
+            ('Cannaregio', -548, -500, 420),
+            ('Castello & Arsenale', 1190, 689, 450),
+            ('Santa Croce & Piazzale Roma', -1034, -100, 380),
+            ('Giudecca', -141, 1278, 450),
+            ('San Giorgio Maggiore', 407, 1023, 280),
+        ],
+        'landmarks_meta': {
+            'St Mark\'s Campanile': {
+                'x': 251, 'z': 445, 'w': 24, 'd': 24, 'h': 99, 'area': 576,
+                'ring': [239, 433, 263, 433, 263, 457, 239, 457]
+            },
+            'Ponte di Rialto': {
+                'x': 0, 'z': 0, 'w': 48, 'd': 28, 'h': 14, 'area': 1344,
+                'ring': [-24, -14, 24, -14, 24, 14, -24, 14]
+            },
+            'Basilica di San Marco': {
+                'x': 312, 'z': 405, 'w': 76, 'd': 62, 'h': 43, 'area': 4712,
+                'ring': [274, 374, 350, 374, 350, 436, 274, 436]
+            },
+        },
+        'rng_seed': 39041,
+    },
+    'amsterdam': {
+        'id': 'amsterdam',
+        'name': 'Amsterdam, Netherlands',
+        'origin_desc': 'Dam Square & Royal Palace, Amsterdam',
+        'lat0': 52.3731,
+        'lon0': 4.8926,
+        'bbox': (52.3530, 4.8640, 52.3880, 4.9220),
+        'base_elev': 0.0,
+        'downtown_box': (-750, -800, 850, 1100),
+        'in_town_box': (-1800, -1500, 1800, 2100),
+        'metered_regex': re.compile(r'^(Damrak|Rokin|Vijzel|Leidsestraat|Utrechtsestraat|Herengracht|Keizersgracht|Prinsengracht|Singel|Spui|Overtoom)\b', re.I),
+        'rail_default_name': 'Nederlandse Spoorwegen (NS)',
+        'rail_route_names': ['NS Intercity Amsterdam Centraal', 'GVB Metro & Tram Ring'],
+        'amtrak_stop_id': 'ASD',
+        'amtrak_station_name': 'Amsterdam Centraal Station',
+        'amtrak_west_keywords': ('Schiphol', 'Rotterdam', 'Paris', 'London', 'Haarlem'),
+        'amtrak_fallback': [
+            ['IC', 'west', 'NS Intercity Direct to Schiphol & Rotterdam', 27600, 27720, '1111111', '20250101', '20301231'],
+            ['EST', 'west', 'Eurostar to Brussels & Paris Nord', 36900, 37080, '1111111', '20250101', '20301231'],
+            ['ICE', 'east', 'ICE International to Utrecht & Frankfurt', 50400, 50580, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'gvb_amsterdam_2026',
+        'transit_prefix': 'ams',
+        'corridor_waypoints': [
+            ('2', 'GVB Tram 2 Centraal - Dam - Rijksmuseum - Vondelpark', 'Nieuw Sloten', 'Centraal Station', '004b93',
+             [(531, -667), (0, 0), (-180, 720), (-265, 1479), (-1130, 1668)]),
+            ('14', 'GVB Tram 14 Centraal - Dam - Rembrandtplein - Artis', 'Flevopark', 'Centraal Station', '009fe3',
+             [(531, -667), (0, 0), (260, 780), (1150, 420)]),
+            ('17', 'GVB Tram 17 Centraal - Westerkerk - Jordaan - Kinkerstraat', 'Osdorp', 'Centraal Station', 'd92626',
+             [(531, -667), (-586, -156), (-980, 620), (-1450, 1280)]),
+        ],
+        'historic_districts': [
+            ['Grachtengordel UNESCO Canal Ring', -850, -550, 850, -550, 850, 1250, -850, 1250],
+            ['Jordaan Historic District', -1350, -650, -550, -650, -550, 450, -1350, 450],
+        ],
+        'neighborhood_places': [
+            ('Dam Square', 0, 0, 320),
+            ('Amsterdam Centraal', 531, -667, 380),
+            ('Jordaan', -780, -180, 450),
+            ('Grachtengordel', -280, 520, 550),
+            ('Rembrandtplein', 260, 780, 320),
+            ('Museumplein & Rijksmuseum', -265, 1479, 450),
+            ('Vondelpark', -1130, 1668, 480),
+            ('De Pijp', 220, 1850, 450),
+            ('Oosterdok & Plantage', 1212, 180, 450),
+        ],
+        'landmarks_meta': {
+            'Royal Palace Amsterdam': {
+                'x': -45, 'z': 0, 'w': 80, 'd': 56, 'h': 52, 'area': 4480,
+                'ring': [-85, -28, 35, -28, 35, 28, -85, 28]
+            },
+            'Rijksmuseum': {
+                'x': -265, 'z': 1405, 'w': 135, 'd': 85, 'h': 48, 'area': 11475,
+                'ring': [-332, 1362, -198, 1362, -198, 1448, -332, 1448]
+            },
+            'Westerkerk': {
+                'x': -586, 'z': -156, 'w': 32, 'd': 58, 'h': 85, 'area': 1856,
+                'ring': [-602, -185, -570, -185, -570, -127, -602, -127]
+            },
+        },
+        'rng_seed': 3120,
+    },
+    'hongkong': {
+        'id': 'hongkong',
+        'name': 'Hong Kong',
+        'origin_desc': 'Central & International Finance Centre, Hong Kong',
+        'lat0': 22.2855,
+        'lon0': 114.1577,
+        'bbox': (22.2680, 114.1380, 22.3060, 114.1860),
+        'base_elev': 0.0,
+        'downtown_box': (-1100, -1900, 2400, 1100),
+        'in_town_box': (-1900, -2100, 2800, 1800),
+        'metered_regex': re.compile(r'^(Des Voeux|Queen\'s|Connaught|Hennessy|Gloucester|Lockhart|Nathan|Canton|Salisbury)\b', re.I),
+        'rail_default_name': 'MTR Island & Tsuen Wan Lines',
+        'rail_route_names': ['MTR Island Line & Airport Express', 'Hong Kong Tramways (Ding Ding)'],
+        'amtrak_stop_id': 'HKG',
+        'amtrak_station_name': 'Hong Kong West Kowloon & Central Station',
+        'amtrak_west_keywords': ('Airport', 'Kowloon', 'Shenzhen', 'Guangzhou'),
+        'amtrak_fallback': [
+            ['AEL', 'west', 'Airport Express to Hong Kong Int\'l Airport', 27000, 27120, '1111111', '20250101', '20301231'],
+            ['G80', 'west', 'High Speed Rail to Shenzhen & Guangzhou South', 36000, 36180, '1111111', '20250101', '20301231'],
+            ['ISL', 'east', 'MTR Island Line to Wan Chai & Causeway Bay', 54000, 54120, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'hk_citybus_kmb_2026',
+        'transit_prefix': 'hkg',
+        'corridor_waypoints': [
+            ('10', 'Citybus 10 Kennedy Town - Central - Wan Chai - Causeway Bay', 'North Point', 'Kennedy Town', 'f5c400',
+             [(-1450, -180), (0, 0), (402, 689), (1762, 622), (2720, 622)]),
+            ('15', 'Peak Explorer 15 Central Star Ferry - Victoria Peak', 'The Peak', 'Central Pier 5', 'd92626',
+             [(240, -120), (402, 689), (-240, 1150), (-1154, 1656)]),
+            ('1A', 'KMB 1A Star Ferry Tsim Sha Tsui - Nathan Road', 'Sau Mau Ping', 'Star Ferry TST', 'e60012',
+             [(1236, -967), (1380, -1450), (1420, -2100)]),
+        ],
+        'historic_districts': [
+            ['Central & SoHo Heritage Precinct', -650, 100, 150, 100, 150, 650, -650, 650],
+        ],
+        'neighborhood_places': [
+            ('Central', 0, 0, 450),
+            ('Admiralty', 520, 689, 380),
+            ('SoHo & Mid-Levels', -515, 420, 420),
+            ('Victoria Peak', -1154, 1656, 480),
+            ('Wan Chai', 1762, 622, 480),
+            ('Causeway Bay', 2720, 622, 450),
+            ('Tsim Sha Tsui', 1236, -967, 480),
+            ('West Kowloon', 412, -1934, 480),
+        ],
+        'landmarks_meta': {
+            'Bank of China Tower': {
+                'x': 402, 'z': 689, 'w': 56, 'd': 56, 'h': 367, 'area': 3136,
+                'ring': [374, 661, 430, 661, 430, 717, 374, 717]
+            },
+            'Two International Finance Centre': {
+                'x': 85, 'z': -45, 'w': 64, 'd': 64, 'h': 412, 'area': 4096,
+                'ring': [53, -77, 117, -77, 117, -13, 53, -13]
+            },
+            'Hong Kong Convention Centre': {
+                'x': 1762, 'z': 245, 'w': 220, 'd': 140, 'h': 48, 'area': 30800,
+                'ring': [1652, 175, 1872, 175, 1872, 315, 1652, 315]
+            },
+        },
+        'rng_seed': 852,
+    },
+    'paris': {
+        'id': 'paris',
+        'name': 'Paris, France',
+        'origin_desc': 'Musee du Louvre & Pyramide, Paris',
+        'lat0': 48.8606,
+        'lon0': 2.3376,
+        'bbox': (48.8420, 2.2880, 48.8780, 2.3680),
+        'base_elev': 28.0,
+        'overpass_tiles': (1, 2),
+        'downtown_box': (-3400, -1600, 1800, 1600),
+        'in_town_box': (-3600, -1900, 2200, 2000),
+        'metered_regex': re.compile(r'^(Rue|Boulevard|Avenue|Quai|Place|Pont)\b', re.I),
+        'rail_default_name': 'RER & Metro de Paris',
+        'rail_route_names': ['RER C Rive Gauche (Tour Eiffel - Musee d\'Orsay - Notre-Dame)', 'RER A & B Chatelet - Les Halles'],
+        'amtrak_stop_id': 'PAR',
+        'amtrak_station_name': 'Paris Gare Saint-Lazare & Musee d\'Orsay',
+        'amtrak_west_keywords': ('Versailles', 'Saint-Germain', 'Eiffel', 'La Defense'),
+        'amtrak_fallback': [
+            ['RERC', 'west', 'RER C to Tour Eiffel & Chateau de Versailles', 27600, 27720, '1111111', '20250101', '20301231'],
+            ['RERA', 'east', 'RER A to Chatelet, Gare de Lyon & Nation', 36000, 36120, '1111111', '20250101', '20301231'],
+            ['TGV', 'east', 'TGV InOui to Lyon, Marseille & Nice', 54000, 54180, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'ratp_paris_2026',
+        'transit_prefix': 'par',
+        'corridor_waypoints': [
+            ('72', 'RATP Bus 72 Hotel de Ville - Louvre - Concorde - Tour Eiffel', 'Parc de Saint-Cloud', 'Hotel de Ville', '00a88f',
+             [(1240, 220), (0, 0), (-1200, -490), (-3168, 256)]),
+            ('73', 'RATP Bus 73 Musee d\'Orsay - Concorde - Champs-Elysees - Etoile', 'La Defense', 'Musee d\'Orsay', '0055a4',
+             [(-337, 45), (-1200, -490), (-2150, -980), (-3116, -1467)]),
+            ('63', 'RATP Bus 63 Jardin des Plantes - Latin Quarter - Saint-Germain - Trocadero', 'Porte de la Muette', 'Gare de Lyon', 'e3051b',
+             [(797, 1590), (-406, 1080), (-1650, 420), (-3168, 256)]),
+        ],
+        'historic_districts': [
+            ['Rives de la Seine UNESCO Historic District', -3400, -600, 1600, -600, 1600, 1200, -3400, 1200],
+            ['Le Marais & Ile de la Cite Historic Quarter', 400, -400, 1800, -400, 1800, 1100, 400, 1100],
+        ],
+        'neighborhood_places': [
+            ('Musee du Louvre', 0, 0, 450),
+            ('Tour Eiffel & Champ de Mars', -3168, 256, 520),
+            ('Ile de la Cite & Notre-Dame', 907, 845, 380),
+            ('Place de la Concorde', -1200, -490, 380),
+            ('Champs-Elysees & Arc de Triomphe', -3116, -1467, 520),
+            ('Saint-Germain-des-Pres', -337, 520, 450),
+            ('Quartier Latin & Pantheon', 797, 1590, 450),
+            ('Jardin du Luxembourg', -406, 1701, 420),
+            ('Le Marais', 1240, 220, 480),
+        ],
+        'landmarks_meta': {
+            'Tour Eiffel': {
+                'x': -3168, 'z': 256, 'w': 125, 'd': 125, 'h': 330, 'area': 15625,
+                'ring': [-3230, 194, -3106, 194, -3106, 318, -3230, 318]
+            },
+            'Louvre Pyramid': {
+                'x': 0, 'z': 0, 'w': 36, 'd': 36, 'h': 22, 'area': 1296,
+                'ring': [-18, -18, 18, -18, 18, 18, -18, 18]
+            },
+            'Arc de Triomphe': {
+                'x': -3116, 'z': -1467, 'w': 45, 'd': 22, 'h': 50, 'area': 990,
+                'ring': [-3138, -1478, -3094, -1478, -3094, -1456, -3138, -1456]
+            },
+            'Cathedrale Notre-Dame de Paris': {
+                'x': 907, 'z': 845, 'w': 128, 'd': 48, 'h': 96, 'area': 6144,
+                'ring': [843, 821, 971, 821, 971, 869, 843, 869]
+            },
+        },
+        'rng_seed': 33175,
+    },
+    'london': {
+        'id': 'london',
+        'name': 'London, UK',
+        'origin_desc': 'Waterloo Bridge & Strand, Central London',
+        'lat0': 51.5055,
+        'lon0': -0.1168,
+        'bbox': (51.4880, -0.1480, 51.5220, -0.0820),
+        'base_elev': 0.0,
+        'overpass_tiles': (1, 2),
+        'downtown_box': (-1600, -1200, 2100, 1000),
+        'in_town_box': (-2100, -1800, 2400, 1800),
+        'metered_regex': re.compile(r'^(Strand|Whitehall|Victoria|Piccadilly|Regent|Oxford|Fleet|Cannon|Queen Victoria|York|Stamford|Blackfriars)\b', re.I),
+        'rail_default_name': 'National Rail & London Underground',
+        'rail_route_names': ['Southeastern Charing Cross & Waterloo East', 'Thameslink Blackfriars - St Pancras'],
+        'amtrak_stop_id': 'WAT',
+        'amtrak_station_name': 'London Waterloo & Charing Cross',
+        'amtrak_west_keywords': ('Windsor', 'Reading', 'Oxford', 'Heathrow', 'Southampton'),
+        'amtrak_fallback': [
+            ['SWR', 'west', 'South Western Railway from London Waterloo', 27600, 27780, '1111111', '20250101', '20301231'],
+            ['SE', 'east', 'Southeastern Highspeed from Charing Cross', 36000, 36180, '1111111', '20250101', '20301231'],
+            ['TLK', 'east', 'Thameslink Cross-London via Blackfriars Bridge', 54000, 54180, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'tfl_london_2026',
+        'transit_prefix': 'ldn',
+        'corridor_waypoints': [
+            ('11', 'TfL Route 11 Westminster - Whitehall - Trafalgar Sq - Strand - St Paul\'s', 'Liverpool Street', 'Westminster', 'dc241f',
+             [(-542, 534), (-780, -289), (0, 0), (1273, -934)]),
+            ('15', 'TfL Heritage Route 15 Trafalgar Sq - Fleet St - St Paul\'s - Cannon St', 'Tower Hill', 'Trafalgar Square', 'b81d18',
+             [(-780, -289), (0, -240), (1273, -934), (1950, -780)]),
+            ('381', 'TfL Route 381 Waterloo - London Eye - Tate Modern - London Bridge', 'London Bridge & Shard', 'Waterloo Station', '0019a8',
+             [(-542, 534), (-156, 245), (924, -67), (2100, 111)]),
+        ],
+        'historic_districts': [
+            ['Westminster & Whitehall Conservation Area', -1800, -450, -350, -450, -350, 850, -1800, 850],
+            ['City of London & St Paul\'s Conservation Area', 650, -1350, 2200, -1350, 2200, -200, 650, -200],
+        ],
+        'neighborhood_places': [
+            ('Westminster & Big Ben', -542, 534, 450),
+            ('South Bank & London Eye', -156, 245, 420),
+            ('Trafalgar Square & Whitehall', -780, -289, 420),
+            ('St James\'s & Buckingham Palace', -1704, 489, 480),
+            ('Covent Garden & Strand', -380, -680, 420),
+            ('Soho & West End', -1150, -780, 450),
+            ('City of London & St Paul\'s', 1273, -934, 520),
+            ('Bankside & Tate Modern', 924, -67, 420),
+            ('Southwark & The Shard', 2100, 111, 450),
+        ],
+        'landmarks_meta': {
+            'Elizabeth Tower (Big Ben)': {
+                'x': -542, 'z': 534, 'w': 24, 'd': 24, 'h': 96, 'area': 576,
+                'ring': [-554, 522, -530, 522, -530, 546, -554, 546]
+            },
+            'London Eye': {
+                'x': -156, 'z': 245, 'w': 36, 'd': 120, 'h': 135, 'area': 4320,
+                'ring': [-174, 185, -138, 185, -138, 305, -174, 305]
+            },
+            'St Paul\'s Cathedral': {
+                'x': 1273, 'z': -934, 'w': 158, 'd': 78, 'h': 111, 'area': 12324,
+                'ring': [1194, -973, 1352, -973, 1352, -895, 1194, -895]
+            },
+            'The Shard': {
+                'x': 2100, 'z': 111, 'w': 72, 'd': 72, 'h': 310, 'area': 5184,
+                'ring': [2064, 75, 2136, 75, 2136, 147, 2064, 147]
+            },
+        },
+        'rng_seed': 4420,
+    },
+    'tokyo': {
+        'id': 'tokyo',
+        'name': 'Tokyo, Japan',
+        'origin_desc': 'Toranomon & Shimbashi, Minato-ku, Tokyo',
+        'lat0': 35.6655,
+        'lon0': 139.7514,
+        'bbox': (35.6460, 139.7260, 35.6860, 139.7760),
+        'base_elev': 0.0,
+        'downtown_box': (-1800, -2100, 1800, 1400),
+        'in_town_box': (-2200, -2200, 2200, 2100),
+        'metered_regex': re.compile(r'^(Chuo|Harumi|Sotobori|Showa|Hibiya|Sakurada|Aoyama|Roppongi|Dai-Ichi)\b', re.I),
+        'rail_default_name': 'JR Yamanote & Tokaido Shinkansen',
+        'rail_route_names': ['JR Yamanote Line & Tokaido Shinkansen (Tokyo - Shimbashi - Hamamatsucho)', 'Tokyo Monorail & Yurikamome'],
+        'amtrak_stop_id': 'TYO',
+        'amtrak_station_name': 'Tokyo Station & Shimbashi',
+        'amtrak_west_keywords': ('Shinagawa', 'Yokohama', 'Nagoya', 'Kyoto', 'Osaka'),
+        'amtrak_fallback': [
+            ['NOZ1', 'west', 'Nozomi Shinkansen to Nagoya, Kyoto & Shin-Osaka', 25200, 25380, '1111111', '20250101', '20301231'],
+            ['JY10', 'west', 'JR Yamanote Line Outer Loop via Shibuya & Shinjuku', 34200, 34320, '1111111', '20250101', '20301231'],
+            ['HAYA', 'east', 'Hayabusa Tohoku Shinkansen to Sendai & Shin-Aomori', 50400, 50580, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'toei_tokyo_2026',
+        'transit_prefix': 'tyo',
+        'corridor_waypoints': [
+            ('01', 'Toei 01 Shimbashi - Toranomon - Roppongi Hills', 'Shibuya / Roppongi', 'Shimbashi Station', '4ca626',
+             [(450, 120), (0, 0), (-950, 280), (-1991, 567)]),
+            ('06', 'Toei Marunouchi - Ginza - Tokyo Tower - Shiba Park', 'Tokyo Tower', 'Tokyo Station', 'f39800',
+             [(1421, -1867), (1014, -678), (0, 0), (-543, 767)]),
+            ('98', 'Toei 98 Tokyo Tower - Akasaka - Imperial Palace', 'Imperial Palace', 'Tokyo Tower', '00a0e9',
+             [(-543, 767), (-652, -834), (172, -1820), (1421, -1867)]),
+        ],
+        'historic_districts': [
+            ['Imperial Palace & Zojo-ji Shiba Precinct', -750, 450, -250, 450, -250, 1050, -750, 1050],
+        ],
+        'neighborhood_places': [
+            ('Tokyo Tower & Shiba Park', -543, 767, 450),
+            ('Toranomon & Shimbashi', 180, 0, 450),
+            ('Ginza & Yurakucho', 1014, -678, 480),
+            ('Tokyo Station & Marunouchi', 1421, -1867, 520),
+            ('Imperial Palace (Chiyoda)', 172, -2289, 550),
+            ('Akasaka & Nagatacho', -652, -834, 450),
+            ('Roppongi Hills & Azabu', -1991, 567, 480),
+            ('Hamamatsucho & Shiodome', 750, 720, 450),
+        ],
+        'landmarks_meta': {
+            'Tokyo Tower': {
+                'x': -543, 'z': 767, 'w': 88, 'd': 88, 'h': 333, 'area': 7744,
+                'ring': [-587, 723, -499, 723, -499, 811, -587, 811]
+            },
+            'Roppongi Hills Mori Tower': {
+                'x': -1991, 'z': 567, 'w': 78, 'd': 78, 'h': 238, 'area': 6084,
+                'ring': [-2030, 528, -1952, 528, -1952, 606, -2030, 606]
+            },
+            'Tokyo Station Marunouchi Building': {
+                'x': 1421, 'z': -1867, 'w': 48, 'd': 335, 'h': 46, 'area': 16080,
+                'ring': [1397, -2034, 1445, -2034, 1445, -1700, 1397, -1700]
+            },
+        },
+        'rng_seed': 813,
+    },
+    'barcelona': {
+        'id': 'barcelona',
+        'name': 'Barcelona, Spain',
+        'origin_desc': 'Placa de Catalunya, Barcelona',
+        'lat0': 41.3902,
+        'lon0': 2.1699,
+        'bbox': (41.3720, 2.1440, 41.4090, 2.1980),
+        'base_elev': 0.0,
+        'overpass_tiles': (1, 2),
+        'downtown_box': (-1500, -1600, 1600, 1500),
+        'in_town_box': (-2100, -2000, 2200, 1900),
+        'metered_regex': re.compile(r'^(Passeig|Avinguda|Gran Via|Carrer|Rambla|Ronda|Via Laietana)\b', re.I),
+        'rail_default_name': 'Rodalies de Catalunya & AVE',
+        'rail_route_names': ['Rodalies Catalunya & Estacio de Franca', 'FGC & Trambesos Diagonal'],
+        'amtrak_stop_id': 'BCN',
+        'amtrak_station_name': 'Barcelona Sants & Estacio de Franca',
+        'amtrak_west_keywords': ('Madrid', 'Zaragoza', 'Tarragona', 'Valencia'),
+        'amtrak_fallback': [
+            ['AVE', 'west', 'AVE High Speed to Zaragoza & Madrid Puerta de Atocha', 28800, 28980, '1111111', '20250101', '20301231'],
+            ['R2S', 'west', 'Rodalies R2 Sud from Estacio de Franca to Sitges', 39600, 39720, '1111111', '20250101', '20301231'],
+            ['TGV', 'east', 'TGV InOui to Girona, Perpignan & Paris', 57600, 57780, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'tmb_barcelona_2026',
+        'transit_prefix': 'bcn',
+        'corridor_waypoints': [
+            ('D50', 'TMB Bus D50 Barceloneta - Placa Catalunya - Passeig de Gracia - Sagrada Familia', 'Sagrada Familia', 'Port Vell & Barceloneta', 'd92626',
+             [(1688, 1345), (68, 1601), (0, 0), (-351, -245), (39, -1489)]),
+            ('H12', 'TMB Bus H12 Gran Via de les Corts Catalanes - Glories', 'Besos / Glories', 'Placa d\'Espanya', '0072ce',
+             [(-1580, 1280), (-350, 220), (420, -280), (1588, -1478)]),
+            ('V15', 'TMB Bus V15 Barceloneta - Via Laietana - Diagonal', 'Vall d\'Hebron', 'Barceloneta Beach', '4ca626',
+             [(1688, 1345), (48, 745), (0, 0), (-680, -820)]),
+        ],
+        'historic_districts': [
+            ['Ciutat Vella & Barri Gotic Historic Quarter', -650, 150, 850, 150, 850, 1650, -650, 1650],
+            ['Eixample Modernisme Quadrat d\'Or', -950, -1100, 450, -1100, 450, 0, -950, 0],
+        ],
+        'neighborhood_places': [
+            ('Placa de Catalunya', 0, 0, 350),
+            ('L\'Eixample & Passeig de Gracia', -351, -420, 550),
+            ('Sagrada Familia', 39, -1489, 420),
+            ('Barri Gotic & La Rambla', 48, 867, 450),
+            ('El Born & Ciutadella', 961, 450, 450),
+            ('La Barceloneta', 1688, 1345, 420),
+            ('Glories & Poblenou', 1588, -1478, 480),
+        ],
+        'landmarks_meta': {
+            'Basilica de la Sagrada Familia': {
+                'x': 39, 'z': -1489, 'w': 95, 'd': 95, 'h': 172, 'area': 9025,
+                'ring': [-8, -1536, 86, -1536, 86, -1442, -8, -1442]
+            },
+            'Torre Glories': {
+                'x': 1588, 'z': -1478, 'w': 42, 'd': 42, 'h': 144, 'area': 1764,
+                'ring': [1567, -1499, 1609, -1499, 1609, -1457, 1567, -1457]
+            },
+            'Barcelona Cathedral': {
+                'x': 48, 'z': 745, 'w': 48, 'd': 92, 'h': 70, 'area': 4416,
+                'ring': [24, 699, 72, 699, 72, 791, 24, 791]
+            },
+        },
+        'rng_seed': 3493,
+    },
+    'rio': {
+        'id': 'rio',
+        'name': 'Rio de Janeiro, Brazil',
+        'origin_desc': 'Copacabana & Avenida Atlantica, Rio de Janeiro',
+        'lat0': -22.9619,
+        'lon0': -43.1806,
+        'bbox': (-22.9900, -43.2180, -22.9360, -43.1520),
+        'base_elev': 0.0,
+        'downtown_box': (-2600, -1800, 1200, 2800),
+        'in_town_box': (-3600, -2600, 2800, 2900),
+        'metered_regex': re.compile(r'^(Avenida Atlantica|Nossa Senhora de Copacabana|Barata Ribeiro|Vieira Souto|Visconde de Piraja|Princesa Isabel|Pasteur|Borges de Medeiros)\b', re.I),
+        'rail_default_name': 'Trem do Corcovado & MetroRio',
+        'rail_route_names': ['Trem do Corcovado (Cosme Velho - Cristo Redentor)'],
+        'amtrak_stop_id': 'RIO',
+        'amtrak_station_name': 'Estacao Cosme Velho & Cardeal Arcoverde',
+        'amtrak_west_keywords': ('Corcovado', 'Ipanema', 'Leblon', 'Barra'),
+        'amtrak_fallback': [
+            ['COR1', 'west', 'Trem do Corcovado Rack Railway to Cristo Redentor', 28800, 28980, '1111111', '20250101', '20301231'],
+            ['L1', 'west', 'MetroRio Linha 1 Copacabana - General Osorio Ipanema', 39600, 39720, '1111111', '20250101', '20301231'],
+            ['L2', 'east', 'MetroRio Linha 2 Botafogo - Centro', 57600, 57720, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'sppo_rio_2026',
+        'transit_prefix': 'rio',
+        'corridor_waypoints': [
+            ('474', 'Rio Onibus 474 Leme - Copacabana - Arpoador - Ipanema', 'Ipanema & Leblon', 'Leme / Urca', '009b3a',
+             [(965, 511), (0, 420), (-1150, 2450), (-2390, 2668)]),
+            ('583', 'Rio Onibus 583 Leblon - Lagoa - Copacabana - Urca (Sugarloaf)', 'Pao de Acucar (Urca)', 'Lagoa / Leblon', 'fedf00',
+             [(-2842, 1345), (0, 0), (15, -1556), (2100, -1350)]),
+            ('584', 'Rio Onibus 584 Copacabana - Botafogo - Humaita - Corcovado Base', 'Cosme Velho / Corcovado', 'Copacabana', '004b87',
+             [(0, 420), (15, -1556), (-1450, -820), (-2450, -1120)]),
+        ],
+        'historic_districts': [
+            ['Copacabana Art Deco Oceanfront District', -900, -100, 950, -100, 950, 950, -900, 950],
+        ],
+        'neighborhood_places': [
+            ('Copacabana', 0, 420, 550),
+            ('Pao de Acucar & Urca', 2534, -1256, 480),
+            ('Corcovado & Cristo Redentor', -3068, -1123, 480),
+            ('Ipanema & Arpoador', -2390, 2668, 520),
+            ('Lagoa Rodrigo de Freitas', -2842, 1345, 550),
+            ('Botafogo', 15, -1556, 480),
+            ('Leme', 965, 511, 380),
+        ],
+        'landmarks_meta': {
+            'Christ the Redeemer': {
+                'x': -3068, 'z': -1123, 'w': 28, 'd': 28, 'h': 38, 'area': 784,
+                'ring': [-3082, -1137, -3054, -1137, -3054, -1109, -3082, -1109]
+            },
+            'Sugarloaf Cable Car Station': {
+                'x': 2534, 'z': -1256, 'w': 36, 'd': 36, 'h': 24, 'area': 1296,
+                'ring': [2516, -1274, 2552, -1274, 2552, -1238, 2516, -1238]
+            },
+            'Copacabana Palace': {
+                'x': 210, 'z': 240, 'w': 110, 'd': 54, 'h': 32, 'area': 5940,
+                'ring': [155, 213, 265, 213, 265, 267, 155, 267]
+            },
+        },
+        'rng_seed': 5521,
+    },
+    'vancouver': {
+        'id': 'vancouver',
+        'name': 'Vancouver, Canada',
+        'origin_desc': 'Robson Square & Vancouver Art Gallery, Downtown Vancouver',
+        'lat0': 49.2827,
+        'lon0': -123.1207,
+        'bbox': (49.2640, -123.1620, 49.3180, -123.0960),
+        'base_elev': 0.0,
+        'downtown_box': (-1600, -1100, 1400, 1400),
+        'in_town_box': (-2900, -3900, 1700, 2000),
+        'metered_regex': re.compile(r'^(Robson|Georgia|Granville|Burrard|Howe|Hornby|Davie|Denman|Seymour|Richards|Homer|Hamilton|Mainland|Cambie|Cordova|Hastings|Pender)\b', re.I),
+        'rail_default_name': 'SkyTrain Expo & Canada Line / West Coast Express',
+        'rail_route_names': ['SkyTrain Expo & Canada Line (Waterfront Station)', 'VIA Rail Canadian & Amtrak Cascades'],
+        'amtrak_stop_id': 'VAC',
+        'amtrak_station_name': 'Pacific Central & Waterfront Station',
+        'amtrak_west_keywords': ('Seattle', 'Portland', 'Waterfront', 'YVR'),
+        'amtrak_fallback': [
+            ['517', 'west', 'Amtrak Cascades to Seattle King Street & Portland', 24300, 24600, '1111111', '20250101', '20301231'],
+            ['CAN', 'east', 'VIA Rail The Canadian to Jasper & Toronto', 54000, 54300, '1111111', '20250101', '20301231'],
+            ['518', 'west', 'Amtrak Cascades from Seattle to Vancouver BC', 79200, 79500, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'translink_vancouver_2026',
+        'transit_prefix': 'van',
+        'corridor_waypoints': [
+            ('19', 'TransLink 19 Stanley Park - Georgia St - Downtown - Science World', 'Stanley Park', 'Metrotown / Science World', '005da6',
+             [(1309, 1212), (480, -200), (0, 0), (-1450, -980), (-2150, -1820)]),
+            ('240', 'TransLink 240 Downtown - Georgia St - Lions Gate Bridge', 'North Vancouver', 'Downtown Vancouver', 'fab600',
+             [(0, 0), (-1150, -780), (-2150, -1820), (-2734, -3400)]),
+            ('50', 'TransLink 50 Waterfront - Gastown - False Creek - Granville Island', 'Granville Island', 'Waterfront Station', '0098cd',
+             [(480, -689), (982, -200), (1309, 1212), (-996, 2001)]),
+        ],
+        'historic_districts': [
+            ['Gastown National Historic Site', 450, -550, 1250, -550, 1250, 100, 450, 100],
+            ['Yaletown Warehouse Heritage District', -250, 450, 450, 450, 450, 1150, -250, 1150],
+        ],
+        'neighborhood_places': [
+            ('Downtown & Robson Square', 0, 0, 480),
+            ('Canada Place & Waterfront', 480, -689, 380),
+            ('Coal Harbour', -760, -680, 420),
+            ('Stanley Park', -2150, -1820, 650),
+            ('West End & English Bay', -1450, 280, 480),
+            ('Gastown & Chinatown', 982, -100, 450),
+            ('Yaletown', 80, 950, 420),
+            ('Granville Island & Kitsilano', -996, 2001, 450),
+            ('Science World & False Creek', 1309, 1212, 450),
+        ],
+        'landmarks_meta': {
+            'Canada Place': {
+                'x': 480, 'z': -689, 'w': 95, 'd': 260, 'h': 38, 'area': 24700,
+                'ring': [432, -819, 528, -819, 528, -559, 432, -559]
+            },
+            'Harbour Centre': {
+                'x': 610, 'z': -310, 'w': 48, 'd': 48, 'h': 168, 'area': 2304,
+                'ring': [586, -334, 634, -334, 634, -286, 586, -286]
+            },
+            'Science World': {
+                'x': 1309, 'z': 1212, 'w': 62, 'd': 62, 'h': 48, 'area': 3844,
+                'ring': [1278, 1181, 1340, 1181, 1340, 1243, 1278, 1243]
+            },
+            'Lions Gate Bridge': {
+                'x': -2734, 'z': -3650, 'w': 32, 'd': 1200, 'h': 111, 'area': 38400,
+                'ring': [-2750, -4250, -2718, -4250, -2718, -3050, -2750, -3050]
+            },
+        },
+        'rng_seed': 604,
+    },
+    'capetown': {
+        'id': 'capetown',
+        'name': 'Cape Town, South Africa',
+        'origin_desc': 'City Bowl & Greenmarket Square, Cape Town',
+        'lat0': -33.9249,
+        'lon0': 18.4241,
+        'bbox': (-33.9620, 18.3820, -33.9000, 18.4520),
+        'base_elev': 0.0,
+        'downtown_box': (-950, -1400, 950, 950),
+        'in_town_box': (-3800, -2700, 2400, 3900),
+        'metered_regex': re.compile(r'^(Adderley|Long|Loop|Bree|Buitengracht|Strand|Wale|Darling|Kloof|Somerset|Main)\b', re.I),
+        'rail_default_name': 'PRASA Metrorail Southern & Atlantic Lines',
+        'rail_route_names': ['PRASA Metrorail & Blue Train (Cape Town Station)'],
+        'amtrak_stop_id': 'CPT',
+        'amtrak_station_name': 'Cape Town Station',
+        'amtrak_west_keywords': ('Simon\'s Town', 'Muizenberg', 'Stellenbosch', 'Pretoria'),
+        'amtrak_fallback': [
+            ['SR1', 'west', 'Southern Line Express to Muizenberg & Simon\'s Town', 27000, 27180, '1111111', '20250101', '20301231'],
+            ['BLU', 'east', 'The Blue Train Luxury Service to Pretoria', 39600, 39900, '1111111', '20250101', '20301231'],
+            ['NL1', 'east', 'Northern Line to Bellville & Stellenbosch', 57600, 57780, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'myciti_capetown_2026',
+        'transit_prefix': 'cpt',
+        'corridor_waypoints': [
+            ('104', 'MyCiTi 104 Civic Centre - V&A Waterfront - Sea Point', 'Sea Point Promenade', 'Civic Centre', 'd92626',
+             [(350, -350), (-35, -2156), (-1650, -2250), (-2450, -2100)]),
+            ('107', 'MyCiTi 107 Civic Centre - Long St - Kloof Nek - Table Mountain Cableway', 'Table Mountain Cableway', 'Civic Centre', '0072ce',
+             [(0, 0), (-289, 622), (-1450, 1950), (-1924, 3450)]),
+            ('106', 'MyCiTi 106 City Bowl - Bo-Kaap - Signal Hill', 'Signal Hill', 'Adderley Street', '06d6a0',
+             [(0, 0), (-832, -8), (-2033, -722)]),
+        ],
+        'historic_districts': [
+            ['Bo-Kaap Heritage Area', -1200, -450, -550, -450, -550, 450, -1200, 450],
+            ['Company\'s Garden & Long Street Heritage Precinct', -450, -250, 250, -250, 250, 850, -450, 850],
+        ],
+        'neighborhood_places': [
+            ('City Bowl & Long Street', 0, 0, 480),
+            ('V&A Waterfront', -35, -2250, 480),
+            ('Bo-Kaap', -832, -8, 380),
+            ('Signal Hill', -2033, -722, 480),
+            ('Lion\'s Head', -3189, 1189, 480),
+            ('Table Mountain', -1500, 3556, 650),
+            ('Gardens & Oranjezicht', -289, 1100, 480),
+            ('Green Point & Sea Point', -2450, -2100, 520),
+        ],
+        'landmarks_meta': {
+            'Cape Town City Hall': {
+                'x': 156, 'z': 20, 'w': 86, 'd': 54, 'h': 42, 'area': 4644,
+                'ring': [113, -7, 199, -7, 199, 47, 113, 47]
+            },
+            'Cape Wheel V&A Waterfront': {
+                'x': -35, 'z': -2156, 'w': 32, 'd': 32, 'h': 50, 'area': 1024,
+                'ring': [-51, -2172, -19, -2172, -19, -2140, -51, -2140]
+            },
+            'Table Mountain Cableway': {
+                'x': -1924, 'z': 3450, 'w': 48, 'd': 48, 'h': 26, 'area': 2304,
+                'ring': [-1948, 3426, -1900, 3426, -1900, 3474, -1948, 3474]
+            },
+        },
+        'rng_seed': 2721,
+    },
+    'chicago': {
+        'id': 'chicago',
+        'name': 'Chicago, IL',
+        'origin_desc': 'State & Madison (The Loop), Chicago IL',
+        'lat0': 41.8827,
+        'lon0': -87.6278,
+        'bbox': (41.8640, -87.6520, 41.9020, -87.6020),
+        'base_elev': 179.0,
+        'downtown_box': (-1200, -1900, 1200, 1500),
+        'in_town_box': (-1950, -2100, 2100, 2000),
+        'metered_regex': re.compile(r'^(State|Michigan|Wabash|Clark|Dearborn|LaSalle|Wells|Franklin|Wacker|Madison|Monroe|Adams|Jackson|Van Buren|Randolph|Washington|Lake|Grand|Ohio|Ontario|Erie|Huron|Superior|Chicago)\b', re.I),
+        'rail_default_name': 'CTA Loop L & Metra / Amtrak Union Station',
+        'rail_route_names': ['CTA Elevated Loop & Red/Blue/Brown Lines', 'Amtrak & Metra Union Station / Millennium Station'],
+        'amtrak_stop_id': 'CHI',
+        'amtrak_station_name': 'Chicago Union Station',
+        'amtrak_west_keywords': ('Denver', 'Seattle', 'Los Angeles', 'San Francisco', 'St. Louis', 'Milwaukee'),
+        'amtrak_fallback': [
+            ['350', 'east', 'Amtrak Wolverine to Ann Arbor, Royal Oak & Detroit/Pontiac', 26100, 26400, '1111111', '20250101', '20301231'],
+            ['5', 'west', 'California Zephyr to Denver, Salt Lake City & Emeryville/SF', 50400, 50700, '1111111', '20250101', '20301231'],
+            ['48', 'east', 'Lake Shore Limited to New York Penn & Boston South', 77400, 77700, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'cta_chicago_2026',
+        'transit_prefix': 'chi',
+        'corridor_waypoints': [
+            ('151', 'CTA 151 Sheridan / Michigan Ave - Union Station - Millennium Park - Mag Mile', 'Devon / Sheridan', 'Union Station', '00a1de',
+             [(-920, 433), (0, 0), (357, 0), (340, -645), (415, -1812)]),
+            ('124', 'CTA 124 Navy Pier Express - Union Station - Willis Tower - Navy Pier', 'Navy Pier', 'Union Station', 'c60c30',
+             [(-920, 433), (-672, 433), (0, -240), (340, -645), (1825, -990)]),
+            ('22', 'CTA 22 Clark Street - Loop - River North - Gold Coast', 'Howard', 'Harrison / State', '009b3a',
+             [(0, 1200), (-180, 0), (-180, -980), (-180, -1950)]),
+        ],
+        'historic_districts': [
+            ['Historic Michigan Boulevard District', 220, -450, 480, -450, 480, 1250, 220, 1250],
+            ['Loop Retail & Printing House Row Historic District', -250, -350, 220, -350, 220, 1150, -250, 1150],
+        ],
+        'neighborhood_places': [
+            ('The Loop', 0, 0, 550),
+            ('Willis Tower & West Loop', -672, 433, 450),
+            ('Millennium Park', 357, 0, 420),
+            ('Grant Park', 620, 920, 520),
+            ('Michigan Ave & Riverwalk', 340, -645, 420),
+            ('River North', -320, -1100, 480),
+            ('Magnificent Mile & Streeterville', 520, -1450, 520),
+            ('Navy Pier', 1825, -990, 420),
+        ],
+        'landmarks_meta': {
+            'Willis Tower': {
+                'x': -672, 'z': 433, 'w': 69, 'd': 69, 'h': 442, 'area': 4761,
+                'ring': [-706, 399, -638, 399, -638, 467, -706, 467]
+            },
+            '875 North Michigan Avenue': {
+                'x': 415, 'z': -1812, 'w': 58, 'd': 80, 'h': 344, 'area': 4640,
+                'ring': [386, -1852, 444, -1852, 444, -1772, 386, -1772]
+            },
+            'Wrigley Building': {
+                'x': 310, 'z': -780, 'w': 48, 'd': 58, 'h': 134, 'area': 2784,
+                'ring': [286, -809, 334, -809, 334, -751, 286, -751]
+            },
+            'Cloud Gate': {
+                'x': 357, 'z': 0, 'w': 24, 'd': 14, 'h': 11, 'area': 336,
+                'ring': [345, -7, 369, -7, 369, 7, 345, 7]
+            },
+        },
+        'rng_seed': 312,
+    },
+    'boston': {
+        'id': 'boston',
+        'name': 'Boston, MA',
+        'origin_desc': 'Boston Common & Massachusetts State House, Boston MA',
+        'lat0': 42.3584,
+        'lon0': -71.0636,
+        'bbox': (42.3420, -71.0920, 42.3740, -71.0420),
+        'base_elev': 0.0,
+        'downtown_box': (-1600, -1200, 1400, 1400),
+        'in_town_box': (-2200, -1650, 1750, 1750),
+        'metered_regex': re.compile(r'^(Boylston|Newbury|Commonwealth|Beacon|Tremont|Washington|Congress|Atlantic|State|Cambridge|Charles|Dartmouth|Clarendon|Berkeley|Arlington|Massachusetts)\b', re.I),
+        'rail_default_name': 'MBTA Green/Red/Orange Lines & Amtrak Northeast Corridor',
+        'rail_route_names': ['Amtrak Acela & MBTA South/Back Bay Station', 'MBTA North Station & Zakim Crossing'],
+        'amtrak_stop_id': 'BOS',
+        'amtrak_station_name': 'Boston South Station & Back Bay',
+        'amtrak_west_keywords': ('New York', 'Washington', 'Providence', 'Worcester', 'Chicago'),
+        'amtrak_fallback': [
+            ['2155', 'west', 'Acela Express to Providence, New York Penn & Washington DC', 25200, 25500, '1111111', '20250101', '20301231'],
+            ['171', 'west', 'Northeast Regional to New Haven, New York & Roanoke', 36000, 36300, '1111111', '20250101', '20301231'],
+            ['449', 'west', 'Lake Shore Limited to Springfield, Albany & Chicago', 46800, 47100, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'mbta_boston_2026',
+        'transit_prefix': 'bos',
+        'corridor_waypoints': [
+            ('39', 'MBTA 39 Back Bay - Copley Square - Boylston St - Boston Common', 'Back Bay Station', 'Forest Hills / Copley', 'ffc72c',
+             [(-1507, 1289), (-1038, 667), (-350, 180), (0, 0)]),
+            ('93', 'MBTA 93 Haymarket - North End - Zakim Bridge - Charlestown', 'Charlestown', 'Downtown Crossing', 'da291c',
+             [(450, 180), (840, -189), (780, -820), (115, -1100)]),
+            ('1', 'MBTA 1 Harvard / MIT - Harvard Bridge - Back Bay - Prudential', 'Harvard Square', 'Nubian / Back Bay', '00843d',
+             [(-1943, -12), (-1850, 620), (-1507, 1289)]),
+        ],
+        'historic_districts': [
+            ['Beacon Hill Historic District', -650, -450, 100, -450, 100, 120, -650, 120],
+            ['Back Bay Architectural District', -1850, 180, -450, 180, -450, 950, -1850, 950],
+            ['North End & Freedom Trail Historic District', 450, -1050, 1150, -1050, 1150, -100, 450, -100],
+        ],
+        'neighborhood_places': [
+            ('Boston Common & Beacon Hill', 0, 0, 450),
+            ('Faneuil Hall & Waterfront', 920, -120, 420),
+            ('North End', 780, -820, 380),
+            ('West End & Zakim Bridge', 115, -1100, 420),
+            ('Back Bay & Copley Square', -1038, 667, 480),
+            ('Prudential & South End', -1507, 1289, 450),
+            ('Cambridge & MIT', -1943, -12, 480),
+        ],
+        'landmarks_meta': {
+            'Custom House Tower': {
+                'x': 1046, 'z': -18, 'w': 38, 'd': 38, 'h': 151, 'area': 1444,
+                'ring': [1027, -37, 1065, -37, 1065, 1, 1027, 1]
+            },
+            'Leonard P. Zakim Bunker Hill Bridge': {
+                'x': 115, 'z': -1100, 'w': 56, 'd': 436, 'h': 98, 'area': 24416,
+                'ring': [87, -1318, 143, -1318, 143, -882, 87, -882]
+            },
+            'Massachusetts State House': {
+                'x': 0, 'z': -45, 'w': 115, 'd': 68, 'h': 65, 'area': 7820,
+                'ring': [-57, -79, 58, -79, 58, -11, -57, -11]
+            },
+            'Prudential Tower': {
+                'x': -1507, 'z': 1289, 'w': 64, 'd': 64, 'h': 228, 'area': 4096,
+                'ring': [-1539, 1257, -1475, 1257, -1475, 1321, -1539, 1321]
+            },
+        },
+        'rng_seed': 617,
+    },
+    'seattle': {
+        'id': 'seattle',
+        'name': 'Seattle, WA',
+        'origin_desc': 'Pike Place Market & 1st Ave, Seattle WA',
+        'lat0': 47.6101,
+        'lon0': -122.3421,
+        'bbox': (47.5940, -122.3640, 47.6320, -122.3140),
+        'base_elev': 0.0,
+        'downtown_box': (-750, -1400, 1200, 1350),
+        'in_town_box': (-1550, -2350, 2000, 1700),
+        'metered_regex': re.compile(r'^(1st|2nd|3rd|4th|5th|6th|Pike|Pine|Union|University|Seneca|Spring|Madison|Marion|Columbia|Cherry|James|Yesler|Alaskan|Broad|Denny|Mercer|Westlake|Broadway)\b', re.I),
+        'rail_default_name': 'Sound Transit Link Light Rail & BNSF / Amtrak King Street',
+        'rail_route_names': ['Amtrak Coast Starlight & Cascades / Sounder', 'Seattle Center Monorail & Link 1 Line'],
+        'amtrak_stop_id': 'SEA',
+        'amtrak_station_name': 'Seattle King Street Station',
+        'amtrak_west_keywords': ('Portland', 'Los Angeles', 'Vancouver', 'Chicago'),
+        'amtrak_fallback': [
+            ['11', 'west', 'Coast Starlight to Portland, Sacramento, Oakland & Los Angeles', 35100, 35700, '1111111', '20250101', '20301231'],
+            ['8', 'east', 'Empire Builder to Spokane, Glacier Park, Minneapolis & Chicago', 60300, 60900, '1111111', '20250101', '20301231'],
+            ['516', 'west', 'Amtrak Cascades to Edmonds, Bellingham & Vancouver BC', 27900, 28200, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'kcm_seattle_2026',
+        'transit_prefix': 'sea',
+        'corridor_waypoints': [
+            ('D', 'RapidRide D Line Pioneer Square - Pike Place - Belltown - Seattle Center - Queen Anne', 'Crown Hill / Queen Anne', 'Pioneer Square', 'c60c30',
+             [(759, 1050), (0, 0), (-320, -520), (-541, -1156), (-980, -2100)]),
+            ('40', 'Metro 40 Pioneer Square - Westlake - South Lake Union', 'Fremont / Ballard', 'Downtown Seattle', '006847',
+             [(759, 1050), (320, 120), (480, -920), (480, -1820)]),
+            ('2', 'Metro 2 Seattle Center - Pike Place - Downtown - Capitol Hill', 'Madrona / Capitol Hill', 'West Queen Anne', 'fab600',
+             [(-541, -1156), (0, 0), (616, 111), (1502, -456)]),
+        ],
+        'historic_districts': [
+            ['Pike Place Market Historical District', -180, -220, 180, -220, 180, 220, -180, 220],
+            ['Pioneer Square Preservation District', 380, 820, 950, 820, 950, 1450, 380, 1450],
+        ],
+        'neighborhood_places': [
+            ('Pike Place Market', 0, 0, 350),
+            ('Seattle Center & Space Needle', -541, -1156, 480),
+            ('Alaskan Way Waterfront', -150, 320, 420),
+            ('Downtown & Columbia Center', 720, 480, 520),
+            ('South Lake Union', 480, -1650, 480),
+            ('Capitol Hill', 1502, -456, 520),
+            ('Pioneer Square', 759, 1100, 420),
+            ('Queen Anne & Kerry Park', -980, -2150, 480),
+        ],
+        'landmarks_meta': {
+            'Space Needle': {
+                'x': -541, 'z': -1156, 'w': 44, 'd': 44, 'h': 184, 'area': 1936,
+                'ring': [-563, -1178, -519, -1178, -519, -1134, -563, -1134]
+            },
+            'Columbia Center': {
+                'x': 811, 'z': 700, 'w': 64, 'd': 64, 'h': 284, 'area': 4096,
+                'ring': [779, 668, 843, 668, 843, 732, 779, 732]
+            },
+            'Smith Tower': {
+                'x': 759, 'z': 1050, 'w': 38, 'd': 38, 'h': 148, 'area': 1444,
+                'ring': [740, 1031, 778, 1031, 778, 1069, 740, 1069]
+            },
+            'Seattle Great Wheel': {
+                'x': -120, 'z': 280, 'w': 18, 'd': 54, 'h': 53, 'area': 972,
+                'ring': [-129, 253, -111, 253, -111, 307, -129, 307]
+            },
+        },
+        'rng_seed': 206,
+    },
 }
 
 r1 = lambda v: round(float(v), 1)
@@ -809,7 +1691,8 @@ out body;
     DRIVE = {
         'motorway', 'trunk', 'primary', 'secondary', 'tertiary',
         'unclassified', 'residential', 'living_street',
-        'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link'
+        'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link',
+        *cfg.get('extra_drive_highways', ())
     }
     ABBR = [
         ('Street', 'St'), ('Avenue', 'Ave'), ('Boulevard', 'Blvd'), ('Drive', 'Dr'),
@@ -1001,7 +1884,8 @@ out body;
 
         if not is_closed and t.get('waterway') in ('canal', 'river') and t.get('tunnel') != 'yes':
             try:
-                w_m = 24.0 if t.get('waterway') == 'canal' else 32.0
+                default_cw = 11.0 if city_id == 'venice' else 24.0
+                w_m = default_cw if t.get('waterway') == 'canal' else 32.0
                 c_poly = LineString(pts).buffer(w_m * 0.5, cap_style=2).intersection(CLIP_BOX.buffer(150))
                 if not c_poly.is_empty:
                     water_polys.append(c_poly)
@@ -2321,6 +3205,20 @@ ALL_CITY_METADATA = {
     'annarbor': ('Ann Arbor, MI', 'University of Michigan, Downtown, Huron River & TheRide'),
     'newyork': ('New York, NY', 'Manhattan Grid, Central Park, Hudson/East Rivers & MTA Subway'),
     'pompanobeach': ('Pompano Beach, FL', 'Atlantic Ocean Pier, Hillsboro Lighthouse, Intracoastal Canals & BCT'),
+    'sydney': ('Sydney, Australia', 'Sydney Opera House, Harbour Bridge, Circular Quay, The Rocks & Port Jackson'),
+    'venice': ('Venice, Italy', 'Grand Canal, Rialto Bridge, Piazza San Marco, Doge\'s Palace & Lagoon'),
+    'amsterdam': ('Amsterdam, NL', 'UNESCO Canal Ring (Grachtengordel), Dam Square, Rijksmuseum & Amstel'),
+    'hongkong': ('Hong Kong', 'Victoria Harbour, Central Skyline, Bank of China, Victoria Peak & TST'),
+    'paris': ('Paris, France', 'Eiffel Tower, River Seine, Louvre, Notre-Dame, Champs-Elysees & Haussmann'),
+    'london': ('London, UK', 'Big Ben & Westminster, River Thames, London Eye, Trafalgar Sq & St Paul\'s'),
+    'tokyo': ('Tokyo, Japan', 'Tokyo Tower, Imperial Palace, Ginza, Roppongi Hills & Tokyo Station'),
+    'barcelona': ('Barcelona, Spain', 'Sagrada Familia, Cerda Eixample Octagons, Barri Gotic & Barceloneta'),
+    'rio': ('Rio de Janeiro, BR', 'Copacabana, Sugarloaf Mountain, Christ the Redeemer, Ipanema & Lagoa'),
+    'vancouver': ('Vancouver, Canada', 'Stanley Park, Lions Gate Bridge, Canada Place, False Creek & English Bay'),
+    'capetown': ('Cape Town, SA', 'Table Mountain, V&A Waterfront, Lion\'s Head, Signal Hill & Bo-Kaap'),
+    'chicago': ('Chicago, IL', 'The Loop, Willis Tower, Chicago River Bascule Bridges & Millennium Park'),
+    'boston': ('Boston, MA', 'Boston Common, Back Bay Brownstones, Zakim Bridge, Faneuil Hall & Charles'),
+    'seattle': ('Seattle, WA', 'Space Needle, Pike Place Market, Elliott Bay Waterfront & Lake Union'),
 }
 
 

@@ -24,23 +24,46 @@ npm run city:list
 | `annarbor` | **Ann Arbor, MI** | University of Michigan Diag, Michigan Stadium (The Big House), Burton Memorial Tower, Huron River & Argo Cascades, TheRide buses & Amtrak Wolverine (`ARB`) |
 | `newyork` | **New York, NY** | Manhattan grid & Broadway, Central Park, Hudson & East Rivers, Empire State Building, Chrysler Building, One WTC, Brooklyn/Manhattan/Williamsburg/Queensboro/GWB bridges, Staten Island Ferry & MTA Subway |
 | `pompanobeach` | **Pompano Beach, FL** | Atlantic Ocean & **Fisher Family Pier**, **Hillsboro Inlet Lighthouse**, **Intracoastal Waterway & Finger Canals**, **Pompano Beach Airpark (`KPMP`) & Goodyear Blimp**, Civic Center & Amphitheater ("The Amp"), Broward County Transit & FEC/Brightline |
+| `sydney` | **Sydney, Australia** | **Sydney Opera House**, **Sydney Harbour Bridge**, Circular Quay, The Rocks, Barangaroo, Martin Place CBD, Royal Botanic Garden, Darling Harbour & Sydney Trains / Ferries |
+| `venice` | **Venice, Italy** | **Grand Canal**, **Ponte di Rialto**, **Piazza San Marco & Campanile**, Doge's Palace, Accademia Bridge, Arsenale, Giudecca, San Giorgio Maggiore & ACTV Vaporetto routes |
+| `amsterdam` | **Amsterdam, Netherlands** | UNESCO **Grachtengordel (Canal Ring)**, **Dam Square & Royal Palace**, **Rijksmuseum**, Westerkerk & Jordaan, Vondelpark, Amstel River & GVB Trams |
+| `hongkong` | **Hong Kong** | **Victoria Harbour**, Central & **IFC**, **Bank of China Tower**, **Victoria Peak**, Star Ferry, Wan Chai, Causeway Bay, **Tsim Sha Tsui** & West Kowloon |
+| `paris` | **Paris, France** | **Tour Eiffel**, **River Seine** bridges, **Musee du Louvre**, **Cathedrale Notre-Dame**, Place de la Concorde, **Champs-Elysees & Arc de Triomphe** & Haussmann boulevards |
+| `london` | **London, UK** | **Big Ben (Elizabeth Tower) & Westminster**, **River Thames**, **London Eye**, Trafalgar Square, Buckingham Palace, Covent Garden, **St Paul's Cathedral** & The Shard |
+| `tokyo` | **Tokyo, Japan** | **Tokyo Tower & Shiba Park**, **Imperial Palace & Moat**, **Ginza**, **Tokyo Station & Marunouchi**, **Roppongi Hills**, Toranomon & JR Yamanote / Shinkansen |
+| `barcelona` | **Barcelona, Spain** | **Sagrada Familia**, Cerda's **Eixample octagonal blocks**, **Passeig de Gracia**, Placa de Catalunya, **Barri Gotic & La Rambla**, Port Vell & **Barceloneta Beach** |
+| `rio` | **Rio de Janeiro, Brazil** | **Copacabana Beach**, **Sugarloaf Mountain (`Pao de Acucar`)**, **Corcovado & Christ the Redeemer**, **Ipanema**, Lagoa Rodrigo de Freitas & Botafogo Bay |
+| `vancouver` | **Vancouver, Canada** | **Stanley Park Seawall**, **Lions Gate Bridge**, **Canada Place**, Coal Harbour, Gastown, **False Creek & Science World**, Granville Island & English Bay |
+| `capetown` | **Cape Town, South Africa** | **Table Mountain**, **Lion's Head & Signal Hill**, **V&A Waterfront**, **Bo-Kaap** colourful terraces, City Bowl & Atlantic Seaboard |
+| `chicago` | **Chicago, IL** | **The Loop** elevated L, **Willis (Sears) Tower**, **Chicago River** bascule bridges, **Millennium Park & Cloud Gate**, **Navy Pier** & Magnificent Mile |
+| `boston` | **Boston, MA** | **Boston Common & State House**, Beacon Hill, **Back Bay** brownstones, **Zakim Bunker Hill Bridge**, **Faneuil Hall**, Custom House Tower & **Charles River** |
+| `seattle` | **Seattle, WA** | **Space Needle & Seattle Center**, **Pike Place Market**, **Elliott Bay Waterfront & Piers**, Columbia Center, Pioneer Square, **South Lake Union** & Capitol Hill |
 
 ### 2. Install / Build a City Pack Locally
 
-Install a single city pack or all six:
+Install a single city pack or all 20 starter-pack cities:
 
 ```bash
 # Install San Francisco, CA (default city - fetches 2x2 tiled OpenStreetMap + AWS Terrain Tiles + SF Muni)
 npm run city:install -- sanfrancisco
 
-# Or install Royal Oak, Oakland, Ann Arbor, New York, or Pompano Beach:
-npm run city:install -- royaloak
-npm run city:install -- oakland
-npm run city:install -- annarbor
-npm run city:install -- newyork
-npm run city:install -- pompanobeach
+# Or install any of the 20 worldwide cities on demand:
+npm run city:install -- sydney
+npm run city:install -- venice
+npm run city:install -- amsterdam
+npm run city:install -- hongkong
+npm run city:install -- paris
+npm run city:install -- london
+npm run city:install -- tokyo
+npm run city:install -- barcelona
+npm run city:install -- rio
+npm run city:install -- vancouver
+npm run city:install -- capetown
+npm run city:install -- chicago
+npm run city:install -- boston
+npm run city:install -- seattle
 
-# Or install all 6 city packs at once:
+# Or install all 20 city packs at once:
 npm run city:install -- all
 ```
 

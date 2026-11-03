@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="58%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Rising red sun disc behind Tokyo Tower & Mount Fuji -->
+  <circle cx="256" cy="244" r="126" fill="#e63946" opacity="0.88"/>
+  <!-- Mount Fuji snow-capped silhouette -->
+  <path d="M24 398 Q128 360 184 274 L236 274 Q292 360 396 398 Z" fill="#1e3a5f"/>
+  <path d="M184 274 L236 274 L256 306 L234 298 L218 312 L204 296 L188 308 L166 298 Z" fill="#f8fafc"/>
+  <!-- Tokyo Tower (Red & White International Orange Lattice Tower) -->
+  <!-- Antenna spire (alternating red & white) -->
+  <rect x="334" y="48" width="8" height="28" fill="#ef233c"/>
+  <rect x="334" y="76" width="8" height="26" fill="#ffffff"/>
+  <rect x="333" y="102" width="10" height="28" fill="#ef233c"/>
+  <!-- Top deck -->
+  <rect x="320" y="130" width="36" height="14" rx="3" fill="#ffffff" stroke="#b91c1c" stroke-width="2.5"/>
+  <!-- Upper red lattice section -->
+  <polygon points="326,144 350,144 358,214 318,214" fill="#ef233c"/>
+  <!-- Middle white lattice section -->
+  <polygon points="318,214 358,214 368,278 308,278" fill="#ffffff"/>
+  <!-- Main two-storey observation deck -->
+  <rect x="292" y="276" width="92" height="24" rx="4" fill="#ffffff" stroke="#b91c1c" stroke-width="3"/>
+  <rect x="298" y="283" width="80" height="10" fill="#1e293b"/>
+  <!-- Lower red lattice section & splayed legs -->
+  <path d="M304 300 L270 426 H302 L320 374 Q338 352 356 374 L374 426 H406 L372 300 Z" fill="#ef233c"/>
+  <!-- White band on lower legs -->
+  <polygon points="292,344 384,344 392,374 284,374" fill="#ffffff"/>
+  <!-- Iconic Vermilion Torii Gate in foreground left -->
+  <g fill="#d90429" stroke="#590d22" stroke-width="3" stroke-linejoin="round">
+    <!-- Kasagi curved top lintel -->
+    <path d="M62 252 Q168 268 274 252 L266 270 Q168 282 70 270 Z"/>
+    <!-- Shimaki black cap -->
+    <path d="M58 244 Q168 260 278 244 L274 254 Q168 268 62 254 Z" fill="#1b1b1e"/>
+    <!--貫 Nuki tie beam -->
+    <rect x="76" y="294" width="184" height="14" rx="2"/>
+    <!-- Gakuzuka center tablet -->
+    <rect x="158" y="268" width="20" height="28" fill="#1b1b1e" stroke="#ffd166" stroke-width="2"/>
+    <!-- Hashira pillars -->
+    <rect x="98" y="268" width="20" height="160"/>
+    <rect x="218" y="268" width="20" height="160"/>
+    <!-- Nemaki black pillar bases -->
+    <rect x="94" y="402" width="28" height="28" fill="#1b1b1e"/>
+    <rect x="214" y="402" width="28" height="28" fill="#1b1b1e"/>
+  </g>
+  <!-- Tokyo Bay water & neon reflections -->
+  <path d="M0 426 L512 426 L512 512 L0 512 Z" fill="#0b132b"/>
+  <path d="M84 462 Q188 450 292 462 T436 462" fill="none" stroke="#ef233c" stroke-width="4" stroke-linecap="round"/>
+</svg>

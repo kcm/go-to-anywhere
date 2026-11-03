@@ -28,7 +28,7 @@ function containsBox(polygon, x, z, w, d, cs, sn) {
   return true;
 }
 
-function addBuildingDetails(b, detail, { masonry, rand, neighbours }) {
+function addBuildingDetails(b, detail, { masonry, rand, neighbours, waterTowerProb = 0.04 }) {
   const roofY = b.height + 0.22;
   const streetReserves = [];
   const edges = b.polygons.flatMap((polygon) => polygon.outer.map((a, i, ring) => {
@@ -78,7 +78,7 @@ function addBuildingDetails(b, detail, { masonry, rand, neighbours }) {
       }
       return null;
     }
-    if (masonry && b.height >= 14 && rand() < 0.04) { // Lamp: Ann Arbor has few rooftop water tanks
+    if (masonry && b.height >= 14 && waterTowerProb > 0 && rand() < waterTowerProb) {
       const spot = roofSpot(4, 4);
       if (spot) detail.waterTowers.push(spot);
     }
