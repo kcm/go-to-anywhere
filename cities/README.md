@@ -13,6 +13,9 @@ npm run city:list
 Download and build a city pack locally:
 
 ```bash
+# Install San Francisco, CA (default city - 7x7 mile SF, Golden Gate Bridge, Union Square, Coit Tower & Muni)
+npm run city:install -- sanfrancisco
+
 # Install Royal Oak, MI (10 Mile to 14 Mile Rd, OSM + AWS Terrain Tiles + SMART GTFS)
 npm run city:install -- royaloak
 
@@ -27,9 +30,6 @@ npm run city:install -- newyork
 
 # Install Pompano Beach, FL (Fisher Family Pier, Hillsboro Lighthouse, Intracoastal Canals & Airpark)
 npm run city:install -- pompanobeach
-
-# Install San Francisco, CA (Union Square, Transamerica, Coit Tower, Ferry Bldg, Lombard St & Muni)
-npm run city:install -- sanfrancisco
 
 # Or install all 6 city packs at once
 npm run city:install -- all

@@ -2315,12 +2315,12 @@ out body;
 
 
 ALL_CITY_METADATA = {
+    'sanfrancisco': ('San Francisco, CA', '7x7 Mile SF, Golden Gate Bridge, Union Square, Coit Tower & Muni'),
     'royaloak': ('Royal Oak, MI', 'OpenStreetMap + AWS Terrain Tiles + SMART GTFS (10 Mile to 14 Mile Rd)'),
     'oakland': ('Oakland, CA', 'OpenStreetMap + AWS Terrain Tiles + AC Transit / BART'),
     'annarbor': ('Ann Arbor, MI', 'University of Michigan, Downtown, Huron River & TheRide'),
     'newyork': ('New York, NY', 'Manhattan Grid, Central Park, Hudson/East Rivers & MTA Subway'),
     'pompanobeach': ('Pompano Beach, FL', 'Atlantic Ocean Pier, Hillsboro Lighthouse, Intracoastal Canals & BCT'),
-    'sanfrancisco': ('San Francisco, CA', 'Union Square, Transamerica, Coit Tower, Ferry Bldg, Lombard St & Muni'),
 }
 
 
@@ -2396,7 +2396,7 @@ def main():
     if args.list:
         list_city_packs()
         return
-    target = args.city or args.city_pos or 'royaloak'
+    target = args.city or args.city_pos or 'sanfrancisco'
     if target == 'all':
         for cid in ALL_CITY_METADATA:
             install_or_build_city(cid)

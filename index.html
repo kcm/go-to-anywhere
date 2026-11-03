@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Go To Anywhere (GTA) - Royal Oak, MI</title>
+  <title>Go To Anywhere (GTA) - San Francisco, CA</title>
   <link rel="icon" href="img/app-icon.png" />
-  <meta name="description" content="Go To Anywhere (GTA): A 3D drive, ride, walk, paddle and fly engine for real-world city packs (Royal Oak, Oakland, Ann Arbor, New York, Pompano Beach, San Francisco), built from real streets, buildings, trees, hills and waterways." />
+  <meta name="description" content="Go To Anywhere (GTA): A 3D drive, ride, walk, paddle and fly engine for real-world city packs (San Francisco, Royal Oak, Oakland, Ann Arbor, New York, Pompano Beach), built from real streets, buildings, trees, hills and waterways." />
   <!-- Lamp's building blocks for the page (LampAI, LampStore, LampNative), then three.js as Lamp ships it (Web/three) -->
   <script src="lamp.js"></script>
   <script type="importmap">
@@ -168,7 +168,7 @@
     <div class="loader">
       <img class="mta-bullet app-logo loader-bullet" src="img/app-icon.png" alt="" aria-hidden="true">
       <div id="loader-title" class="loader-title">Go To Anywhere (GTA)</div>
-      <div id="loader-subtitle" class="loader-subtitle">Royal Oak, MI</div>
+      <div id="loader-subtitle" class="loader-subtitle">San Francisco, CA</div>
       <div class="loader-track is-indeterminate" aria-hidden="true"><span id="loading-progress" class="loader-fill"></span></div>
       <div id="loading-status">Loading city code and data...</div>
     </div>
@@ -185,12 +185,12 @@
         <div class="brand-heading">
           <h1 id="brand-title">Go To Anywhere (GTA)</h1>
           <select id="city-select" class="city-select" aria-label="Select City" title="Switch City">
+            <option value="sanfrancisco">San Francisco, CA</option>
             <option value="royaloak">Royal Oak, MI</option>
             <option value="oakland">Oakland, CA</option>
             <option value="annarbor">Ann Arbor, MI</option>
             <option value="newyork">New York, NY</option>
             <option value="pompanobeach">Pompano Beach, FL</option>
-            <option value="sanfrancisco">San Francisco, CA</option>
           </select>
           <a class="repo-link" href="https://github.com/kcm/go-to-anywhere" target="_blank" rel="noopener noreferrer" aria-label="Go To Anywhere (GTA) on GitHub (opens in your browser)">GitHub <span aria-hidden="true">&#8599;</span></a>
         </div>
@@ -202,7 +202,7 @@
   <div class="hud hud-top-right">
     <div id="hud-toolbar" class="panel toolbar">
       <div class="time-switch" role="group" aria-label="Atmosphere &amp; time of day">
-        <button id="time-now" class="time-btn active" data-time="now" type="button" title="Now in Royal Oak">
+        <button id="time-now" class="time-btn active" data-time="now" type="button" title="Now in San Francisco">
           <svg class="icon" aria-hidden="true"><use href="#i-locate"/></svg><span class="seg-label">Now</span>
         </button>
         <button id="time-golden" class="time-btn" data-time="golden" type="button" title="Golden Hour">
@@ -222,7 +222,7 @@
       <button id="btn-teleport" class="tool-btn" type="button" popovertarget="teleport-popover" title="Teleport the active player">
         <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span class="tool-label">Teleport</span><svg class="icon icon-sm" aria-hidden="true"><use href="#i-chevron-down"/></svg>
       </button>
-      <button id="btn-open-map" class="tool-btn" type="button" title="Full Royal Oak street map [M]">
+      <button id="btn-open-map" class="tool-btn" type="button" title="Full San Francisco street map [M]">
         <svg class="icon" aria-hidden="true"><use href="#i-map"/></svg><span class="tool-label">Map</span><kbd data-key="KeyM" data-pad="MENU">M</kbd>
       </button>
       <span class="toolbar-divider" aria-hidden="true"></span>
@@ -358,7 +358,7 @@
   </div>
 
   <!-- Full-Screen Interactive City Street Map ([M]) -->
-  <section id="fullmap-modal" class="fullmap-modal hidden" role="dialog" aria-modal="true" aria-label="Full Royal Oak Interactive Street Map">
+  <section id="fullmap-modal" class="fullmap-modal hidden" role="dialog" aria-modal="true" aria-label="Full San Francisco Interactive Street Map">
     <div id="fullmap-canvas-wrap" class="fullmap-canvas-wrap">
       <canvas id="fullmap-canvas"></canvas>
     </div>
@@ -367,22 +367,22 @@
       <div class="panel fullmap-title">
         <img class="mta-bullet app-logo" src="img/app-icon.png" alt="" aria-hidden="true">
         <div>
-          <h2 id="fullmap-city-title">Royal Oak Street Atlas</h2>
-          <p id="fullmap-player-info" class="fullmap-subtitle">You are at Main &amp; 4th</p>
-          <p id="fullmap-credit" class="fullmap-subtitle fullmap-credit">Downtown, Woodward Ave, Detroit Zoo &amp; Shrine of the Little Flower</p>
+          <h2 id="fullmap-city-title">San Francisco Street Atlas</h2>
+          <p id="fullmap-player-info" class="fullmap-subtitle">You are at Union Square</p>
+          <p id="fullmap-credit" class="fullmap-subtitle fullmap-credit">Golden Gate Bridge, Union Square, Transamerica, Coit Tower, Golden Gate Park &amp; Twin Peaks</p>
         </div>
         <select id="map-city-select" class="city-select" aria-label="Select City" title="Switch City">
+          <option value="sanfrancisco">San Francisco, CA</option>
           <option value="royaloak">Royal Oak, MI</option>
           <option value="oakland">Oakland, CA</option>
           <option value="annarbor">Ann Arbor, MI</option>
           <option value="newyork">New York, NY</option>
           <option value="pompanobeach">Pompano Beach, FL</option>
-          <option value="sanfrancisco">San Francisco, CA</option>
         </select>
       </div>
       <label class="panel fullmap-search-wrap">
         <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-        <input id="fullmap-search" class="fullmap-search" type="text" placeholder="Street or landmark (Main St, Woodward, 4th St, Detroit Zoo...)" aria-label="Search street or landmark" autocomplete="off" spellcheck="false" />
+        <input id="fullmap-search" class="fullmap-search" type="text" placeholder="Street or landmark (Golden Gate Bridge, Union Square, Lombard St, Coit Tower...)" aria-label="Search street or landmark" autocomplete="off" spellcheck="false" />
       </label>
       <button id="close-fullmap-btn" class="panel tool-btn fullmap-close" type="button" title="Close map [M / Esc]">
         <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg><span class="tool-label">Close</span><kbd data-key="Escape" data-pad="B">Esc</kbd>

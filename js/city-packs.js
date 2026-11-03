@@ -1,7 +1,11 @@
 // Multi-city registry & active city pack configuration.
-// Supports 'royaloak' (default), 'oakland', 'annarbor', 'newyork', 'pompanobeach', and 'sanfrancisco'.
+// Supports 'sanfrancisco' (default), 'royaloak', 'oakland', 'annarbor', 'newyork', and 'pompanobeach'.
 
 const CITY_ALIASES = {
+  sanfrancisco: 'sanfrancisco',
+  'san-francisco': 'sanfrancisco',
+  sf: 'sanfrancisco',
+  sfo: 'sanfrancisco',
   royaloak: 'royaloak',
   'royal-oak': 'royaloak',
   ro: 'royaloak',
@@ -19,11 +23,7 @@ const CITY_ALIASES = {
   'pompano-beach': 'pompanobeach',
   pompano: 'pompanobeach',
   pb: 'pompanobeach',
-  fl: 'pompanobeach',
-  sanfrancisco: 'sanfrancisco',
-  'san-francisco': 'sanfrancisco',
-  sf: 'sanfrancisco',
-  sfo: 'sanfrancisco'
+  fl: 'pompanobeach'
 };
 
 function resolveActiveCityId() {
@@ -32,7 +32,7 @@ function resolveActiveCityId() {
     raw = new URLSearchParams(globalThis.location.search).get('city') || '';
   }
   const key = String(raw).trim().toLowerCase();
-  return CITY_ALIASES[key] || 'royaloak';
+  return CITY_ALIASES[key] || 'sanfrancisco';
 }
 
 const ACTIVE_CITY_ID = resolveActiveCityId();
@@ -43,7 +43,7 @@ function cityAssetPath(relPath) {
 }
 
 function switchCity(cityId) {
-  const target = CITY_ALIASES[String(cityId || '').trim().toLowerCase()] || 'royaloak';
+  const target = CITY_ALIASES[String(cityId || '').trim().toLowerCase()] || 'sanfrancisco';
   if (typeof globalThis.location !== 'undefined') {
     const url = new URL(globalThis.location.href);
     url.searchParams.set('city', target);

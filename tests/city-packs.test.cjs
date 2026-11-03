@@ -6,7 +6,7 @@ const zlib = require('node:zlib');
 const { execFileSync } = require('node:child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const CITIES = ['royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach', 'sanfrancisco'];
+const CITIES = ['sanfrancisco', 'royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach'];
 
 const REQUIRED_FILES = [
   'city-geodata.js',
@@ -25,9 +25,10 @@ const REQUIRED_FILES = [
 ];
 
 describe('Multi-City Pack Manifest & Assets', () => {
-  it('exports all 4 city packs with complete metadata in js/city-packs.js', async () => {
+  it('exports all 6 city packs with sanfrancisco as default in js/city-packs.js', async () => {
     const mod = await import(path.join(ROOT, 'js/city-packs.js'));
     assert.ok(mod.CITY_PACKS, 'CITY_PACKS should be exported');
+    assert.equal(mod.ACTIVE_CITY_ID, 'sanfrancisco', 'Default ACTIVE_CITY_ID should be sanfrancisco');
     for (const cityId of CITIES) {
       const pack = mod.CITY_PACKS[cityId];
       assert.ok(pack, `Missing CITY_PACKS.${cityId}`);
