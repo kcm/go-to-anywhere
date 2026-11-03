@@ -34,6 +34,7 @@ describe('Multi-City Pack Manifest & Assets', () => {
       assert.ok(pack, `Missing CITY_PACKS.${cityId}`);
       assert.equal(pack.id, cityId);
       assert.ok(pack.title && pack.displayName && pack.stateCode, `Missing title/displayName for ${cityId}`);
+      assert.ok(pack.icon && fs.existsSync(path.join(ROOT, pack.icon)), `Missing or nonexistent icon ${pack.icon} for ${cityId}`);
       assert.ok(Number.isFinite(pack.lat) && Number.isFinite(pack.lon), `Invalid lat/lon for ${cityId}`);
       assert.ok(Number.isFinite(pack.baseElev), `Invalid baseElev for ${cityId}`);
       assert.ok(pack.weatherStation, `Missing weatherStation for ${cityId}`);

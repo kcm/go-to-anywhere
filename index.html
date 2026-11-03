@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Go To Anywhere (GTA) - San Francisco, CA</title>
-  <link rel="icon" href="img/app-icon.png" />
+  <link id="app-favicon" rel="icon" href="img/icon-sanfrancisco.svg" />
   <meta name="description" content="Go To Anywhere (GTA): A 3D drive, ride, walk, paddle and fly engine for real-world city packs (San Francisco, Royal Oak, Oakland, Ann Arbor, New York, Pompano Beach), built from real streets, buildings, trees, hills and waterways." />
   <!-- Lamp's building blocks for the page (LampAI, LampStore, LampNative), then three.js as Lamp ships it (Web/three) -->
   <script src="lamp.js"></script>
@@ -166,13 +166,43 @@
   <!-- Loading Screen -->
   <div id="loading-overlay" role="status" aria-live="polite">
     <div class="loader">
-      <img class="mta-bullet app-logo loader-bullet" src="img/app-icon.png" alt="" aria-hidden="true">
+      <img class="mta-bullet app-logo loader-bullet" src="img/icon-sanfrancisco.svg" alt="" aria-hidden="true">
       <div id="loader-title" class="loader-title">Go To Anywhere (GTA)</div>
       <div id="loader-subtitle" class="loader-subtitle">San Francisco, CA</div>
       <div class="loader-track is-indeterminate" aria-hidden="true"><span id="loading-progress" class="loader-fill"></span></div>
       <div id="loading-status">Loading city code and data...</div>
     </div>
   </div>
+  <script>
+    (() => {
+      const aliases = {
+        sanfrancisco: 'sanfrancisco', 'san-francisco': 'sanfrancisco', sf: 'sanfrancisco', sfo: 'sanfrancisco',
+        royaloak: 'royaloak', 'royal-oak': 'royaloak', ro: 'royaloak',
+        oakland: 'oakland', oak: 'oakland',
+        annarbor: 'annarbor', 'ann-arbor': 'annarbor', a2: 'annarbor', aa: 'annarbor',
+        newyork: 'newyork', 'new-york': 'newyork', ny: 'newyork', nyc: 'newyork',
+        pompanobeach: 'pompanobeach', 'pompano-beach': 'pompanobeach', pompano: 'pompanobeach', pb: 'pompanobeach', fl: 'pompanobeach'
+      };
+      const meta = {
+        sanfrancisco: { name: 'San Francisco, CA', icon: 'img/icon-sanfrancisco.svg' },
+        royaloak:     { name: 'Royal Oak, MI',     icon: 'img/icon-royaloak.svg' },
+        oakland:      { name: 'Oakland, CA',       icon: 'img/app-icon.png' },
+        annarbor:     { name: 'Ann Arbor, MI',     icon: 'img/icon-annarbor.svg' },
+        newyork:      { name: 'New York, NY',      icon: 'img/icon-newyork.svg' },
+        pompanobeach: { name: 'Pompano Beach, FL', icon: 'img/icon-pompanobeach.svg' }
+      };
+      const raw = new URLSearchParams(location.search).get('city') || '';
+      const id = aliases[String(raw).trim().toLowerCase()] || 'sanfrancisco';
+      const cur = meta[id] || meta.sanfrancisco;
+      document.title = `Go To Anywhere (GTA) - ${cur.name}`;
+      const fav = document.getElementById('app-favicon');
+      if (fav) fav.href = cur.icon;
+      const sub = document.getElementById('loader-subtitle');
+      if (sub) sub.textContent = cur.name;
+      const img = document.querySelector('#loading-overlay .loader-bullet');
+      if (img) img.src = cur.icon;
+    })();
+  </script>
 
   <!-- 3D WebGPU Viewport Container -->
   <main id="canvas-container" aria-label="3D Interactive Go To Anywhere (GTA) Viewport"></main>
@@ -180,7 +210,7 @@
   <!-- Top-Left: Brand & City Switcher -->
   <header class="hud hud-top-left">
     <div class="panel brand">
-      <img class="mta-bullet app-logo" src="img/app-icon.png" alt="" aria-hidden="true">
+      <img class="mta-bullet app-logo" src="img/icon-sanfrancisco.svg" alt="" aria-hidden="true">
       <div class="brand-titles">
         <div class="brand-heading">
           <h1 id="brand-title">Go To Anywhere (GTA)</h1>
@@ -365,7 +395,7 @@
 
     <div class="fullmap-header">
       <div class="panel fullmap-title">
-        <img class="mta-bullet app-logo" src="img/app-icon.png" alt="" aria-hidden="true">
+        <img class="mta-bullet app-logo" src="img/icon-sanfrancisco.svg" alt="" aria-hidden="true">
         <div>
           <h2 id="fullmap-city-title">San Francisco Street Atlas</h2>
           <p id="fullmap-player-info" class="fullmap-subtitle">You are at Union Square</p>

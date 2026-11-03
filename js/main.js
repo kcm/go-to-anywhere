@@ -93,6 +93,13 @@ async function initApp() {
   document.title = `Go To Anywhere (GTA) - ${CITY_PACK.displayName}`;
   const loaderSubtitle = document.getElementById('loader-subtitle');
   if (loaderSubtitle) loaderSubtitle.textContent = CITY_PACK.displayName;
+  if (CITY_PACK.icon) {
+    const fav = document.getElementById('app-favicon');
+    if (fav) fav.href = CITY_PACK.icon;
+    for (const logoEl of document.querySelectorAll('.app-logo')) {
+      logoEl.src = CITY_PACK.icon;
+    }
+  }
   for (const selId of ['city-select', 'map-city-select']) {
     const sel = document.getElementById(selId);
     if (sel) {

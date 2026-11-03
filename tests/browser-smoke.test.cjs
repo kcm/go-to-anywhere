@@ -150,12 +150,12 @@ describe('Headless Browser Multi-City 3D Runtime Verification', () => {
   });
 
   const EXPECTED = [
-    { id: 'royaloak',     title: 'Go To Anywhere (GTA) - Royal Oak, MI',     atlas: 'Royal Oak Street Atlas' },
-    { id: 'oakland',      title: 'Go To Anywhere (GTA) - Oakland, CA',       atlas: 'Oakland Street Atlas' },
-    { id: 'annarbor',     title: 'Go To Anywhere (GTA) - Ann Arbor, MI',     atlas: 'Ann Arbor Street Atlas' },
-    { id: 'newyork',      title: 'Go To Anywhere (GTA) - New York, NY',      atlas: 'New York Street Atlas' },
-    { id: 'pompanobeach', title: 'Go To Anywhere (GTA) - Pompano Beach, FL', atlas: 'Pompano Beach Street Atlas' },
-    { id: 'sanfrancisco', title: 'Go To Anywhere (GTA) - San Francisco, CA', atlas: 'San Francisco Street Atlas' }
+    { id: 'royaloak',     title: 'Go To Anywhere (GTA) - Royal Oak, MI',     atlas: 'Royal Oak Street Atlas',     icon: 'img/icon-royaloak.svg' },
+    { id: 'oakland',      title: 'Go To Anywhere (GTA) - Oakland, CA',       atlas: 'Oakland Street Atlas',       icon: 'img/app-icon.png' },
+    { id: 'annarbor',     title: 'Go To Anywhere (GTA) - Ann Arbor, MI',     atlas: 'Ann Arbor Street Atlas',     icon: 'img/icon-annarbor.svg' },
+    { id: 'newyork',      title: 'Go To Anywhere (GTA) - New York, NY',      atlas: 'New York Street Atlas',      icon: 'img/icon-newyork.svg' },
+    { id: 'pompanobeach', title: 'Go To Anywhere (GTA) - Pompano Beach, FL', atlas: 'Pompano Beach Street Atlas', icon: 'img/icon-pompanobeach.svg' },
+    { id: 'sanfrancisco', title: 'Go To Anywhere (GTA) - San Francisco, CA', atlas: 'San Francisco Street Atlas', icon: 'img/icon-sanfrancisco.svg' }
   ];
 
   for (const exp of EXPECTED) {
@@ -181,10 +181,12 @@ describe('Headless Browser Multi-City 3D Runtime Verification', () => {
               const citySelect = document.getElementById('city-select')?.value;
               const mapCitySelect = document.getElementById('map-city-select')?.value;
               const atlas = document.getElementById('fullmap-city-title')?.textContent;
+              const loaderIcon = document.querySelector('#loading-overlay .loader-bullet')?.getAttribute('src') || '';
+              const brandIcon = document.querySelector('.brand .app-logo')?.getAttribute('src') || '';
               const tpCount = document.querySelectorAll('#teleport-popover .tp-btn').length;
               const canvasCount = document.querySelectorAll('#canvas-container canvas').length;
               const locationText = document.getElementById('hud-location')?.textContent || '';
-              return { hidden, status, title: document.title, citySelect, mapCitySelect, atlas, tpCount, canvasCount, locationText };
+              return { hidden, status, title: document.title, citySelect, mapCitySelect, atlas, loaderIcon, brandIcon, tpCount, canvasCount, locationText };
             })()`,
             returnByValue: true
           }, sessionId);
@@ -199,6 +201,8 @@ describe('Headless Browser Multi-City 3D Runtime Verification', () => {
         assert.equal(state.citySelect, exp.id);
         assert.equal(state.mapCitySelect, exp.id);
         assert.equal(state.atlas, exp.atlas);
+        assert.equal(state.loaderIcon, exp.icon);
+        assert.equal(state.brandIcon, exp.icon);
         assert.ok(state.tpCount >= 6, `Expected >= 6 teleport buttons for ${exp.id}, got ${state.tpCount}`);
         assert.equal(state.canvasCount, 1, `Expected 3D canvas mounted in #canvas-container for ${exp.id}`);
       } finally {
