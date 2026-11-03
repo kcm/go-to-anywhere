@@ -214,6 +214,12 @@ def load_city_configs():
     for cid, extra in EXTRA_CITY_CONFIGS.items():
         if cid not in configs:
             configs[cid] = extra
+    for cid in mod.discover_local_city_packs():
+        if cid not in configs:
+            try:
+                configs[cid] = mod.resolve_local_city_config(cid)
+            except Exception:
+                pass
     return configs
 
 
@@ -866,6 +872,24 @@ def sample_city_archetypes(city_id, num_sv_samples=12, write_geodata=False):
         with open(out_path, 'w', encoding='utf-8') as f:
             json.dump(result, f, indent=2)
         print(f"Wrote sampled city + neighborhood + landmark archetypes to {out_path}")
+
+    local_pack_json = os.path.join(ROOT_DIR, 'cities', city_id, 'city-pack.json')
+    if os.path.isfile(local_pack_json):
+        try:
+            with open(local_pack_json, 'r', encoding='utf-8') as f:
+                pack_meta = json.load(f)
+            arch = dict(pack_meta.get('archetypes') or {})
+            arch['treeCoverage'] = result['treeCoverage']
+            arch['housingDensity'] = result['housingDensity']
+            if result.get('residential'):
+                arch['residential'] = result['residential']
+            if result.get('midrise'):
+                arch['midrise'] = result['midrise']
+            pack_meta['archetypes'] = arch
+            with open(local_pack_json, 'w', encoding='utf-8') as f:
+                json.dump(pack_meta, f, indent=2)
+        except Exception:
+            pass
 
     if write_geodata:
         geodata_path = os.path.join(ROOT_DIR, 'cities', city_id, 'city-geodata.js')

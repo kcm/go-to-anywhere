@@ -97,21 +97,48 @@ You can also switch cities anytime from the top-left **Go To Anywhere (GTA)** HU
 
 ---
 
-## Adding a New City Pack
+## Adding Your Own Local City Pack (No Repo Sync Required)
 
-1. **Configure the Geodata Builder**: Add an entry to `CITY_CONFIGS` in [`tools/build-city-pack.py`](tools/build-city-pack.py) with your city's bounding box `(south, west, north, east)`, center `(lat0, lon0)`, highway corridors, waterways, and transit routes.
-2. **Register the Runtime City Pack**: Add an entry to `CITY_PACKS` in [`js/city-packs.js`](js/city-packs.js) with landmarks, camera presets, scenic starts, radio stations, and map labels.
-3. **Build Locally**:
-   ```bash
-   npm run city:build -- <your-city-id>
-   ```
-4. **Run Tests**:
-   ```bash
-   npm test
-   npm run test:browser
-   ```
+You can build and play your own custom local city pack(s) without modifying any git-tracked files. Everything inside `cities/` (except `cities/README.md`) is gitignored, including `cities/<your-city-id>/` and `cities/local-packs.json`.
 
-See [`cities/README.md`](cities/README.md) for the full specification of the `cities/<id>/` directory layout and binary formats (`NYB1`, `NYT2`, `ELV2`, `RIV1`).
+### Option A: Build Directly from Coordinates (One Command)
+
+Pass any custom city slug (`--city`), display name (`--name`), and center coordinates (`--lat`, `--lon`):
+
+```bash
+npm run city:build -- --city traversecity --name "Traverse City, MI" --lat 44.7631 --lon -85.6206 --radius-km 2.5
+```
+
+This automatically:
+1. Fetches OpenStreetMap roads, buildings, parks, waterways, and AWS Terrain elevation tiles around `(lat, lon)`.
+2. Discovers local landmarks, parks, and neighborhoods from OpenStreetMap.
+3. Writes `cities/traversecity/city-pack.json` and registers the pack in `cities/local-packs.json` so it appears in the in-game city selector dropdown (`#city-select`) and `npm run city:list`.
+4. Loads directly at `http://localhost:8000/?city=traversecity`.
+
+### Option B: Use a Local JSON Config File (`cities/<id>/city-pack.json`)
+
+Create `cities/<your-city-id>/city-pack.json` (or pass `--config path/to/my-city.json`) with your custom coordinates, bounding box, or custom landmarks/branding:
+
+```json
+{
+  "id": "traversecity",
+  "displayName": "Traverse City, MI",
+  "stateCode": "MI",
+  "timeZone": "America/Detroit",
+  "lat": 44.7631,
+  "lon": -85.6206,
+  "radiusKm": 2.5
+}
+```
+
+Then build and optionally sample Street View / Satellite archetypes:
+
+```bash
+npm run city:build -- traversecity
+npm run city:archetypes -- --city traversecity --write-geodata
+```
+
+See [`cities/README.md`](cities/README.md) for the full specification of `cities/<id>/city-pack.json`, `cities/local-packs.json`, and the binary formats (`NYB1`, `NYT2`, `ELV2`, `RIV1`).
 
 ---
 

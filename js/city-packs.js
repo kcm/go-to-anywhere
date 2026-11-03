@@ -65,13 +65,20 @@ const CITY_ALIASES = {
   sea: 'seattle'
 };
 
+function normalizeCityId(raw) {
+  const key = String(raw || '').trim().toLowerCase();
+  if (!key) return '';
+  if (CITY_ALIASES[key]) return CITY_ALIASES[key];
+  if (/^[a-z0-9][a-z0-9_-]*$/.test(key)) return key;
+  return '';
+}
+
 function resolveActiveCityId() {
   let raw = globalThis.__CITY_ID__ || '';
   if (!raw && typeof globalThis.location?.search === 'string') {
     raw = new URLSearchParams(globalThis.location.search).get('city') || '';
   }
-  const key = String(raw).trim().toLowerCase();
-  return CITY_ALIASES[key] || 'sanfrancisco';
+  return normalizeCityId(raw) || 'sanfrancisco';
 }
 
 const ACTIVE_CITY_ID = resolveActiveCityId();
@@ -82,7 +89,7 @@ function cityAssetPath(relPath) {
 }
 
 function switchCity(cityId) {
-  const target = CITY_ALIASES[String(cityId || '').trim().toLowerCase()] || 'sanfrancisco';
+  const target = normalizeCityId(cityId) || 'sanfrancisco';
   if (typeof globalThis.location !== 'undefined') {
     const url = new URL(globalThis.location.href);
     url.searchParams.set('city', target);
@@ -3810,12 +3817,378 @@ const CITY_PACKS = {
   }
 };
 
+const BUILTIN_CITY_IDS = new Set(Object.keys(CITY_PACKS));
+
+function titleFromSlug(slug) {
+  return String(slug || 'localcity')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function normalizeCityPack(spec = {}, fallbackId = 'localcity') {
+  const id = normalizeCityId(spec.id || fallbackId) || 'localcity';
+  const rawName = String(spec.displayName || spec.name || spec.title || titleFromSlug(id)).trim();
+  const parts = rawName.split(',').map((s) => s.trim()).filter(Boolean);
+  const title = String(spec.title || parts[0] || titleFromSlug(id)).trim();
+  const stateCode = String(spec.stateCode || (parts[1] ? parts[1].slice(0, 3).toUpperCase() : 'LOC')).trim();
+  const stateLabel = String(spec.stateLabel || parts[1] || stateCode || 'Local Pack').trim();
+  const displayName = String(spec.displayName || spec.name || (parts.length > 1 ? rawName : `${title}, ${stateCode}`)).trim();
+  const hasExplicitCoords = Number.isFinite(spec.lat) || Number.isFinite(spec.lat0);
+  const lat = Number.isFinite(spec.lat) ? Number(spec.lat) : (Number.isFinite(spec.lat0) ? Number(spec.lat0) : 37.7749);
+  const lon = Number.isFinite(spec.lon) ? Number(spec.lon) : (Number.isFinite(spec.lon0) ? Number(spec.lon0) : -122.4194);
+  const baseElev = Number.isFinite(spec.baseElev)
+    ? Number(spec.baseElev)
+    : (Number.isFinite(spec.base_elev) ? Number(spec.base_elev) : 10.0);
+
+  const hasExplicitLandmarks = Array.isArray(spec.landmarks) && spec.landmarks.length > 0;
+  const landmarks = hasExplicitLandmarks
+    ? spec.landmarks.map((l, idx) => ({
+        id: String(l.id || `lm_${idx + 1}`).toLowerCase().replace(/[^a-z0-9_]+/g, ''),
+        name: String(l.name || l.short || `${title} Landmark ${idx + 1}`),
+        short: String(l.short || l.name || `Site ${idx + 1}`).slice(0, 24),
+        x: Number(l.x) || 0,
+        z: Number(l.z) || 0,
+        heading: Number(l.heading) || 0
+      }))
+    : [
+        { id: 'downtown',  name: `Downtown ${title}`,             short: 'Downtown',       x: 0,    z: 0,    heading: 0 },
+        { id: 'civic',     name: `${title} Civic Center & Plaza`, short: 'Civic Center',   x: 160,  z: -80,  heading: -Math.PI / 2 },
+        { id: 'northside', name: `North ${title} District`,       short: `North ${title}`, x: 0,    z: -620, heading: 0 },
+        { id: 'southside', name: `South ${title} District`,       short: `South ${title}`, x: 0,    z: 620,  heading: Math.PI },
+        { id: 'eastside',  name: `East ${title} Corridor`,        short: `East ${title}`,  x: 620,  z: 0,    heading: -Math.PI / 2 },
+        { id: 'westside',  name: `West ${title} Corridor`,        short: `West ${title}`,  x: -620, z: 0,    heading: Math.PI / 2 }
+      ];
+
+  const teleportIds = Array.isArray(spec.teleportIds) && spec.teleportIds.length
+    ? spec.teleportIds
+    : landmarks.slice(0, 8).map((l) => l.id);
+
+  const areas = Array.isArray(spec.areas) && spec.areas.length
+    ? spec.areas
+    : landmarks.map((l) => [l.x, l.z, l.short || l.name]);
+
+  const areaLabels = Array.isArray(spec.areaLabels) && spec.areaLabels.length
+    ? spec.areaLabels
+    : [
+        [title.toUpperCase(), 0, -180, 0],
+        ...landmarks.slice(0, 6).map((l) => [String(l.short || l.name).toUpperCase(), l.x, l.z, 2])
+      ];
+
+  const customCameraPresets = Array.isArray(spec.cameraPresets) && spec.cameraPresets.length
+    ? spec.cameraPresets
+    : [
+        ...FOLLOW_CAMERAS,
+        { id: 'downtownView', name: `Downtown ${title}`,  category: 'scenic', fov: 50 },
+        { id: 'cityAerial',   name: `${title} Aerial`,    category: 'scenic', fov: 46 },
+        DRONE_CAMERA
+      ];
+  const hasFollow = customCameraPresets.some((c) => c && c.id === 'chase');
+  const hasDrone = customCameraPresets.some((c) => c && c.id === 'drone');
+  const cameraPresets = [
+    ...(hasFollow ? [] : FOLLOW_CAMERAS),
+    ...customCameraPresets,
+    ...(hasDrone ? [] : [DRONE_CAMERA])
+  ];
+
+  const scenicCameras = {
+    downtownView: { pos: [24, 11, 78],     look: [0, 8, -24],      ampPos: [5, 0.3, 5],   ampLook: [4, 0, 4],   freq: 0.13 },
+    cityAerial:   { pos: [360, 165, 420],  look: [0, 12, 0],       ampPos: [18, 2.0, 18], ampLook: [20, 0, 20], freq: 0.08 },
+    ...(spec.scenicCameras || {})
+  };
+
+  const defaultSpawn = spec.defaultSpawn || { x: landmarks[0]?.x || 0, z: landmarks[0]?.z || 0 };
+  const kayakLaunch = spec.kayakLaunch || { x: 0, z: 0 };
+  const samplePlate = String(spec.plate?.sample || `${id.slice(0, 3).toUpperCase()} 100`);
+  const stateUpper = stateLabel.toUpperCase();
+
+  const rawArch = spec.archetypes || {};
+  const archetypes = {
+    style: rawArch.style || 'regional-mixed-urban',
+    treeCoverage: {
+      canopyCover: 0.25,
+      streetTreeDensity: 1.0,
+      streetTreeSpacing: 22.0,
+      parkTreeDensity: 1.15,
+      foliageScale: 1.0,
+      ...(rawArch.treeCoverage || {})
+    },
+    housingDensity: {
+      form: 'urban',
+      buildingsPerKm2: 1450,
+      footprintCoverage: 0.34,
+      wallEnclosure: 0.44,
+      lotInfill: 0.42,
+      rowhouseAttachment: 0.28,
+      maxHouseHeight: 9.8,
+      maxHouseFootprint: 280,
+      porchProbScale: 1.0,
+      shrubDensity: 1.0,
+      ...(rawArch.housingDensity || {})
+    },
+    residential: {
+      walls: { clapboard: 0.38, brick: 0.32, stone: 0.08, stucco: 0.16, shake: 0.06, ...(rawArch.residential?.walls || {}) },
+      roofs: { flat: 0.16, hip: 0.38, gable: 0.42, gambrel: 0.04, ...(rawArch.residential?.roofs || {}) },
+      pitch: { hip: 0.36, gable: 0.44, historic: 0.52, ...(rawArch.residential?.pitch || {}) },
+      ...(rawArch.residential || {})
+    },
+    midrise: {
+      masonry: { stoneColor: 0xd4c8b4, trimColor: 0x968c7a, windowWidth: 2.5, floorHeight: 3.7, ...(rawArch.midrise?.masonry || {}) },
+      historic: { stoneColor: 0x9e523c, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.6, ...(rawArch.midrise?.historic || {}) },
+      waterTowerProb: rawArch.midrise?.waterTowerProb ?? 0.05,
+      fireEscapes: rawArch.midrise?.fireEscapes ?? true
+    },
+    neighborhoods: { ...(rawArch.neighborhoods || {}) },
+    landmarks: { ...(rawArch.landmarks || {}) }
+  };
+
+  return {
+    ...spec,
+    id,
+    isLocal: Boolean(spec.isLocal ?? !BUILTIN_CITY_IDS.has(id)),
+    _hasDefaultCoords: !hasExplicitCoords,
+    _hasDefaultLandmarks: !hasExplicitLandmarks,
+    title,
+    stateCode,
+    stateLabel,
+    displayName,
+    icon: spec.icon || 'img/icon-royaloak.svg',
+    subtitle: spec.subtitle || `Local OpenStreetMap + Terrain City Pack (${displayName})`,
+    countyLabel: spec.countyLabel || `${title.toUpperCase()} METRO`,
+    cityLabel: spec.cityLabel || title.toUpperCase(),
+    searchPlaceholder: spec.searchPlaceholder || `Street or landmark in ${title}...`,
+    loadingStages: {
+      streets: `Building ${title} streets, blocks and parks...`,
+      outskirts: `Laying out ${displayName} terrain and waterways...`,
+      landmarks: `Building ${title} landmarks and transit...`,
+      ...(spec.loadingStages || {})
+    },
+    timeZone: spec.timeZone || 'America/New_York',
+    lat,
+    lon,
+    baseElev,
+    weatherStation: spec.weatherStation || 'KSFO',
+    riverGaugeSite: spec.riverGaugeSite || '01376520',
+    riverGaugeBaseFt: Number.isFinite(spec.riverGaugeBaseFt) ? Number(spec.riverGaugeBaseFt) : 2.0,
+    usualCfs: Number.isFinite(spec.usualCfs) ? Number(spec.usualCfs) : 250,
+    kayakLaunch,
+    defaultSpawn,
+    police: {
+      name: `${id.slice(0, 2).toUpperCase()}PD`,
+      doorTop: title.toUpperCase().slice(0, 14),
+      doorBottom: 'POLICE',
+      doorSub: `${title.toUpperCase()} DEPT`,
+      badgeTitle: `${id.slice(0, 2).toUpperCase()}PD`,
+      baseColor: 0x16191e,
+      stripeColor: 0x2b5fb8,
+      ...(spec.police || {})
+    },
+    plate: {
+      state: stateUpper,
+      slogan: displayName.toUpperCase(),
+      sample: samplePlate,
+      bg: '#f4f6f8',
+      topBand: '#1d3557',
+      text: '#1d3557',
+      scriptColor: '#1d3557',
+      legacyEvery4: false,
+      ...(spec.plate || {})
+    },
+    transit: {
+      name: `${title} Transit`,
+      shortName: `${title.slice(0, 8).toUpperCase()} BUS`,
+      bodyColor: 0xf4f5f7,
+      bandColor: 0x1976d2,
+      accentColor: 0xf59e0b,
+      ...(spec.transit || {})
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0xd62828,
+      plateText: samplePlate,
+      state: stateUpper,
+      ...(spec.ownCar || {})
+    },
+    areas,
+    landmarks,
+    teleportIds,
+    modelledLandmarks: Array.isArray(spec.modelledLandmarks) ? spec.modelledLandmarks : [],
+    areaLabels,
+    cameraPresets,
+    scenicCameras,
+    scenicStarts: {
+      person:     { x: defaultSpawn.x + 8, z: defaultSpawn.z, heading: 0 },
+      car:        { x: defaultSpawn.x,     z: defaultSpawn.z, heading: 0 },
+      cyclist:    { x: defaultSpawn.x + 14, z: defaultSpawn.z, heading: 0 },
+      helicopter: { x: defaultSpawn.x + 180, z: defaultSpawn.z + 240, heading: Math.PI, above: 150 },
+      kayak:      { x: kayakLaunch.x,      z: kayakLaunch.z,  heading: 0 },
+      ...(spec.scenicStarts || {})
+    },
+    archetypes
+  };
+}
+
+function registerLocalCityPack(id, spec = {}) {
+  const normId = normalizeCityId(id || spec.id);
+  if (!normId) return null;
+  const existing = CITY_PACKS[normId] || {};
+  const merged = normalizeCityPack({ ...existing, ...spec, id: normId, isLocal: !BUILTIN_CITY_IDS.has(normId) }, normId);
+  if (CITY_PACKS[normId]) {
+    Object.assign(CITY_PACKS[normId], merged);
+  } else {
+    CITY_PACKS[normId] = merged;
+  }
+  CITY_ALIASES[normId] = normId;
+  if (Array.isArray(spec.aliases)) {
+    for (const alias of spec.aliases) {
+      const k = String(alias || '').trim().toLowerCase();
+      if (k && !CITY_ALIASES[k]) CITY_ALIASES[k] = normId;
+    }
+  }
+  return CITY_PACKS[normId];
+}
+
+function hydrateLocalCityPackFromGeo(pack, geo) {
+  if (!pack || !geo) return pack;
+  if (geo.packMeta && typeof geo.packMeta === 'object' && pack.isLocal) {
+    registerLocalCityPack(pack.id, { ...geo.packMeta, ...pack, _hasDefaultLandmarks: pack._hasDefaultLandmarks && !geo.packMeta.landmarks });
+  }
+  if (pack._hasDefaultCoords && geo.frame) {
+    if (Number.isFinite(geo.frame.lat0)) pack.lat = Number(geo.frame.lat0);
+    if (Number.isFinite(geo.frame.lon0)) pack.lon = Number(geo.frame.lon0);
+    pack._hasDefaultCoords = false;
+  }
+  if (geo.sampledArchetypes && typeof geo.sampledArchetypes === 'object' && pack.isLocal) {
+    const sa = geo.sampledArchetypes;
+    if (sa.treeCoverage) pack.archetypes.treeCoverage = { ...pack.archetypes.treeCoverage, ...sa.treeCoverage };
+    if (sa.housingDensity) pack.archetypes.housingDensity = { ...pack.archetypes.housingDensity, ...sa.housingDensity };
+    if (sa.residential) pack.archetypes.residential = { ...pack.archetypes.residential, ...sa.residential };
+    if (sa.midrise) pack.archetypes.midrise = { ...pack.archetypes.midrise, ...sa.midrise };
+  }
+  if (pack.isLocal && pack._hasDefaultLandmarks) {
+    const discovered = [];
+    const seen = new Set();
+    const addSite = (name, x, z) => {
+      const clean = String(name || '').trim();
+      if (!clean || seen.has(clean.toLowerCase()) || !Number.isFinite(x) || !Number.isFinite(z)) return;
+      if (discovered.some((d) => Math.hypot(d.x - x, d.z - z) < 30)) return;
+      seen.add(clean.toLowerCase());
+      const slug = clean.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 14) || `site${discovered.length + 1}`;
+      discovered.push({
+        id: seen.has(slug) ? `${slug}_${discovered.length + 1}` : slug,
+        name: clean,
+        short: clean.length > 22 ? clean.slice(0, 20).trim() : clean,
+        x: Math.round(x),
+        z: Math.round(z),
+        heading: 0
+      });
+    };
+    addSite(`Downtown ${pack.title}`, 0, 0);
+    if (Array.isArray(geo.landmarks)) {
+      for (const lm of geo.landmarks) addSite(lm.name, lm.x, lm.z);
+    } else if (geo.landmarks && typeof geo.landmarks === 'object') {
+      for (const [name, lm] of Object.entries(geo.landmarks)) addSite(name, lm.x, lm.z);
+    }
+    if (Array.isArray(geo.parks)) {
+      for (const pk of geo.parks) {
+        const ring = pk.rings && pk.rings[0];
+        if (pk.name && Array.isArray(ring) && ring.length >= 2) {
+          addSite(pk.name, ring[0], ring[1]);
+        }
+        if (discovered.length >= 8) break;
+      }
+    }
+    if (discovered.length < 8 && geo.places && Array.isArray(geo.places.names) && Array.isArray(geo.places.list)) {
+      const { names, list } = geo.places;
+      for (let i = 0; i < list.length && discovered.length < 8; i += 4) {
+        addSite(names[list[i + 3]], list[i], list[i + 1]);
+      }
+    }
+    if (discovered.length >= 2) {
+      pack.landmarks = discovered.slice(0, 8);
+      pack.teleportIds = pack.landmarks.map((l) => l.id);
+      pack.areas = pack.landmarks.map((l) => [l.x, l.z, l.short || l.name]);
+      pack.areaLabels = [
+        [pack.title.toUpperCase(), 0, -180, 0],
+        ...pack.landmarks.slice(0, 6).map((l) => [String(l.short || l.name).toUpperCase(), l.x, l.z, 2])
+      ];
+      pack._hasDefaultLandmarks = false;
+    }
+  }
+  return pack;
+}
+
+async function readLocalJsonFile(relPath) {
+  if (typeof process !== 'undefined' && process.versions?.node) {
+    try {
+      const fs = await import('node:fs');
+      const pathMod = await import('node:path');
+      const urlMod = await import('node:url');
+      const rootDir = pathMod.resolve(pathMod.dirname(urlMod.fileURLToPath(import.meta.url)), '..');
+      const fullPath = pathMod.join(rootDir, relPath);
+      if (fs.existsSync(fullPath)) {
+        return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+      }
+    } catch {
+      // Ignore missing or invalid local JSON in Node
+    }
+    return null;
+  }
+  if (typeof fetch === 'function') {
+    try {
+      const res = await fetch(relPath, { cache: 'no-store' });
+      if (res.ok) return await res.json();
+    } catch {
+      // Ignore missing local JSON in browser
+    }
+  }
+  return null;
+}
+
+let _localManifestLoaded = false;
+async function loadLocalCityPacks(targetCityId = null, { fetchManifest = false } = {}) {
+  const isNode = typeof process !== 'undefined' && Boolean(process.versions?.node);
+  if ((isNode || fetchManifest || (targetCityId && !BUILTIN_CITY_IDS.has(targetCityId))) && !_localManifestLoaded) {
+    _localManifestLoaded = true;
+    const manifest = await readLocalJsonFile('cities/local-packs.json');
+    if (manifest && typeof manifest === 'object') {
+      const entries = Array.isArray(manifest.cities)
+        ? manifest.cities.map((c) => [c.id, c])
+        : Object.entries(manifest.cities || manifest);
+      for (const [cid, spec] of entries) {
+        if (cid && spec && typeof spec === 'object') {
+          registerLocalCityPack(cid, spec);
+        }
+      }
+    }
+  }
+  if (targetCityId && !BUILTIN_CITY_IDS.has(targetCityId)) {
+    const perCity = await readLocalJsonFile(`cities/${targetCityId}/city-pack.json`);
+    if (perCity && typeof perCity === 'object') {
+      registerLocalCityPack(targetCityId, perCity);
+    } else if (!CITY_PACKS[targetCityId]) {
+      registerLocalCityPack(targetCityId, { id: targetCityId, isLocal: true });
+    }
+  }
+  return CITY_PACKS;
+}
+
+await loadLocalCityPacks(BUILTIN_CITY_IDS.has(ACTIVE_CITY_ID) ? null : ACTIVE_CITY_ID);
+if (!CITY_PACKS[ACTIVE_CITY_ID]) {
+  registerLocalCityPack(ACTIVE_CITY_ID, { id: ACTIVE_CITY_ID, isLocal: true });
+}
+
 const CITY_PACK = CITY_PACKS[ACTIVE_CITY_ID];
 
 export {
   ACTIVE_CITY_ID,
+  BUILTIN_CITY_IDS,
   CITY_PACKS,
   CITY_PACK,
   cityAssetPath,
-  switchCity
+  switchCity,
+  normalizeCityId,
+  normalizeCityPack,
+  registerLocalCityPack,
+  hydrateLocalCityPackFromGeo,
+  loadLocalCityPacks
 };

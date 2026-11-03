@@ -8,8 +8,8 @@ __pycache__/
 # Cached upstream geodata & OSM/Terrain/GTFS downloads
 tools/.cache/
 
-# Local city data packs (installed/built locally like npm packages via `npm run city:install`)
-cities/*/
+# Local city data packs & custom local pack manifests (never synced with repo)
+cities/*
 !cities/README.md
 
 # Legacy root geodata files

@@ -80,6 +80,58 @@ describe('Multi-City Pack Manifest & Assets', () => {
     }
   });
 
+  it('supports user-added local city packs without repo changes', async () => {
+    const mod = await import(path.join(ROOT, 'js/city-packs.js'));
+    assert.equal(typeof mod.registerLocalCityPack, 'function');
+    assert.equal(typeof mod.hydrateLocalCityPackFromGeo, 'function');
+
+    const localPack = mod.registerLocalCityPack('traversecity', {
+      displayName: 'Traverse City, MI',
+      lat: 44.7631,
+      lon: -85.6206,
+      baseElev: 182
+    });
+    assert.ok(localPack);
+    assert.equal(localPack.id, 'traversecity');
+    assert.equal(localPack.isLocal, true);
+    assert.equal(localPack.title, 'Traverse City');
+    assert.equal(localPack.stateCode, 'MI');
+    assert.ok(localPack.archetypes.treeCoverage && localPack.archetypes.housingDensity);
+
+    mod.hydrateLocalCityPackFromGeo(localPack, {
+      landmarks: [{ name: 'City Opera House', x: 40, z: -20 }],
+      parks: [{ name: 'Clinch Park Beach', rings: [[-180, -320, -140, -320, -140, -280]] }],
+      places: { names: ['Boardman River Wier', 'State Theatre'], list: [160, 140, 18, 0, -120, 60, 15, 1] }
+    });
+    assert.ok(localPack.landmarks.some((l) => l.name === 'Clinch Park Beach'));
+    assert.ok(localPack.landmarks.some((l) => l.name === 'City Opera House'));
+
+    const script = `
+      globalThis.__CITY_ID__ = 'mycustomlocalcity';
+      const packs = await import('./js/city-packs.js');
+      const cfg = await import('./js/city-config.js');
+      console.log(JSON.stringify({
+        activeId: packs.ACTIVE_CITY_ID,
+        isLocal: packs.CITY_PACK.isLocal,
+        title: packs.CITY_PACK.title,
+        landmarks: cfg.LANDMARKS.length,
+        teleports: Object.keys(cfg.TELEPORT_LOCATIONS).length,
+        label: cfg.getLocationLabel(0, 0)
+      }));
+    `;
+    const out = execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: ROOT,
+      encoding: 'utf8'
+    });
+    const res = JSON.parse(out.trim().split('\n').pop());
+    assert.equal(res.activeId, 'mycustomlocalcity');
+    assert.equal(res.isLocal, true);
+    assert.equal(res.title, 'Mycustomlocalcity');
+    assert.ok(res.landmarks >= 4);
+    assert.ok(res.teleports >= 4);
+    assert.ok(res.label.length > 0);
+  });
+
   for (const cityId of CITIES) {
     const cityDir = path.join(ROOT, 'cities', cityId);
     const isInstalled = fs.existsSync(path.join(cityDir, 'city-geodata.js'));

@@ -5,7 +5,7 @@ import { pass, mrt, output, normalView, positionView, metalness, roughness, vec2
 import { ssr } from 'three/addons/tsl/display/SSRNode.js';
 import { createPostProcessing } from './post-processing.js';
 import { ClusteredLighting } from 'three/addons/lighting/ClusteredLighting.js';
-import { ACTIVE_CITY_ID, CITY_PACK, CITY_PACKS, cityAssetPath, switchCity } from './city-packs.js';
+import { ACTIVE_CITY_ID, CITY_PACK, CITY_PACKS, cityAssetPath, switchCity, loadLocalCityPacks } from './city-packs.js';
 import { CITY_PACK_INSTALLED } from './city-geodata.js';
 import { getLocationLabel, isTypingInField, ROADS, LANDMARKS, TELEPORT_LOCATIONS } from './city-config.js';
 import { buildCityGrid } from './city-grid.js';
@@ -75,6 +75,7 @@ async function loadCityJson(relPath, fallback = null) {
 }
 
 async function probeInstalledCities() {
+  await loadLocalCityPacks(null, { fetchManifest: true });
   const entries = await Promise.all(
     Object.keys(CITY_PACKS).map(async (id) => {
       if (id === ACTIVE_CITY_ID) return [id, CITY_PACK_INSTALLED];
@@ -107,7 +108,7 @@ async function initApp() {
         ...Object.values(CITY_PACKS).map((pack) => {
           const opt = document.createElement('option');
           opt.value = pack.id;
-          opt.textContent = pack.displayName;
+          opt.textContent = pack.isLocal ? `${pack.displayName} (local)` : pack.displayName;
           return opt;
         })
       );
@@ -119,13 +120,20 @@ async function initApp() {
     for (const selId of ['city-select', 'map-city-select']) {
       const sel = document.getElementById(selId);
       if (!sel) continue;
-      for (const opt of sel.options) {
-        const pack = CITY_PACKS[opt.value];
-        if (!pack) continue;
-        opt.textContent = installedMap[opt.value]
-          ? pack.displayName
-          : `${pack.displayName} (not installed)`;
-      }
+      sel.replaceChildren(
+        ...Object.values(CITY_PACKS).map((pack) => {
+          const opt = document.createElement('option');
+          opt.value = pack.id;
+          const isInstalled = installedMap[pack.id];
+          if (pack.isLocal) {
+            opt.textContent = isInstalled ? `${pack.displayName} (local)` : `${pack.displayName} (local, not installed)`;
+          } else {
+            opt.textContent = isInstalled ? pack.displayName : `${pack.displayName} (not installed)`;
+          }
+          return opt;
+        })
+      );
+      sel.value = ACTIVE_CITY_ID;
     }
   });
 
@@ -138,10 +146,13 @@ async function initApp() {
       loadingStatus.textContent = `Local city pack "${ACTIVE_CITY_ID}" is not installed yet.`;
       const box = document.createElement('div');
       box.className = 'loader-missing-pack';
+      const buildCmd = CITY_PACK.isLocal
+        ? `npm run city:build -- --city ${ACTIVE_CITY_ID} --name "${CITY_PACK.displayName}" --lat ${CITY_PACK.lat} --lon ${CITY_PACK.lon}`
+        : `npm run city:install -- ${ACTIVE_CITY_ID}`;
       box.innerHTML = `
-        <div><strong>City data is stored locally (like npm packages).</strong></div>
+        <div><strong>City data is stored locally (like npm packages) and does not need to be synced with the repo.</strong></div>
         <div>To download and build <strong>${CITY_PACK.displayName}</strong> locally, run:</div>
-        <code>npm run city:install -- ${ACTIVE_CITY_ID}</code>
+        <code>${buildCmd}</code>
         <div>or with Python / uv:</div>
         <code>uv run --with shapely --with numpy --with pillow python3 tools/build-city-pack.py --city ${ACTIVE_CITY_ID}</code>
       `;

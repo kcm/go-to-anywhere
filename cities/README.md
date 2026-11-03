@@ -57,12 +57,50 @@ cities/<id>/
     └── street-furniture.json  # Fire hydrants, park benches, picnic tables, shelters, and sports courts
 ```
 
-## Adding Your Own City
+## Adding Your Own Local City Pack (Without Syncing to Git)
 
-1. Add your city's bounding box, origin `(lat0, lon0)`, highways, waterways, and transit corridors to `CITY_CONFIGS` in [`../tools/build-city-pack.py`](../tools/build-city-pack.py).
-2. Add your city's runtime descriptor (landmarks, camera presets, scenic starts, radio stations) to `CITY_PACKS` in [`../js/city-packs.js`](../js/city-packs.js).
-3. Build your city pack locally:
-   ```bash
-   npm run city:build -- <your-city-id>
-   ```
-4. Open `http://localhost:8000/?city=<your-city-id>`.
+All files and folders inside `cities/` (except this `README.md`) are gitignored (`cities/*`), so you can create, customize, or drop in your own local city pack(s) without touching any repo-tracked files.
+
+### 1. One-Command Build from Coordinates
+
+```bash
+npm run city:build -- --city traversecity --name "Traverse City, MI" --lat 44.7631 --lon -85.6206 --radius-km 2.5
+```
+
+Or specify an explicit bounding box `south_lat,west_lon,north_lat,east_lon`:
+
+```bash
+python3 tools/build-city-pack.py --city traversecity --name "Traverse City, MI" --bbox 44.740,-85.655,44.785,-85.585
+```
+
+### 2. Local Config File (`cities/<id>/city-pack.json`)
+
+You can also create `cities/<id>/city-pack.json` (or pass `--config path/to/spec.json`) to customize any `CITY_PACK` fields (`landmarks`, `areas`, `police`, `plate`, `transit`, `ownCar`, `archetypes`):
+
+```json
+{
+  "id": "traversecity",
+  "displayName": "Traverse City, MI",
+  "stateCode": "MI",
+  "stateLabel": "Michigan",
+  "timeZone": "America/Detroit",
+  "lat": 44.7631,
+  "lon": -85.6206,
+  "radiusKm": 2.5,
+  "weatherStation": "KTVC"
+}
+```
+
+Then run:
+
+```bash
+npm run city:build -- traversecity
+```
+
+The builder automatically generates all 13 city pack files in `cities/<id>/`, writes the complete descriptor to `cities/<id>/city-pack.json`, and registers `<id>` in `cities/local-packs.json` so it appears in the in-game city switcher dropdown and `npm run city:list`.
+
+### 3. Dropping In a Prebuilt Local City Pack Folder
+
+If you copy a prebuilt `cities/<id>/` directory onto your machine:
+- Open `http://localhost:8000/?city=<id>` directly in your browser (it loads immediately even before registration), or
+- Run `python3 tools/build-city-pack.py --register-local` to add all local folders in `cities/*/` to `cities/local-packs.json` so they appear in the UI dropdown.
