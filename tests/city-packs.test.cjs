@@ -6,7 +6,7 @@ const zlib = require('node:zlib');
 const { execFileSync } = require('node:child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const CITIES = ['royaloak', 'oakland', 'annarbor', 'newyork'];
+const CITIES = ['royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach', 'sanfrancisco'];
 
 const REQUIRED_FILES = [
   'city-geodata.js',

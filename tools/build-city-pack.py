@@ -245,6 +245,194 @@ CITY_CONFIGS = {
         },
         'rng_seed': 510,
     },
+    'pompanobeach': {
+        'id': 'pompanobeach',
+        'name': 'Pompano Beach, FL',
+        'origin_desc': 'E Atlantic Blvd & N Federal Hwy / US-1 (centreline)',
+        'lat0': 26.2318,
+        'lon0': -80.1038,
+        'bbox': (26.208, -80.135, 26.265, -80.076),
+        'base_elev': 0.0,
+        'downtown_box': (-2350, -350, 1750, 350),
+        'in_town_box': (-2600, -1800, 2100, 1800),
+        'metered_regex': re.compile(
+            r'^(E Atlantic Blvd|W Atlantic Blvd|Atlantic Blvd|N Ocean Blvd|S Ocean Blvd|Ocean Blvd|'
+            r'N Federal Hwy|S Federal Hwy|Federal Hwy|N Pompano Beach Blvd|S Pompano Beach Blvd|Pompano Beach Blvd|'
+            r'NE 1st St|NE 2nd St|NE 3rd St|SE 1st St|SE 2nd St|Briny Ave|N Riverside Dr|S Riverside Dr)$'
+        ),
+        'rail_default_name': 'FEC Railway Corridor',
+        'rail_route_names': ['Brightline Florida East Coast', 'FEC Freight Main Line', 'CSX / Tri-Rail Corridor'],
+        'amtrak_stop_id': 'DFB',
+        'amtrak_station_name': 'Pompano Beach Station (POM)',
+        'amtrak_west_keywords': ('Orlando', 'Tampa', 'New York', 'Jacksonville'),
+        'amtrak_fallback': [
+            ['91', 'east', 'Miami Central', 10 * 3600 + 18 * 60, 10 * 3600 + 20 * 60, '1111111', '20250101', '20301231'],
+            ['97', 'east', 'Miami Central', 16 * 3600 + 42 * 60, 16 * 3600 + 44 * 60, '1111111', '20250101', '20301231'],
+            ['92', 'west', 'Orlando / New York', 9 * 3600 + 12 * 60, 9 * 3600 + 14 * 60, '1111111', '20250101', '20301231'],
+            ['98', 'west', 'Orlando / New York', 12 * 3600 + 35 * 60, 12 * 3600 + 37 * 60, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'pompanobeach-bct-1',
+        'transit_prefix': 'bct',
+        'corridor_waypoints': [
+            ("10", "US-1 Federal Highway Breeze", "Deerfield Beach / Mizner", "Fort Lauderdale Central Terminal", "#0072ce",
+             [(180, -3400), (80, -2100), (15, -900), (0, 0), (-40, 1200), (-80, 2400)]),
+            ("11", "Atlantic Blvd - Pompano Beach Pier", "Pompano Beach Pier (A1A)", "Old Pompano / NW 31st Ave", "#f58220",
+             [(1680, -10), (1188, -10), (0, 0), (-1100, -10), (-1867, -20), (-2900, -30)]),
+            ("20", "NE 6th Ave - Dixie Highway", "Sample Rd Transit Center", "Cypress Creek Tri-Rail", "#009639",
+             [(-1850, -3400), (-1950, -2100), (-2100, -900), (-2215, 0), (-2350, 1200), (-2500, 2400)]),
+            ("42", "NE 14th St Causeway - Airpark", "A1A & Hillsboro Inlet", "Pompano Airpark & Dixie", "#8c1d40",
+             [(2050, -2110), (1538, -2110), (90, -2110), (-900, -2110), (-2100, -2110)]),
+            ("50", "Ocean Blvd A1A Coastal", "Hillsboro Inlet Lighthouse", "Lauderdale-by-the-Sea", "#00a3e0",
+             [(2280, -2950), (2050, -2110), (1850, -1000), (1680, -10), (1550, 1100), (1420, 2400)]),
+            ("60", "Andrews Ave - McNab Crosstown", "Pompano Civic Center", "McNab & Federal Hwy", "#662d91",
+             [(-2900, -20), (-2215, 0), (-2400, 1300), (-2500, 2400), (-1000, 2400), (-80, 2400)]),
+        ],
+        'historic_districts': [
+            {'name': 'Old Town Pompano Historic District', 'rings': [[-2550, -350, -1750, -350, -1750, 250, -2550, 250]]},
+            {'name': 'Pompano Beach Barrier Island & Pier District', 'rings': [[1350, -900, 1950, -900, 1950, 500, 1350, 500]]},
+            {'name': 'Hillsboro Inlet Historic Lighthouse Reserve', 'rings': [[2050, -3300, 2500, -3300, 2500, -2800, 2050, -2800]]},
+            {'name': 'Harbor Village Canal District', 'rings': [[200, 100, 1300, 100, 1300, 1200, 200, 1200]]},
+        ],
+        'neighborhood_places': [
+            ('Atlantic & Federal (Downtown East)', 0, 0, 240),
+            ('Pompano Beach Fisher Family Pier', 1728, -345, 220),
+            ('Hillsboro Inlet Lighthouse', 2317, -3034, 220),
+            ('Intracoastal Waterway & Atlantic Drawbridge', 1188, -11, 220),
+            ('Pompano Beach Airpark & Blimp Base', -719, -1689, 320),
+            ('Pompano Beach Municipal Golf Course', -450, -1350, 280),
+            ('Pompano Beach Civic Center & Amphitheater', -1867, -22, 240),
+            ('Old Town Pompano', -2217, -78, 240),
+            ('Harbor Village Finger Canals', 879, 533, 280),
+            ('Santa Barbara Shores Canals', 750, 1650, 280),
+            ('NE 14th St Causeway', 1538, -2112, 220),
+        ],
+        'landmarks_meta': {
+            'Pompano Beach Fisher Family Pier': {
+                'x': 1728, 'z': -345, 'w': 260, 'd': 28, 'h': 14, 'area': 7280,
+                'ring': [1598, -359, 1858, -359, 1858, -331, 1598, -331]
+            },
+            'Hillsboro Inlet Lighthouse': {
+                'x': 2317, 'z': -3034, 'w': 28, 'd': 28, 'h': 42, 'area': 784,
+                'ring': [2303, -3048, 2331, -3048, 2331, -3020, 2303, -3020]
+            },
+            'Pompano Beach Amphitheater': {
+                'x': -1867, 'z': -22, 'w': 64, 'd': 58, 'h': 18, 'area': 3712,
+                'ring': [-1899, -51, -1835, -51, -1835, 7, -1899, 7]
+            },
+            'Pompano Airpark Goodyear Blimp Hangar': {
+                'x': -719, 'z': -1689, 'w': 95, 'd': 46, 'h': 26, 'area': 4370,
+                'ring': [-766, -1712, -672, -1712, -672, -1666, -766, -1666]
+            },
+            'Atlantic Blvd Intracoastal Control Tower': {
+                'x': 1188, 'z': -11, 'w': 22, 'd': 22, 'h': 20, 'area': 484,
+                'ring': [1177, -22, 1199, -22, 1199, 0, 1177, 0]
+            },
+            'Old Town Pompano Civic Plaza': {
+                'x': -2217, 'z': -78, 'w': 48, 'd': 42, 'h': 16, 'area': 2016,
+                'ring': [-2241, -99, -2193, -99, -2193, -57, -2241, -57]
+            },
+        },
+        'rng_seed': 954,
+    },
+    'sanfrancisco': {
+        'id': 'sanfrancisco',
+        'name': 'San Francisco, CA',
+        'origin_desc': 'Union Square - Post St & Powell St (centreline)',
+        'lat0': 37.7879,
+        'lon0': -122.4075,
+        'bbox': (37.772, -122.438, 37.812, -122.384),
+        'base_elev': 0.0,
+        'downtown_box': (-950, -1150, 1250, 750),
+        'in_town_box': (-1800, -2100, 1650, 1350),
+        'metered_regex': re.compile(
+            r'^(Market St|Mission St|Howard St|Folsom St|Harrison St|Bryant St|Brannan St|Townsend St|'
+            r'Geary St|Geary Blvd|Post St|Sutter St|Bush St|Pine St|California St|Sacramento St|Clay St|Washington St|Jackson St|'
+            r'Columbus Ave|Broadway|Grant Ave|Stockton St|Powell St|Mason St|Taylor St|Jones St|Leavenworth St|Hyde St|Larkin St|Polk St|Van Ness Ave|'
+            r'Montgomery St|Sansome St|Battery St|Front St|Davis St|Drumm St|The Embarcadero|2nd St|3rd St|4th St|5th St|6th St|7th St|8th St|9th St|10th St)$'
+        ),
+        'rail_default_name': 'Caltrain / Muni Metro Corridor',
+        'rail_route_names': ['Caltrain Peninsula Commute', 'Muni Metro T Third', 'F Market & Wharves Historic Streetcar'],
+        'amtrak_stop_id': 'SFC',
+        'amtrak_station_name': 'San Francisco 4th & King Station (SFC)',
+        'amtrak_west_keywords': ('San Francisco', 'Oakland', 'Emeryville'),
+        'amtrak_fallback': [
+            ['101', 'west', 'San Francisco 4th & King', 7 * 3600 + 45 * 60, 7 * 3600 + 47 * 60, '1111111', '20250101', '20301231'],
+            ['105', 'west', 'San Francisco 4th & King', 12 * 3600 + 15 * 60, 12 * 3600 + 17 * 60, '1111111', '20250101', '20301231'],
+            ['102', 'east', 'San Jose Diridon / Gilroy', 8 * 3600 + 30 * 60, 8 * 3600 + 32 * 60, '1111111', '20250101', '20301231'],
+            ['106', 'east', 'San Jose Diridon / Tamien', 17 * 3600 + 15 * 60, 17 * 3600 + 17 * 60, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'sanfrancisco-muni-1',
+        'transit_prefix': 'muni',
+        'corridor_waypoints': [
+            ("F", "Market & Wharves Historic Streetcar", "Fisherman's Wharf", "Castro & Market via Ferry Bldg", "#e31837",
+             [(-200, -2250), (650, -1800), (1180, -850), (650, -250), (0, 200), (-750, 750), (-1500, 1300)]),
+            ("38", "Geary Rapid", "Ocean Beach / Fillmore", "Salesforce Transit Center", "#cc0033",
+             [(-2400, 180), (-1200, 90), (-550, 40), (0, 0), (500, -80), (920, -190)]),
+            ("30", "Stockton - Marina", "Crissy Field / Chestnut", "Caltrain 4th & King", "#005a9c",
+             [(-1400, -1950), (-400, -1650), (120, -800), (120, 0), (450, 450), (950, 950)]),
+            ("49", "Van Ness - Mission BRT", "Fort Mason / North Point", "Mission District", "#f58220",
+             [(-1250, -2050), (-1180, -1100), (-1100, 0), (-1030, 850), (-980, 1550)]),
+            ("1", "California Trolley Coach", "Clay & Drumm (Embarcadero)", "Pacific Heights / Presidio", "#008566",
+             [(1050, -620), (400, -520), (-200, -430), (-1100, -300), (-2350, -120)]),
+            ("14R", "Mission Rapid", "Ferry Plaza", "Mission & 16th St", "#8c1d40",
+             [(1150, -780), (550, -150), (-100, 320), (-850, 900), (-1450, 1450)]),
+        ],
+        'historic_districts': [
+            {'name': 'Union Square & Downtown Retail District', 'rings': [[-320, -260, 320, -260, 320, 260, -320, 260]]},
+            {'name': 'Chinatown Historic District', 'rings': [[20, -980, 360, -980, 360, -260, 20, -260]]},
+            {'name': 'Jackson Square & Barbary Coast Historic District', 'rings': [[340, -1150, 780, -1150, 780, -750, 340, -750]]},
+            {'name': 'Civic Center National Historic Landmark District', 'rings': [[-1350, 620, -750, 620, -750, 1180, -1350, 1180]]},
+            {'name': 'Alamo Square Historic District', 'rings': [[-2500, 1050, -1950, 1050, -1950, 1500, -2500, 1500]]},
+        ],
+        'neighborhood_places': [
+            ('Union Square', 0, 0, 220),
+            ('Financial District', 620, -520, 280),
+            ('Chinatown', 170, -580, 240),
+            ('North Beach & Little Italy', 40, -1450, 260),
+            ('Telegraph Hill & Coit Tower', 150, -1611, 200),
+            ('Russian Hill & Lombard Street', -985, -1578, 260),
+            ('Nob Hill', -260, -420, 240),
+            ('Fisherman\'s Wharf & Pier 39', -202, -2312, 280),
+            ('The Embarcadero & Ferry Building', 1214, -845, 280),
+            ('South of Market (SoMa)', 380, 520, 300),
+            ('Civic Center', -1038, 956, 260),
+            ('China Basin & Oracle Park', 1601, 1034, 260),
+            ('Alamo Square & Painted Ladies', -2226, 1289, 260),
+            ('Pacific Heights', -1950, -650, 280),
+            ('Japantown', -1850, 280, 240),
+        ],
+        'landmarks_meta': {
+            'Transamerica Pyramid': {
+                'x': 414, 'z': -811, 'w': 54, 'd': 54, 'h': 260, 'area': 2916,
+                'ring': [387, -838, 441, -838, 441, -784, 387, -784]
+            },
+            'Salesforce Tower': {
+                'x': 933, 'z': -200, 'w': 52, 'd': 52, 'h': 326, 'area': 2704,
+                'ring': [907, -226, 959, -226, 959, -174, 907, -174]
+            },
+            'Ferry Building': {
+                'x': 1214, 'z': -845, 'w': 48, 'd': 200, 'h': 75, 'area': 9600,
+                'ring': [1190, -945, 1238, -945, 1238, -745, 1190, -745]
+            },
+            'Coit Tower': {
+                'x': 150, 'z': -1611, 'w': 26, 'd': 26, 'h': 64, 'area': 676,
+                'ring': [137, -1624, 163, -1624, 163, -1598, 137, -1598]
+            },
+            'San Francisco City Hall': {
+                'x': -1038, 'z': 956, 'w': 118, 'd': 94, 'h': 94, 'area': 11092,
+                'ring': [-1097, 909, -979, 909, -979, 1003, -1097, 1003]
+            },
+            'Chinatown Dragon Gate': {
+                'x': 167, 'z': -311, 'w': 22, 'd': 10, 'h': 12, 'area': 220,
+                'ring': [156, -316, 178, -316, 178, -306, 156, -306]
+            },
+            'Painted Ladies': {
+                'x': -2155, 'z': 1289, 'w': 28, 'd': 62, 'h': 15, 'area': 1736,
+                'ring': [-2169, 1258, -2141, 1258, -2141, 1320, -2169, 1320]
+            },
+        },
+        'rng_seed': 415,
+    },
 }
 
 r1 = lambda v: round(float(v), 1)
@@ -727,6 +915,15 @@ out body;
 
         if t.get('natural') == 'coastline':
             coastline_lines.append(LineString(pts))
+
+        if not is_closed and t.get('waterway') in ('canal', 'river') and t.get('tunnel') != 'yes':
+            try:
+                w_m = 24.0 if t.get('waterway') == 'canal' else 32.0
+                c_poly = LineString(pts).buffer(w_m * 0.5, cap_style=2).intersection(CLIP_BOX.buffer(150))
+                if not c_poly.is_empty:
+                    water_polys.append(c_poly)
+            except Exception:
+                pass
 
         if not is_closed and t.get('man_made') == 'pier':
             try:
@@ -2036,6 +2233,8 @@ ALL_CITY_METADATA = {
     'oakland': ('Oakland, CA', 'OpenStreetMap + AWS Terrain Tiles + AC Transit / BART'),
     'annarbor': ('Ann Arbor, MI', 'University of Michigan, Downtown, Huron River & TheRide'),
     'newyork': ('New York, NY', 'Manhattan Grid, Central Park, Hudson/East Rivers & MTA Subway'),
+    'pompanobeach': ('Pompano Beach, FL', 'Atlantic Ocean Pier, Hillsboro Lighthouse, Intracoastal Canals & BCT'),
+    'sanfrancisco': ('San Francisco, CA', 'Union Square, Transamerica, Coit Tower, Ferry Bldg, Lombard St & Muni'),
 }
 
 

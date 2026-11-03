@@ -1890,9 +1890,342 @@ function buildNewYorkLandmarks(scene) {
   return { group, colliders };
 }
 
+// ============================================================================
+// POMPANO BEACH, FL LANDMARKS
+// ============================================================================
+
+function buildPompanoBeachLandmarks(scene) {
+  const group = new THREE.Group();
+  group.name = 'PompanoBeachLandmarks';
+  const colliders = [];
+
+  // 1. Pompano Beach Fisher Family Pier (260m ocean pier + pompano-fish canopy + turquoise beacons)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Pompano Beach Fisher Family Pier'];
+    const cx = site ? site.x : 1728;
+    const cz = site ? site.z : -345;
+    const deck = [];
+    const pilings = [];
+    const canopy = [];
+    const aquaGlow = [];
+
+    pushBox(deck, 260, 1.2, 7.5, 0, 5.2, 0);
+    pushBox(deck, 34, 1.3, 24, 118, 5.25, 0);
+    for (let x = -124; x <= 128; x += 14) {
+      pushCyl(pilings, 0.45, 0.48, 8.5, 8, x, 1.2, -3.1);
+      pushCyl(pilings, 0.45, 0.48, 8.5, 8, x, 1.2, 3.1);
+    }
+    // Pompano fish-shaped shade canopy at pier head + mid-pier shade sails
+    pushCyl(canopy, 13, 13, 0.7, 12, 118, 11.8, 0);
+    pushBox(canopy, 10, 0.6, 18, 104, 11.6, 0);
+    for (const x of [-50, 20, 85, 118]) {
+      pushCyl(pilings, 0.35, 0.4, 6.5, 8, x, 8.5, -2.8);
+      pushCyl(pilings, 0.35, 0.4, 6.5, 8, x, 8.5, 2.8);
+      pushBox(canopy, 14, 0.45, 9.5, x, 11.5, 0);
+      pushCyl(aquaGlow, 0.42, 0.42, 1.4, 8, x, 12.4, 0);
+    }
+
+    addMergedMeshes(g, deck, new THREE.MeshStandardNodeMaterial({ color: 0xd9cbb8, roughness: 0.75 }));
+    addMergedMeshes(g, pilings, new THREE.MeshStandardNodeMaterial({ color: 0xcfd6dc, roughness: 0.5, metalness: 0.35 }));
+    addMergedMeshes(g, canopy, new THREE.MeshStandardNodeMaterial({ color: 0xf4f7fa, roughness: 0.4 }));
+    addMergedMeshes(g, aquaGlow, new THREE.MeshStandardNodeMaterial({ color: 0x6fffe9, emissive: 0x00e5ff, emissiveIntensity: 1.1, roughness: 0.2 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 40, 20), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 130, maxX: cx + 135, minZ: cz - 12, maxZ: cz + 12, maxY: 14, solid: true });
+  }
+
+  // 2. Hillsboro Inlet Lighthouse (1907 octagonal skeletal iron tower, black/white daymark & rotating Fresnel beacon)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Hillsboro Inlet Lighthouse'];
+    const cx = site ? site.x : 2317;
+    const cz = site ? site.z : -3034;
+    const whiteIron = [];
+    const blackIron = [];
+    const redRoof = [];
+    const beaconGlow = [];
+
+    // Lower white skeletal base & central cylinder
+    pushCyl(whiteIron, 3.2, 6.8, 18, 8, 0, 9, 0);
+    pushCyl(whiteIron, 1.7, 1.7, 18, 12, 0, 9, 0);
+    // Upper black skeletal section & watch gallery
+    pushCyl(blackIron, 2.4, 3.2, 17, 8, 0, 26.5, 0);
+    pushCyl(blackIron, 3.4, 3.4, 1.4, 12, 0, 35.5, 0);
+    pushCyl(blackIron, 2.2, 2.2, 3.8, 12, 0, 38.0, 0);
+    pushCyl(blackIron, 0.2, 2.5, 2.8, 12, 0, 41.2, 0);
+    pushCyl(beaconGlow, 1.85, 1.85, 2.8, 12, 0, 38.0, 0);
+
+    // Keeper's cottages next to the lighthouse
+    pushBox(whiteIron, 16, 6.5, 11, -18, 3.25, 8);
+    pushBox(redRoof, 17.2, 2.4, 12.2, -18, 7.6, 8);
+
+    addMergedMeshes(g, whiteIron, new THREE.MeshStandardNodeMaterial({ color: 0xf5f6f8, roughness: 0.45, metalness: 0.25 }));
+    addMergedMeshes(g, blackIron, new THREE.MeshStandardNodeMaterial({ color: 0x1a1d22, roughness: 0.4, metalness: 0.5 }));
+    addMergedMeshes(g, redRoof, new THREE.MeshStandardNodeMaterial({ color: 0xb8332a, roughness: 0.65 }));
+    addMergedMeshes(g, beaconGlow, new THREE.MeshStandardNodeMaterial({ color: 0xfff8d6, emissive: 0xffea79, emissiveIntensity: 1.5, roughness: 0.15 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 24, 24), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 8, maxX: cx + 8, minZ: cz - 8, maxZ: cz + 8, maxY: 43, solid: true });
+  }
+
+  // 3. Pompano Beach Airpark Goodyear Blimp Hangar & Floating Blimp
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Pompano Airpark Goodyear Blimp Hangar'];
+    const cx = site ? site.x : -719;
+    const cz = site ? site.z : -1689;
+    const hangar = [];
+    const blimpBlue = [];
+    const blimpGold = [];
+    const blimpSilver = [];
+
+    pushBox(hangar, 88, 16, 42, 0, 8, 0);
+    pushCyl(hangar, 21, 21, 88, 16, 0, 16, 0, Math.PI / 2);
+    // Floating blimp envelope above the airpark mooring mast
+    pushCyl(blimpSilver, 8.5, 8.5, 44, 16, 0, 68, 35, Math.PI / 2);
+    pushCyl(blimpBlue, 8.7, 8.7, 26, 16, 0, 68, 35, Math.PI / 2);
+    pushBox(blimpGold, 22, 2.2, 17.6, 0, 68, 35);
+    pushBox(blimpSilver, 9, 3.2, 3.6, 0, 58.5, 35);
+
+    addMergedMeshes(g, hangar, new THREE.MeshStandardNodeMaterial({ color: 0xdce1e7, roughness: 0.55, metalness: 0.3 }));
+    addMergedMeshes(g, blimpSilver, new THREE.MeshStandardNodeMaterial({ color: 0xd8dee6, roughness: 0.3, metalness: 0.45 }));
+    addMergedMeshes(g, blimpBlue, new THREE.MeshStandardNodeMaterial({ color: 0x003882, roughness: 0.35, metalness: 0.25 }));
+    addMergedMeshes(g, blimpGold, new THREE.MeshStandardNodeMaterial({ color: 0xffd100, emissive: 0xffc400, emissiveIntensity: 0.35, roughness: 0.3 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 60, 40), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 44, maxX: cx + 44, minZ: cz - 21, maxZ: cz + 21, maxY: 28, solid: true });
+  }
+
+  // 4. Pompano Beach Amphitheater ("The Amp")
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Pompano Beach Amphitheater'];
+    const cx = site ? site.x : -1867;
+    const cz = site ? site.z : -22;
+    const canopy = [];
+    const stage = [];
+
+    pushBox(stage, 28, 8.5, 18, 0, 4.25, -12);
+    pushCyl(canopy, 28, 32, 1.4, 16, 0, 15.5, 2);
+    pushCyl(canopy, 14, 24, 3.2, 16, 0, 17.5, 2);
+    for (const [px, pz] of [[-24, -10], [24, -10], [-26, 16], [26, 16]]) {
+      pushCyl(stage, 0.55, 0.65, 16, 8, px, 8, pz);
+    }
+
+    addMergedMeshes(g, canopy, new THREE.MeshStandardNodeMaterial({ color: 0xf7f9fb, roughness: 0.38 }));
+    addMergedMeshes(g, stage, new THREE.MeshStandardNodeMaterial({ color: 0xcfc8bc, roughness: 0.68 }));
+
+    g.position.set(cx, groundUnder(cx, cz, 40, 40), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 26, maxX: cx + 26, minZ: cz - 22, maxZ: cz + 22, maxY: 19, solid: true });
+  }
+
+  if (scene && typeof scene.add === 'function') scene.add(group);
+  return { group, colliders };
+}
+
+// ============================================================================
+// SAN FRANCISCO, CA LANDMARKS
+// ============================================================================
+
+function buildSanFranciscoLandmarks(scene) {
+  const group = new THREE.Group();
+  group.name = 'SanFranciscoLandmarks';
+  const colliders = [];
+
+  // 1. Transamerica Pyramid (260m white quartz-aggregate tapered pyramid + elevator wings + glowing glass crown)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Transamerica Pyramid'];
+    const cx = site ? site.x : 414;
+    const cz = site ? site.z : -811;
+    const quartz = [];
+    const wings = [];
+    const glass = [];
+    const crownGlow = [];
+
+    pushBox(quartz, 46, 16, 46, 0, 8, 0);
+    // Tapered 4-sided pyramid shaft
+    pushCyl(quartz, 5.2, 31.0, 212, 4, 0, 122, 0, Math.PI / 4);
+    // East & West vertical elevator/stair wing shafts
+    pushBox(wings, 56, 155, 11, 0, 95, 0);
+    // Illuminated glass pyramidion crown & beacon
+    pushCyl(crownGlow, 0.4, 5.2, 32, 4, 0, 244, 0, Math.PI / 4);
+    pushCyl(glass, 0.25, 0.25, 4, 8, 0, 261, 0);
+
+    addMergedMeshes(g, quartz, new THREE.MeshStandardNodeMaterial({ color: 0xebe7de, roughness: 0.55 }));
+    addMergedMeshes(g, wings, new THREE.MeshStandardNodeMaterial({ color: 0xded9ce, roughness: 0.6 }));
+    addMergedMeshes(g, glass, new THREE.MeshStandardNodeMaterial({ color: 0x2c4a68, roughness: 0.2, metalness: 0.6 }));
+    addMergedMeshes(g, crownGlow, new THREE.MeshStandardNodeMaterial({ color: 0xffffff, emissive: 0xfff0c2, emissiveIntensity: 1.2, roughness: 0.2 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 48, 48), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 24, maxX: cx + 24, minZ: cz - 24, maxZ: cz + 24, maxY: 262, solid: true });
+  }
+
+  // 2. Salesforce Tower (326m tapered glass & white-metal obelisk + illuminated crown)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Salesforce Tower'];
+    const cx = site ? site.x : 933;
+    const cz = site ? site.z : -200;
+    const curtain = [];
+    const fins = [];
+    const crown = [];
+
+    pushCyl(curtain, 21, 28, 292, 16, 0, 146, 0);
+    pushCyl(fins, 21.4, 28.4, 290, 8, 0, 145, 0, Math.PI / 8);
+    pushCyl(crown, 16.5, 21, 34, 16, 0, 309, 0);
+
+    addMergedMeshes(g, curtain, new THREE.MeshStandardNodeMaterial({ color: 0x6ea8d6, roughness: 0.15, metalness: 0.78 }));
+    addMergedMeshes(g, fins, new THREE.MeshStandardNodeMaterial({ color: 0xe9eef4, roughness: 0.35, metalness: 0.5 }));
+    addMergedMeshes(g, crown, new THREE.MeshStandardNodeMaterial({ color: 0xd8f0ff, emissive: 0x6bc4ff, emissiveIntensity: 0.85, roughness: 0.2 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 48, 48), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 26, maxX: cx + 26, minZ: cz - 26, maxZ: cz + 26, maxY: 326, solid: true });
+  }
+
+  // 3. San Francisco Ferry Building (1898 Embarcadero terminal nave + 75m clock tower)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Ferry Building'];
+    const cx = site ? site.x : 1214;
+    const cz = site ? site.z : -845;
+    const stone = [];
+    const roof = [];
+    const clockGlow = [];
+
+    // 200m waterfront nave hall along The Embarcadero
+    pushBox(stone, 36, 18, 196, 0, 9, 0);
+    pushBox(roof, 38, 4.5, 198, 0, 20.25, 0);
+    // 75m central Seville-inspired Clock Tower
+    pushBox(stone, 11.5, 52, 11.5, -2, 26, 0);
+    pushBox(stone, 9.2, 14, 9.2, -2, 59, 0);
+    pushCyl(roof, 0.8, 5.8, 9, 8, -2, 70.5, 0, Math.PI / 8);
+    // Four-sided illuminated terracotta clock faces
+    pushBox(clockGlow, 10.0, 5.2, 5.2, -2, 46, 0);
+    pushBox(clockGlow, 5.2, 5.2, 10.0, -2, 46, 0);
+
+    addMergedMeshes(g, stone, new THREE.MeshStandardNodeMaterial({ color: 0xdcd5c6, roughness: 0.65 }));
+    addMergedMeshes(g, roof, new THREE.MeshStandardNodeMaterial({ color: 0x5c6970, roughness: 0.55, metalness: 0.25 }));
+    addMergedMeshes(g, clockGlow, new THREE.MeshStandardNodeMaterial({ color: 0xfff3d1, emissive: 0xffc86b, emissiveIntensity: 0.95, roughness: 0.25 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 36, 120), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 18, maxX: cx + 18, minZ: cz - 98, maxZ: cz + 98, maxY: 75, solid: true });
+  }
+
+  // 4. Coit Tower (1933 fluted white concrete column atop Telegraph Hill)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Coit Tower'];
+    const cx = site ? site.x : 150;
+    const cz = site ? site.z : -1611;
+    const concrete = [];
+    const lanternGlow = [];
+
+    pushBox(concrete, 24, 7, 24, 0, 3.5, 0);
+    pushCyl(concrete, 6.2, 7.2, 52, 20, 0, 29.5, 0);
+    pushCyl(concrete, 4.6, 5.4, 7, 16, 0, 59, 0);
+    pushCyl(lanternGlow, 4.8, 4.8, 3.5, 16, 0, 56, 0);
+
+    addMergedMeshes(g, concrete, new THREE.MeshStandardNodeMaterial({ color: 0xf0ece1, roughness: 0.62 }));
+    addMergedMeshes(g, lanternGlow, new THREE.MeshStandardNodeMaterial({ color: 0xfff5d6, emissive: 0xffd27d, emissiveIntensity: 0.85, roughness: 0.25 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 22, 22), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 12, maxX: cx + 12, minZ: cz - 12, maxZ: cz + 12, maxY: 64, solid: true });
+  }
+
+  // 5. San Francisco City Hall (Beaux-Arts granite civic palace & 94m green-and-gold dome)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['San Francisco City Hall'];
+    const cx = site ? site.x : -1038;
+    const cz = site ? site.z : 956;
+    const granite = [];
+    const patinaDome = [];
+    const goldLeaf = [];
+
+    pushBox(granite, 92, 24, 114, 0, 12, 0);
+    pushBox(granite, 42, 12, 42, 0, 30, 0);
+    pushCyl(granite, 17.5, 18.5, 18, 16, 0, 45, 0);
+    pushCyl(patinaDome, 4.5, 18.0, 24, 16, 0, 66, 0);
+    pushCyl(goldLeaf, 3.2, 3.8, 9, 12, 0, 82.5, 0);
+    pushCyl(goldLeaf, 0.3, 2.2, 7, 8, 0, 90.5, 0);
+
+    addMergedMeshes(g, granite, new THREE.MeshStandardNodeMaterial({ color: 0xdad6ce, roughness: 0.68 }));
+    addMergedMeshes(g, patinaDome, new THREE.MeshStandardNodeMaterial({ color: 0x457b66, roughness: 0.48, metalness: 0.3 }));
+    addMergedMeshes(g, goldLeaf, new THREE.MeshStandardNodeMaterial({ color: 0xf5c842, emissive: 0xd49b1a, emissiveIntensity: 0.35, roughness: 0.25, metalness: 0.8 }));
+
+    g.position.set(cx, groundUnder(cx, cz, 80, 100), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 46, maxX: cx + 46, minZ: cz - 57, maxZ: cz + 57, maxY: 94, solid: true });
+  }
+
+  // 6. Chinatown Dragon Gate (Grant Ave & Bush St)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Chinatown Dragon Gate'];
+    const cx = site ? site.x : 167;
+    const cz = site ? site.z : -311;
+    const pillars = [];
+    const jadeTile = [];
+    const goldTrim = [];
+
+    for (const px of [-7.5, -3.2, 3.2, 7.5]) {
+      pushCyl(pillars, 0.42, 0.48, 8.5, 8, px, 4.25, 0);
+    }
+    pushBox(jadeTile, 18.5, 1.8, 3.4, 0, 9.2, 0);
+    pushBox(jadeTile, 10.5, 2.0, 3.8, 0, 11.4, 0);
+    pushBox(goldTrim, 16.5, 0.6, 2.2, 0, 8.0, 0);
+
+    addMergedMeshes(g, pillars, new THREE.MeshStandardNodeMaterial({ color: 0xb82921, roughness: 0.55 }));
+    addMergedMeshes(g, jadeTile, new THREE.MeshStandardNodeMaterial({ color: 0x1b6e44, roughness: 0.4 }));
+    addMergedMeshes(g, goldTrim, new THREE.MeshStandardNodeMaterial({ color: 0xf2c138, roughness: 0.3, metalness: 0.65 }));
+
+    g.position.set(cx, groundUnder(cx, cz, 16, 8), cz);
+    group.add(g);
+  }
+
+  // 7. Alamo Square "Painted Ladies" (Postcard Row of 6 Victorian Queen Anne houses)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Painted Ladies'];
+    const cx = site ? site.x : -2155;
+    const cz = site ? site.z : 1289;
+    const pastelColors = [0xf2d1a0, 0xa8d5ba, 0xf4b6c2, 0xaec6cf, 0xf7e396, 0xd7bde2];
+    const trim = [];
+
+    for (let i = 0; i < 6; i++) {
+      const zOff = (i - 2.5) * 8.6;
+      const body = [];
+      pushBox(body, 16, 11.5, 7.6, 0, 5.75, zOff);
+      pushCyl(body, 0.2, 4.6, 4.2, 4, -5.5, 13.6, zOff, Math.PI / 4);
+      pushBox(trim, 2.2, 9.5, 3.2, -8.2, 5.0, zOff - 1.5);
+      addMergedMeshes(g, body, new THREE.MeshStandardNodeMaterial({ color: pastelColors[i], roughness: 0.65 }));
+    }
+    addMergedMeshes(g, trim, new THREE.MeshStandardNodeMaterial({ color: 0xf8f6f0, roughness: 0.55 }));
+
+    g.position.set(cx, groundUnder(cx, cz, 18, 52), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 9, maxX: cx + 9, minZ: cz - 26, maxZ: cz + 26, maxY: 16, solid: true });
+  }
+
+  if (scene && typeof scene.add === 'function') scene.add(group);
+  return { group, colliders };
+}
+
 export function buildLandmarks(scene) {
   if (ACTIVE_CITY_ID === 'annarbor') return buildAnnArborLandmarks(scene);
   if (ACTIVE_CITY_ID === 'newyork') return buildNewYorkLandmarks(scene);
   if (ACTIVE_CITY_ID === 'oakland') return buildOaklandLandmarks(scene);
+  if (ACTIVE_CITY_ID === 'pompanobeach') return buildPompanoBeachLandmarks(scene);
+  if (ACTIVE_CITY_ID === 'sanfrancisco') return buildSanFranciscoLandmarks(scene);
   return buildRoyalOakLandmarks(scene);
 }

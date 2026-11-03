@@ -1,5 +1,5 @@
 // Multi-city registry & active city pack configuration.
-// Supports 'royaloak' (default), 'oakland', 'annarbor', and 'newyork'.
+// Supports 'royaloak' (default), 'oakland', 'annarbor', 'newyork', 'pompanobeach', and 'sanfrancisco'.
 
 const CITY_ALIASES = {
   royaloak: 'royaloak',
@@ -7,7 +7,6 @@ const CITY_ALIASES = {
   ro: 'royaloak',
   oakland: 'oakland',
   oak: 'oakland',
-  sf: 'oakland',
   annarbor: 'annarbor',
   'ann-arbor': 'annarbor',
   a2: 'annarbor',
@@ -15,7 +14,16 @@ const CITY_ALIASES = {
   newyork: 'newyork',
   'new-york': 'newyork',
   ny: 'newyork',
-  nyc: 'newyork'
+  nyc: 'newyork',
+  pompanobeach: 'pompanobeach',
+  'pompano-beach': 'pompanobeach',
+  pompano: 'pompanobeach',
+  pb: 'pompanobeach',
+  fl: 'pompanobeach',
+  sanfrancisco: 'sanfrancisco',
+  'san-francisco': 'sanfrancisco',
+  sf: 'sanfrancisco',
+  sfo: 'sanfrancisco'
 };
 
 function resolveActiveCityId() {
@@ -587,6 +595,278 @@ const CITY_PACKS = {
       cyclist:    { x: -18.2, z: 312,  heading: Math.PI },
       helicopter: { x: -140,  z: 400,  heading: 2.6, above: 96 },
       kayak:      { x: -1750, z: 180,  heading: 0 }
+    }
+  },
+
+  pompanobeach: {
+    id: 'pompanobeach',
+    title: 'Pompano Beach',
+    stateCode: 'FL',
+    stateLabel: 'Florida',
+    displayName: 'Pompano Beach, FL',
+    subtitle: 'Fisher Family Pier, Hillsboro Inlet Lighthouse, Intracoastal Canals & Airpark',
+    countyLabel: 'BROWARD COUNTY',
+    cityLabel: 'POMPANO BEACH',
+    searchPlaceholder: 'Street or landmark (Atlantic Blvd, Ocean Blvd, Pier, Hillsboro Inlet, US-1...)',
+    loadingStages: {
+      streets: 'Building Atlantic Blvd, A1A, the Intracoastal and finger canals...',
+      outskirts: 'Laying out Broward County, Pompano Airpark and the Atlantic coast...',
+      landmarks: 'Building Fisher Family Pier, Hillsboro Lighthouse and the Goodyear Blimp...'
+    },
+    timeZone: 'America/New_York',
+    lat: 26.2318,
+    lon: -80.1038,
+    baseElev: 0.0,
+    weatherStation: 'KPMP',
+    riverGaugeSite: '02281500',
+    riverGaugeBaseFt: 1.8,
+    usualCfs: 35,
+    kayakLaunch: { x: 1120, z: 60 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'BSO',
+      doorTop: 'BROWARD',
+      doorBottom: 'SHERIFF',
+      doorSub: 'POMPANO BEACH',
+      badgeTitle: 'BSO',
+      baseColor: 0x143322,
+      stripeColor: 0xd4af37
+    },
+    plate: {
+      state: 'MYFLORIDA.COM',
+      slogan: 'SUNSHINE STATE',
+      sample: 'PMP 954',
+      bg: '#f7f8f5',
+      topBand: '#e87722',
+      text: '#006847',
+      scriptColor: '#e87722',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'Broward County Transit',
+      shortName: 'BCT',
+      bodyColor: 0xf4f6f8,
+      bandColor: 0x0072ce,
+      accentColor: 0xf58220
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0x00b4d8,
+      plateText: 'PMP 954',
+      state: 'FLORIDA'
+    },
+    areas: [
+      [0, 0, 'Atlantic & Federal (US-1)'],
+      [1728, -345, 'Pompano Beach & Fisher Family Pier'],
+      [2317, -3034, 'Hillsboro Inlet Lighthouse'],
+      [1188, -11, 'Intracoastal Waterway & Atlantic Bridge'],
+      [879, 533, 'Harbor Village Finger Canals'],
+      [750, 1650, 'Santa Barbara Shores Canals'],
+      [1538, -2112, 'NE 14th St Causeway'],
+      [-719, -1689, 'Pompano Beach Airpark & Blimp Base'],
+      [-1867, -22, 'Civic Center & Amphitheater'],
+      [-2217, -78, 'Old Town Pompano']
+    ],
+    landmarks: [
+      { id: 'atlanticus1', name: 'Atlantic Blvd & Federal Hwy (US-1)',            short: 'Atlantic & US-1',      x: 0,     z: 0,     heading: Math.PI / 2 },
+      { id: 'pier',        name: 'Pompano Beach Fisher Family Pier',              short: 'Fisher Family Pier',   x: 1620,  z: -345,  heading: Math.PI / 2 },
+      { id: 'lighthouse',  name: 'Hillsboro Inlet Lighthouse & Coast Guard',      short: 'Hillsboro Lighthouse', x: 2260,  z: -2980, heading: 0 },
+      { id: 'icwbridge',   name: 'Atlantic Blvd Intracoastal Drawbridge',         short: 'Intracoastal Bridge',  x: 1140,  z: -11,   heading: Math.PI / 2 },
+      { id: 'canals',      name: 'Harbor Village Finger Canals',                  short: 'Finger Canals',        x: 879,   z: 533,   heading: 0 },
+      { id: 'airpark',     name: 'Pompano Beach Airpark & Goodyear Blimp Base',   short: 'Airpark & Blimp Base', x: -650,  z: -1620, heading: 0 },
+      { id: 'amp',         name: 'Pompano Beach Amphitheater (The Amp)',          short: 'The Amp / Civic Ctr',  x: -1820, z: 20,    heading: -Math.PI / 2 },
+      { id: 'oldtown',     name: 'Old Town Pompano & Arts District',              short: 'Old Town Pompano',     x: -2217, z: -20,   heading: -Math.PI / 2 }
+    ],
+    teleportIds: ['atlanticus1', 'pier', 'lighthouse', 'icwbridge', 'canals', 'airpark', 'amp', 'oldtown'],
+    modelledLandmarks: [
+      'Pompano Beach Fisher Family Pier',
+      'Hillsboro Inlet Lighthouse',
+      'Pompano Beach Amphitheater',
+      'Pompano Airpark Goodyear Blimp Hangar',
+      'Atlantic Blvd Intracoastal Control Tower',
+      'Old Town Pompano Civic Plaza'
+    ],
+    areaLabels: [
+      ['POMPANO BEACH', 0, -200, 0],
+      ['ATLANTIC OCEAN', 2250, -500, 1],
+      ['INTRACOASTAL WATERWAY', 1200, -700, 1],
+      ['HILLSBORO INLET', 2317, -3034, 2],
+      ['FISHER FAMILY PIER', 1728, -345, 2],
+      ['ATLANTIC \u00b7 US-1', 0, 0, 2],
+      ['HARBOR VILLAGE CANALS', 879, 533, 2],
+      ['SANTA BARBARA SHORES', 750, 1650, 2],
+      ['POMPANO AIRPARK (KPMP)', -719, -1689, 2],
+      ['MUNICIPAL GOLF COURSE', -450, -1350, 2],
+      ['CIVIC CENTER \u00b7 THE AMP', -1867, -22, 2],
+      ['OLD TOWN POMPANO', -2217, -78, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'pierSunset',       name: 'Fisher Family Pier & Ocean',   category: 'scenic', fov: 50 },
+      { id: 'hillsboroLight',   name: 'Hillsboro Inlet Lighthouse',   category: 'scenic', fov: 48 },
+      { id: 'intracoastalBridge', name: 'Atlantic Intracoastal Bridge', category: 'scenic', fov: 50 },
+      { id: 'fingerCanals',     name: 'Harbor Village Finger Canals', category: 'scenic', fov: 52 },
+      { id: 'blimpBase',        name: 'Airpark & Goodyear Blimp',     category: 'scenic', fov: 48 },
+      { id: 'theAmp',           name: 'Pompano Amphitheater',         category: 'scenic', fov: 50 },
+      { id: 'coastalAerial',    name: 'Barrier Island & Coast Aerial',category: 'scenic', fov: 46 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      pierSunset:         { pos: [1580, 12, -290],    look: [1760, 8, -345],      ampPos: [8, 0.4, 6],   ampLook: [4, 0, 4],   freq: 0.12 },
+      hillsboroLight:     { pos: [2220, 14, -2940],   look: [2317, 24, -3034],    ampPos: [7, 0.4, 7],   ampLook: [3, 1, 3],   freq: 0.11 },
+      intracoastalBridge: { pos: [1080, 15, 65],      look: [1200, 8, -20],       ampPos: [6, 0.3, 6],   ampLook: [4, 0, 4],   freq: 0.13 },
+      fingerCanals:       { pos: [980, 45, 720],      look: [850, 4, 480],        ampPos: [10, 0.8, 10], ampLook: [8, 0, 8],   freq: 0.09 },
+      blimpBase:          { pos: [-580, 18, -1580],   look: [-719, 28, -1689],    ampPos: [8, 0.5, 8],   ampLook: [5, 1, 5],   freq: 0.10 },
+      theAmp:             { pos: [-1790, 11, 45],     look: [-1867, 10, -22],     ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.13 },
+      coastalAerial:      { pos: [2150, 165, 250],    look: [1250, 10, -450],     ampPos: [22, 2.0, 20], ampLook: [20, 0, 20], freq: 0.07 }
+    },
+    scenicStarts: {
+      person:     { x: 1595, z: -345, heading: Math.PI / 2 },
+      car:        { x: 0,    z: 0,    heading: Math.PI / 2 },
+      cyclist:    { x: 1580, z: -200, heading: 0 },
+      helicopter: { x: 1650, z: -250, heading: -0.4, above: 120 },
+      kayak:      { x: 1120, z: 60,   heading: 0 }
+    }
+  },
+
+  sanfrancisco: {
+    id: 'sanfrancisco',
+    title: 'San Francisco',
+    stateCode: 'CA',
+    stateLabel: 'California',
+    displayName: 'San Francisco, CA',
+    subtitle: 'Union Square, Transamerica Pyramid, Coit Tower, Ferry Building & Lombard St',
+    countyLabel: 'CITY & COUNTY OF SF',
+    cityLabel: 'SAN FRANCISCO',
+    searchPlaceholder: 'Street or landmark (Market St, Powell, Lombard, Ferry Building, Coit Tower...)',
+    loadingStages: {
+      streets: 'Building Market Street, Nob Hill, Russian Hill and the Embarcadero...',
+      outskirts: 'Laying out San Francisco Bay, Telegraph Hill and the Marina...',
+      landmarks: 'Building Transamerica Pyramid, Salesforce Tower, Coit Tower and City Hall...'
+    },
+    timeZone: 'America/Los_Angeles',
+    lat: 37.7879,
+    lon: -122.4075,
+    baseElev: 0.0,
+    weatherStation: 'KSFO',
+    riverGaugeSite: '11162765',
+    riverGaugeBaseFt: 3.0,
+    usualCfs: 25,
+    kayakLaunch: { x: -1350, z: -2120 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'SFPD',
+      doorTop: 'SAN FRANCISCO',
+      doorBottom: 'POLICE',
+      doorSub: 'ORO EN PAZ FIERRO EN GUERRA',
+      badgeTitle: 'SFPD',
+      baseColor: 0x14171c,
+      stripeColor: 0x1e4d8c
+    },
+    plate: {
+      state: 'California',
+      slogan: 'dmv.ca.gov',
+      sample: 'SFO 415',
+      bg: '#f4f5f2',
+      topBand: null,
+      text: '#122b66',
+      scriptColor: '#c81e2b',
+      legacyEvery4: true
+    },
+    transit: {
+      name: 'SF Muni',
+      shortName: 'MUNI',
+      bodyColor: 0xf2f4f5,
+      bandColor: 0xcc0033,
+      accentColor: 0xf58220
+    },
+    ownCar: {
+      kind: 'sports',
+      hex: 0xf04a24,
+      plateText: 'SFO 415',
+      state: 'CALIFORNIA'
+    },
+    areas: [
+      [0, 0, 'Union Square'],
+      [580, -520, 'Financial District'],
+      [167, -550, 'Chinatown'],
+      [40, -1450, 'North Beach'],
+      [150, -1611, 'Telegraph Hill & Coit Tower'],
+      [-985, -1578, 'Russian Hill & Lombard Street'],
+      [-260, -420, 'Nob Hill'],
+      [-202, -2312, 'Fisherman\'s Wharf & Pier 39'],
+      [1214, -845, 'The Embarcadero & Ferry Building'],
+      [380, 520, 'South of Market (SoMa)'],
+      [-1038, 956, 'Civic Center'],
+      [1601, 1034, 'China Basin & Oracle Park'],
+      [-2226, 1289, 'Alamo Square & Painted Ladies']
+    ],
+    landmarks: [
+      { id: 'unionsq',      name: 'Union Square (Post & Powell)',            short: 'Union Square',         x: 0,     z: 0,     heading: 0 },
+      { id: 'transamerica', name: 'Transamerica Pyramid',                    short: 'Transamerica Pyramid', x: 365,   z: -811,  heading: 0 },
+      { id: 'salesforce',   name: 'Salesforce Tower & Transit Center',       short: 'Salesforce Tower',     x: 880,   z: -200,  heading: 0 },
+      { id: 'ferrybldg',    name: 'San Francisco Ferry Building',            short: 'Ferry Building',       x: 1155,  z: -845,  heading: Math.PI / 2 },
+      { id: 'coittower',    name: 'Coit Tower & Telegraph Hill',             short: 'Coit Tower',           x: 120,   z: -1580, heading: 0 },
+      { id: 'lombard',      name: 'Lombard Street (Crookedest Street)',      short: 'Lombard Street',       x: -985,  z: -1578, heading: Math.PI / 2 },
+      { id: 'sfcityhall',   name: 'San Francisco City Hall & Civic Center',  short: 'SF City Hall',         x: -960,  z: 956,   heading: -Math.PI / 2 },
+      { id: 'chinatown',    name: 'Chinatown Dragon Gate (Grant & Bush)',    short: 'Chinatown Gate',       x: 167,   z: -285,  heading: Math.PI },
+      { id: 'wharf',        name: 'Fisherman\'s Wharf & Pier 39',            short: 'Fisherman\'s Wharf',   x: -202,  z: -2220, heading: 0 },
+      { id: 'alamo',        name: 'Alamo Square & Painted Ladies',           short: 'Painted Ladies',       x: -2210, z: 1289,  heading: Math.PI / 2 }
+    ],
+    teleportIds: ['unionsq', 'transamerica', 'ferrybldg', 'coittower', 'lombard', 'sfcityhall', 'wharf', 'alamo'],
+    modelledLandmarks: [
+      'Transamerica Pyramid',
+      'Salesforce Tower',
+      'Ferry Building',
+      'Coit Tower',
+      'San Francisco City Hall',
+      'Chinatown Dragon Gate',
+      'Painted Ladies'
+    ],
+    areaLabels: [
+      ['SAN FRANCISCO', 0, -400, 0],
+      ['SAN FRANCISCO BAY', 1650, -1600, 1],
+      ['AQUATIC PARK COVE', -1408, -2150, 1],
+      ['UNION SQUARE', 0, 0, 2],
+      ['FINANCIAL DISTRICT', 620, -520, 2],
+      ['CHINATOWN', 167, -580, 2],
+      ['NOB HILL', -260, -420, 2],
+      ['RUSSIAN HILL \u00b7 LOMBARD', -985, -1578, 2],
+      ['TELEGRAPH HILL \u00b7 COIT', 150, -1611, 2],
+      ['NORTH BEACH', 40, -1350, 2],
+      ['FISHERMAN\'S WHARF', -202, -2312, 2],
+      ['THE EMBARCADERO', 1214, -845, 2],
+      ['SOUTH OF MARKET (SOMA)', 380, 520, 2],
+      ['CIVIC CENTER', -1038, 956, 2],
+      ['CHINA BASIN \u00b7 ORACLE PARK', 1601, 1034, 2],
+      ['ALAMO SQUARE', -2226, 1289, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'unionSquare',    name: 'Union Square & Powell St',     category: 'scenic', fov: 50 },
+      { id: 'transamerica',   name: 'Transamerica Pyramid',         category: 'scenic', fov: 46 },
+      { id: 'ferryBuilding',  name: 'Ferry Building & Embarcadero', category: 'scenic', fov: 48 },
+      { id: 'coitTower',      name: 'Coit Tower & Telegraph Hill',  category: 'scenic', fov: 50 },
+      { id: 'lombardStreet',  name: 'Lombard St & Russian Hill',    category: 'scenic', fov: 50 },
+      { id: 'sfCityHall',     name: 'San Francisco City Hall Dome', category: 'scenic', fov: 48 },
+      { id: 'baySkyline',     name: 'San Francisco Bay Skyline',    category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      unionSquare:   { pos: [-55, 11, 65],        look: [10, 14, -40],          ampPos: [5, 0.3, 4],   ampLook: [3, 0, 3],   freq: 0.13 },
+      transamerica:  { pos: [260, 18, -640],      look: [414, 125, -811],       ampPos: [6, 0.4, 6],   ampLook: [3, 4, 3],   freq: 0.11 },
+      ferryBuilding: { pos: [1095, 14, -760],     look: [1214, 38, -845],       ampPos: [6, 0.3, 6],   ampLook: [3, 1, 3],   freq: 0.12 },
+      coitTower:     { pos: [70, 22, -1520],      look: [150, 42, -1611],       ampPos: [6, 0.4, 6],   ampLook: [3, 1, 3],   freq: 0.11 },
+      lombardStreet: { pos: [-880, 18, -1565],    look: [-1010, 26, -1580],     ampPos: [5, 0.3, 5],   ampLook: [3, 1, 3],   freq: 0.12 },
+      sfCityHall:    { pos: [-910, 14, 956],      look: [-1038, 45, 956],       ampPos: [5, 0.3, 5],   ampLook: [3, 1, 3],   freq: 0.11 },
+      baySkyline:    { pos: [1680, 145, -1150],   look: [580, 85, -520],        ampPos: [20, 2.0, 20], ampLook: [15, 0, 15], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: -12,   z: 18,    heading: Math.PI },
+      car:        { x: 0,     z: 45,    heading: Math.PI },
+      cyclist:    { x: 1145,  z: -845,  heading: Math.PI },
+      helicopter: { x: 1450,  z: -1050, heading: -1.8, above: 165 },
+      kayak:      { x: -1350, z: -2120, heading: Math.PI / 2 }
     }
   }
 };

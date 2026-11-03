@@ -25,7 +25,13 @@ npm run city:install -- annarbor
 # Install New York, NY (Manhattan Grid + Central Park + MTA Subway)
 npm run city:install -- newyork
 
-# Or install all 4 city packs at once
+# Install Pompano Beach, FL (Fisher Family Pier, Hillsboro Lighthouse, Intracoastal Canals & Airpark)
+npm run city:install -- pompanobeach
+
+# Install San Francisco, CA (Union Square, Transamerica, Coit Tower, Ferry Bldg, Lombard St & Muni)
+npm run city:install -- sanfrancisco
+
+# Or install all 6 city packs at once
 npm run city:install -- all
 ```
 

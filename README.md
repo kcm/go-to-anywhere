@@ -18,25 +18,29 @@ npm run city:list
 
 | City ID | Display Name | Coverage & Highlights |
 | :--- | :--- | :--- |
-| `royaloak` *(default)* | **Royal Oak, MI** | 10 Mile Rd (I-696) north to **14 Mile Rd** (`7.22 km × 5.92 km`), Downtown Main & 4th, Woodward Ave (M-1), Shrine of the Little Flower Basilica, Royal Oak Music Theatre, Detroit Zoo, SMART buses & Amtrak Wolverine (`ROY`) |
+| `royaloak` *(default)* | **Royal Oak, MI** | 10 Mile Rd (I-696) north to **14 Mile Rd** (`7.22 km x 5.92 km`), Downtown Main & 4th, Woodward Ave (M-1), Shrine of the Little Flower Basilica, Royal Oak Music Theatre, Detroit Zoo, SMART buses & Amtrak Wolverine (`ROY`) |
 | `oakland` | **Oakland, CA** | Downtown Oakland (14th & Broadway), Lake Merritt, Jack London Square, Oakland Estuary, Port of Oakland cranes, Tribune Tower, City Hall, Fox Theater, Cathedral of Christ the Light, AC Transit & BART |
 | `annarbor` | **Ann Arbor, MI** | University of Michigan Diag, Michigan Stadium (The Big House), Burton Memorial Tower, Huron River & Argo Cascades, TheRide buses & Amtrak Wolverine (`ARB`) |
 | `newyork` | **New York, NY** | Manhattan grid & Broadway, Central Park, Hudson & East Rivers, Empire State Building, Chrysler Building, One WTC, Brooklyn/Manhattan/Williamsburg/Queensboro/GWB bridges, Staten Island Ferry & MTA Subway |
+| `pompanobeach` | **Pompano Beach, FL** | Atlantic Ocean & **Fisher Family Pier**, **Hillsboro Inlet Lighthouse**, **Intracoastal Waterway & Finger Canals**, **Pompano Beach Airpark (`KPMP`) & Goodyear Blimp**, Civic Center & Amphitheater ("The Amp"), Broward County Transit & FEC/Brightline |
+| `sanfrancisco` | **San Francisco, CA** | **Union Square**, **Transamerica Pyramid**, **Salesforce Tower**, **San Francisco Ferry Building & Embarcadero**, **Coit Tower & Telegraph Hill**, **Lombard Street & Russian Hill**, **San Francisco City Hall**, **Chinatown Dragon Gate**, **Fisherman's Wharf & Pier 39**, **Alamo Square Painted Ladies** & SF Muni |
 
 ### 2. Install / Build a City Pack Locally
 
-Install a single city pack or all four:
+Install a single city pack or all six:
 
 ```bash
 # Install Royal Oak, MI (fetches OpenStreetMap + AWS Terrain Tiles + GTFS)
 npm run city:install -- royaloak
 
-# Or install Oakland, Ann Arbor, or New York:
+# Or install Oakland, Ann Arbor, New York, Pompano Beach, or San Francisco:
 npm run city:install -- oakland
 npm run city:install -- annarbor
 npm run city:install -- newyork
+npm run city:install -- pompanobeach
+npm run city:install -- sanfrancisco
 
-# Or install all 4 city packs at once:
+# Or install all 6 city packs at once:
 npm run city:install -- all
 ```
 
@@ -53,6 +57,8 @@ Then open a WebGPU-capable browser (Chrome, Edge, or Safari):
 - **Oakland, CA**: `http://localhost:8000/?city=oakland`
 - **Ann Arbor, MI**: `http://localhost:8000/?city=annarbor`
 - **New York, NY**: `http://localhost:8000/?city=newyork`
+- **Pompano Beach, FL**: `http://localhost:8000/?city=pompanobeach`
+- **San Francisco, CA**: `http://localhost:8000/?city=sanfrancisco`
 
 You can also switch cities anytime from the top-left **Go To Anywhere (GTA)** HUD dropdown or inside the full-screen street map (`M`).
 

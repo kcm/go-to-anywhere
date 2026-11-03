@@ -150,10 +150,12 @@ describe('Headless Browser Multi-City 3D Runtime Verification', () => {
   });
 
   const EXPECTED = [
-    { id: 'royaloak', title: 'Go To Anywhere (GTA) - Royal Oak, MI', atlas: 'Royal Oak Street Atlas' },
-    { id: 'oakland',  title: 'Go To Anywhere (GTA) - Oakland, CA',   atlas: 'Oakland Street Atlas' },
-    { id: 'annarbor', title: 'Go To Anywhere (GTA) - Ann Arbor, MI', atlas: 'Ann Arbor Street Atlas' },
-    { id: 'newyork',  title: 'Go To Anywhere (GTA) - New York, NY',  atlas: 'New York Street Atlas' }
+    { id: 'royaloak',     title: 'Go To Anywhere (GTA) - Royal Oak, MI',     atlas: 'Royal Oak Street Atlas' },
+    { id: 'oakland',      title: 'Go To Anywhere (GTA) - Oakland, CA',       atlas: 'Oakland Street Atlas' },
+    { id: 'annarbor',     title: 'Go To Anywhere (GTA) - Ann Arbor, MI',     atlas: 'Ann Arbor Street Atlas' },
+    { id: 'newyork',      title: 'Go To Anywhere (GTA) - New York, NY',      atlas: 'New York Street Atlas' },
+    { id: 'pompanobeach', title: 'Go To Anywhere (GTA) - Pompano Beach, FL', atlas: 'Pompano Beach Street Atlas' },
+    { id: 'sanfrancisco', title: 'Go To Anywhere (GTA) - San Francisco, CA', atlas: 'San Francisco Street Atlas' }
   ];
 
   for (const exp of EXPECTED) {
