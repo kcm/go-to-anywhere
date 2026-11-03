@@ -10,6 +10,7 @@
     "city:install": "python3 tools/build-city-pack.py",
     "city:build": "python3 tools/build-city-pack.py",
     "city:archetypes": "python3 tools/sample-city-archetypes.py",
+    "deploy": "python3 tools/deploy-gh-pages.py",
     "test": "node --test tests/city-packs.test.cjs",
     "test:browser": "node --test tests/browser-smoke.test.cjs"
   },
