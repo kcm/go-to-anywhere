@@ -2,7 +2,7 @@ import { gpuOnly } from './gpu-only.js';
 import * as THREE from 'three/webgpu';
 import { Fn, attribute, float, vec2, vec3, color, fract, floor, abs, clamp, max, min, mix, step, smoothstep, sin, fwidth, uv, texture, pow, mod } from 'three/tsl';
 import { cityUniforms } from './tsl-materials.js';
-import { nearestRoads } from './city-config.js';
+import { nearestRoads, districtAt } from './city-config.js';
 import { historicDistrictAt } from './districts.js';
 import { groundHeight } from './terrain.js';
 import { GEO } from './city-geodata.js';
@@ -838,8 +838,20 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     const ranch = storeys === 1 && !historic;
     let fh = garage ? 0.12 : historic ? 0.75 + 0.3 * id(21) : ranch ? 0.3 + 0.2 * id(21) : 0.5 + 0.35 * id(21);
 
-    // Walls & regional palette from city pack / sampled Street View archetypes (GEO.archetypes || CITY_PACK.archetypes)
-    const archRes = ((GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {}).residential || {};
+    // Walls & regional/neighborhood palette from city pack / sampled Street View archetypes (GEO.archetypes || CITY_PACK.archetypes)
+    const archRoot = (GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {};
+    const archResBase = archRoot.residential || {};
+    const nbId = districtAt(r.cx, r.cz);
+    const nbRes = (archRoot.neighborhoods && archRoot.neighborhoods[nbId] && archRoot.neighborhoods[nbId].residential) || null;
+    const archRes = nbRes
+      ? {
+          ...archResBase,
+          ...nbRes,
+          walls: nbRes.walls || archResBase.walls,
+          roofs: nbRes.roofs || archResBase.roofs,
+          pitch: nbRes.pitch || archResBase.pitch
+        }
+      : archResBase;
     const wProbs = archRes.walls || { brick: 0.03, stone: 0.02, stucco: 0.40, shake: 0.13, clapboard: 0.42 };
     const pBrick = wProbs.brick ?? 0.03;
     const pStone = pBrick + (wProbs.stone ?? 0.02);

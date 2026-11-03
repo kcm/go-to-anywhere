@@ -246,6 +246,30 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x8e4232, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.6 },
         waterTowerProb: 0.03,
         fireEscapes: true
+      },
+      neighborhoods: {
+        downtown_royal_oak: {
+          midrise: { stoneColor: 0x9c4a38, trimColor: 0xded6c4, windowWidth: 2.5, floorHeight: 3.7, storefronts: true }
+        },
+        vinsetta: {
+          residential: {
+            walls: { clapboard: 0.22, brick: 0.54, stone: 0.14, stucco: 0.06, shake: 0.04 },
+            roofs: { flat: 0.02, hip: 0.32, gable: 0.64, gambrel: 0.02 },
+            pitch: { hip: 0.42, gable: 0.54, historic: 0.60 }
+          }
+        },
+        shrine_northwood: {
+          residential: {
+            walls: { clapboard: 0.38, brick: 0.48, stone: 0.06, stucco: 0.04, shake: 0.04 },
+            pitch: { hip: 0.38, gable: 0.48, historic: 0.54 }
+          }
+        }
+      },
+      landmarks: {
+        'National Shrine of the Little Flower Basilica': { form: 'clock_tower', w: 54, d: 46, h: 42, primaryColor: 0xe3dccb, secondaryColor: 0xaca69b, roofColor: 0x457d68, accentColor: 0xffcf78 },
+        'Detroit Zoo Water Tower': { form: 'observation_needle', w: 28, d: 28, h: 43, primaryColor: 0xd8e0e8, secondaryColor: 0xe8dec9, roofColor: 0x15589c, accentColor: 0xb54d32 },
+        'Royal Oak Music Theatre': { form: 'historic_row', w: 32, d: 44, h: 18, primaryColor: 0x8f3f31, secondaryColor: 0xded6c6, accentColor: 0xffbf40, glowColor: 0xff3b2f, signText: 'ROYAL OAK MUSIC THEATRE' },
+        'Royal Oak Farmers Market': { form: 'canal_palazzo', w: 62, d: 34, h: 12, primaryColor: 0xa64b38, secondaryColor: 0xe2dac9, roofColor: 0x4b565e }
       }
     }
   },
@@ -395,6 +419,48 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xa45a45, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.5 },
         waterTowerProb: 0.05,
         fireEscapes: true
+      },
+      neighborhoods: {
+        old_oakland: {
+          style: 'victorian-italianate-commercial-row',
+          residential: {
+            walls: { clapboard: 0.65, brick: 0.15, stone: 0.05, stucco: 0.10, shake: 0.05 },
+            roofs: { flat: 0.45, hip: 0.30, gable: 0.25, gambrel: 0.0 },
+            siding: [0xd99b52, 0x5c8294, 0x7c9c72, 0xc86452, 0xeadbc4]
+          },
+          midrise: { stoneColor: 0xb85c42, trimColor: 0xeadbc4, storefronts: true, fireEscapes: true }
+        },
+        west_oakland: {
+          style: 'queen-anne-victorian-cottages',
+          residential: {
+            walls: { clapboard: 0.72, brick: 0.02, stone: 0.01, stucco: 0.15, shake: 0.10 },
+            roofs: { flat: 0.08, hip: 0.32, gable: 0.58, gambrel: 0.02 },
+            siding: [0x6e8c9e, 0xd4a259, 0x829c7a, 0xe8dfd0, 0xb86b58]
+          }
+        },
+        chinatown: {
+          style: 'oakland-chinatown-masonry-shopfronts',
+          midrise: { stoneColor: 0xc86446, trimColor: 0xe2b857, storefronts: true, fireEscapes: true }
+        },
+        uptown: {
+          style: 'art-deco-terracotta-theater-district',
+          midrise: { stoneColor: 0x7a9e95, trimColor: 0xd9c282, storefronts: true, fireEscapes: true }
+        },
+        piedmont_ave: {
+          style: 'east-bay-craftsman-bungalow',
+          residential: {
+            walls: { clapboard: 0.45, brick: 0.03, stone: 0.04, stucco: 0.22, shake: 0.26 },
+            roofs: { flat: 0.06, hip: 0.34, gable: 0.60, gambrel: 0.0 },
+            siding: [0x7a6855, 0x627362, 0xcab89e, 0x8c735b, 0x586875]
+          }
+        }
+      },
+      landmarks: {
+        'Tribune Tower': { form: 'clock_tower', w: 26, d: 26, h: 93, wallColor: 0xa45a45, trimColor: 0xd8c8a8, roofColor: 0x4a7c6b },
+        'Oakland City Hall': { form: 'clock_tower', w: 54, d: 38, h: 98, wallColor: 0xe6dfd0, trimColor: 0xb8ae9c, roofColor: 0x8a7d68 },
+        'Fox Theater': { form: 'dome_palace', w: 52, d: 46, h: 36, wallColor: 0xd49b58, trimColor: 0x3b7a75, roofColor: 0xb8860b },
+        'Paramount Theatre': { form: 'triumphal_arch', w: 38, d: 52, h: 32, wallColor: 0x7a9e95, trimColor: 0xd9b854 },
+        'Cathedral of Christ the Light': { form: 'diagrid_prism', w: 42, d: 58, h: 38, wallColor: 0xdce8f0, trimColor: 0xc4a478 }
       }
     }
   },
@@ -535,6 +601,27 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xa45a45, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.5 },
         waterTowerProb: 0.04,
         fireEscapes: true
+      },
+      neighborhoods: {
+        old_west_side: {
+          residential: {
+            walls: { clapboard: 0.72, brick: 0.18, stone: 0.02, stucco: 0.04, shake: 0.04 },
+            roofs: { flat: 0.02, hip: 0.28, gable: 0.66, gambrel: 0.04 },
+            pitch: { hip: 0.40, gable: 0.52, historic: 0.58 },
+            siding: [0x7a3b33, 0x46604a, 0xb8924a, 0x52616d, 0xe6dcc3, 0x8c6f4e, 0xd8c8a0]
+          }
+        },
+        kerrytown: {
+          midrise: { stoneColor: 0x8e4232, trimColor: 0xd9ccb0, windowWidth: 2.3, floorHeight: 3.6, storefronts: true }
+        },
+        central_campus: {
+          midrise: { stoneColor: 0x8a4632, trimColor: 0xd9ccb0, windowWidth: 2.2, floorHeight: 4.2 }
+        }
+      },
+      landmarks: {
+        'Burton Memorial Tower': { form: 'clock_tower', w: 14, d: 14, h: 65, primaryColor: 0xdcd5c6, secondaryColor: 0x9e9585, roofColor: 0x457d68 },
+        'Michigan Stadium': { form: 'stadium_bowl', w: 230, d: 190, h: 32, primaryColor: 0x8e4232, secondaryColor: 0x2e6f40, roofColor: 0x162d4c },
+        'Michigan Theater': { form: 'historic_row', w: 32, d: 46, h: 18, primaryColor: 0x9c4836, secondaryColor: 0xd8cfb8, glowColor: 0xffbf40 }
       }
     }
   },
@@ -695,6 +782,25 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xa45a45, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.5 },
         waterTowerProb: 0.26,
         fireEscapes: true
+      },
+      neighborhoods: {
+        harlem: {
+          midrise: { stoneColor: 0x6e4232, trimColor: 0xb8a894, windowWidth: 2.2, floorHeight: 3.5, fireEscapes: true, waterTowerProb: 0.30 }
+        },
+        village: {
+          midrise: { stoneColor: 0x8e3e2e, trimColor: 0xd8cfc0, windowWidth: 2.2, floorHeight: 3.4, fireEscapes: true, storefronts: true, waterTowerProb: 0.32 }
+        },
+        soho: {
+          midrise: { stoneColor: 0xd8d2c6, trimColor: 0x585c62, windowWidth: 2.8, floorHeight: 4.1, fireEscapes: true, storefronts: true, waterTowerProb: 0.34 }
+        },
+        uws: {
+          midrise: { stoneColor: 0xb88468, trimColor: 0xd8cdb8, windowWidth: 2.4, floorHeight: 3.6, fireEscapes: true, waterTowerProb: 0.28 }
+        }
+      },
+      landmarks: {
+        'Empire State Building': { form: 'stepped_bundled_tube', w: 129, d: 57, h: 381, primaryColor: 0xd8cdb8, secondaryColor: 0x9e937f, accentColor: 0xc8d0d8, twinSpire: false },
+        'Chrysler Building': { form: 'stepped_bundled_tube', w: 62, d: 62, h: 319, primaryColor: 0xdfd8c8, secondaryColor: 0xc8d0d8, accentColor: 0xe8eef4, twinSpire: false },
+        'One World Trade Center': { form: 'diagrid_prism', w: 61, d: 61, h: 417, primaryColor: 0x385e82, secondaryColor: 0xb8c6d4, accentColor: 0xe6edf5 }
       }
     }
   },
@@ -843,6 +949,26 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xe6d2bd, trimColor: 0xf5f2eb, windowWidth: 2.8, floorHeight: 3.5 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        pompano_beach_fisher_family_pier: {
+          midrise: { stoneColor: 0xf4f2ec, trimColor: 0x52b8c4, windowWidth: 3.2, floorHeight: 3.6, storefronts: true }
+        },
+        harbor_village_finger_canals: {
+          residential: {
+            walls: { clapboard: 0.04, brick: 0.02, stone: 0.04, stucco: 0.88, shake: 0.02 },
+            roofs: { flat: 0.24, hip: 0.64, gable: 0.12, gambrel: 0.0 },
+            stucco: [0xf7f2e8, 0xf5dfd0, 0xd6ece6, 0xf6e6be, 0xede6da]
+          }
+        },
+        old_town_pompano: {
+          midrise: { stoneColor: 0xe6d4be, trimColor: 0xc86448, windowWidth: 2.6, floorHeight: 3.5, storefronts: true }
+        }
+      },
+      landmarks: {
+        'Pompano Beach Fisher Family Pier': { form: 'arch_bridge', w: 260, d: 28, h: 14, primaryColor: 0xe8eef2, secondaryColor: 0x2892a8 },
+        'Hillsboro Inlet Lighthouse': { form: 'observation_needle', w: 28, d: 28, h: 42, primaryColor: 0xf4f6f8, secondaryColor: 0x1e2228, glowColor: 0xfff2a8 },
+        'Pompano Beach Amphitheater': { form: 'opera_sails', w: 64, d: 58, h: 18, primaryColor: 0xf7f9fb, secondaryColor: 0xcfc8bc, sails: 2 }
       }
     }
   },
@@ -1045,6 +1171,60 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xad5d45, trimColor: 0xd8c8b0, windowWidth: 2.4, floorHeight: 3.6 },
         waterTowerProb: 0.05,
         fireEscapes: true
+      },
+      neighborhoods: {
+        chinatown: {
+          midrise: { stoneColor: 0xc44b38, trimColor: 0xe8be52, windowWidth: 2.2, floorHeight: 3.5, storefronts: true, fireEscapes: true }
+        },
+        alamo_square_painted_ladies: {
+          residential: {
+            walls: { clapboard: 0.78, brick: 0.02, stone: 0.02, stucco: 0.14, shake: 0.04 },
+            roofs: { flat: 0.16, hip: 0.24, gable: 0.58, gambrel: 0.02 },
+            pitch: { hip: 0.42, gable: 0.58, historic: 0.68 },
+            siding: [0xf2d1a0, 0xa8d5ba, 0xf4b6c2, 0xaec6cf, 0xf7e396, 0xd7bde2, 0xf5e8d0]
+          }
+        },
+        haight_ashbury: {
+          residential: {
+            walls: { clapboard: 0.74, brick: 0.04, stone: 0.02, stucco: 0.16, shake: 0.04 },
+            roofs: { flat: 0.18, hip: 0.26, gable: 0.54, gambrel: 0.02 },
+            pitch: { hip: 0.40, gable: 0.56, historic: 0.64 },
+            siding: [0xe8c48e, 0x8fb8a2, 0xd88a98, 0x7ea6c2, 0xd9bf72, 0xb896c8]
+          },
+          midrise: { stoneColor: 0xc97b58, trimColor: 0xf2ece0, windowWidth: 2.3, floorHeight: 3.6, storefronts: true }
+        },
+        marina_palace_of_fine_arts: {
+          residential: {
+            walls: { clapboard: 0.18, brick: 0.04, stone: 0.02, stucco: 0.74, shake: 0.02 },
+            roofs: { flat: 0.56, hip: 0.34, gable: 0.10, gambrel: 0.0 },
+            stucco: [0xf6efe2, 0xf2dfd0, 0xebe0c8, 0xdce8e2, 0xf4e4c2]
+          }
+        },
+        sunset_district: {
+          residential: {
+            walls: { clapboard: 0.16, brick: 0.02, stone: 0.02, stucco: 0.78, shake: 0.02 },
+            roofs: { flat: 0.64, hip: 0.26, gable: 0.10, gambrel: 0.0 },
+            stucco: [0xf2ebe0, 0xe8d8c8, 0xd8e4e0, 0xf0dcd0, 0xe6dfc8, 0xd4dfe8]
+          }
+        },
+        north_beach_little_italy: {
+          midrise: { stoneColor: 0xe8dcc4, trimColor: 0x3b6e52, windowWidth: 2.3, floorHeight: 3.5, storefronts: true, fireEscapes: true }
+        },
+        south_of_market_soma: {
+          midrise: { stoneColor: 0x9c4836, trimColor: 0xb8b2a6, windowWidth: 2.8, floorHeight: 4.0, storefronts: true }
+        }
+      },
+      landmarks: {
+        'Transamerica Pyramid': { form: 'diagrid_prism', w: 54, d: 54, h: 260, primaryColor: 0xebe7de, secondaryColor: 0xded9ce, glowColor: 0xfff0c2 },
+        'Salesforce Tower': { form: 'stepped_bundled_tube', w: 52, d: 52, h: 326, primaryColor: 0x6ea8d6, secondaryColor: 0xe9eef4, glowColor: 0x6bc4ff, twinSpire: false },
+        'Ferry Building': { form: 'clock_tower', w: 48, d: 200, h: 75, hallW: 36, hallD: 196, hallH: 18, primaryColor: 0xdcd5c6, secondaryColor: 0x5c6970, roofColor: 0x5c6970, glowColor: 0xffc86b },
+        'Coit Tower': { form: 'clock_tower', w: 26, d: 26, h: 64, primaryColor: 0xf0ece1, secondaryColor: 0xdcd5c6, glowColor: 0xffd27d },
+        'San Francisco City Hall': { form: 'dome_palace', w: 118, d: 94, h: 94, primaryColor: 0xdad6ce, secondaryColor: 0xb8b2a6, roofColor: 0x457b66, accentColor: 0xf5c842 },
+        'Chinatown Dragon Gate': { form: 'torii_temple', w: 22, d: 10, h: 14, primaryColor: 0xb82921, secondaryColor: 0xf2c138, roofColor: 0x1b6e44 },
+        'Painted Ladies': { form: 'historic_row', w: 18, d: 54, h: 16, rowCount: 6, rowColors: [0xf2d1a0, 0xa8d5ba, 0xf4b6c2, 0xaec6cf, 0xf7e396, 0xd7bde2] },
+        'Golden Gate Bridge': { form: 'suspension_bridge', w: 36, d: 1980, h: 227, deckY: 67, primaryColor: 0xc0362c, secondaryColor: 0x33373d, accentColor: 0xc0362c },
+        'Palace of Fine Arts': { form: 'dome_palace', w: 68, d: 120, h: 48, primaryColor: 0xe6d3b3, secondaryColor: 0xd8c3a0, roofColor: 0xc87d55 },
+        'Sutro Tower': { form: 'lattice_tower', w: 52, d: 52, h: 298, primaryColor: 0xc92a2a, secondaryColor: 0xf4f6f8, glowColor: 0xff1744 }
       }
     }
   },
@@ -1189,6 +1369,41 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x9e4834, trimColor: 0xe6dcc4, windowWidth: 2.4, floorHeight: 3.6 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        the_rocks: {
+          style: 'colonial-sydney-sandstone-bond-stores',
+          residential: {
+            walls: { clapboard: 0.04, brick: 0.36, stone: 0.48, stucco: 0.12, shake: 0.0 },
+            roofs: { flat: 0.14, hip: 0.38, gable: 0.48, gambrel: 0.0 },
+            stucco: [0xdcc59a, 0xcfb484, 0xe6d4b0, 0xc4a675]
+          },
+          midrise: { stoneColor: 0xd6bc8c, trimColor: 0x9c8258, storefronts: true }
+        },
+        potts_point_woolloomooloo: {
+          style: 'victorian-filigree-terrace-art-deco',
+          residential: {
+            walls: { clapboard: 0.05, brick: 0.35, stone: 0.10, stucco: 0.50, shake: 0.0 },
+            roofs: { flat: 0.35, hip: 0.45, gable: 0.20, gambrel: 0.0 },
+            stucco: [0xf2ead8, 0xd8e2dc, 0xead4be, 0xf5f0e4]
+          },
+          midrise: { stoneColor: 0x9c4632, trimColor: 0xf2ead8, storefronts: true }
+        },
+        milsons_point_kirribilli: {
+          style: 'federation-queen-anne-redbrick-terrace',
+          residential: {
+            walls: { clapboard: 0.08, brick: 0.68, stone: 0.08, stucco: 0.16, shake: 0.0 },
+            roofs: { flat: 0.10, hip: 0.48, gable: 0.42, gambrel: 0.0 },
+            bricks: [0x9c4632, 0xad4f38, 0x8a3b2a],
+            shingles: [0xb84a32, 0xc45638, 0x9e3e28]
+          }
+        }
+      },
+      landmarks: {
+        'Sydney Opera House': { form: 'opera_sails', x: 388, z: -534, w: 120, d: 185, h: 65, wallColor: 0xf7f5ef, trimColor: 0xd8c3a5 },
+        'Sydney Harbour Bridge': { form: 'arch_bridge', x: -120, z: -1045, w: 500, d: 49, h: 134, heading: 0.42, wallColor: 0x5c646d, trimColor: 0xcab99b },
+        'Sydney Tower Eye': { form: 'observation_needle', x: -175, z: 989, w: 36, d: 36, h: 309, wallColor: 0xd9c282, trimColor: 0x5c646d },
+        'The Rocks & George Street': { form: 'historic_row', x: -231, z: -244, w: 72, d: 24, h: 16, wallColor: 0xdcc59a, trimColor: 0x8a3b2a, roofColor: 0x4a5258 }
       }
     }
   },
@@ -1331,6 +1546,38 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xe3b278, trimColor: 0xf5efe4, windowWidth: 2.2, floorHeight: 3.7 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        rialto_bridge_grand_canal: {
+          style: 'grand-canal-istrian-stone-palazzi',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.18, stone: 0.28, stucco: 0.54, shake: 0.0 },
+            stucco: [0xf2eadc, 0xd9825b, 0xe8be82, 0xd46f54]
+          },
+          midrise: { stoneColor: 0xe8d8be, trimColor: 0xf7f4ec, storefronts: true }
+        },
+        cannaregio_jewish_ghetto: {
+          style: 'cannaregio-tall-brick-sestiere',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.45, stone: 0.05, stucco: 0.50, shake: 0.0 },
+            stucco: [0xc85a42, 0xd9825b, 0xe3a869, 0xbd543c]
+          },
+          midrise: { stoneColor: 0xb8523b, trimColor: 0xeadcc6, storefronts: true }
+        },
+        arsenale_castello: {
+          style: 'venetian-arsenale-red-brick-fortress',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.62, stone: 0.08, stucco: 0.30, shake: 0.0 }
+          },
+          midrise: { stoneColor: 0x9e3e2b, trimColor: 0xdfd3be, storefronts: false }
+        }
+      },
+      landmarks: {
+        'St Mark\'s Campanile': { form: 'clock_tower', x: 251, z: 412, w: 12, d: 12, h: 98.6, wallColor: 0xa64432, trimColor: 0xf2eadc, roofColor: 0x4a7c6b },
+        'Ponte di Rialto': { form: 'canal_palazzo', x: 0, z: 0, w: 48, d: 22, h: 14, wallColor: 0xf2eadc, trimColor: 0xd8cdb8, roofColor: 0x7a8086 },
+        'Basilica di San Marco': { form: 'dome_palace', x: 305, z: 398, w: 76, d: 62, h: 43, wallColor: 0xeadbc4, trimColor: 0xd4af37, roofColor: 0x6e7880 },
+        'Doge\'s Palace & Riva degli Schiavoni': { form: 'canal_palazzo', x: 345, z: 489, w: 72, d: 75, h: 28, wallColor: 0xf2d8cc, trimColor: 0xf7f5ef, roofColor: 0xb84a2e },
+        'Basilica di Santa Maria della Salute': { form: 'dome_palace', x: -86, z: 767, w: 58, d: 58, h: 48, wallColor: 0xf5f2ea, trimColor: 0xd8d2c6, roofColor: 0x707880 }
       }
     }
   },
@@ -1472,6 +1719,38 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x3d3532, trimColor: 0xf5f2ea, windowWidth: 2.1, floorHeight: 3.6 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        grachtengordel_canal_ring: {
+          style: 'golden-age-step-and-bell-gabled-canal-houses',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.90, stone: 0.08, stucco: 0.02, shake: 0.0 },
+            roofs: { flat: 0.02, hip: 0.04, gable: 0.74, gambrel: 0.20 },
+            pitch: { hip: 0.52, gable: 0.72, historic: 0.80 },
+            bricks: [0x6e2e24, 0x383230, 0x85382a, 0x483832]
+          },
+          midrise: { stoneColor: 0x6e2e24, trimColor: 0xf7f5ef, storefronts: true }
+        },
+        jordaan_westerkerk: {
+          style: 'jordaan-artisan-brick-gable-rows',
+          residential: {
+            walls: { clapboard: 0.02, brick: 0.92, stone: 0.02, stucco: 0.04, shake: 0.0 },
+            roofs: { flat: 0.04, hip: 0.06, gable: 0.78, gambrel: 0.12 },
+            bricks: [0x85382a, 0x9c4430, 0x6e2e24, 0x7a4232]
+          },
+          midrise: { stoneColor: 0x85382a, trimColor: 0xf2eee4, storefronts: true }
+        },
+        de_pijp_albert_cuyp: {
+          style: 'amsterdam-school-expressionist-brick',
+          midrise: { stoneColor: 0x94422e, trimColor: 0xdfd8c8, storefronts: true }
+        }
+      },
+      landmarks: {
+        'Royal Palace Amsterdam': { form: 'dome_palace', x: 0, z: 0, w: 80, d: 63, h: 52, wallColor: 0xd8ccb8, trimColor: 0x9e9482, roofColor: 0x4a7c6b },
+        'Rijksmuseum': { form: 'cathedral_spires', x: -265, z: 1479, w: 135, d: 84, h: 62, wallColor: 0x8a3b2c, trimColor: 0xdfd6c4, roofColor: 0x383e45 },
+        'Westerkerk': { form: 'clock_tower', x: -586, z: -156, w: 28, d: 52, h: 85, wallColor: 0x7a3428, trimColor: 0xd8d0c0, roofColor: 0x2e5894 },
+        'Amsterdam Centraal Station': { form: 'cathedral_spires', x: 531, z: -667, w: 150, d: 65, h: 48, wallColor: 0x8e3c2c, trimColor: 0xe6dfd0, roofColor: 0x3b4045 },
+        'Magere Brug (Skinny Bridge) on Amstel': { form: 'bascule_bridge', x: 688, z: 1112, w: 80, d: 9, h: 12, wallColor: 0xf7f5ef, trimColor: 0xd8d2c6 }
       }
     }
   },
@@ -1610,6 +1889,35 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xc8b8a6, trimColor: 0x8c7e70, windowWidth: 2.3, floorHeight: 3.4 },
         waterTowerProb: 0.08,
         fireEscapes: false
+      },
+      neighborhoods: {
+        soho_mid_levels_escalator: {
+          style: 'tong-lau-verandah-shophouses',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.12, stone: 0.08, stucco: 0.80, shake: 0.0 },
+            roofs: { flat: 0.88, hip: 0.08, gable: 0.04, gambrel: 0.0 },
+            stucco: [0xf2ded6, 0xd4e2dc, 0xf5e8c8, 0xe8d4c4]
+          },
+          midrise: { stoneColor: 0xd8c8b4, trimColor: 0x4a6b5c, storefronts: true }
+        },
+        victoria_peak_the_peak: {
+          style: 'peak-subtropical-hillside-villas',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.05, stone: 0.25, stucco: 0.70, shake: 0.0 },
+            roofs: { flat: 0.45, hip: 0.40, gable: 0.15, gambrel: 0.0 },
+            stucco: [0xf7f5ef, 0xf2ece0, 0xe8dfd0]
+          }
+        },
+        tsim_sha_tsui_avenue_of_stars: {
+          style: 'kowloon-neon-podium-commercial',
+          midrise: { stoneColor: 0xd4cfc4, trimColor: 0x8c8478, storefronts: true, waterTowerProb: 0.14 }
+        }
+      },
+      landmarks: {
+        'Bank of China Tower': { form: 'diagrid_prism', x: 402, z: 689, w: 52, d: 52, h: 367, wallColor: 0xa8c8dc, trimColor: 0xe6edf2 },
+        'Two International Finance Centre': { form: 'stepped_bundled_tube', x: 0, z: 0, w: 58, d: 58, h: 415, wallColor: 0xb8d4e6, trimColor: 0xdce6ed },
+        'Hong Kong Convention Centre': { form: 'opera_sails', x: 1762, z: 245, w: 145, d: 220, h: 48, wallColor: 0xdce6ed, trimColor: 0x8ea4b5 },
+        'International Commerce Centre (West Kowloon)': { form: 'stepped_bundled_tube', x: 412, z: -1934, w: 62, d: 62, h: 484, wallColor: 0xa8c4d8, trimColor: 0xd8e4ec }
       }
     }
   },
@@ -1757,6 +2065,37 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xdfd3ba, trimColor: 0x9c927e, windowWidth: 2.1, floorHeight: 3.8 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        le_marais_hotel_de_ville: {
+          style: 'marais-17th-century-hotels-particuliers',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.24, stone: 0.56, stucco: 0.20, shake: 0.0 },
+            roofs: { flat: 0.06, hip: 0.48, gable: 0.22, gambrel: 0.24 },
+            stucco: [0xeadfc8, 0xdfd3ba, 0xd4c5a8],
+            bricks: [0xa64836, 0x943e2e]
+          },
+          midrise: { stoneColor: 0xdfd3ba, trimColor: 0xf4eee0, storefronts: true }
+        },
+        opera_garnier_grands_boulevards: {
+          style: 'grand-haussmann-boulevard-limestone',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.02, stone: 0.82, stucco: 0.16, shake: 0.0 },
+            roofs: { flat: 0.06, hip: 0.62, gable: 0.06, gambrel: 0.26 }
+          },
+          midrise: { stoneColor: 0xefe8d5, trimColor: 0x4c5866, storefronts: true }
+        },
+        latin_quarter_pantheon: {
+          style: 'rive-gauche-sorbonne-plaster-stone',
+          midrise: { stoneColor: 0xe2d6be, trimColor: 0xa89c86, storefronts: true }
+        }
+      },
+      landmarks: {
+        'Tour Eiffel': { form: 'lattice_tower', x: -3168, z: 256, w: 125, d: 125, h: 324, wallColor: 0x8b6f4e, trimColor: 0xa88b68 },
+        'Louvre Pyramid': { form: 'diagrid_prism', x: 0, z: 0, w: 35, d: 35, h: 22, wallColor: 0xb8d8e8, trimColor: 0xe8dec8 },
+        'Arc de Triomphe': { form: 'triumphal_arch', x: -3116, z: -1467, w: 45, d: 22, h: 50, wallColor: 0xe8dec8, trimColor: 0xcabfa8 },
+        'Cathedrale Notre-Dame de Paris': { form: 'cathedral_spires', x: 907, z: 845, w: 48, d: 128, h: 69, wallColor: 0xe6dec8, trimColor: 0xb8ae98, roofColor: 0x4c5866 },
+        'Pantheon & Latin Quarter': { form: 'dome_palace', x: 797, z: 1590, w: 84, d: 110, h: 83, wallColor: 0xe8dec8, trimColor: 0xcabfa8, roofColor: 0x586573 }
       }
     }
   },
@@ -1900,6 +2239,38 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x984634, trimColor: 0xe8e2d5, windowWidth: 2.3, floorHeight: 3.6 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        westminster_big_ben: {
+          style: 'whitehall-portland-stone-imperial',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.35, stone: 0.45, stucco: 0.20, shake: 0.0 }
+          },
+          midrise: { stoneColor: 0xe6e0d4, trimColor: 0xb5afa2, storefronts: false }
+        },
+        soho_covent_garden_west_end: {
+          style: 'soho-georgian-london-stock-brick',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.82, stone: 0.08, stucco: 0.10, shake: 0.0 },
+            bricks: [0x8e4232, 0xb89660, 0x7c382a, 0xa88652]
+          },
+          midrise: { stoneColor: 0x8e4232, trimColor: 0xf4f0e6, storefronts: true }
+        },
+        buckingham_palace_st_james_s_park: {
+          style: 'belgravia-regency-cream-stucco-terrace',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.24, stone: 0.26, stucco: 0.50, shake: 0.0 },
+            stucco: [0xf7f5ef, 0xf4f0e6, 0xebe4d4]
+          },
+          midrise: { stoneColor: 0xf4f0e6, trimColor: 0xd8d0c0, storefronts: false }
+        }
+      },
+      landmarks: {
+        'Elizabeth Tower (Big Ben)': { form: 'clock_tower', x: -542, z: 534, w: 15, d: 15, h: 96, wallColor: 0xd8c69e, trimColor: 0xd4af37, roofColor: 0x38424a },
+        'London Eye': { form: 'ferris_wheel', x: -156, z: 245, w: 120, d: 24, h: 135, wallColor: 0xf0f4f8, trimColor: 0xdce4ec },
+        'St Paul\'s Cathedral': { form: 'dome_palace', x: 1273, z: -934, w: 75, d: 158, h: 111, wallColor: 0xe2dcd0, trimColor: 0xb5afa2, roofColor: 0x454c54 },
+        'The Shard': { form: 'diagrid_prism', x: 2100, z: 111, w: 56, d: 56, h: 309, wallColor: 0xc8e0f0, trimColor: 0xeaf2f8 },
+        'Buckingham Palace & The Mall': { form: 'dome_palace', x: -1704, z: 489, w: 108, d: 120, h: 24, wallColor: 0xe6e0d4, trimColor: 0xcabfa8, roofColor: 0x383e45 }
       }
     }
   },
@@ -2039,6 +2410,31 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x9e4838, trimColor: 0xe6e2d8, windowWidth: 2.4, floorHeight: 3.6 },
         waterTowerProb: 0.04,
         fireEscapes: false
+      },
+      neighborhoods: {
+        ginza_yurakucho: {
+          style: 'ginza-curtain-wall-commercial-blocks',
+          midrise: { stoneColor: 0xe6e4dc, trimColor: 0x6e7378, storefronts: true }
+        },
+        tokyo_station_marunouchi: {
+          style: 'marunouchi-red-brick-and-granite-financial',
+          midrise: { stoneColor: 0x9e4838, trimColor: 0xebe8e0, storefronts: true }
+        },
+        tokyo_tower_shiba_park: {
+          style: 'shiba-zojoji-kawara-tile-temple-precinct',
+          residential: {
+            walls: { clapboard: 0.28, brick: 0.02, stone: 0.08, stucco: 0.44, shake: 0.18 },
+            roofs: { flat: 0.18, hip: 0.46, gable: 0.36, gambrel: 0.0 },
+            pitch: { hip: 0.36, gable: 0.44, historic: 0.50 },
+            shingles: [0x222428, 0x2b2d30, 0x36393d]
+          }
+        }
+      },
+      landmarks: {
+        'Tokyo Tower': { form: 'lattice_tower', x: -543, z: 767, w: 88, d: 88, h: 333, wallColor: 0xe03c1f, trimColor: 0xf7f7f7 },
+        'Roppongi Hills Mori Tower': { form: 'stepped_bundled_tube', x: -1991, z: 567, w: 68, d: 68, h: 238, wallColor: 0x9cb4c4, trimColor: 0xd8e0e6 },
+        'Tokyo Station Marunouchi Building': { form: 'dome_palace', x: 1421, z: -1867, w: 45, d: 180, h: 46, wallColor: 0xa64432, trimColor: 0xf2eee4, roofColor: 0x383e45 },
+        'Imperial Palace Outer Gardens & Nijubashi': { form: 'torii_temple', x: 480, z: -1820, w: 54, d: 44, h: 26, wallColor: 0xf5f2ea, trimColor: 0x3b352e, roofColor: 0x3e6b5c }
       }
     }
   },
@@ -2179,6 +2575,40 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xc97b5b, trimColor: 0xebe0ce, windowWidth: 2.3, floorHeight: 3.8 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        passeig_de_gracia_eixample: {
+          style: 'cerda-eixample-chamfered-modernisme',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.08, stone: 0.54, stucco: 0.38, shake: 0.0 },
+            roofs: { flat: 0.72, hip: 0.20, gable: 0.08, gambrel: 0.0 },
+            stucco: [0xead8be, 0xdfc49e, 0xf2e6d2]
+          },
+          midrise: { stoneColor: 0xe2cfb2, trimColor: 0xa89578, storefronts: true }
+        },
+        barri_gotic_cathedral: {
+          style: 'gothic-quarter-montjuic-sandstone-lanes',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.18, stone: 0.62, stucco: 0.20, shake: 0.0 },
+            stucco: [0xcab89c, 0xbfa888, 0xd8c8ae]
+          },
+          midrise: { stoneColor: 0xc4b092, trimColor: 0x8a7960, storefronts: true }
+        },
+        la_barceloneta_mediterranean_beach: {
+          style: 'barceloneta-maritime-narrow-balcony-blocks',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.12, stone: 0.08, stucco: 0.80, shake: 0.0 },
+            roofs: { flat: 0.82, hip: 0.12, gable: 0.06, gambrel: 0.0 },
+            stucco: [0xf2e6d2, 0xe8be82, 0xd48262, 0xdce8ec]
+          },
+          midrise: { stoneColor: 0xdfc49e, trimColor: 0xf7f4ec, storefronts: true }
+        }
+      },
+      landmarks: {
+        'Basilica de la Sagrada Familia': { form: 'cathedral_spires', x: 39, z: -1489, w: 60, d: 90, h: 138, wallColor: 0xd8c3a5, trimColor: 0xe6d5b8, roofColor: 0xc97b5b },
+        'Torre Glories': { form: 'diagrid_prism', x: 1588, z: -1478, w: 38, d: 38, h: 144, wallColor: 0x689ec8, trimColor: 0xc84852 },
+        'Barcelona Cathedral': { form: 'cathedral_spires', x: 48, z: 745, w: 42, d: 90, h: 70, wallColor: 0xc4b092, trimColor: 0x9e8c72, roofColor: 0x4a5258 },
+        'Parc de la Ciutadella & Arc de Triomf': { form: 'triumphal_arch', x: 961, z: 300, w: 30, d: 15, h: 30, wallColor: 0xb8523b, trimColor: 0xeadbc4 }
       }
     }
   },
@@ -2317,6 +2747,35 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xdfc9ae, trimColor: 0xf5f0e6, windowWidth: 2.5, floorHeight: 3.6 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        copacabana_avenida_atlantica: {
+          style: 'avenida-atlantica-art-deco-beachfront-wall',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.06, stone: 0.10, stucco: 0.84, shake: 0.0 },
+            roofs: { flat: 0.78, hip: 0.14, gable: 0.08, gambrel: 0.0 },
+            stucco: [0xf7f5ef, 0xf5efe2, 0xeadbc4]
+          },
+          midrise: { stoneColor: 0xf2ece0, trimColor: 0xb8afa0, storefronts: true }
+        },
+        ipanema_arpoador: {
+          style: 'ipanema-carioca-modernist-pilotis-blocks',
+          midrise: { stoneColor: 0xebe5d8, trimColor: 0x8c98a0, storefronts: true }
+        },
+        pao_de_acucar_sugarloaf_urca: {
+          style: 'urca-lowrise-spanish-revival-waterfront',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.12, stone: 0.08, stucco: 0.80, shake: 0.0 },
+            roofs: { flat: 0.18, hip: 0.56, gable: 0.26, gambrel: 0.0 },
+            stucco: [0xf5efe2, 0xf4e2b0, 0xf2dfce],
+            shingles: [0xb85234, 0xc45e3e]
+          }
+        }
+      },
+      landmarks: {
+        'Christ the Redeemer': { form: 'mountain_statue', x: -3068, z: -1123, w: 28, d: 18, h: 38, wallColor: 0xebe8e0, trimColor: 0xd4cfc4 },
+        'Sugarloaf Cable Car Station': { form: 'observation_needle', x: 2534, z: -1256, w: 34, d: 34, h: 42, wallColor: 0xdfe6ec, trimColor: 0xd92626 },
+        'Copacabana Palace': { form: 'dome_palace', x: 180, z: 380, w: 86, d: 42, h: 28, wallColor: 0xfaf8f2, trimColor: 0xe6dfd0, roofColor: 0xb85234 }
       }
     }
   },
@@ -2459,6 +2918,35 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x964a38, trimColor: 0xd8cfc0, windowWidth: 2.4, floorHeight: 3.6 },
         waterTowerProb: 0.02,
         fireEscapes: true
+      },
+      neighborhoods: {
+        gastown_steam_clock: {
+          style: 'gastown-edwardian-redbrick-cornice-warehouses',
+          residential: {
+            walls: { clapboard: 0.08, brick: 0.78, stone: 0.08, stucco: 0.06, shake: 0.0 },
+            roofs: { flat: 0.82, hip: 0.10, gable: 0.08, gambrel: 0.0 },
+            bricks: [0x964a38, 0x843e2e, 0xa8523e]
+          },
+          midrise: { stoneColor: 0x964a38, trimColor: 0xd8cfc0, storefronts: true, fireEscapes: true }
+        },
+        west_end_english_bay: {
+          style: 'west-end-craftsman-and-midcentury-point-towers',
+          residential: {
+            walls: { clapboard: 0.52, brick: 0.06, stone: 0.04, stucco: 0.14, shake: 0.24 },
+            siding: [0x6c7c74, 0x4d5d53, 0xe6e0d2, 0x5a6e7f]
+          },
+          midrise: { stoneColor: 0xdfe4e8, trimColor: 0x6c7c74, storefronts: true }
+        },
+        granville_island_false_creek: {
+          style: 'granville-industrial-timber-sheds-and-lofts',
+          midrise: { stoneColor: 0xb87a4b, trimColor: 0x3b4852, storefronts: true }
+        }
+      },
+      landmarks: {
+        'Canada Place': { form: 'opera_sails', x: 480, z: -689, w: 96, d: 210, h: 48, wallColor: 0xf7f9fb, trimColor: 0x4a78a8 },
+        'Harbour Centre': { form: 'observation_needle', x: 680, z: -320, w: 42, d: 42, h: 177, wallColor: 0xd8cfc0, trimColor: 0x8ea4b5 },
+        'Science World': { form: 'dome_palace', x: 1309, z: 1212, w: 54, d: 54, h: 48, wallColor: 0xe6edf2, trimColor: 0xa8bcc8, roofColor: 0xdce6ed },
+        'Lions Gate Bridge': { form: 'suspension_bridge', x: -2734, z: -3400, w: 480, d: 24, h: 111, heading: 0.0, wallColor: 0x467862, trimColor: 0xd8dfd8 }
       }
     }
   },
@@ -2598,6 +3086,36 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xd9c29c, trimColor: 0xf5f2ea, windowWidth: 2.4, floorHeight: 3.8 },
         waterTowerProb: 0.0,
         fireEscapes: false
+      },
+      neighborhoods: {
+        bo_kaap_malay_quarter: {
+          style: 'bo-kaap-bright-polychrome-flat-parapet-terraces',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.02, stone: 0.02, stucco: 0.96, shake: 0.0 },
+            roofs: { flat: 0.76, hip: 0.14, gable: 0.10, gambrel: 0.0 },
+            stucco: [0xffbe0b, 0xfb5607, 0xff006e, 0x06d6a0, 0x3a86ff, 0x8338ec]
+          },
+          midrise: { stoneColor: 0xffbe0b, trimColor: 0xf7f5ef, storefronts: true }
+        },
+        v_a_waterfront: {
+          style: 'victorian-harbour-clocktower-warehouses',
+          midrise: { stoneColor: 0xb8523b, trimColor: 0xf5f2ea, storefronts: true }
+        },
+        company_s_garden_parliament: {
+          style: 'cape-dutch-whitewashed-gabled-manor',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.08, stone: 0.08, stucco: 0.84, shake: 0.0 },
+            roofs: { flat: 0.10, hip: 0.25, gable: 0.65, gambrel: 0.0 },
+            pitch: { hip: 0.38, gable: 0.52, historic: 0.58 },
+            stucco: [0xfaf8f2, 0xf5f2ea, 0xefeadd]
+          }
+        }
+      },
+      landmarks: {
+        'Cape Town City Hall': { form: 'clock_tower', x: 156, z: 20, w: 72, d: 48, h: 61, wallColor: 0xdcc59a, trimColor: 0xf2eadc, roofColor: 0x4a5258 },
+        'Cape Wheel V&A Waterfront': { form: 'ferris_wheel', x: -35, z: -2156, w: 48, d: 16, h: 50, wallColor: 0xf7f9fb, trimColor: 0x0072ce },
+        'Table Mountain Cableway': { form: 'observation_needle', x: -1924, z: 3450, w: 36, d: 28, h: 32, wallColor: 0xcabfa8, trimColor: 0x4a5258 },
+        'Bo-Kaap Colourful Terraces (Wale St)': { form: 'historic_row', x: -832, z: -8, w: 68, d: 18, h: 10, wallColor: 0xffbe0b, trimColor: 0x06d6a0, roofColor: 0xfb5607 }
       }
     }
   },
@@ -2738,6 +3256,32 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x964836, trimColor: 0xcfc2ae, windowWidth: 2.6, floorHeight: 3.7 },
         waterTowerProb: 0.18,
         fireEscapes: true
+      },
+      neighborhoods: {
+        the_loop_state_madison: {
+          style: 'chicago-school-terracotta-bay-window-commercial',
+          midrise: { stoneColor: 0x964836, trimColor: 0xd4cab8, storefronts: true, fireEscapes: true, waterTowerProb: 0.24 }
+        },
+        river_north_merchandise_mart: {
+          style: 'river-north-heavy-timber-brick-lofts',
+          residential: {
+            walls: { clapboard: 0.04, brick: 0.78, stone: 0.16, stucco: 0.02, shake: 0.0 },
+            roofs: { flat: 0.78, hip: 0.12, gable: 0.10, gambrel: 0.0 }
+          },
+          midrise: { stoneColor: 0x8e4232, trimColor: 0xc8bca8, storefronts: true, fireEscapes: true, waterTowerProb: 0.22 }
+        },
+        magnificent_mile_875_n_michigan: {
+          style: 'michigan-ave-limestone-beaux-arts-and-miesian',
+          midrise: { stoneColor: 0xe6dfd0, trimColor: 0x9e9585, storefronts: true }
+        }
+      },
+      landmarks: {
+        'Willis Tower': { form: 'stepped_bundled_tube', x: -672, z: 433, w: 68, d: 68, h: 442, wallColor: 0x22262c, trimColor: 0x454c54 },
+        '875 North Michigan Avenue': { form: 'diagrid_prism', x: 415, z: -1812, w: 58, d: 46, h: 344, wallColor: 0x262a30, trimColor: 0x525a63 },
+        'Wrigley Building': { form: 'clock_tower', x: 340, z: -680, w: 46, d: 42, h: 134, wallColor: 0xf7f5ef, trimColor: 0xe2dcd0, roofColor: 0xd4af37 },
+        'Cloud Gate': { form: 'dome_palace', x: 357, z: 0, w: 20, d: 13, h: 10, wallColor: 0xdce4ec, trimColor: 0xf0f4f8, roofColor: 0xe6edf2 },
+        'DuSable (Michigan Ave) Bascule Bridge': { form: 'bascule_bridge', x: 340, z: -645, w: 78, d: 28, h: 18, wallColor: 0xd8cfc0, trimColor: 0x7c382a },
+        'Navy Pier & Centennial Wheel': { form: 'ferris_wheel', x: 1825, z: -990, w: 60, d: 20, h: 60, wallColor: 0xf7f9fb, trimColor: 0xc60c30 }
       }
     }
   },
@@ -2879,6 +3423,41 @@ const CITY_PACKS = {
         historic: { stoneColor: 0xd4cab6, trimColor: 0x8e8676, windowWidth: 2.4, floorHeight: 3.7 },
         waterTowerProb: 0.06,
         fireEscapes: true
+      },
+      neighborhoods: {
+        public_garden_beacon_hill: {
+          style: 'beacon-hill-federal-redbrick-rowhouses',
+          residential: {
+            walls: { clapboard: 0.04, brick: 0.88, stone: 0.06, stucco: 0.02, shake: 0.0 },
+            roofs: { flat: 0.58, hip: 0.22, gable: 0.14, gambrel: 0.06 },
+            bricks: [0x8e382a, 0x7a3024, 0x9c4232]
+          },
+          midrise: { stoneColor: 0x8e382a, trimColor: 0xf2eee4, storefronts: false, fireEscapes: true }
+        },
+        copley_square_back_bay: {
+          style: 'back-bay-victorian-brownstone-mansard-rows',
+          residential: {
+            walls: { clapboard: 0.0, brick: 0.52, stone: 0.46, stucco: 0.02, shake: 0.0 },
+            roofs: { flat: 0.48, hip: 0.28, gable: 0.08, gambrel: 0.16 },
+            bricks: [0x6e3628, 0x7a3024, 0x8e382a]
+          },
+          midrise: { stoneColor: 0x7a382c, trimColor: 0xd8cfc0, storefronts: true, fireEscapes: true }
+        },
+        north_end_paul_revere_mall: {
+          style: 'north-end-colonial-narrow-brick-tenements',
+          residential: {
+            walls: { clapboard: 0.14, brick: 0.80, stone: 0.04, stucco: 0.02, shake: 0.0 },
+            roofs: { flat: 0.52, hip: 0.18, gable: 0.24, gambrel: 0.06 }
+          },
+          midrise: { stoneColor: 0x944030, trimColor: 0xe6dfd0, storefronts: true, fireEscapes: true }
+        }
+      },
+      landmarks: {
+        'Custom House Tower': { form: 'clock_tower', x: 1046, z: -18, w: 28, d: 28, h: 151, wallColor: 0xd8cfc0, trimColor: 0xb5aba0, roofColor: 0xcabfa8 },
+        'Leonard P. Zakim Bunker Hill Bridge': { form: 'cable_stayed_bridge', x: 115, z: -1100, w: 440, d: 34, h: 98, heading: 0.35, wallColor: 0xf2f5f8, trimColor: 0xd8e0e8 },
+        'Massachusetts State House': { form: 'dome_palace', x: 0, z: -45, w: 76, d: 46, h: 46, wallColor: 0x944030, trimColor: 0xf7f5ef, roofColor: 0xd4af37 },
+        'Prudential Tower': { form: 'stepped_bundled_tube', x: -1507, z: 1289, w: 54, d: 54, h: 228, wallColor: 0x7c8e9e, trimColor: 0xc4d0d8 },
+        'Faneuil Hall & Quincy Market': { form: 'historic_row', x: 840, z: -189, w: 96, d: 26, h: 18, wallColor: 0x944030, trimColor: 0xe6dfd0, roofColor: 0x383e45 }
       }
     }
   },
@@ -3019,6 +3598,39 @@ const CITY_PACKS = {
         historic: { stoneColor: 0x8a3e2e, trimColor: 0xcab9a0, windowWidth: 2.4, floorHeight: 3.6 },
         waterTowerProb: 0.04,
         fireEscapes: true
+      },
+      neighborhoods: {
+        pioneer_square_lumen_field: {
+          style: 'pioneer-square-romanesque-revival-redbrick',
+          residential: {
+            walls: { clapboard: 0.06, brick: 0.82, stone: 0.10, stucco: 0.02, shake: 0.0 },
+            roofs: { flat: 0.80, hip: 0.12, gable: 0.08, gambrel: 0.0 }
+          },
+          midrise: { stoneColor: 0x8a3e2e, trimColor: 0xcab9a0, storefronts: true, fireEscapes: true }
+        },
+        capitol_hill: {
+          style: 'capitol-hill-brick-courtyard-apartments-and-foursquares',
+          residential: {
+            walls: { clapboard: 0.44, brick: 0.24, stone: 0.04, stucco: 0.06, shake: 0.22 },
+            siding: [0x5d6d5e, 0x8a6d4b, 0x4a5d6e, 0xd8cdb8]
+          },
+          midrise: { stoneColor: 0x9c4a38, trimColor: 0xe6dfd0, storefronts: true, fireEscapes: true }
+        },
+        queen_anne_kerry_park: {
+          style: 'queen-anne-hillside-shingle-and-craftsman',
+          residential: {
+            walls: { clapboard: 0.50, brick: 0.08, stone: 0.04, stucco: 0.06, shake: 0.32 },
+            roofs: { flat: 0.06, hip: 0.34, gable: 0.58, gambrel: 0.02 },
+            pitch: { hip: 0.40, gable: 0.50, historic: 0.58 }
+          }
+        }
+      },
+      landmarks: {
+        'Space Needle': { form: 'observation_needle', x: -541, z: -1156, w: 42, d: 42, h: 184, wallColor: 0xf7f9fb, trimColor: 0xe06d2b },
+        'Columbia Center': { form: 'stepped_bundled_tube', x: 811, z: 700, w: 58, d: 58, h: 284, wallColor: 0x262c34, trimColor: 0x525a63 },
+        'Smith Tower': { form: 'clock_tower', x: 759, z: 1050, w: 30, d: 30, h: 148, wallColor: 0xf2eee4, trimColor: 0xd8d0c0, roofColor: 0x4a7c6b },
+        'Seattle Great Wheel': { form: 'ferris_wheel', x: -120, z: 280, w: 54, d: 18, h: 53, wallColor: 0xf7f9fb, trimColor: 0x00a88f },
+        'Pike Place Market & Public Market Sign': { form: 'historic_row', x: 0, z: 0, w: 88, d: 28, h: 16, wallColor: 0x9c4a38, trimColor: 0xd92626, roofColor: 0x3b4045 }
       }
     }
   }

@@ -527,7 +527,7 @@ function districtAt(x, z) {
     const d = Math.hypot(x - ax, z - az);
     if (d < bestD) {
       bestD = d;
-      bestId = String(name).toLowerCase().replace(/[^a-z0-9]+/g, '_');
+      bestId = String(name).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
     }
   }
   return bestId;
@@ -543,7 +543,7 @@ function districtLabel(idOrX, z) {
     return bestName;
   }
   for (const [, , name] of AREAS) {
-    if (String(name).toLowerCase().replace(/[^a-z0-9]+/g, '_') === idOrX) return name;
+    if (String(name).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') === idOrX) return name;
   }
   return CITY_PACK.title;
 }

@@ -1591,6 +1591,8 @@ out skel qt;
 (
   way["building"]({s_},{w_},{n_},{e_});
   relation["building"]({s_},{w_},{n_},{e_});
+  way["building:part"]({s_},{w_},{n_},{e_});
+  relation["building:part"]({s_},{w_},{n_},{e_});
   node["addr:housenumber"]({s_},{w_},{n_},{e_});
 );
 out body;
@@ -2260,6 +2262,7 @@ out body;
     }
 
     buildings = []
+    building_parts = []
     roof_shapes = []
     fuel_canopies = []
     addresses = []
@@ -2286,6 +2289,24 @@ out body;
                     if key not in seen_addr:
                         seen_addr.add(key)
                         addresses.extend([r1(cx), r1(cz), num])
+
+        if 'building:part' in tags and tags.get('building:part') != 'no' and 'building' not in tags:
+            minx = min(p[0] for p in pts[:-1])
+            maxx = max(p[0] for p in pts[:-1])
+            minz = min(p[1] for p in pts[:-1])
+            maxz = max(p[1] for p in pts[:-1])
+            pw = max(4.0, maxx - minx)
+            pd = max(4.0, maxz - minz)
+            ph = parse_height_m(tags, 3, pw * pd, cx, cz)
+            building_parts.append({
+                'cx': cx,
+                'cz': cz,
+                'w': round(pw, 1),
+                'd': round(pd, 1),
+                'h': round(ph, 1),
+                'roofShape': tags.get('roof:shape', 'flat'),
+                'color': tags.get('building:colour', ''),
+            })
 
         if 'building' not in tags or tags.get('building') in ('no', 'bridge', 'construction', 'ruins'):
             continue
@@ -2883,6 +2904,28 @@ out body;
         for g in green_spaces if g['name']
     ]
 
+    landmarks_out = []
+    for lm in cfg['landmarks_meta']:
+        lm_copy = dict(lm)
+        lx, lz = float(lm.get('x', 0)), float(lm.get('z', 0))
+        nearby_parts = [
+            {
+                'dx': round(bp['cx'] - lx, 1),
+                'dz': round(bp['cz'] - lz, 1),
+                'w': bp['w'],
+                'd': bp['d'],
+                'h': bp['h'],
+                'roofShape': bp['roofShape'],
+                'color': bp['color'],
+            }
+            for bp in building_parts
+            if math.hypot(bp['cx'] - lx, bp['cz'] - lz) <= 130.0
+        ]
+        if nearby_parts:
+            nearby_parts.sort(key=lambda p: -p['h'])
+            lm_copy['parts'] = nearby_parts[:16]
+        landmarks_out.append(lm_copy)
+
     GEO = {
         'version': 1,
         'city': city_id,
@@ -2926,7 +2969,7 @@ out body;
         'lawns': lawn_polys,
         'driveways': [],
         'garageDoors': [],
-        'landmarks': cfg['landmarks_meta'],
+        'landmarks': landmarks_out,
     }
 
     geodata_js_path = os.path.join(out_dir, 'city-geodata.js')

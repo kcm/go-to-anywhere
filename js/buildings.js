@@ -24,7 +24,8 @@ import {
   TOWN_BOUNDS,
   LANDMARK_SITES,
   streetZ,
-  avenueX
+  avenueX,
+  districtAt
 } from './city-config.js';
 import {
   createPreWarBuildingMaterial,
@@ -233,7 +234,9 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
     maxZ: TOWN_BOUNDS.maxZ + 50
   }, 6, 9);
   const allBlocks = [];
-  const archMid = ((GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {}).midrise || {};
+  const archRoot = (GEO && GEO.archetypes) || (CITY_PACK && CITY_PACK.archetypes) || {};
+  const archMid = archRoot.midrise || {};
+  const archNeighborhoods = archRoot.neighborhoods || {};
   const m0 = archMid.masonry || {};
   const m1 = archMid.historic || {};
 
@@ -327,6 +330,26 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
       windowWidth: 3.0, floorHeight: 3.8, litProbability: 0.48, warmth: 0.75, seed: 117.3
     }]
   );
+  // Register neighborhood-specific midrise facade materials from archetypes.neighborhoods
+  const nbMatIndex = new Map();
+  let nbSeed = 141.7;
+  for (const [nbId, nbSpec] of Object.entries(archNeighborhoods)) {
+    const nm = nbSpec && nbSpec.midrise;
+    if (nm && nm.stoneColor !== undefined) {
+      nbMatIndex.set(nbId, facades.length);
+      facades.push([createPreWarBuildingMaterial, {
+        stoneColor: nm.stoneColor,
+        trimColor: nm.trimColor ?? (m0.trimColor ?? 0xd8d0c0),
+        windowGlassColor: 0x182430,
+        windowWidth: nm.windowWidth ?? (m0.windowWidth ?? 2.4),
+        floorHeight: nm.floorHeight ?? (m0.floorHeight ?? 3.6),
+        litProbability: nm.litProbability ?? 0.56,
+        warmth: 0.84,
+        seed: nbSeed
+      }]);
+      nbSeed += 17.3;
+    }
+  }
   const materials = facades.map(([create, opts]) => create({ ...opts, footprintLocal: true }));
   const storeys = facades.map(([, opts]) => opts.floorHeight);
 
@@ -529,7 +552,11 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
               : (b.height < 40 ? (tone < 0.55 ? 1 : 0) : (tone < 0.5 ? 0 : 3));
     // Lamp: the city's land use and historic districts: old brick and stone in a historic district (the University's
     // own buildings keep theirs), stone or brick for churches, plain tan brick for industry and research
-    if (kind !== 5 && historicDistrictAt(b.cx, b.cz) && b.height < 30) mat = tone < 0.68 ? 1 : 0;
+    const nbId = districtAt(b.cx, b.cz);
+    const nbMid = (archNeighborhoods[nbId] && archNeighborhoods[nbId].midrise) || null;
+    if (kind !== 5 && nbMatIndex.has(nbId) && b.height < (nbMid.maxHeight ?? 38) && tone < (nbMid.prob ?? 0.72)) {
+      mat = nbMatIndex.get(nbId);
+    } else if (kind !== 5 && historicDistrictAt(b.cx, b.cz) && b.height < 30) mat = tone < 0.68 ? 1 : 0;
     else if (use === LAND_USE.RELIGIOUS && kind !== 5) mat = tone < 0.5 ? 0 : 1;
     else if (use === LAND_USE.INDUSTRY && kind !== 5 && b.height < 20) mat = tone < 0.7 ? 10 : 3;
     // Reference ground-floor doors/windows to the uphill grade (`maxGround + 0.24`, so doors at `g + 0.22` clear the
@@ -540,7 +567,7 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
     // Lamp: storefronts (tsl-materials.js) where the survey or the city says shops: a shop building, or a shop or
     // mixed-use parcel, not the University's own or a house-style one
     const storefronts = b.height >= 6 && kind !== 5 && (mat < 5 || mat > 7)
-      && (kind === 2 || use === LAND_USE.SHOPS || use === LAND_USE.MIXED_USE);
+      && (kind === 2 || use === LAND_USE.SHOPS || use === LAND_USE.MIXED_USE || Boolean(nbMid && nbMid.storefronts));
     const record = { ...b, tone, ground, minGround, storefronts };
     surveyedBuckets[mat].push(record);
     const detail = {
@@ -555,16 +582,19 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
       detail.footprints.push({ h: top, pts: polygon.outer, holes: polygon.holes });
     }
     const neighbours = nearbyReserves(b, 6);
-    if (archMid.fireEscapes !== false) {
+    const allowFireEscapes = (nbMid && nbMid.fireEscapes !== undefined) ? nbMid.fireEscapes : (archMid.fireEscapes !== false);
+    if (allowFireEscapes) {
       addSurveyedFireEscapes(b, detail, storeys[mat], neighbours);
     }
-    detailsToPlace.push({ b: record, detail, masonry: mat < 2 || mat > 7, rand });
+    const wtProb = (nbMid && nbMid.waterTowerProb !== undefined) ? nbMid.waterTowerProb : (archMid.waterTowerProb ?? 0.04);
+    detailsToPlace.push({ b: record, detail, masonry: mat < 2 || mat > 7, rand, wtProb });
     allBlocks.push(detail);
   }
   // Reserve every fire escape before placing storefronts on neighbouring buildings.
-  const waterTowerProb = archMid.waterTowerProb ?? 0.04;
-  for (const { b, detail, masonry, rand } of detailsToPlace) {
+  const defaultWaterTowerProb = archMid.waterTowerProb ?? 0.04;
+  for (const { b, detail, masonry, rand, wtProb } of detailsToPlace) {
     const neighbours = nearbyReserves(b, 6);
+    const waterTowerProb = wtProb ?? defaultWaterTowerProb;
     for (const reserve of addBuildingDetails(b, detail, { masonry, rand, neighbours, waterTowerProb })) addReserve(reserve);
     // Lamp: details were placed from street level (y = 0); lift them onto the building's ground, sheds onto the
     // sidewalk's where they stand

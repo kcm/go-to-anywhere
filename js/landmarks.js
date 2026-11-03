@@ -1,6 +1,7 @@
 import * as THREE from 'three/webgpu';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { ACTIVE_CITY_ID } from './city-packs.js';
+import { ACTIVE_CITY_ID, CITY_PACK } from './city-packs.js';
+import { GEO } from './city-geodata.js';
 import { getBlockBounds, LANDMARK_SITES, BLOCKS } from './city-config.js';
 import { STADIUM, N, radiiAt, FIELD_Y, WALL_TOP, SEAT_TOP, RIM_Y, WALL_Y, AISLE_IN, CONCOURSE } from './stadium-shape.js';
 import { groundUnder, stadiumGround } from './terrain.js';
@@ -2355,11 +2356,417 @@ function buildSanFranciscoLandmarks(scene) {
   return { group, colliders };
 }
 
+// ============================================================================
+// ARCHETYPE-DRIVEN WORLDWIDE LANDMARK SYNTHESIZER
+// Builds 3D landmarks from CITY_PACK.archetypes.landmarks + OSM building:part data
+// ============================================================================
+
+function buildLandmarkFromArchetype(name, spec, site) {
+  const g = new THREE.Group();
+  g.name = `Landmark_${String(name).replace(/[^a-zA-Z0-9]+/g, '_')}`;
+  const cx = Number.isFinite(site?.x) ? site.x : (spec.x ?? 0);
+  const cz = Number.isFinite(site?.z) ? site.z : (spec.z ?? 0);
+  const W = Math.max(12, spec.w || site?.w || 40);
+  const D = Math.max(12, spec.d || site?.d || 40);
+  const H = Math.max(12, spec.h || site?.h || 45);
+  const form = spec.form || 'canal_palazzo';
+
+  const primaryCol = spec.primaryColor ?? 0xdcd5c6;
+  const secondaryCol = spec.secondaryColor ?? 0x9e9585;
+  const roofCol = spec.roofColor ?? 0x457b66;
+  const accentCol = spec.accentColor ?? 0xf0c24b;
+  const glowCol = spec.glowColor ?? 0xffe4a0;
+
+  const prim = [];
+  const sec = [];
+  const roof = [];
+  const accent = [];
+  const glow = [];
+  let atWaterLevel = false;
+
+  if (form === 'lattice_tower') {
+    // 4-leg tapered structural iron/steel observation tower (Eiffel Tower, Tokyo Tower, Skytree)
+    const baseSpan = Math.min(W, D) * 0.42;
+    const midY1 = H * 0.22;
+    const midY2 = H * 0.48;
+    const topDeckY = H * 0.84;
+    for (const sx of [-1, 1]) {
+      for (const sz of [-1, 1]) {
+        pushCyl(prim, baseSpan * 0.12, baseSpan * 0.18, midY1, 8, sx * baseSpan * 0.72, midY1 * 0.5, sz * baseSpan * 0.72);
+        pushCyl(sec, baseSpan * 0.09, baseSpan * 0.12, midY2 - midY1, 8, sx * baseSpan * 0.44, (midY1 + midY2) * 0.5, sz * baseSpan * 0.44);
+      }
+    }
+    // Observation decks & upper shaft
+    pushBox(prim, baseSpan * 1.45, H * 0.035, baseSpan * 1.45, 0, midY1, 0);
+    pushBox(prim, baseSpan * 0.95, H * 0.032, baseSpan * 0.95, 0, midY2, 0);
+    pushCyl(prim, baseSpan * 0.14, baseSpan * 0.36, topDeckY - midY2, 8, 0, (midY2 + topDeckY) * 0.5, 0, Math.PI / 8);
+    pushCyl(sec, baseSpan * 0.22, baseSpan * 0.22, H * 0.035, 16, 0, topDeckY, 0);
+    pushCyl(glow, baseSpan * 0.18, baseSpan * 0.18, H * 0.025, 16, 0, topDeckY + H * 0.025, 0);
+    pushCyl(accent, 0.35, baseSpan * 0.08, H - topDeckY, 8, 0, topDeckY + (H - topDeckY) * 0.5, 0);
+    pushCyl(glow, 0.9, 0.9, 2.5, 8, 0, H + 1.2, 0);
+  } else if (form === 'opera_sails') {
+    // Vaulted ceramic shell sails atop terraced harbourside granite podium (Sydney Opera House, Canada Place)
+    const podH = Math.min(11, H * 0.18);
+    pushBox(sec, W * 0.92, podH, D * 0.92, 0, podH * 0.5, 0);
+    const nSails = spec.sails || 5;
+    for (let i = 0; i < nSails; i++) {
+      const t = (i / Math.max(1, nSails - 1)) - 0.5;
+      const zOff = t * D * 0.62;
+      const sailH = (H - podH) * (1.0 - 0.32 * Math.abs(t));
+      const sailR = Math.min(W, D) * (0.26 - 0.05 * Math.abs(t));
+      pushCyl(prim, 0.8, sailR, sailH, 12, (i % 2 === 0 ? -1 : 1) * W * 0.12, podH + sailH * 0.48, zOff, Math.PI / 6);
+      pushBox(glow, sailR * 0.9, sailH * 0.45, 1.8, (i % 2 === 0 ? -1 : 1) * W * 0.12, podH + sailH * 0.24, zOff + sailR * 0.55);
+    }
+  } else if (form === 'arch_bridge') {
+    if (spec.stoneArcade) {
+      // Venetian stone arch bridge with peaked central portico & vaulted shops (Rialto Bridge)
+      pushBox(prim, W, H * 0.42, D, 0, H * 0.28, 0);
+      pushBox(sec, W * 0.86, H * 0.38, D * 0.72, 0, H * 0.62, 0);
+      pushCyl(roof, 0.6, W * 0.35, H * 0.25, 4, 0, H * 0.90, 0, Math.PI / 4);
+      pushBox(glow, W * 0.65, H * 0.22, D * 0.76, 0, H * 0.58, 0);
+    } else {
+      // Steel through-arch bridge with twin stone pylons at each end (Sydney Harbour Bridge)
+      atWaterLevel = true;
+      const deckY = spec.deckY || Math.min(54, H * 0.40);
+      const span = Math.max(W, D);
+      for (const sz of [-span * 0.42, span * 0.42]) {
+        for (const sx of [-14, 14]) {
+          pushBox(sec, 9.5, H * 0.66, 12.5, sx, H * 0.33, sz);
+        }
+      }
+      pushBox(prim, 32, 5.5, span, 0, deckY, 0);
+      const segs = 16;
+      for (let i = 0; i < segs; i++) {
+        const u = ((i + 0.5) / segs) * 2 - 1;
+        const zPos = u * span * 0.42;
+        const archY = deckY + (H - deckY) * (1 - u * u);
+        for (const sx of [-13.5, 13.5]) {
+          pushBox(prim, 2.6, 5.2, (span * 0.88) / segs, sx, archY, zPos);
+          if (archY > deckY + 4) {
+            pushCyl(prim, 0.28, 0.28, archY - deckY, 6, sx, (archY + deckY) * 0.5, zPos);
+          }
+        }
+      }
+    }
+  } else if (form === 'suspension_bridge' || form === 'cable_stayed_bridge' || form === 'bascule_bridge') {
+    atWaterLevel = true;
+    const span = Math.max(W, D);
+    const deckY = spec.deckY || Math.min(48, H * 0.36);
+    const towerZ = span * 0.26;
+    pushBox(sec, 26, 4.2, span, 0, deckY, 0);
+    for (const tz of [-towerZ, towerZ]) {
+      for (const lx of [-11.5, 11.5]) {
+        pushBox(prim, 5.8, H, 6.8, lx, H * 0.5, tz);
+        if (spec.gothicTowers || form === 'cable_stayed_bridge') {
+          pushCyl(roof, 0.3, 4.2, H * 0.18, 4, lx, H + H * 0.09, tz, Math.PI / 4);
+        }
+      }
+      pushBox(prim, 24, 4.5, 5.5, 0, H * 0.58, tz);
+      pushBox(prim, 24, 4.2, 5.2, 0, H * 0.88, tz);
+    }
+    if (form !== 'bascule_bridge') {
+      const nCables = 16;
+      for (let i = 0; i < nCables; i++) {
+        const u = ((i + 0.5) / nCables) * 2 - 1;
+        const zm = u * span * 0.45;
+        const ym = deckY + 4 + (H - deckY - 6) * Math.min(1, Math.abs(Math.abs(zm) - towerZ) / Math.max(1, towerZ));
+        for (const lx of [-11.5, 11.5]) {
+          pushCyl(accent, 0.24, 0.24, Math.max(2, ym - deckY), 6, lx, (ym + deckY) * 0.5, zm);
+        }
+      }
+    }
+  } else if (form === 'clock_tower') {
+    // Clock tower + optional palace/terminal wing (Big Ben, St. Mark's Campanile, Custom House Tower)
+    const hallW = spec.hallW || W;
+    const hallD = spec.hallD || D;
+    const hallH = spec.hallH || Math.min(26, H * 0.28);
+    if (Math.max(hallW, hallD) > 24) {
+      pushBox(prim, hallW, hallH, hallD, 0, hallH * 0.5, 0);
+      pushBox(roof, hallW + 1.5, 3.2, hallD + 1.5, 0, hallH + 1.6, 0);
+    }
+    const tw = Math.min(16, Math.min(W, D) * 0.42);
+    const shaftH = H * 0.72;
+    pushBox(prim, tw, shaftH, tw, 0, shaftH * 0.5, 0);
+    pushBox(sec, tw * 1.08, H * 0.11, tw * 1.08, 0, shaftH + H * 0.055, 0);
+    // 4-sided illuminated clock face
+    pushBox(glow, tw * 1.12, tw * 0.52, tw * 0.52, 0, shaftH + H * 0.055, 0);
+    pushBox(glow, tw * 0.52, tw * 0.52, tw * 1.12, 0, shaftH + H * 0.055, 0);
+    pushCyl(roof, 0.4, tw * 0.68, H * 0.17, 4, 0, shaftH + H * 0.11 + H * 0.085, 0, Math.PI / 4);
+  } else if (form === 'cathedral_spires') {
+    // Gothic / Modernisme cathedral with nave, transept, rose window & multi-spire towers (Sagrada Familia, Notre-Dame)
+    const naveH = Math.min(42, H * 0.36);
+    pushBox(prim, W * 0.58, naveH, D * 0.88, 0, naveH * 0.5, 0);
+    pushBox(prim, W * 0.88, naveH * 0.92, D * 0.38, 0, naveH * 0.46, 0);
+    pushCyl(roof, 0.8, W * 0.32, naveH * 0.28, 4, 0, naveH * 1.12, 0, Math.PI / 4);
+    pushCyl(glow, W * 0.14, W * 0.14, 1.8, 16, 0, naveH * 0.62, D * 0.445);
+    const spireOffsets = spec.modernisme
+      ? [[-W * 0.18, D * 0.28, 0.68], [W * 0.18, D * 0.28, 0.70], [-W * 0.18, -D * 0.28, 0.66], [W * 0.18, -D * 0.28, 0.68], [0, -D * 0.12, 0.82], [0, 0, 1.0]]
+      : [[-W * 0.20, D * 0.36, 0.72], [W * 0.20, D * 0.36, 0.72], [0, 0, 1.0]];
+    for (const [sx, sz, hScale] of spireOffsets) {
+      const sh = H * hScale;
+      const rBase = Math.min(W, D) * (hScale > 0.9 ? 0.11 : 0.08);
+      pushCyl(prim, rBase * 0.42, rBase, sh * 0.78, 8, sx, sh * 0.39, sz);
+      pushCyl(accent, 0.3, rBase * 0.48, sh * 0.22, 8, sx, sh * 0.89, sz);
+    }
+  } else if (form === 'dome_palace') {
+    // Beaux-Arts / Byzantine / Classical domed civic or religious landmark (Sacre-Coeur, St. Mark's, State House)
+    const baseH = Math.min(28, H * 0.34);
+    pushBox(prim, W, baseH, D, 0, baseH * 0.5, 0);
+    pushBox(sec, W * 0.52, baseH * 0.45, D * 0.52, 0, baseH * 1.22, 0);
+    const domeR = Math.min(W, D) * 0.24;
+    const drumH = H * 0.22;
+    const domeH = H * 0.26;
+    pushCyl(prim, domeR * 0.95, domeR, drumH, 16, 0, baseH + drumH * 0.5, 0);
+    pushCyl(roof, domeR * 0.22, domeR * 0.98, domeH, 16, 0, baseH + drumH + domeH * 0.5, 0);
+    pushCyl(accent, 0.3, domeR * 0.18, H * 0.14, 10, 0, baseH + drumH + domeH + H * 0.07, 0);
+    if (spec.sideDomes) {
+      for (const sx of [-W * 0.30, W * 0.30]) {
+        pushCyl(prim, domeR * 0.48, domeR * 0.52, drumH * 0.7, 12, sx, baseH + drumH * 0.35, 0);
+        pushCyl(roof, domeR * 0.12, domeR * 0.50, domeH * 0.7, 12, sx, baseH + drumH * 0.7 + domeH * 0.35, 0);
+      }
+    }
+  } else if (form === 'triumphal_arch') {
+    // Monumental Neoclassical stone arch with central vault & attic frieze (Arc de Triomphe)
+    const pillarW = W * 0.31;
+    const archH = H * 0.58;
+    pushBox(prim, pillarW, archH, D, -W * 0.34, archH * 0.5, 0);
+    pushBox(prim, pillarW, archH, D, W * 0.34, archH * 0.5, 0);
+    pushBox(prim, W, H * 0.26, D, 0, archH + H * 0.13, 0);
+    pushBox(sec, W * 1.04, H * 0.05, D * 1.04, 0, archH + H * 0.26, 0);
+    pushBox(prim, W * 0.94, H * 0.14, D * 0.92, 0, H * 0.93, 0);
+    pushCyl(glow, 1.4, 1.8, 0.8, 12, 0, 0.4, 0);
+  } else if (form === 'torii_temple') {
+    // Vermilion Torii / Kaminarimon gate + 5-storey pagoda + irimoya main temple hall (Senso-ji Asakusa)
+    const gateW = Math.min(24, W * 0.38);
+    const gateZ = D * 0.38;
+    for (const px of [-gateW * 0.38, gateW * 0.38]) {
+      pushCyl(prim, 0.65, 0.75, 11, 10, px, 5.5, gateZ);
+    }
+    pushBox(roof, gateW * 1.15, 2.8, 5.2, 0, 11.8, gateZ);
+    pushCyl(glow, 1.8, 1.8, 3.2, 12, 0, 7.2, gateZ);
+    // Main temple hall (Hondo)
+    pushBox(sec, W * 0.55, 14, D * 0.42, 0, 7, -D * 0.12);
+    pushCyl(roof, W * 0.18, W * 0.44, 9.5, 4, 0, 18.5, -D * 0.12, Math.PI / 4);
+    // 5-storey vermilion pagoda
+    const pagX = -W * 0.32;
+    for (let t = 0; t < 5; t++) {
+      const ty = 4 + t * ((H - 8) / 5);
+      const s = 1 - t * 0.11;
+      pushBox(prim, 7.5 * s, (H - 8) / 5.5, 7.5 * s, pagX, ty, 0);
+      pushBox(roof, 11.5 * s, 1.3, 11.5 * s, pagX, ty + (H - 8) / 11, 0);
+    }
+    pushCyl(accent, 0.2, 0.55, 9, 8, pagX, H + 3, 0);
+  } else if (form === 'stepped_bundled_tube') {
+    // Stepped bundled-tube / Art Deco skyscraper + twin or single broadcast spires (Willis Tower, Empire State)
+    const tierSpecs = [
+      [0, 0, 1.0], [-1, -1, 0.50], [1, 1, 0.50],
+      [-1, 1, 0.66], [1, -1, 0.66], [0, -1, 0.80],
+      [0, 1, 0.80], [-1, 0, 0.90], [1, 0, 1.0]
+    ];
+    const tw = W / 3.1;
+    const td = D / 3.1;
+    for (const [gx, gz, hFrac] of tierSpecs) {
+      const th = H * hFrac;
+      pushBox(prim, tw * 0.96, th, td * 0.96, gx * tw, th * 0.5, gz * td);
+    }
+    const spireH = H * 0.16;
+    if (spec.twinSpire !== false) {
+      for (const sx of [-W * 0.14, W * 0.14]) {
+        pushCyl(accent, 0.35, 1.1, spireH, 8, sx, H + spireH * 0.5, 0);
+        pushCyl(glow, 0.8, 0.8, 2.2, 8, sx, H + spireH + 1.1, 0);
+      }
+    } else {
+      pushCyl(accent, 0.35, 1.4, spireH * 1.2, 8, 0, H + spireH * 0.6, 0);
+    }
+  } else if (form === 'diagrid_prism') {
+    // Faceted prism glass-and-aluminum skyscraper (Bank of China Tower, Two IFC)
+    const qW = W * 0.46;
+    const qD = D * 0.46;
+    const quadrantFracs = [[-0.5, -0.5, 0.42], [0.5, -0.5, 0.64], [-0.5, 0.5, 0.82], [0.5, 0.5, 1.0]];
+    for (const [qx, qz, hf] of quadrantFracs) {
+      const qh = H * hf;
+      pushBox(prim, qW, qh, qD, qx * qW, qh * 0.5, qz * qD);
+      pushCyl(sec, 0.4, qW * 0.65, qW * 0.9, 4, qx * qW, qh + qW * 0.4, qz * qD, Math.PI / 4);
+    }
+    pushCyl(accent, 0.25, 0.7, H * 0.15, 8, qW * 0.5, H + H * 0.075, qD * 0.5);
+    pushCyl(glow, 0.8, 0.8, 2.2, 8, qW * 0.5, H + H * 0.15 + 1.1, qD * 0.5);
+  } else if (form === 'observation_needle') {
+    // Tripod core + flying-saucer observation Halo + lightning spire (Space Needle, Harbour Centre)
+    const haloY = H * 0.76;
+    const rBase = Math.min(W, D) * 0.36;
+    for (let i = 0; i < 3; i++) {
+      const a = (i / 3) * Math.PI * 2;
+      pushCyl(prim, 1.4, 2.4, haloY * 0.55, 8, Math.cos(a) * rBase * 0.65, haloY * 0.275, Math.sin(a) * rBase * 0.65);
+      pushCyl(prim, 1.6, 1.2, haloY * 0.45, 8, Math.cos(a) * rBase * 0.38, haloY * 0.775, Math.sin(a) * rBase * 0.38);
+    }
+    pushCyl(sec, 3.6, 4.2, haloY, 12, 0, haloY * 0.5, 0);
+    // Saucer observation deck
+    const haloR = Math.min(W, D) * 0.48;
+    pushCyl(prim, haloR, haloR * 0.62, 5.2, 24, 0, haloY, 0);
+    pushCyl(glow, haloR * 0.96, haloR * 0.96, 3.8, 24, 0, haloY + 4.2, 0);
+    pushCyl(roof, haloR * 0.25, haloR * 1.02, 5.5, 24, 0, haloY + 8.6, 0);
+    pushCyl(accent, 0.25, 0.85, H - haloY - 8, 8, 0, haloY + 8 + (H - haloY - 8) * 0.5, 0);
+  } else if (form === 'mountain_statue') {
+    // Stepped stone terrace + pedestal + Art Deco statue with outstretched arms (Christ the Redeemer)
+    pushCyl(sec, W * 0.42, W * 0.48, 6.0, 8, 0, 3.0, 0);
+    const pedH = Math.max(8, H * 0.24);
+    pushCyl(sec, 4.2, 5.2, pedH, 8, 0, 6.0 + pedH * 0.5, 0);
+    const figH = Math.max(18, H - pedH - 6);
+    pushCyl(prim, 2.2, 3.4, figH * 0.82, 12, 0, 6.0 + pedH + figH * 0.41, 0);
+    // Outstretched arms
+    pushBox(prim, figH * 0.92, 2.8, 2.4, 0, 6.0 + pedH + figH * 0.68, 0);
+    // Head
+    pushCyl(prim, 1.5, 1.7, figH * 0.16, 10, 0, 6.0 + pedH + figH * 0.90, 0);
+  } else if (form === 'ferris_wheel') {
+    // Cantilevered observation wheel with passenger capsules (London Eye, Seattle Great Wheel)
+    const wheelR = H * 0.46;
+    const centerY = H * 0.52;
+    for (const sz of [-14, 14]) {
+      pushCyl(sec, 0.95, 1.35, centerY * 1.05, 8, -8, centerY * 0.5, sz);
+    }
+    pushCyl(prim, 1.8, 1.8, 12, 12, 0, centerY, 0, Math.PI / 2);
+    const nCaps = 16;
+    for (let i = 0; i < nCaps; i++) {
+      const a0 = (i / nCaps) * Math.PI * 2;
+      const a1 = ((i + 1) / nCaps) * Math.PI * 2;
+      const x0 = Math.cos(a0) * wheelR, y0 = centerY + Math.sin(a0) * wheelR;
+      const x1 = Math.cos(a1) * wheelR, y1 = centerY + Math.sin(a1) * wheelR;
+      const segLen = Math.hypot(x1 - x0, y1 - y0);
+      pushBox(prim, segLen, 1.6, 1.8, (x0 + x1) * 0.5, (y0 + y1) * 0.5, 0);
+      pushCyl(glow, 1.6, 1.6, 3.6, 10, x0, y0, 0);
+    }
+  } else if (form === 'fortress_bastion') {
+    // 5-bastion star fort with stone curtain walls & gatehouse bell tower (Castle of Good Hope)
+    const R = Math.min(W, D) * 0.44;
+    for (let i = 0; i < 5; i++) {
+      const a = (i / 5) * Math.PI * 2;
+      const na = ((i + 1) / 5) * Math.PI * 2;
+      const bx = Math.cos(a) * R, bz = Math.sin(a) * R;
+      pushCyl(sec, 12, 14, H * 0.68, 4, bx, H * 0.34, bz, a);
+      const mx = (bx + Math.cos(na) * R) * 0.5, mz = (bz + Math.sin(na) * R) * 0.5;
+      pushBox(prim, R * 0.95, H * 0.58, 6.5, mx, H * 0.29, mz, -((a + na) * 0.5));
+    }
+    pushBox(accent, 18, H, 14, 0, H * 0.5, R * 0.72);
+  } else if (form === 'stadium_bowl') {
+    // Elliptical stadium bowl with canopy rim, pitch & floodlights (Maracana, Fenway Park, BC Place)
+    const nSegs = 20;
+    const rx = W * 0.48, rz = D * 0.48;
+    for (let i = 0; i < nSegs; i++) {
+      const a = (i / nSegs) * Math.PI * 2;
+      const sx = Math.cos(a) * rx, sz = Math.sin(a) * rz;
+      const segW = (2 * Math.PI * Math.max(rx, rz)) / nSegs;
+      pushBox(prim, segW * 1.05, H * 0.78, 14, sx, H * 0.39, sz, -a + Math.PI / 2);
+      pushBox(roof, segW * 1.08, 2.4, 18, sx * 0.92, H * 0.80, sz * 0.92, -a + Math.PI / 2);
+    }
+    pushCyl(sec, rx * 0.68, rx * 0.68, 0.5, 24, 0, 0.3, 0);
+    if (spec.greenMonster) {
+      pushBox(accent, W * 0.55, 11.3, 3.2, 0, 5.65, -rz * 0.78);
+    }
+  } else if (form === 'historic_row') {
+    if (spec.cloudGate) {
+      // Millennium Park & Cloud Gate ("The Bean") reflective elliptical sculpture + trellis
+      pushBox(sec, W * 0.85, 1.2, D * 0.85, 0, 0.6, 0);
+      const beanGeo = new THREE.SphereGeometry(10, 24, 18);
+      beanGeo.scale(2.0, 1.0, 1.3);
+      beanGeo.translate(0, 6.2, 0);
+      prim.push(beanGeo.index ? beanGeo.toNonIndexed() : beanGeo);
+    } else {
+      // Multi-building architectural streetscape ensemble (Bo-Kaap, Casa Batllo, Quincy Market, Pike Place)
+      const count = spec.rowCount || 6;
+      const rowColors = spec.rowColors || [primaryCol, secondaryCol, accentCol, roofCol];
+      const unitW = (W * 0.92) / count;
+      for (let i = 0; i < count; i++) {
+        const xOff = (i - (count - 1) * 0.5) * unitW;
+        const uh = H * (0.82 + ((i * 7) % 5) * 0.05);
+        const unitArr = [];
+        pushBox(unitArr, unitW * 0.94, uh, D * 0.75, xOff, uh * 0.5, 0);
+        addMergedMeshes(g, unitArr, new THREE.MeshStandardNodeMaterial({ color: rowColors[i % rowColors.length], roughness: 0.62 }));
+        pushBox(sec, unitW * 0.98, 1.1, D * 0.78, xOff, uh + 0.55, 0);
+      }
+      if (spec.signText) {
+        pushBox(glow, W * 0.55, 4.5, 1.4, 0, H + 2.8, D * 0.36);
+      }
+    }
+  } else {
+    // Default / 'canal_palazzo': Palace, museum, or glass-pyramid courtyard (Doge's Palace, Louvre, Rijksmuseum)
+    if (spec.glassPyramid) {
+      // Louvre Cour Napoleon wings + glowing diamond-lattice Glass Pyramid
+      pushBox(prim, W, H * 0.62, 18, 0, H * 0.31, -D * 0.42);
+      pushBox(prim, 18, H * 0.62, D * 0.84, -W * 0.44, H * 0.31, 0);
+      pushBox(prim, 18, H * 0.62, D * 0.84, W * 0.44, H * 0.31, 0);
+      pushCyl(glow, 0.4, 24.5, 21.6, 4, 0, 10.8, 4, Math.PI / 4);
+    } else {
+      const bodyH = H * 0.78;
+      pushBox(prim, W * 0.92, bodyH, D * 0.88, 0, bodyH * 0.5, 0);
+      pushBox(sec, W * 0.96, 1.8, D * 0.92, 0, bodyH + 0.9, 0);
+      pushCyl(roof, W * 0.25, W * 0.52, H * 0.22, 4, 0, bodyH + H * 0.11, 0, Math.PI / 4);
+      if (spec.towerH) {
+        pushBox(prim, 10, spec.towerH, 10, W * 0.32, spec.towerH * 0.5, D * 0.28);
+        pushCyl(roof, 0.4, 6.2, spec.towerH * 0.18, 8, W * 0.32, spec.towerH * 1.09, D * 0.28);
+      }
+    }
+  }
+
+  // Merge any additional 3D building:part sub-volumes extracted by sample-city-archetypes.py / build-city-pack.py
+  const partsList = spec.parts || site?.parts || [];
+  for (const pt of partsList) {
+    if (!pt || !pt.w || !pt.d || !pt.h) continue;
+    pushBox(sec, pt.w, pt.h, pt.d, pt.dx || 0, pt.h * 0.5, pt.dz || 0);
+  }
+
+  const primRough = (form === 'diagrid_prism' || spec.cloudGate) ? 0.18 : 0.62;
+  const primMetal = (form === 'diagrid_prism' || spec.cloudGate) ? 0.78 : (form === 'lattice_tower' ? 0.45 : 0.15);
+  addMergedMeshes(g, prim, new THREE.MeshStandardNodeMaterial({ color: primaryCol, roughness: primRough, metalness: primMetal }));
+  addMergedMeshes(g, sec, new THREE.MeshStandardNodeMaterial({ color: secondaryCol, roughness: 0.65, metalness: 0.2 }));
+  addMergedMeshes(g, roof, new THREE.MeshStandardNodeMaterial({ color: roofCol, roughness: 0.52, metalness: 0.28 }));
+  addMergedMeshes(g, accent, new THREE.MeshStandardNodeMaterial({ color: accentCol, roughness: 0.35, metalness: 0.65 }));
+  addMergedMeshes(g, glow, new THREE.MeshStandardNodeMaterial({ color: glowCol, emissive: glowCol, emissiveIntensity: 0.95, roughness: 0.22 }), false);
+
+  const baseY = atWaterLevel ? 0 : groundUnder(cx, cz, Math.min(80, W), Math.min(80, D));
+  g.position.set(cx, baseY, cz);
+
+  const collider = atWaterLevel ? null : {
+    minX: cx - W * 0.45,
+    maxX: cx + W * 0.45,
+    minZ: cz - D * 0.45,
+    maxZ: cz + D * 0.45,
+    maxY: baseY + H,
+    solid: true
+  };
+  return { group: g, collider };
+}
+
+function buildArchetypeCityLandmarks(scene, baseResult = null, builtNames = new Set()) {
+  const group = baseResult ? baseResult.group : new THREE.Group();
+  if (!baseResult) group.name = `${ACTIVE_CITY_ID}_ArchetypeLandmarks`;
+  const colliders = baseResult ? baseResult.colliders : [];
+
+  const packLandmarks = (CITY_PACK && CITY_PACK.archetypes && CITY_PACK.archetypes.landmarks) || {};
+  const sampledLandmarks = (GEO && GEO.sampledArchetypes && GEO.sampledArchetypes.landmarks) || {};
+  const allNames = new Set([...Object.keys(packLandmarks), ...Object.keys(sampledLandmarks)]);
+
+  for (const name of allNames) {
+    if (builtNames.has(name)) continue;
+    const spec = { ...(sampledLandmarks[name] || {}), ...(packLandmarks[name] || {}) };
+    const site = LANDMARK_SITES[name] || (CITY_PACK.landmarks || []).find((l) => l.name === name) || null;
+    const { group: lmGroup, collider } = buildLandmarkFromArchetype(name, spec, site);
+    group.add(lmGroup);
+    if (collider) colliders.push(collider);
+    builtNames.add(name);
+  }
+
+  if (!baseResult && scene && typeof scene.add === 'function') {
+    scene.add(group);
+  }
+  return { group, colliders };
+}
+
 export function buildLandmarks(scene) {
-  if (ACTIVE_CITY_ID === 'annarbor') return buildAnnArborLandmarks(scene);
-  if (ACTIVE_CITY_ID === 'newyork') return buildNewYorkLandmarks(scene);
-  if (ACTIVE_CITY_ID === 'oakland') return buildOaklandLandmarks(scene);
-  if (ACTIVE_CITY_ID === 'pompanobeach') return buildPompanoBeachLandmarks(scene);
-  if (ACTIVE_CITY_ID === 'sanfrancisco') return buildSanFranciscoLandmarks(scene);
-  return buildRoyalOakLandmarks(scene);
+  if (ACTIVE_CITY_ID === 'annarbor') return buildArchetypeCityLandmarks(scene, buildAnnArborLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
+  if (ACTIVE_CITY_ID === 'newyork') return buildArchetypeCityLandmarks(scene, buildNewYorkLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
+  if (ACTIVE_CITY_ID === 'oakland') return buildArchetypeCityLandmarks(scene, buildOaklandLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
+  if (ACTIVE_CITY_ID === 'pompanobeach') return buildArchetypeCityLandmarks(scene, buildPompanoBeachLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
+  if (ACTIVE_CITY_ID === 'sanfrancisco') return buildArchetypeCityLandmarks(scene, buildSanFranciscoLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
+  if (ACTIVE_CITY_ID === 'royaloak') return buildArchetypeCityLandmarks(scene, buildRoyalOakLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
+  return buildArchetypeCityLandmarks(scene);
 }

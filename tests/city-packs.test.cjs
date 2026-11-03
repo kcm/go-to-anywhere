@@ -47,6 +47,18 @@ describe('Multi-City Pack Manifest & Assets', () => {
       assert.ok(Array.isArray(pack.cameraPresets) && pack.cameraPresets.length >= 5, `Insufficient cameraPresets for ${cityId}`);
       assert.ok(pack.scenicStarts && pack.scenicStarts.car && pack.scenicStarts.person, `Missing scenicStarts for ${cityId}`);
       assert.ok(pack.archetypes && pack.archetypes.residential && pack.archetypes.midrise, `Missing regional building archetypes for ${cityId}`);
+      assert.ok(
+        pack.archetypes.neighborhoods && Object.keys(pack.archetypes.neighborhoods).length >= 2,
+        `Missing neighborhood archetypes for ${cityId}`
+      );
+      assert.ok(
+        pack.archetypes.landmarks && Object.keys(pack.archetypes.landmarks).length >= 3,
+        `Missing landmark archetypes for ${cityId}`
+      );
+      for (const [lmName, lmSpec] of Object.entries(pack.archetypes.landmarks)) {
+        assert.ok(lmSpec.form && typeof lmSpec.form === 'string', `Missing form on landmark archetype ${lmName} in ${cityId}`);
+        assert.ok(lmSpec.w > 0 && lmSpec.d > 0 && lmSpec.h > 0, `Invalid dimensions on landmark archetype ${lmName} in ${cityId}`);
+      }
     }
   });
 
