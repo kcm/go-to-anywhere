@@ -110,20 +110,71 @@ function streetDirection(cx, cz) {
 // How far along the ray from (x, z) toward (nx, nz) the nearest road's edge is, or -1
 function distanceToStreet(x, z, nx, nz) {
   let best = -1;
-  for (const { road } of nearestRoads(x, z, 50).slice(0, 3)) {
-    const pts = road.pts;
+  for (const { road } of nearestRoads(x, z, 55)) {
+    const pts = road.pts, hw = (road.w || 8) / 2;
     for (let i = 0; i + 1 < pts.length; i++) {
       const a = pts[i], qx = pts[i + 1].x - a.x, qz = pts[i + 1].z - a.z;
       const den = nx * qz - nz * qx;
       if (Math.abs(den) < 1e-6) continue;
       const wx = a.x - x, wz = a.z - z;
       const s = (wx * qz - wz * qx) / den, t = (wx * nz - wz * nx) / den;
-      if (s <= 0 || t < 0 || t > 1) continue;
-      const edge = s - (road.w || 8) / 2;
+      if (s <= 0 || t < -0.1 || t > 1.1) continue;
+      const edge = Math.max(0, s - hw);
       if (best < 0 || edge < best) best = edge;
     }
   }
   return best;
+}
+
+// Maximum outward projection (in metres) from a front wall segment before reaching the sidewalk/curb corridor.
+function maxFrontProjection(A0, dir, N, t0, t1, cx, cz) {
+  const roads = nearestRoads(cx, cz, 60);
+  if (!roads.length) return 6.0;
+  const SIDEWALK_BUF = 2.2;
+  let limit = 6.0;
+  const samples = [Math.max(0, t0), (t0 + t1) * 0.5, Math.min(t1, t0 + (t1 - t0))];
+  for (const t of samples) {
+    const ox = A0.x + dir.x * t, oz = A0.z + dir.z * t;
+    const rayCurb = distanceToStreet(ox, oz, N.x, N.z);
+    if (rayCurb >= 0) limit = Math.min(limit, Math.max(0, rayCurb - SIDEWALK_BUF));
+    for (const { road } of roads) {
+      const pts = road.pts, R = (road.w || 8) * 0.5 + SIDEWALK_BUF;
+      for (let i = 0; i + 1 < pts.length; i++) {
+        const a = pts[i], b = pts[i + 1], dx = b.x - a.x, dz = b.z - a.z, L2 = dx * dx + dz * dz;
+        if (L2 < 1e-6) continue;
+        const u0 = Math.max(0, Math.min(1, ((ox - a.x) * dx + (oz - a.z) * dz) / L2));
+        const rx = a.x + u0 * dx - ox, rz = a.z + u0 * dz - oz;
+        const dist = Math.hypot(rx, rz);
+        if (dist > 30) continue;
+        const dotN = rx * N.x + rz * N.z;
+        // Only restrict if moving outward along N approaches this road segment
+        if (dotN <= 0.15 * dist) continue;
+        if (dist <= R) {
+          limit = 0;
+          break;
+        }
+        const L = Math.sqrt(L2);
+        const m = ((ox - a.x) * (-dz) + (oz - a.z) * dx) / L;
+        const nm = (N.x * (-dz) + N.z * dx) / L;
+        if (Math.abs(m) > R && m * nm < -1e-6) {
+          const dHit = (Math.abs(m) - R) / Math.abs(nm);
+          const uHit = ((ox + N.x * dHit - a.x) * dx + (oz + N.z * dHit - a.z) * dz) / L2;
+          if (uHit >= 0 && uHit <= 1) limit = Math.min(limit, dHit);
+        }
+        for (const ep of [a, b]) {
+          const wx = ep.x - ox, wz = ep.z - oz;
+          const proj = wx * N.x + wz * N.z;
+          if (proj <= 0) continue;
+          const perp2 = wx * wx + wz * wz - proj * proj;
+          if (perp2 < R * R) {
+            const dCap = proj - Math.sqrt(R * R - perp2);
+            if (dCap >= 0) limit = Math.min(limit, dCap);
+          }
+        }
+      }
+    }
+  }
+  return Math.max(0, limit);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -485,6 +536,16 @@ function pushWall(hc, a, b, y0, y1, kind, eaveRel) {
   const { c, g } = hc;
   const dx = b.x - a.x, dz = b.z - a.z, L = Math.hypot(dx, dz);
   if (L < 0.05 || y1 <= y0) return;
+  // On hillside lots, front walls reference the front door's ground `g`, while side/rear walls lift their foundation
+  // line to follow the local ground along that wall segment so ground-floor windows never sink into the slope.
+  const wallG = (kind === K_FRONT || kind === K_FACADE)
+    ? g
+    : Math.max(g, Math.max(
+        groundHeight(a.x, a.z),
+        groundHeight((a.x + b.x) * 0.5, (a.z + b.z) * 0.5),
+        groundHeight(b.x, b.z)
+      ) + 0.42);
+  const wallEaveRel = eaveRel + (g - wallG);
   // the garage door is measured along the wall from a; the shader counts u the same way
   const gd = kind !== K_FRONT && hc.doors.length ? doorOnWall(hc.doors, a, b) : null;
   const nx = dz / L, nz = -dx / L;
@@ -493,10 +554,10 @@ function pushWall(hc, a, b, y0, y1, kind, eaveRel) {
   for (let k = 0; k < 4; k++) {
     c.nor.push(nx, 0, nz);
     c.col.push(...hc.sc);
-    c.house.push(hc.seed, eaveRel, gd ? gd[0] : -1, gd ? gd[1] : -1);
+    c.house.push(hc.seed, wallEaveRel, gd ? gd[0] : -1, gd ? gd[1] : -1);
     c.style.push(...hc.style);
   }
-  c.info.push(0, y0 - g, L, kind, L, y0 - g, L, kind, 0, y1 - g, L, kind, L, y1 - g, L, kind);
+  c.info.push(0, y0 - wallG, L, kind, L, y0 - wallG, L, kind, 0, y1 - wallG, L, kind, L, y1 - wallG, L, kind);
   c.idx.push(o, o + 2, o + 1, o + 1, o + 2, o + 3);
 }
 
@@ -774,7 +835,7 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     const h = Math.max(3, r.height);
     const storeys = garage ? 0 : h < 4.6 ? 1 : h < 6.6 ? 1.5 : h < 10 ? 2 : 3;
     const ranch = storeys === 1 && !historic;
-    const fh = garage ? 0.12 : historic ? 0.75 + 0.3 * id(21) : ranch ? 0.3 + 0.2 * id(21) : 0.5 + 0.35 * id(21);
+    let fh = garage ? 0.12 : historic ? 0.75 + 0.3 * id(21) : ranch ? 0.3 + 0.2 * id(21) : 0.5 + 0.35 * id(21);
 
     // Walls: Oakland stucco (Mediterranean, Marina, Spanish Revival, mid-century), painted wood clapboard, and shingles
     const m = id(2);
@@ -827,9 +888,9 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
       }
     }
 
-    // On hillside lots, reference the foundation base `g` to the highest lawn (`LAWN_Y = 0.42`) across the house's
-    // walls so the foundation (`fh`), doors, and ground-floor windows sit cleanly above the slope along every wall,
-    // while `base` extends the foundation wall down below `minG` on the downhill side.
+    // Reference the front door/porch ground `g` to the terrain right at the front door wall so hillside houses don't
+    // lift their front door 3-4 m into the air at backyard hill height, while keeping `maxGround` so the roof eaves
+    // still clear the uphill side of the lot.
     let minGround = r.ground ?? groundHeight(r.cx, r.cz);
     let maxGround = r.maxGround ?? minGround;
     for (const p of ring) {
@@ -844,7 +905,23 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
         if (gh > maxGround) maxGround = gh;
       }
     }
-    const g = maxGround + 0.42;
+    let doorGround = maxGround + 0.42;
+    let doorMaxProj = 6.0;
+    if (door && !garage) {
+      const dS = sideOf(door.rect, door.side);
+      const dA0 = P(dS.au, dS.av), dB0 = P(dS.bu, dS.bv);
+      const dDir = { x: (dB0.x - dA0.x) / dS.L, z: (dB0.z - dA0.z) / dS.L };
+      const dN = { x: dDir.z, z: -dDir.x };
+      const dT = (door.t0 + door.t1) * 0.5;
+      doorGround = Math.max(
+        groundHeight(dA0.x + dDir.x * Math.max(0, dT - 0.8), dA0.z + dDir.z * Math.max(0, dT - 0.8)),
+        groundHeight(dA0.x + dDir.x * dT, dA0.z + dDir.z * dT),
+        groundHeight(dA0.x + dDir.x * Math.min(dS.L, dT + 0.8), dA0.z + dDir.z * Math.min(dS.L, dT + 0.8))
+      ) + 0.42;
+      doorMaxProj = maxFrontProjection(dA0, dDir, dN, door.t0, door.t1, r.cx, r.cz);
+      if (doorMaxProj < 1.15) fh = Math.min(fh, 0.22);
+    }
+    const g = doorGround;
 
     const hc = {
       c: cellOf(r.cx, r.cz), g, P, seed: id(4) * 100, sc: lin(sidingHex), style: [matKind, trim, accent, fh],
@@ -878,7 +955,10 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
     else if (rr < 0.65) { type = 'hip'; along = longer; }
     else along = frontAlong;
     const pitch = garage ? 0.30 : type === 'hip' ? (ranch ? 0.28 : 0.36) : ranch ? 0.30 : historic ? 0.52 : 0.38;
-    const mainTop = garage ? g + Math.max(2.4, Math.min(3, h - 1)) : g + fh + (storeys === 1.5 ? 3.25 : Math.floor(storeys) * 2.8 + 0.2);
+    const storeyH = storeys === 1.5 ? 3.25 : Math.floor(storeys) * 2.8 + 0.2;
+    const mainTop = garage
+      ? g + Math.max(2.4, Math.min(3, h - 1))
+      : Math.max(g + fh + storeyH, maxGround + 0.42 + Math.max(2.8, storeyH * 0.72));
     const hbM = (along === 'u' ? mW : mL) / 2;
     const rhM = type === 'flat' ? 0 : Math.max(0.75, Math.min(garage ? 1.4 : 3.0, hbM * pitch));
     const roofSpecs = [{ type, along, top: mainTop, rh: rhM, shade: hc.shade }];
@@ -1016,16 +1096,21 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
       const deckY = g + fh;
       const blockTop = roofSpecs[rects.indexOf(R)].top, blockSoffit = frames[rects.indexOf(R)].soffit;
       const yaw = Math.atan2(-dir.z, dir.x);
+      const maxProj = doorMaxProj;
+      const stepDepth = 0.26;
+      const estSteps = Math.max(1, Math.min(6, Math.round(fh / 0.18)));
+      const stepReserve = estSteps * stepDepth + 0.15;
       const craftsman = storeys === 1.5 || (!historic && storeys === 1 && id(17) < 0.3);
-      const hasPorch = segLen >= 3.4 && id(8) < (historic ? 0.85 : ranch ? 0.3 : 0.65);
+      const hasPorch = maxProj >= 2.35 + stepReserve && segLen >= 3.4 && id(8) < (historic ? 0.85 : ranch ? 0.3 : 0.65);
       const sw = craftsman ? 1.8 : 1.5;
-      let outD;
+      let outD = 0;
       if (hasPorch) {
         porches++;
         const full = (historic && id(18) < 0.6) || (craftsman && id(18) < 0.7);
         const pw = full ? segLen - 0.2 : Math.min(segLen - 0.4, 3.6 + id(19) * 1.8);
         const t0 = doorT - pw / 2, t1 = doorT + pw / 2;
-        const pd = historic ? 2.5 + id(20) * 0.5 : 2.1 + id(20) * 0.6;
+        const pdRaw = historic ? 2.5 + id(20) * 0.5 : 2.1 + id(20) * 0.6;
+        const pd = Math.min(pdRaw, Math.max(1.6, maxProj - stepReserve));
         const ph = Math.min(deckY + 2.65, blockSoffit - 0.45);
         outD = pd;
         // the deck on its skirt, the ceiling, posts (on brick piers on a craftsman porch), beams
@@ -1066,47 +1151,56 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
         }
         // shrubs either side of the steps, and at the porch's ends
         for (const s of [-1, 1]) {
-          const p = Q(doorT + s * (sw / 2 + 0.75), pd + 0.6);
-          shrubs.push(p.x, groundHeight(p.x, p.z) + 0.42, p.z, 0.5 + id(24 + s) * 0.3, ...lin(pick(SHRUBS, id(26 + s))));
+          const rad = 0.5 + id(24 + s) * 0.3;
+          if (pd + 0.6 + rad <= maxProj) {
+            const p = Q(doorT + s * (sw / 2 + 0.75), pd + 0.6);
+            shrubs.push(p.x, groundHeight(p.x, p.z) + 0.42, p.z, rad, ...lin(pick(SHRUBS, id(26 + s))));
+          }
           const t = s < 0 ? t0 - 0.9 : t1 + 0.9;
-          if (t > 0.6 && t < S.L - 0.6) {
+          const qRad = 0.6 + id(28 + s) * 0.35;
+          if (t > 0.6 && t < S.L - 0.6 && 0.8 + qRad <= maxProj) {
             const q = Q(t, 0.8);
-            shrubs.push(q.x, groundHeight(q.x, q.z) + 0.42, q.z, 0.6 + id(28 + s) * 0.35, ...lin(pick(SHRUBS, id(29 + s))));
+            shrubs.push(q.x, groundHeight(q.x, q.z) + 0.42, q.z, qRad, ...lin(pick(SHRUBS, id(29 + s))));
           }
         }
-      } else {
-        // a stoop: a landing at the door
-        outD = 1.3;
-        const stPt = Q(doorT, 0.65);
-        const sCorners = [Q(doorT - 0.95, 0), Q(doorT + 0.95, 0), Q(doorT - 0.95, 1.3), Q(doorT + 0.95, 1.3), stPt];
+      } else if (maxProj >= 1.15) {
+        // a stoop: a landing at the door, sized to leave room for at least 2 steps within maxProj
+        outD = Math.min(1.25, Math.max(0.55, maxProj - Math.max(2 * stepDepth, Math.min(maxProj * 0.55, stepReserve))));
+        const stPt = Q(doorT, outD * 0.5);
+        const sCorners = [Q(doorT - 0.95, 0), Q(doorT + 0.95, 0), Q(doorT - 0.95, outD), Q(doorT + 0.95, outD), stPt];
         const stoopBase = Math.min(g, ...sCorners.map((p) => groundHeight(p.x, p.z) + 0.42)) - 0.45;
-        addBox(c, stPt, dir.x, dir.z, 1.9, 1.3, stoopBase, deckY, lin(CONCRETE));
+        addBox(c, stPt, dir.x, dir.z, 1.9, outD, stoopBase, deckY, lin(CONCRETE));
         for (const s of [-1, 1]) for (const t of [doorT + s * 1.9, doorT + s * 3.4]) {
-          if (t < 0.6 || t > S.L - 0.6) continue;
+          const rad = 0.45 + id(31 + t) * 0.3;
+          if (t < 0.6 || t > S.L - 0.6 || 0.75 + rad > maxProj) continue;
           const p = Q(t, 0.75);
-          shrubs.push(p.x, groundHeight(p.x, p.z) + 0.42, p.z, 0.45 + id(31 + t) * 0.3, ...lin(pick(SHRUBS, id(33 + t))));
+          shrubs.push(p.x, groundHeight(p.x, p.z) + 0.42, p.z, rad, ...lin(pick(SHRUBS, id(33 + t))));
         }
       }
-      // steps down from the porch or stoop to the front yard slope
+      // steps down from the porch or stoop to the front yard slope, strictly within maxProj
       const stepRGB = hasPorch ? lin(DECK) : lin(CONCRETE);
       const stepLawnAt = (d) => Math.min(
         groundHeight(Q(doorT - sw * 0.5, d).x, Q(doorT - sw * 0.5, d).z),
         groundHeight(Q(doorT, d).x, Q(doorT, d).z),
         groundHeight(Q(doorT + sw * 0.5, d).x, Q(doorT + sw * 0.5, d).z)
       ) + 0.42;
-      const stepGround = Math.min(g, stepLawnAt(outD + 0.6), stepLawnAt(outD + 2.1));
-      const dropH = Math.max(fh, deckY - stepGround);
-      const nSteps = Math.max(1, Math.min(20, Math.round(dropH / 0.18))), riser = dropH / nSteps;
+      const maxStepsFit = outD > 0 ? Math.max(0, Math.floor((maxProj - outD) / stepDepth)) : 0;
       let stepsUsed = 0;
-      for (let k = 1; k <= nSteps; k++) {
-        const top = deckY - k * riser;
-        const d = outD + (k - 0.5) * 0.3;
-        const p = Q(doorT, d);
-        const sg = stepLawnAt(d);
-        if (top <= sg - 0.02 && k > 1) break;
-        const sBase = Math.min(sg, top) - 0.4;
-        steps.push(p.x, sBase, p.z, yaw, sw, top - sBase, 0.3, ...stepRGB);
-        stepsUsed = k;
+      if (maxStepsFit > 0) {
+        const stepGround = Math.min(g, stepLawnAt(outD + Math.min(0.8, maxStepsFit * stepDepth)));
+        const dropH = Math.min(fh + 0.35, Math.max(fh, deckY - stepGround));
+        const nSteps = Math.max(1, Math.min(6, maxStepsFit, Math.round(dropH / 0.18))), riser = dropH / nSteps;
+        for (let k = 1; k <= nSteps; k++) {
+          const top = deckY - k * riser;
+          const d = outD + (k - 0.5) * stepDepth;
+          if (d + stepDepth * 0.5 > maxProj + 0.02) break;
+          const p = Q(doorT, d);
+          const sg = stepLawnAt(d);
+          if (top <= sg - 0.02 && k > 1) break;
+          const sBase = Math.min(sg, top) - 0.4;
+          steps.push(p.x, sBase, p.z, yaw, sw, top - sBase, stepDepth, ...stepRGB);
+          stepsUsed = k;
+        }
       }
       // the porch light by the door and the house number on the other side
       const lp = Q(doorT - 0.9, 0.08);
@@ -1119,17 +1213,19 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
         }
       }
       // a front walk from the steps to the sidewalk, following the ground above the lawn (LAWN_Y = 0.42)
-      const startD = outD + Math.max(1, stepsUsed) * 0.3;
-      const s0 = Q(doorT, startD);
-      const toStreet = distanceToStreet(s0.x, s0.z, N.x, N.z);
-      const walkLen = toStreet - 2.0;
-      if (walkLen > 0.8 && walkLen < 30) {
-        const n = Math.ceil(walkLen / 2.5), walkRGB = lin(CONCRETE);
-        for (let k = 0; k < n; k++) {
-          const d0 = startD + (walkLen * k) / n, d1 = startD + (walkLen * (k + 1)) / n;
-          const p = [Q(doorT - 0.6, d0), Q(doorT + 0.6, d0), Q(doorT + 0.6, d1), Q(doorT - 0.6, d1)]
-            .map((q) => [q.x, groundHeight(q.x, q.z) + 0.43, q.z]);
-          sQuad(c, p[0], p[1], p[2], p[3], walkRGB);
+      const startD = outD + stepsUsed * stepDepth;
+      if (outD > 0 && startD < maxProj - 0.4) {
+        const s0 = Q(doorT, startD);
+        const toStreet = distanceToStreet(s0.x, s0.z, N.x, N.z);
+        const walkLen = Math.min(toStreet - 2.0, maxProj - startD);
+        if (walkLen > 0.8 && walkLen < 30) {
+          const n = Math.ceil(walkLen / 2.5), walkRGB = lin(CONCRETE);
+          for (let k = 0; k < n; k++) {
+            const d0 = startD + (walkLen * k) / n, d1 = startD + (walkLen * (k + 1)) / n;
+            const p = [Q(doorT - 0.6, d0), Q(doorT + 0.6, d0), Q(doorT + 0.6, d1), Q(doorT - 0.6, d1)]
+              .map((q) => [q.x, groundHeight(q.x, q.z) + 0.43, q.z]);
+            sQuad(c, p[0], p[1], p[2], p[3], walkRGB);
+          }
         }
       }
     }
