@@ -1,7 +1,7 @@
 // Multi-city registry & active city pack configuration.
-// Supports 20 worldwide cities: 'sanfrancisco' (default), 'royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach',
+// Supports 21 worldwide cities: 'sanfrancisco' (default), 'royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach',
 // 'sydney', 'venice', 'amsterdam', 'hongkong', 'paris', 'london', 'tokyo', 'barcelona', 'rio', 'vancouver',
-// 'capetown', 'chicago', 'boston', and 'seattle'.
+// 'capetown', 'chicago', 'boston', 'seattle', and 'tampa'.
 
 const CITY_ALIASES = {
   sanfrancisco: 'sanfrancisco',
@@ -62,7 +62,11 @@ const CITY_ALIASES = {
   boston: 'boston',
   bos: 'boston',
   seattle: 'seattle',
-  sea: 'seattle'
+  sea: 'seattle',
+  tampa: 'tampa',
+  tpa: 'tampa',
+  'tampa-bay': 'tampa',
+  tampabay: 'tampa'
 };
 
 const RESERVED_CITY_KEYS = new Set(['__proto__', 'constructor', 'prototype', 'tostring', 'valueof']);
@@ -3814,6 +3818,185 @@ const CITY_PACKS = {
         'Smith Tower': { form: 'clock_tower', x: 759, z: 1050, w: 30, d: 30, h: 148, wallColor: 0xf2eee4, trimColor: 0xd8d0c0, roofColor: 0x4a7c6b },
         'Seattle Great Wheel': { form: 'ferris_wheel', x: -120, z: 280, w: 54, d: 18, h: 53, wallColor: 0xf7f9fb, trimColor: 0x00a88f },
         'Pike Place Market & Public Market Sign': { form: 'historic_row', x: 0, z: 0, w: 88, d: 28, h: 16, wallColor: 0x9c4a38, trimColor: 0xd92626, roofColor: 0x3b4045 }
+      }
+    }
+  },
+  tampa: {
+    id: 'tampa',
+    title: 'Tampa',
+    stateCode: 'FL',
+    stateLabel: 'Florida',
+    displayName: 'Tampa, FL',
+    icon: 'img/icon-tampa.svg',
+    dataPrefix: 'cities/tampa/',
+    tagline: 'Tampa Riverwalk, Plant Hall Minarets, Ybor City 7th Ave, Water Street, Amalie Arena & Hillsborough Bay',
+    fullmapTitle: 'Tampa Bay & Riverwalk Street Atlas',
+    searchPlaceholder: 'Street or landmark (Tampa Riverwalk, Ybor City, Plant Hall, Amalie Arena, Bayshore Blvd...)',
+    loadingStages: {
+      streets: 'Building Downtown Tampa, Tampa Riverwalk, Ashley Drive and Water Street...',
+      outskirts: 'Laying out Hillsborough River, Ybor City, Harbour Island and Hyde Park...',
+      landmarks: 'Building Plant Hall Minarets, Rivergate Tower, 100 North Tampa and Amalie Arena...'
+    },
+    timeZone: 'America/New_York',
+    lat: 27.9475,
+    lon: -82.4584,
+    baseElev: 0.0,
+    weatherStation: 'KTPA',
+    riverGaugeSite: '02301500',
+    riverGaugeBaseFt: 2.2,
+    usualCfs: 420,
+    kayakLaunch: { x: -120, z: 60 },
+    defaultSpawn: { x: 0, z: 0 },
+    police: {
+      name: 'TPD',
+      doorTop: 'TAMPA',
+      doorBottom: 'POLICE',
+      doorSub: 'EXCELLENCE IN POLICING',
+      badgeTitle: 'TPD',
+      baseColor: 0x101c2e,
+      stripeColor: 0xd4af37
+    },
+    plate: {
+      state: 'FLORIDA',
+      slogan: 'SUNSHINE STATE',
+      sample: 'TPA 813',
+      bg: '#f8fafc',
+      topBand: '#ea580c',
+      text: '#047857',
+      scriptColor: '#ea580c',
+      legacyEvery4: false
+    },
+    transit: {
+      name: 'HART & TECO Line Streetcar',
+      shortName: 'HART',
+      bodyColor: 0x005596,
+      bandColor: 0xf59e0b,
+      accentColor: 0xd97706
+    },
+    ownCar: {
+      kind: 'convertible',
+      hex: 0xc8102e,
+      plateText: 'TPA 813',
+      state: 'FLORIDA'
+    },
+    areas: [
+      [0, 0, 'Curtis Hixon Waterfront Park & Riverwalk'],
+      [-551, 100, 'University of Tampa & Plant Hall Minarets'],
+      [167, 200, 'Downtown Tampa & 100 North Tampa'],
+      [649, 533, 'Water Street & Amalie Arena'],
+      [1318, 389, 'Channelside, Sparkman Wharf & Aquarium'],
+      [1633, -1411, 'Ybor City Historic District (7th Ave)'],
+      [-629, -1567, 'Tampa Heights & Armature Works'],
+      [-1780, 1222, 'Hyde Park Village & Bayshore'],
+      [482, 1278, 'Harbour Island']
+    ],
+    landmarks: [
+      { id: 'riverwalk',   name: 'Curtis Hixon Park & Tampa Riverwalk',       short: 'Tampa Riverwalk',      x: 0,     z: 0,     heading: 0 },
+      { id: 'planthall',   name: 'Plant Hall & Silver Minarets (UTampa)',     short: 'Plant Hall Minarets',  x: -551,  z: 100,   heading: Math.PI / 2 },
+      { id: 'northtampa',  name: '100 North Tampa & Rivergate Tower',         short: 'Downtown Skyline',     x: 167,   z: 200,   heading: 0 },
+      { id: 'amaliearena', name: 'Amalie Arena & Water Street Tampa',         short: 'Amalie Arena',         x: 649,   z: 533,   heading: -Math.PI / 2 },
+      { id: 'aquarium',    name: 'The Florida Aquarium & Sparkman Wharf',     short: 'Florida Aquarium',     x: 1318,  z: 389,   heading: Math.PI },
+      { id: 'yborcity',    name: 'Ybor City Historic 7th Avenue & Columbia',  short: 'Ybor City',            x: 1633,  z: -1411, heading: -Math.PI / 2 },
+      { id: 'armature',    name: 'Armature Works & Riverwalk North',          short: 'Armature Works',       x: -629,  z: -1567, heading: Math.PI },
+      { id: 'hydepark',    name: 'Hyde Park Village & Bayshore Blvd',         short: 'Hyde Park',            x: -1780, z: 1222,  heading: Math.PI / 2 }
+    ],
+    teleportIds: ['riverwalk', 'planthall', 'northtampa', 'amaliearena', 'aquarium', 'yborcity', 'armature', 'hydepark'],
+    modelledLandmarks: [
+      'Plant Hall & Silver Minarets',
+      'Rivergate Tower',
+      '100 North Tampa',
+      'Amalie Arena'
+    ],
+    areaLabels: [
+      ['TAMPA', 167, 120, 0],
+      ['HILLSBOROUGH RIVER', -220, -240, 1],
+      ['GARRISON CHANNEL \u00b7 HILLSBOROUGH BAY', 780, 860, 1],
+      ['CURTIS HIXON PARK \u00b7 RIVERWALK', 0, 0, 2],
+      ['UNIVERSITY OF TAMPA \u00b7 PLANT HALL', -551, 100, 2],
+      ['DOWNTOWN TAMPA', 240, 180, 2],
+      ['WATER STREET \u00b7 AMALIE ARENA', 649, 533, 2],
+      ['CHANNELSIDE \u00b7 SPARKMAN WHARF', 1318, 389, 2],
+      ['YBOR CITY HISTORIC DISTRICT', 1633, -1411, 2],
+      ['TAMPA HEIGHTS \u00b7 ARMATURE WORKS', -629, -1567, 2],
+      ['HYDE PARK', -1550, 1100, 2],
+      ['HARBOUR ISLAND', 482, 1278, 2]
+    ],
+    cameraPresets: [
+      ...FOLLOW_CAMERAS,
+      { id: 'tampaRiverwalk', name: 'Tampa Riverwalk & Rivergate Tower', category: 'scenic', fov: 48 },
+      { id: 'plantHallView',  name: 'Plant Hall Moorish Minarets',       category: 'scenic', fov: 48 },
+      { id: 'waterStreet',    name: 'Water Street & Amalie Arena',       category: 'scenic', fov: 50 },
+      { id: 'yborSeventhAve', name: 'Ybor City Historic 7th Avenue',     category: 'scenic', fov: 50 },
+      { id: 'tampaBayAerial', name: 'Hillsborough River & Skyline Aerial', category: 'scenic', fov: 44 },
+      DRONE_CAMERA
+    ],
+    scenicCameras: {
+      tampaRiverwalk: { pos: [-240, 22, 190],     look: [120, 68, 120],       ampPos: [8, 0.5, 8],   ampLook: [4, 2, 4],   freq: 0.10 },
+      plantHallView:  { pos: [-260, 18, 80],      look: [-551, 32, 100],      ampPos: [6, 0.4, 6],   ampLook: [3, 1, 3],   freq: 0.11 },
+      waterStreet:    { pos: [420, 24, 720],      look: [649, 38, 533],       ampPos: [8, 0.5, 8],   ampLook: [4, 2, 4],   freq: 0.10 },
+      yborSeventhAve: { pos: [1450, 12, -1385],   look: [1680, 14, -1411],    ampPos: [5, 0.3, 5],   ampLook: [3, 0, 3],   freq: 0.12 },
+      tampaBayAerial: { pos: [-580, 185, 820],    look: [260, 55, 120],       ampPos: [20, 1.8, 20], ampLook: [14, 0, 14], freq: 0.08 }
+    },
+    scenicStarts: {
+      person:     { x: 12,   z: 18,    heading: 0 },
+      car:        { x: 85,   z: 40,    heading: 0 },
+      cyclist:    { x: -45,  z: 80,    heading: 0 },
+      helicopter: { x: -320, z: 420,   heading: 0.8, above: 165 },
+      kayak:      { x: -120, z: 60,    heading: 0 }
+    },
+    archetypes: {
+      style: 'florida-gulf-coast-masonry-cigar-brick-and-stucco',
+      treeCoverage: { canopyCover: 0.31, streetTreeDensity: 1.12, streetTreeSpacing: 19.2, parkTreeDensity: 1.28, foliageScale: 1.14 },
+      housingDensity: { form: 'urban', buildingsPerKm2: 1620, footprintCoverage: 0.34, wallEnclosure: 0.44, lotInfill: 0.28, rowhouseAttachment: 0.24, maxHouseHeight: 9.8, maxHouseFootprint: 280, porchProbScale: 1.16, shrubDensity: 1.22 },
+      residential: {
+        walls: { clapboard: 0.32, brick: 0.18, stone: 0.04, stucco: 0.42, shake: 0.04 },
+        roofs: { flat: 0.22, hip: 0.46, gable: 0.30, gambrel: 0.02 },
+        pitch: { hip: 0.28, gable: 0.34, historic: 0.40 },
+        siding: [0xf4efe4, 0xe8dec8, 0xd8c3a5, 0xc2d1c8, 0xe2b8a8, 0xd9cdba, 0x8ea39a]
+      },
+      midrise: {
+        masonry: { stoneColor: 0xd8cfc0, trimColor: 0xf4f0e6, windowWidth: 2.5, floorHeight: 3.7 },
+        historic: { stoneColor: 0x9c3e2e, trimColor: 0xdcc59a, windowWidth: 2.3, floorHeight: 3.6 },
+        waterTowerProb: 0.02,
+        fireEscapes: false
+      },
+      neighborhoods: {
+        ybor_city_historic_district: {
+          treeCoverage: { canopyCover: 0.24, streetTreeDensity: 0.96, streetTreeSpacing: 21.0, parkTreeDensity: 1.15, foliageScale: 1.08 },
+          housingDensity: { form: 'urban', buildingsPerKm2: 1980, footprintCoverage: 0.46, wallEnclosure: 0.58, lotInfill: 0.24, rowhouseAttachment: 0.52, maxHouseHeight: 10.5, maxHouseFootprint: 295, porchProbScale: 1.22, shrubDensity: 1.05 },
+          style: 'ybor-cigar-factory-redbrick-and-wrought-iron-balconies',
+          residential: {
+            walls: { clapboard: 0.46, brick: 0.36, stone: 0.02, stucco: 0.16, shake: 0.0 },
+            roofs: { flat: 0.38, hip: 0.26, gable: 0.36, gambrel: 0.0 }
+          },
+          midrise: { stoneColor: 0x9c3e2e, trimColor: 0xdcc59a, storefronts: true, fireEscapes: true }
+        },
+        hyde_park_bayshore: {
+          treeCoverage: { canopyCover: 0.46, streetTreeDensity: 1.36, streetTreeSpacing: 16.0, parkTreeDensity: 1.44, foliageScale: 1.22 },
+          housingDensity: { form: 'suburban', buildingsPerKm2: 1480, footprintCoverage: 0.28, wallEnclosure: 0.30, lotInfill: 0.26, rowhouseAttachment: 0.12, maxHouseHeight: 9.8, maxHouseFootprint: 280, porchProbScale: 1.28, shrubDensity: 1.32 },
+          style: 'hyde-park-historic-craftsman-bungalow-and-mediterranean-revival',
+          residential: {
+            walls: { clapboard: 0.48, brick: 0.12, stone: 0.04, stucco: 0.32, shake: 0.04 },
+            siding: [0xf4efe4, 0xd8cdb8, 0xc2d1c8, 0xe8dec8]
+          },
+          midrise: { stoneColor: 0xe6dfd0, trimColor: 0xf7f5ef, storefronts: true, fireEscapes: false }
+        },
+        water_street_channelside: {
+          treeCoverage: { canopyCover: 0.26, streetTreeDensity: 1.18, streetTreeSpacing: 18.0, parkTreeDensity: 1.24, foliageScale: 1.12 },
+          housingDensity: { form: 'highrise', buildingsPerKm2: 1820, footprintCoverage: 0.48, wallEnclosure: 0.62, lotInfill: 0.18, rowhouseAttachment: 0.44, maxHouseHeight: 11.0, maxHouseFootprint: 310, porchProbScale: 0.82, shrubDensity: 1.08 },
+          style: 'water-street-contemporary-glass-and-coastal-limestone',
+          residential: {
+            walls: { clapboard: 0.08, brick: 0.12, stone: 0.16, stucco: 0.64, shake: 0.0 },
+            roofs: { flat: 0.68, hip: 0.22, gable: 0.10, gambrel: 0.0 }
+          },
+          midrise: { stoneColor: 0xdce4ec, trimColor: 0x94a3b8, storefronts: true, fireEscapes: false }
+        }
+      },
+      landmarks: {
+        'Plant Hall & Silver Minarets': { form: 'dome_palace', x: -551, z: 100, w: 96, d: 44, h: 42, wallColor: 0x9c382b, trimColor: 0xe2e8f0, roofColor: 0xcbd5e1 },
+        'Rivergate Tower': { form: 'diagrid_prism', x: 20, z: 67, w: 40, d: 40, h: 138, wallColor: 0xd8cfc0, trimColor: 0x94a3b8 },
+        '100 North Tampa': { form: 'stepped_bundled_tube', x: 167, z: 200, w: 52, d: 52, h: 176, wallColor: 0x8e9aa8, trimColor: 0xdce4ec, roofColor: 0x4a6b82 },
+        'Amalie Arena': { form: 'dome_palace', x: 649, z: 533, w: 112, d: 96, h: 41, wallColor: 0xd8e0e8, trimColor: 0x005596, roofColor: 0xe2e8f0 }
       }
     }
   }

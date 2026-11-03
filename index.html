@@ -250,7 +250,8 @@
         capetown: 'capetown', 'cape-town': 'capetown', cpt: 'capetown',
         chicago: 'chicago', chi: 'chicago', ord: 'chicago',
         boston: 'boston', bos: 'boston',
-        seattle: 'seattle', sea: 'seattle'
+        seattle: 'seattle', sea: 'seattle',
+        tampa: 'tampa', tpa: 'tampa', 'tampa-bay': 'tampa', tampabay: 'tampa'
       };
       const meta = {
         sanfrancisco: { name: 'San Francisco, CA',        icon: 'img/icon-sanfrancisco.svg' },
@@ -272,7 +273,8 @@
         capetown:     { name: 'Cape Town, South Africa',  icon: 'img/icon-capetown.svg' },
         chicago:      { name: 'Chicago, IL',              icon: 'img/icon-chicago.svg' },
         boston:       { name: 'Boston, MA',               icon: 'img/icon-boston.svg' },
-        seattle:      { name: 'Seattle, WA',              icon: 'img/icon-seattle.svg' }
+        seattle:      { name: 'Seattle, WA',              icon: 'img/icon-seattle.svg' },
+        tampa:        { name: 'Tampa, FL',                icon: 'img/icon-tampa.svg' }
       };
       const params = new URLSearchParams(location.search);
       const raw = params.get('city') || '';
@@ -339,6 +341,7 @@
             <option value="chicago">Chicago, IL</option>
             <option value="boston">Boston, MA</option>
             <option value="seattle">Seattle, WA</option>
+            <option value="tampa">Tampa, FL</option>
           </select>
           <div id="tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
             <button id="tier-full" class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
@@ -544,6 +547,7 @@
           <option value="chicago">Chicago, IL</option>
           <option value="boston">Boston, MA</option>
           <option value="seattle">Seattle, WA</option>
+          <option value="tampa">Tampa, FL</option>
         </select>
         <div id="map-tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
           <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>

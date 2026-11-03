@@ -1351,6 +1351,71 @@ CITY_CONFIGS = {
         },
         'rng_seed': 206,
     },
+    'tampa': {
+        'id': 'tampa',
+        'name': 'Tampa, FL',
+        'origin_desc': 'Curtis Hixon Waterfront Park & Ashley Dr, Tampa FL',
+        'lat0': 27.9475,
+        'lon0': -82.4584,
+        'bbox': (27.9280, -82.4820, 27.9680, -82.4320),
+        'base_elev': 0.0,
+        'downtown_box': (-950, -1100, 1250, 1100),
+        'in_town_box': (-2100, -1950, 2350, 1950),
+        'metered_regex': re.compile(r'^(Ashley|Tampa|Florida|Franklin|Marion|Morgan|Pierce|Jefferson|Madison|Twiggs|Zack|Polk|Tyler|Cass|whiting|Jackson|Kennedy|Channelside|Water|Cumberland|Brorein|7th|8th|9th|Palm|Nebraska|Ybor|15th|16th|17th|Bayshore|Swann|Hyde Park|Platt|Howard|Armenia)\b', re.I),
+        'rail_default_name': 'CSX Tampa Terminal & TECO Line Streetcar / Amtrak Silver Star',
+        'rail_route_names': ['Amtrak Floridian / Silver Meteor & CSX Tampa Sub', 'TECO Line Historic Streetcar'],
+        'amtrak_stop_id': 'TPA',
+        'amtrak_station_name': 'Tampa Union Station',
+        'amtrak_west_keywords': ('Miami', 'Fort Lauderdale', 'West Palm Beach', 'Lakeland'),
+        'amtrak_fallback': [
+            ['41', 'west', 'Floridian to Lakeland, Winter Haven, Fort Lauderdale & Miami', 46200, 46800, '1111111', '20250101', '20301231'],
+            ['40', 'east', 'Floridian to Orlando, Winter Park, Jacksonville, Washington DC & Chicago', 59100, 59700, '1111111', '20250101', '20301231'],
+        ],
+        'transit_feed_id': 'hart_tampa_2026',
+        'transit_prefix': 'tpa',
+        'corridor_waypoints': [
+            ('TECO', 'TECO Line Streetcar Whiting Station - Amalie Arena - Channelside - Centro Ybor', 'Centennial Park / Ybor City', 'Fort Brooke / Whiting Station', 'd97706',
+             [(120, 480), (649, 533), (1318, 389), (1450, -680), (1633, -1411)]),
+            ('1', 'HART Route 1 Downtown Tampa - Marion Transit Center - Tampa Heights - Florida Ave', 'University Area', 'Downtown Tampa', '005596',
+             [(0, 0), (180, -360), (220, -1250), (240, -1950)]),
+            ('5', 'HART Route 5 Downtown - Curtis Hixon - University of Tampa - Hyde Park - Ybor City', 'Ybor City', 'Hyde Park / Bayshore', 'f59e0b',
+             [(-1780, 1222), (-551, 100), (0, 0), (680, -420), (1633, -1411)]),
+        ],
+        'historic_districts': [
+            ['Ybor City National Historic Landmark District', 1100, -1850, 2350, -1850, 2350, -980, 1100, -980],
+            ['Hyde Park Historic District', -2150, 620, -820, 620, -820, 1650, -2150, 1650],
+        ],
+        'neighborhood_places': [
+            ('Curtis Hixon Park & Tampa Riverwalk', 0, 0, 380),
+            ('University of Tampa & Plant Hall', -551, 100, 420),
+            ('Downtown Tampa', 167, 200, 480),
+            ('Water Street & Amalie Arena', 649, 533, 450),
+            ('Channelside & Florida Aquarium', 1318, 389, 450),
+            ('Ybor City Historic District', 1633, -1411, 520),
+            ('Tampa Heights & Armature Works', -629, -1567, 480),
+            ('Hyde Park & Bayshore Blvd', -1550, 1100, 520),
+            ('Harbour Island', 482, 1278, 450),
+        ],
+        'landmarks_meta': {
+            'Plant Hall & Silver Minarets': {
+                'x': -551, 'z': 100, 'w': 96, 'd': 44, 'h': 42, 'area': 4224,
+                'ring': [-599, 78, -503, 78, -503, 122, -599, 122]
+            },
+            'Rivergate Tower': {
+                'x': 20, 'z': 67, 'w': 40, 'd': 40, 'h': 138, 'area': 1600,
+                'ring': [0, 47, 40, 47, 40, 87, 0, 87]
+            },
+            '100 North Tampa': {
+                'x': 167, 'z': 200, 'w': 52, 'd': 52, 'h': 176, 'area': 2704,
+                'ring': [141, 174, 193, 174, 193, 226, 141, 226]
+            },
+            'Amalie Arena': {
+                'x': 649, 'z': 533, 'w': 112, 'd': 96, 'h': 41, 'area': 10752,
+                'ring': [593, 485, 705, 485, 705, 581, 593, 581]
+            },
+        },
+        'rng_seed': 813,
+    },
 }
 
 r1 = lambda v: round(float(v), 1)
@@ -3437,6 +3502,7 @@ ALL_CITY_METADATA = {
     'chicago': ('Chicago, IL', 'The Loop, Willis Tower, Chicago River Bascule Bridges & Millennium Park'),
     'boston': ('Boston, MA', 'Boston Common, Back Bay Brownstones, Zakim Bridge, Faneuil Hall & Charles'),
     'seattle': ('Seattle, WA', 'Space Needle, Pike Place Market, Elliott Bay Waterfront & Lake Union'),
+    'tampa': ('Tampa, FL', 'Tampa Riverwalk, Plant Hall Minarets, Ybor City 7th Ave, Water Street & Amalie Arena'),
 }
 
 

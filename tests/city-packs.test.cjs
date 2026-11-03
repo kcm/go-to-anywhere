@@ -9,7 +9,8 @@ const ROOT = path.resolve(__dirname, '..');
 const CITIES = [
   'sanfrancisco', 'royaloak', 'oakland', 'annarbor', 'newyork', 'pompanobeach',
   'sydney', 'venice', 'amsterdam', 'hongkong', 'paris', 'london', 'tokyo',
-  'barcelona', 'rio', 'vancouver', 'capetown', 'chicago', 'boston', 'seattle'
+  'barcelona', 'rio', 'vancouver', 'capetown', 'chicago', 'boston', 'seattle',
+  'tampa'
 ];
 
 const REQUIRED_FILES = [

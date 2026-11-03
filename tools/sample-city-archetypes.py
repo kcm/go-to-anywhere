@@ -178,6 +178,7 @@ CITY_DENSITY_PRIORS = {
     'chicago':      {'canopy': 0.21, 'streetTree': 0.84, 'parkTree': 1.08, 'foliageScale': 0.98, 'form': 'urban',    'bldgKm2': 2450, 'footprint': 0.50, 'infill': 0.22, 'rowhouse': 0.64, 'porch': 0.78, 'shrub': 0.72},
     'boston':        {'canopy': 0.24, 'streetTree': 0.90, 'parkTree': 1.12, 'foliageScale': 1.00, 'form': 'rowhouse', 'bldgKm2': 2680, 'footprint': 0.52, 'infill': 0.20, 'rowhouse': 0.76, 'porch': 0.72, 'shrub': 0.74},
     'seattle':      {'canopy': 0.33, 'streetTree': 1.14, 'parkTree': 1.32, 'foliageScale': 1.14, 'form': 'urban',    'bldgKm2': 1780, 'footprint': 0.35, 'infill': 0.25, 'rowhouse': 0.28, 'porch': 1.06, 'shrub': 1.16},
+    'tampa':        {'canopy': 0.31, 'streetTree': 1.12, 'parkTree': 1.28, 'foliageScale': 1.14, 'form': 'urban',    'bldgKm2': 1620, 'footprint': 0.34, 'infill': 0.28, 'rowhouse': 0.24, 'porch': 1.16, 'shrub': 1.22},
 }
 
 

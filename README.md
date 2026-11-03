@@ -38,16 +38,17 @@ npm run city:list
 | `chicago` | **Chicago, IL** | **The Loop** elevated L, **Willis (Sears) Tower**, **Chicago River** bascule bridges, **Millennium Park & Cloud Gate**, **Navy Pier** & Magnificent Mile |
 | `boston` | **Boston, MA** | **Boston Common & State House**, Beacon Hill, **Back Bay** brownstones, **Zakim Bunker Hill Bridge**, **Faneuil Hall**, Custom House Tower & **Charles River** |
 | `seattle` | **Seattle, WA** | **Space Needle & Seattle Center**, **Pike Place Market**, **Elliott Bay Waterfront & Piers**, Columbia Center, Pioneer Square, **South Lake Union** & Capitol Hill |
+| `tampa` | **Tampa, FL** | **Tampa Riverwalk & Curtis Hixon Park**, **Plant Hall Silver Minarets**, **Ybor City Historic 7th Ave**, **Water Street & Amalie Arena**, Rivergate Tower, **100 North Tampa** & Hillsborough Bay |
 
 ### 2. Install / Build a City Pack Locally
 
-Install a single city pack or all 20 starter-pack cities:
+Install a single city pack or all 21 starter-pack cities:
 
 ```bash
 # Install San Francisco, CA (default city - fetches 2x2 tiled OpenStreetMap + AWS Terrain Tiles + SF Muni)
 npm run city:install -- sanfrancisco
 
-# Or install any of the 20 worldwide cities on demand:
+# Or install any of the 21 worldwide cities on demand:
 npm run city:install -- sydney
 npm run city:install -- venice
 npm run city:install -- amsterdam
@@ -62,8 +63,9 @@ npm run city:install -- capetown
 npm run city:install -- chicago
 npm run city:install -- boston
 npm run city:install -- seattle
+npm run city:install -- tampa
 
-# Or install all 20 city packs at once:
+# Or install all 21 city packs at once:
 npm run city:install -- all
 ```
 
