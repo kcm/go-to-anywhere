@@ -42,8 +42,13 @@ import { fetchWeather, createPrecipitation } from './weather.js';
 import { fetchRiverFlow } from './river-gauge.js';
 import { buildRoadWork } from './road-work.js';
 
+// Unit conversion constants
+const MS_TO_MPH = 2.23694;
+const M_TO_FT = 3.28084;
+
 // In its own window on the Mac the top strip is the title bar, which takes the clicks: the top panels sit below it
-if (window.webkit?.messageHandlers?.lampNative && /Mac/.test(navigator.platform) && navigator.maxTouchPoints === 0) document.documentElement.classList.add('mac-window');
+const isMac = (navigator.userAgentData?.platform === 'macOS') || /Mac|Macintosh/i.test(navigator.userAgent || navigator.platform || '');
+if (window.webkit?.messageHandlers?.lampNative && isMac && (navigator.maxTouchPoints || 0) === 0) document.documentElement.classList.add('mac-window');
 
 // Application setup, shader warm-up and frame loop.
 //
@@ -69,7 +74,8 @@ async function loadCityJson(relPath, fallback = null) {
   if (!bytes) return fallback;
   try {
     return JSON.parse(new TextDecoder().decode(bytes));
-  } catch {
+  } catch (err) {
+    console.warn(`[gto] Failed to parse city JSON at ${relPath}:`, err);
     return fallback;
   }
 }
@@ -82,7 +88,8 @@ async function probeInstalledCities() {
       try {
         const res = await fetch(`cities/${id}/city-geodata.js`, { method: 'HEAD' });
         return [id, res.ok];
-      } catch {
+      } catch (err) {
+        console.warn(`[gto] Failed to probe city ${id}:`, err);
         return [id, false];
       }
     })
@@ -159,13 +166,27 @@ async function initApp() {
       const buildCmd = CITY_PACK.isLocal
         ? `npm run city:build -- --city ${ACTIVE_CITY_ID} --name "${CITY_PACK.displayName}" --lat ${CITY_PACK.lat} --lon ${CITY_PACK.lon}`
         : `npm run city:install -- ${ACTIVE_CITY_ID}`;
-      box.innerHTML = `
-        <div><strong>City data is stored locally (like npm packages) and does not need to be synced with the repo.</strong></div>
-        <div>To download and build <strong>${CITY_PACK.displayName}</strong> locally, run:</div>
-        <code>${buildCmd}</code>
-        <div>or with Python / uv:</div>
-        <code>uv run --with shapely --with numpy --with pillow python3 tools/build-city-pack.py --city ${ACTIVE_CITY_ID}</code>
-      `;
+      const line1 = document.createElement('div');
+      const strong1 = document.createElement('strong');
+      strong1.textContent = 'City data is stored locally (like npm packages) and does not need to be synced with the repo.';
+      line1.appendChild(strong1);
+
+      const line2 = document.createElement('div');
+      line2.append('To download and build ');
+      const strong2 = document.createElement('strong');
+      strong2.textContent = CITY_PACK.displayName;
+      line2.append(strong2, ' locally, run:');
+
+      const code1 = document.createElement('code');
+      code1.textContent = buildCmd;
+
+      const line3 = document.createElement('div');
+      line3.textContent = 'or with Python / uv:';
+
+      const code2 = document.createElement('code');
+      code2.textContent = `uv run --with shapely --with numpy --with pillow python3 tools/build-city-pack.py --city ${ACTIVE_CITY_ID}`;
+
+      box.replaceChildren(line1, line2, code1, line3, code2);
       const installedMap = await probeInstalledCities();
       const installedIds = Object.keys(installedMap).filter((id) => installedMap[id]);
       if (installedIds.length) {
@@ -571,7 +592,9 @@ async function initApp() {
       }
       for (const mode of saved.leftEmpty || []) if (controllerManager.entities[mode]) controllerManager.entities[mode].leftEmpty = true;
     }
-  } catch { /* Missing or unavailable storage does not prevent playing. */ }
+  } catch (err) {
+    console.warn('[gto] Missing or unavailable storage for player state:', err);
+  }
 
   function savePlayerState() {
     try {
@@ -581,7 +604,9 @@ async function initApp() {
       const leftEmpty = Object.keys(controllerManager.entities).filter((mode) => controllerManager.entities[mode].leftEmpty);
       save(PLAYER_SAVE_KEY, { version: 2, activeMode: controllerManager.activeMode, entities, carLook: controllerManager.carLook, leftEmpty });
       save(SWAPS_SAVE_KEY, parkedCars.history);
-    } catch { /* Storage may be disabled or full. */ }
+    } catch (err) {
+      console.warn('[gto] Failed to save player state:', err);
+    }
   }
 
   const keptCamera = live.keep('camera', () => CameraSystem.makeCamera());
@@ -599,7 +624,7 @@ async function initApp() {
   // a cone, drum or barricade the player runs into: a knock, a bang (road-work.js)
   roadWork.onHit = (it, speed, who) => {
     audioSystem.cue(it.kind === 'cone' ? 'thud' : 'crash', { x: it.x, y: it.g, z: it.z }, Math.min(1, (it.kind === 'cone' ? 0.25 : 0.4) + speed * 0.02));
-    if (who === 'player' && speed > 8 && it.kind !== 'cone') log(`[road work] hit a ${it.kind} at ${Math.round(speed * 2.237)} mph`);
+    if (who === 'player' && speed > 8 && it.kind !== 'cone') log(`[road work] hit a ${it.kind} at ${Math.round(speed * MS_TO_MPH)} mph`);
   };
   function updateSoundButton() {
     if (!soundButton) return;
@@ -1553,9 +1578,9 @@ async function initApp() {
 
       const activeEnt = controllerManager.getActiveEntity();
       const mode = controllerManager.activeMode;
-      const mph = Math.round((mode === 'kayak' ? activeEnt.groundSpeed || 0 : Math.abs(activeEnt.speed)) * 2.237);
+      const mph = Math.round((mode === 'kayak' ? activeEnt.groundSpeed || 0 : Math.abs(activeEnt.speed)) * MS_TO_MPH);
       // Lamp: height above the ground below (terrain.js)
-      const altFt = Math.max(0, Math.round((activeEnt.position.y - groundHeight(activeEnt.position.x, activeEnt.position.z)) * 3.281));
+      const altFt = Math.max(0, Math.round((activeEnt.position.y - groundHeight(activeEnt.position.x, activeEnt.position.z)) * M_TO_FT));
 
       if (elFps) {
         elFps.textContent = String(currentFps);

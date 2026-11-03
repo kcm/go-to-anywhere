@@ -37,7 +37,7 @@ const PRETTY = {
 
 function prettyName(n) {
   if (!n) return '';
-  if (PRETTY[n]) return PRETTY[n];
+  if (Object.hasOwn(PRETTY, n)) return PRETTY[n];
   if (!IS_GRID_CITY) return String(n);
   const m = /^(E|W)\s+(\d+)\s+ST$/.exec(n);
   if (m) return `${m[1]} ${ordinal(+m[2])} St`;

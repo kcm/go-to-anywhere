@@ -31,8 +31,10 @@ function classify(props) {
 async function fetchWeather() {
   try {
     // A browser sends its own User-Agent, which the service accepts from a page; nothing of the player's goes with it
-    const res = await fetch(`https://api.weather.gov/stations/${STATION}/observations/latest`, {
-      headers: { Accept: 'application/geo+json' }
+    const safeStation = encodeURIComponent(String(STATION).trim());
+    const res = await fetch(`https://api.weather.gov/stations/${safeStation}/observations/latest`, {
+      headers: { Accept: 'application/geo+json' },
+      signal: AbortSignal.timeout(8000)
     });
     if (!res.ok) return FAIR;
     const props = (await res.json()).properties || {};

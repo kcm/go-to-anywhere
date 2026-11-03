@@ -23,7 +23,6 @@ RUNTIME_PATHS = [
     'lamp-game.js',
     'lamp-controllers.js',
     'lamp-device.js',
-    'lamp-phaser.js',
     'lamp-build.js',
     'js',
     'css',

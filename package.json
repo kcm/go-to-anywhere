@@ -12,6 +12,7 @@
     "city:archetypes": "python3 tools/sample-city-archetypes.py",
     "deploy": "python3 tools/deploy-gh-pages.py",
     "test": "node --test tests/city-packs.test.cjs",
+    "test:review": "node --test tests/review-fixes.test.cjs",
     "test:browser": "node --test tests/browser-smoke.test.cjs"
   },
   "repository": {

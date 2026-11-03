@@ -38,27 +38,52 @@ function polygonBoxOverlaps(polygon, x, z, hx, hz, cs = 1, sn = 0) {
   return false;
 }
 
+const _satState = {
+  best: Infinity,
+  outNx: 0,
+  outNz: 0,
+  polygon: null,
+  x: 0,
+  z: 0,
+  hx: 0,
+  hz: 0,
+  cos: 0,
+  sin: 0
+};
+
+function tryDir(ux, uz, dist) {
+  if (!(dist >= 0) || dist >= _satState.best || !Number.isFinite(ux + uz)) return;
+  const step = dist + 1e-6;
+  if (polygonBoxOverlaps(_satState.polygon, _satState.x + ux * step, _satState.z + uz * step, _satState.hx, _satState.hz, _satState.cos, _satState.sin)) return;
+  _satState.best = dist; _satState.outNx = ux; _satState.outNz = uz;
+}
+
+function pushSigned(ux, uz, s) {
+  if (s >= -1e-9) tryDir(ux, uz, Math.max(0, s));
+  if (s <= 1e-9) tryDir(-ux, -uz, Math.max(0, -s));
+}
+
+function tryVec(dx, dz) {
+  const length = Math.hypot(dx, dz);
+  if (length > 0) tryDir(dx / length, dz / length, length);
+}
+
 function polygonContact(polygon, x, z, body, contact) {
   if (body.car) {
     const { hx, hz, cos, sin } = body;
     if (!polygonBoxOverlaps(polygon, x, z, hx, hz, cos, sin)) return false;
     if (!contact) return true;
-    let best = Infinity, outNx = 0, outNz = 0;
+    _satState.best = Infinity;
+    _satState.outNx = 0;
+    _satState.outNz = 0;
+    _satState.polygon = polygon;
+    _satState.x = x;
+    _satState.z = z;
+    _satState.hx = hx;
+    _satState.hz = hz;
+    _satState.cos = cos;
+    _satState.sin = sin;
     let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
-    const tryDir = (ux, uz, dist) => {
-      if (!(dist >= 0) || dist >= best || !Number.isFinite(ux + uz)) return;
-      const step = dist + 1e-6;
-      if (polygonBoxOverlaps(polygon, x + ux * step, z + uz * step, hx, hz, cos, sin)) return;
-      best = dist; outNx = ux; outNz = uz;
-    };
-    const pushSigned = (ux, uz, s) => {
-      if (s >= -1e-9) tryDir(ux, uz, Math.max(0, s));
-      if (s <= 1e-9) tryDir(-ux, -uz, Math.max(0, -s));
-    };
-    const tryVec = (dx, dz) => {
-      const length = Math.hypot(dx, dz);
-      if (length > 0) tryDir(dx / length, dz / length, length);
-    };
     // Whole-outline escape candidates avoid the internal seams of triangulated colliders.
     for (let r = -1; r < polygon.holes.length; r++) {
       const ring = r < 0 ? polygon.outer : polygon.holes[r];
@@ -125,7 +150,7 @@ function polygonContact(polygon, x, z, body, contact) {
         }
       }
     }
-    if (!Number.isFinite(best) && minX <= maxX) {
+    if (!Number.isFinite(_satState.best) && minX <= maxX) {
       const extX = Math.abs(cos) * hx + Math.abs(sin) * hz;
       const extZ = Math.abs(sin) * hx + Math.abs(cos) * hz;
       pushSigned(1, 0, maxX + extX - x);
@@ -133,8 +158,8 @@ function polygonContact(polygon, x, z, body, contact) {
       pushSigned(0, 1, maxZ + extZ - z);
       pushSigned(0, 1, minZ - extZ - z);
     }
-    if (!Number.isFinite(best)) return false;
-    contact.nx = outNx; contact.nz = outNz; contact.depth = best + 1e-6;
+    if (!Number.isFinite(_satState.best)) return false;
+    contact.nx = _satState.outNx; contact.nz = _satState.outNz; contact.depth = _satState.best + 1e-6;
     return true;
   }
 

@@ -297,6 +297,10 @@ const ROAD_NAME_COUNT = new Set(ROAD_LABELS.map((l) => l.text)).size;
 /** A map viewport: centre (cx, cz) in world metres, s pixels per metre, w x h CSS pixels on a canvas of pixel ratio dpr */
 class MapView {
   constructor(cx, cz, s, w, h, dpr = 1) {
+    this.set(cx, cz, s, w, h, dpr);
+  }
+
+  set(cx, cz, s, w, h, dpr = 1) {
     this.cx = cx;
     this.cz = cz;
     this.s = s;
@@ -307,6 +311,7 @@ class MapView {
     this.maxX = cx + w / (2 * s);
     this.minZ = cz - h / (2 * s);
     this.maxZ = cz + h / (2 * s);
+    return this;
   }
 
   /** Canvas transform for world metres */
@@ -385,10 +390,30 @@ const overlaps = (boxes, b) => boxes.some((o) => b[0] < o[2] && b[2] > o[0] && b
 
 class CityMapSystem {
   // Lamp: the game's code ran again and this map goes with that run (main.js).
-  release() { systems.delete(this); }
+  release() {
+    systems.delete(this);
+    if (this._abortController) {
+      this._abortController.abort();
+    }
+  }
+
+  updateMiniDimensions() {
+    if (!this.miniCanvas) return;
+    this.miniWidth = this.miniCanvas.clientWidth || 180;
+    this.miniHeight = this.miniCanvas.clientHeight || 180;
+    this.miniDpr = Math.min(window.devicePixelRatio || 1, 2);
+    const bw = Math.round(this.miniWidth * this.miniDpr);
+    const bh = Math.round(this.miniHeight * this.miniDpr);
+    if (this.miniCanvas.width !== bw || this.miniCanvas.height !== bh) {
+      this.miniCanvas.width = bw;
+      this.miniCanvas.height = bh;
+      this.miniCache = null;
+    }
+  }
 
   constructor({ controllerManager, cameraSystem, trafficSystem, allBlocks = [], onTeleport, onToggle }) {
     systems.add(this);
+    this._abortController = new AbortController();
     this.controllerManager = controllerManager;
     this.cameraSystem = cameraSystem;
     this.trafficSystem = trafficSystem;
@@ -402,6 +427,12 @@ class CityMapSystem {
     this.miniStreetText = '';
     this.miniScale = RADAR_SCALE;
     this.miniCache = null; // { canvas, cx, cz, s, version }: the radar's ground layers, twice the radar's size
+    this.miniWidth = 0;
+    this.miniHeight = 0;
+    this.miniDpr = 1;
+    this._miniView = new MapView(0, 0, 1, 100, 100, 1);
+    this._miniCacheView = new MapView(0, 0, 1, 100, 100, 1);
+    this.updateMiniDimensions();
     const elCounts = document.getElementById('fullmap-counts');
     if (elCounts) elCounts.textContent = `${ROAD_NAME_COUNT} streets · ${BLOCKS.length.toLocaleString('en-US')} blocks`;
 
@@ -450,6 +481,9 @@ class CityMapSystem {
   }
 
   initEvents() {
+    const signal = this._abortController?.signal;
+    window.addEventListener('resize', () => this.updateMiniDimensions(), { signal });
+
     const closeBtn = document.getElementById('close-fullmap-btn');
     const miniCard = document.getElementById('minimap-card');
     const zoomInBtn = document.getElementById('map-zoom-in');
@@ -460,26 +494,26 @@ class CityMapSystem {
     this.clearRouteBtn?.addEventListener('click', () => {
       this.waypoint = null;
       this.renderFullMap();
-    });
+    }, { signal });
 
     if (miniCard) {
-      miniCard.addEventListener('click', () => this.toggleFullMap(true));
+      miniCard.addEventListener('click', () => this.toggleFullMap(true), { signal });
     }
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => this.toggleFullMap(false));
+      closeBtn.addEventListener('click', () => this.toggleFullMap(false), { signal });
     }
 
     if (zoomInBtn) {
       zoomInBtn.addEventListener('click', () => {
         this.viewZoom = Math.min(MAX_ZOOM, this.viewZoom * 1.45);
         this.renderFullMap();
-      });
+      }, { signal });
     }
     if (zoomOutBtn) {
       zoomOutBtn.addEventListener('click', () => {
         this.viewZoom = Math.max(MIN_ZOOM, this.viewZoom / 1.45);
         this.renderFullMap();
-      });
+      }, { signal });
     }
     if (centerPlayerBtn) {
       centerPlayerBtn.addEventListener('click', () => {
@@ -488,7 +522,7 @@ class CityMapSystem {
         this.viewCenterZ = ent.position.z;
         this.viewZoom = 0.9; // Street-by-street detail zoom
         this.renderFullMap();
-      });
+      }, { signal });
     }
     if (fullIslandBtn) {
       fullIslandBtn.addEventListener('click', () => {
@@ -499,11 +533,11 @@ class CityMapSystem {
         this.viewCenterZ = (b.minZ + b.maxZ) * 0.5;
         this.viewZoom = Math.max(MIN_ZOOM, Math.min(w / ((b.maxX - b.minX) * 1.15), h / ((b.maxZ - b.minZ) * 1.06)));
         this.renderFullMap();
-      });
+      }, { signal });
     }
 
     if (this.elSearchInput) {
-      this.elSearchInput.addEventListener('input', () => this.search(this.elSearchInput.value));
+      this.elSearchInput.addEventListener('input', () => this.search(this.elSearchInput.value), { signal });
     }
 
     window.addEventListener('keydown', (e) => {
@@ -512,7 +546,7 @@ class CityMapSystem {
       } else if (e.code === 'KeyM' && !isTypingInField(e)) {
         this.toggleFullMap(!this.isFullMapOpen);
       }
-    });
+    }, { signal });
 
     if (this.fullCanvas) {
       this.fullCanvas.style.touchAction = 'none';
@@ -528,7 +562,7 @@ class CityMapSystem {
         this.panStart.cx = this.viewCenterX;
         this.panStart.cz = this.viewCenterZ;
         if (this.fullCanvasWrap) this.fullCanvasWrap.classList.add('is-panning');
-      });
+      }, { signal });
 
       this.fullCanvas.addEventListener('pointermove', (e) => {
         if (!this.isFullMapOpen || !this.fullCanvas) return;
@@ -554,7 +588,7 @@ class CityMapSystem {
             this.elHoverInfo.textContent = `${getLocationLabel(wPos.x, wPos.z)} · Click to teleport here`;
           }
         }
-      });
+      }, { signal });
 
       this.fullCanvas.addEventListener('pointerup', (e) => {
         if (e.pointerId !== this.panPointerId) return;
@@ -577,16 +611,16 @@ class CityMapSystem {
             this.renderFullMap();
           }
         }
-      });
+      }, { signal });
       for (const type of ['pointercancel', 'lostpointercapture']) {
         this.fullCanvas.addEventListener(type, (e) => {
           if (e.pointerId === this.panPointerId) this.cancelPan();
-        });
+        }, { signal });
       }
-      window.addEventListener('blur', () => this.cancelPan());
+      window.addEventListener('blur', () => this.cancelPan(), { signal });
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) this.cancelPan();
-      });
+      }, { signal });
 
       // Wheel zoom about the cursor (the place under it stays put)
       this.fullCanvas.addEventListener('wheel', (e) => {
@@ -600,7 +634,7 @@ class CityMapSystem {
         this.viewCenterX = before.x - (mx - rect.width * 0.5) / this.viewZoom;
         this.viewCenterZ = before.z - (my - rect.height * 0.5) / this.viewZoom;
         this.renderFullMap();
-      }, { passive: false });
+      }, { passive: false, signal });
     }
   }
 
@@ -653,7 +687,10 @@ class CityMapSystem {
 
   toggleFullMap(open) {
     this.isFullMapOpen = Boolean(open);
-    if (!this.isFullMapOpen) this.cancelPan();
+    if (!this.isFullMapOpen) {
+      this.cancelPan();
+      this.updateMiniDimensions();
+    }
     if (this.onToggle) this.onToggle(this.isFullMapOpen);
     if (!this.modal) return;
     this.modal.classList.toggle('hidden', !this.isFullMapOpen);
@@ -894,9 +931,10 @@ class CityMapSystem {
     if (!this.miniCanvas.offsetParent || document.body.classList.contains('hud-minimized')) return;
     const ctx = this.miniCtx;
     // Radar size in CSS pixels, backed at the device pixel ratio (crisp street names on HiDPI screens)
-    const w = this.miniCanvas.clientWidth;
-    const h = this.miniCanvas.clientHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (!this.miniWidth || !this.miniHeight) this.updateMiniDimensions();
+    const w = this.miniWidth;
+    const h = this.miniHeight;
+    const dpr = this.miniDpr || Math.min(window.devicePixelRatio || 1, 2);
     const bw = Math.round(w * dpr);
     const bh = Math.round(h * dpr);
     if (this.miniCanvas.width !== bw || this.miniCanvas.height !== bh) {
@@ -944,13 +982,13 @@ class CityMapSystem {
       c.ctx.setTransform(1, 0, 0, 1, 0, 0);
       c.ctx.fillStyle = MAP.water;
       c.ctx.fillRect(0, 0, bw * 2, bh * 2);
-      const cv = new MapView(px, pz, scale, w * 2, h * 2, dpr);
+      const cv = this._miniCacheView.set(px, pz, scale, w * 2, h * 2, dpr);
       this.drawWorld(c.ctx, cv, true);
       cv.screen(c.ctx);
       this.drawRoadLabels(c.ctx, cv, { fontPx: 9.5, maxLabels: 28, sameNameGap: 180 });
     }
 
-    const v = new MapView(px, pz, scale, w, h, dpr);
+    const v = this._miniView.set(px, pz, scale, w, h, dpr);
     ctx.save();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.fillStyle = MAP.water;

@@ -28,9 +28,9 @@ from collections import defaultdict
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_DIR = os.path.join(ROOT_DIR, "tools", ".cache")
-SCRATCH_DIR = "/Users/kcm/.gemini/antigravity/brain/1bc42bf1-f5ff-4b4b-afad-af81b2df6313/scratch"
-ANN_ARBOR_WEB = os.path.join(SCRATCH_DIR, "go-to-ann-arbor", "Web")
-NEW_YORK_ROOT = os.path.join(SCRATCH_DIR, "slop-newyork")
+SCRATCH_DIR = os.environ.get("GTO_SCRATCH_DIR", os.path.join(ROOT_DIR, "tools", ".scratch"))
+ANN_ARBOR_WEB = os.environ.get("ANN_ARBOR_WEB", os.path.join(SCRATCH_DIR, "go-to-ann-arbor", "Web"))
+NEW_YORK_ROOT = os.environ.get("NEW_YORK_ROOT", os.path.join(SCRATCH_DIR, "slop-newyork"))
 
 ANN_ARBOR_BASE_URL = "https://raw.githubusercontent.com/mrubens/go-to-ann-arbor/main/Web"
 NEW_YORK_BASE_URL = "https://mrdoob.github.io/slop-newyork"

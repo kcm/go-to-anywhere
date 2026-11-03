@@ -232,15 +232,43 @@
         oakland: 'oakland', oak: 'oakland',
         annarbor: 'annarbor', 'ann-arbor': 'annarbor', a2: 'annarbor', aa: 'annarbor',
         newyork: 'newyork', 'new-york': 'newyork', ny: 'newyork', nyc: 'newyork',
-        pompanobeach: 'pompanobeach', 'pompano-beach': 'pompanobeach', pompano: 'pompanobeach', pb: 'pompanobeach', fl: 'pompanobeach'
+        pompanobeach: 'pompanobeach', 'pompano-beach': 'pompanobeach', pompano: 'pompanobeach', pb: 'pompanobeach', fl: 'pompanobeach',
+        sydney: 'sydney', syd: 'sydney',
+        venice: 'venice', venezia: 'venice', ven: 'venice',
+        amsterdam: 'amsterdam', ams: 'amsterdam',
+        hongkong: 'hongkong', 'hong-kong': 'hongkong', hk: 'hongkong', hkg: 'hongkong',
+        paris: 'paris', par: 'paris',
+        london: 'london', lon: 'london', ldn: 'london',
+        tokyo: 'tokyo', tyo: 'tokyo',
+        barcelona: 'barcelona', bcn: 'barcelona',
+        rio: 'rio', 'rio-de-janeiro': 'rio', riodejaneiro: 'rio', rdj: 'rio',
+        vancouver: 'vancouver', van: 'vancouver', yvr: 'vancouver',
+        capetown: 'capetown', 'cape-town': 'capetown', cpt: 'capetown',
+        chicago: 'chicago', chi: 'chicago', ord: 'chicago',
+        boston: 'boston', bos: 'boston',
+        seattle: 'seattle', sea: 'seattle'
       };
       const meta = {
-        sanfrancisco: { name: 'San Francisco, CA', icon: 'img/icon-sanfrancisco.svg' },
-        royaloak:     { name: 'Royal Oak, MI',     icon: 'img/icon-royaloak.svg' },
-        oakland:      { name: 'Oakland, CA',       icon: 'img/app-icon.png' },
-        annarbor:     { name: 'Ann Arbor, MI',     icon: 'img/icon-annarbor.svg' },
-        newyork:      { name: 'New York, NY',      icon: 'img/icon-newyork.svg' },
-        pompanobeach: { name: 'Pompano Beach, FL', icon: 'img/icon-pompanobeach.svg' }
+        sanfrancisco: { name: 'San Francisco, CA',        icon: 'img/icon-sanfrancisco.svg' },
+        royaloak:     { name: 'Royal Oak, MI',            icon: 'img/icon-royaloak.svg' },
+        oakland:      { name: 'Oakland, CA',              icon: 'img/app-icon.png' },
+        annarbor:     { name: 'Ann Arbor, MI',            icon: 'img/icon-annarbor.svg' },
+        newyork:      { name: 'New York, NY',             icon: 'img/icon-newyork.svg' },
+        pompanobeach: { name: 'Pompano Beach, FL',        icon: 'img/icon-pompanobeach.svg' },
+        sydney:       { name: 'Sydney, Australia',        icon: 'img/icon-sydney.svg' },
+        venice:       { name: 'Venice, Italy',            icon: 'img/icon-venice.svg' },
+        amsterdam:    { name: 'Amsterdam, Netherlands',   icon: 'img/icon-amsterdam.svg' },
+        hongkong:     { name: 'Hong Kong',                icon: 'img/icon-hongkong.svg' },
+        paris:        { name: 'Paris, France',            icon: 'img/icon-paris.svg' },
+        london:       { name: 'London, UK',               icon: 'img/icon-london.svg' },
+        tokyo:        { name: 'Tokyo, Japan',             icon: 'img/icon-tokyo.svg' },
+        barcelona:    { name: 'Barcelona, Spain',         icon: 'img/icon-barcelona.svg' },
+        rio:          { name: 'Rio de Janeiro, Brazil',   icon: 'img/icon-rio.svg' },
+        vancouver:    { name: 'Vancouver, Canada',        icon: 'img/icon-vancouver.svg' },
+        capetown:     { name: 'Cape Town, South Africa',  icon: 'img/icon-capetown.svg' },
+        chicago:      { name: 'Chicago, IL',              icon: 'img/icon-chicago.svg' },
+        boston:       { name: 'Boston, MA',               icon: 'img/icon-boston.svg' },
+        seattle:      { name: 'Seattle, WA',              icon: 'img/icon-seattle.svg' }
       };
       const params = new URLSearchParams(location.search);
       const raw = params.get('city') || '';
@@ -293,6 +321,20 @@
             <option value="annarbor">Ann Arbor, MI</option>
             <option value="newyork">New York, NY</option>
             <option value="pompanobeach">Pompano Beach, FL</option>
+            <option value="sydney">Sydney, Australia</option>
+            <option value="venice">Venice, Italy</option>
+            <option value="amsterdam">Amsterdam, Netherlands</option>
+            <option value="hongkong">Hong Kong</option>
+            <option value="paris">Paris, France</option>
+            <option value="london">London, UK</option>
+            <option value="tokyo">Tokyo, Japan</option>
+            <option value="barcelona">Barcelona, Spain</option>
+            <option value="rio">Rio de Janeiro, Brazil</option>
+            <option value="vancouver">Vancouver, Canada</option>
+            <option value="capetown">Cape Town, South Africa</option>
+            <option value="chicago">Chicago, IL</option>
+            <option value="boston">Boston, MA</option>
+            <option value="seattle">Seattle, WA</option>
           </select>
           <div id="tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
             <button id="tier-full" class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
@@ -484,6 +526,20 @@
           <option value="annarbor">Ann Arbor, MI</option>
           <option value="newyork">New York, NY</option>
           <option value="pompanobeach">Pompano Beach, FL</option>
+          <option value="sydney">Sydney, Australia</option>
+          <option value="venice">Venice, Italy</option>
+          <option value="amsterdam">Amsterdam, Netherlands</option>
+          <option value="hongkong">Hong Kong</option>
+          <option value="paris">Paris, France</option>
+          <option value="london">London, UK</option>
+          <option value="tokyo">Tokyo, Japan</option>
+          <option value="barcelona">Barcelona, Spain</option>
+          <option value="rio">Rio de Janeiro, Brazil</option>
+          <option value="vancouver">Vancouver, Canada</option>
+          <option value="capetown">Cape Town, South Africa</option>
+          <option value="chicago">Chicago, IL</option>
+          <option value="boston">Boston, MA</option>
+          <option value="seattle">Seattle, WA</option>
         </select>
         <div id="map-tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
           <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>

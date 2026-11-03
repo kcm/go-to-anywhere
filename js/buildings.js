@@ -931,6 +931,9 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
 
   const activeAwnings = [];
   const spotCandidates = [];
+  const MAX_SPOT_CANDIDATES = 128;
+  const spotCandidatePool = Array.from({ length: MAX_SPOT_CANDIDATES }, () => ({ item: null, effDist: 0 }));
+  const compareEffDist = (a, b) => a.effDist - b.effDist;
 
   // ============================================================================
   // STREAMING AROUND THE PLAYER / CAMERA
@@ -1108,7 +1111,7 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
     const fwdZ = -e[10] / fwdLen;
     const STORE_MAX_DIST = 115;
 
-    spotCandidates.length = 0;
+    let spotCandidateCount = 0;
     for (let i = 0; i < activeAwnings.length; i++) {
       const item = activeAwnings[i];
       const a = item.a;
@@ -1120,9 +1123,18 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
       const forwardDot = dx * fwdX + dz * fwdZ;
       const effDist = d + Math.max(0, 6.0 - forwardDot) * 2.8;
       if (effDist >= STORE_MAX_DIST) continue;
-      spotCandidates.push({ item, effDist });
+      if (spotCandidateCount >= spotCandidatePool.length) {
+        spotCandidatePool.push({ item: null, effDist: 0 });
+      }
+      const cand = spotCandidatePool[spotCandidateCount++];
+      cand.item = item;
+      cand.effDist = effDist;
     }
-    spotCandidates.sort((a, b) => a.effDist - b.effDist);
+    spotCandidates.length = spotCandidateCount;
+    for (let i = 0; i < spotCandidateCount; i++) {
+      spotCandidates[i] = spotCandidatePool[i];
+    }
+    spotCandidates.sort(compareEffDist);
 
     const storeCutoff = spotCandidates.length > STORE_SPOT_POOL
       ? Math.min(STORE_MAX_DIST, spotCandidates[STORE_SPOT_POOL].effDist)

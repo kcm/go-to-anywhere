@@ -29,10 +29,16 @@ class CameraSystem {
   }
 
   // Lamp: the game's code ran again and this system goes with that run; the camera it drove is kept (main.js).
-  release() { systems.delete(this); }
+  release() {
+    systems.delete(this);
+    if (this._abortController) {
+      this._abortController.abort();
+    }
+  }
 
   constructor(domElement, controllerManager, camera = CameraSystem.makeCamera()) {
     systems.add(this);
+    this._abortController = new AbortController();
     this.domElement = domElement;
     this.controllerManager = controllerManager;
 
@@ -63,6 +69,7 @@ class CameraSystem {
 
   bindPointerControls() {
     const canvas = this.domElement;
+    const signal = this._abortController?.signal;
     const pointers = new Map();
     canvas.style.touchAction = 'none';
 
@@ -75,7 +82,7 @@ class CameraSystem {
       canvas.setPointerCapture(e.pointerId);
       this.isDragging = true;
       this.userOrbitTimer = 4.0;
-    });
+    }, { signal });
 
     canvas.addEventListener('pointermove', (e) => {
       const pointer = pointers.get(e.pointerId);
@@ -98,7 +105,7 @@ class CameraSystem {
         this.orbitPitchOffset = Math.max(-0.32, Math.min(0.68, this.orbitPitchOffset + dy * 0.005));
       }
       this.userOrbitTimer = 4.0;
-    });
+    }, { signal });
 
     const releasePointer = (id) => {
       if (!pointers.delete(id)) return;
@@ -106,21 +113,21 @@ class CameraSystem {
       if (canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);
     };
     for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
-      canvas.addEventListener(type, (e) => releasePointer(e.pointerId));
+      canvas.addEventListener(type, (e) => releasePointer(e.pointerId), { signal });
     }
     const clearPointers = () => {
       for (const id of pointers.keys()) releasePointer(id);
     };
     this._clearPointers = clearPointers;
-    window.addEventListener('blur', clearPointers);
+    window.addEventListener('blur', clearPointers, { signal });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) clearPointers();
-    });
+    }, { signal });
 
     canvas.addEventListener('wheel', (e) => {
       e.preventDefault();
       this.zoomMultiplier = Math.max(0.45, Math.min(2.4, this.zoomMultiplier + e.deltaY * 0.001));
-    }, { passive: false });
+    }, { passive: false, signal });
   }
 
   setCameraPreset(presetId, snapImmediately = false) {

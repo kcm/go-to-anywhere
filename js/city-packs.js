@@ -65,10 +65,12 @@ const CITY_ALIASES = {
   sea: 'seattle'
 };
 
+const RESERVED_CITY_KEYS = new Set(['__proto__', 'constructor', 'prototype', 'tostring', 'valueof']);
+
 function normalizeCityId(raw) {
   const key = String(raw || '').trim().toLowerCase();
-  if (!key) return '';
-  if (CITY_ALIASES[key]) return CITY_ALIASES[key];
+  if (!key || RESERVED_CITY_KEYS.has(key)) return '';
+  if (Object.hasOwn(CITY_ALIASES, key)) return CITY_ALIASES[key];
   if (/^[a-z0-9][a-z0-9_-]*$/.test(key)) return key;
   return '';
 }
@@ -4029,10 +4031,10 @@ function normalizeCityPack(spec = {}, fallbackId = 'localcity') {
 
 function registerLocalCityPack(id, spec = {}) {
   const normId = normalizeCityId(id || spec.id);
-  if (!normId) return null;
-  const existing = CITY_PACKS[normId] || {};
+  if (!normId || RESERVED_CITY_KEYS.has(normId)) return null;
+  const existing = Object.hasOwn(CITY_PACKS, normId) ? CITY_PACKS[normId] : {};
   const merged = normalizeCityPack({ ...existing, ...spec, id: normId, isLocal: !BUILTIN_CITY_IDS.has(normId) }, normId);
-  if (CITY_PACKS[normId]) {
+  if (Object.hasOwn(CITY_PACKS, normId)) {
     Object.assign(CITY_PACKS[normId], merged);
   } else {
     CITY_PACKS[normId] = merged;
@@ -4041,7 +4043,9 @@ function registerLocalCityPack(id, spec = {}) {
   if (Array.isArray(spec.aliases)) {
     for (const alias of spec.aliases) {
       const k = String(alias || '').trim().toLowerCase();
-      if (k && !CITY_ALIASES[k]) CITY_ALIASES[k] = normId;
+      if (k && !RESERVED_CITY_KEYS.has(k) && /^[a-z0-9][a-z0-9_-]*$/.test(k) && !Object.hasOwn(CITY_ALIASES, k)) {
+        CITY_ALIASES[k] = normId;
+      }
     }
   }
   return CITY_PACKS[normId];

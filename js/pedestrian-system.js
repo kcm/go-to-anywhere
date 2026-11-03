@@ -24,7 +24,7 @@ const CORE = new Set(['downtown', 'uptown', 'chinatown', 'old_oakland', 'jack_lo
 const STREET_CROWD = [
   [/\b(Broadway|Telegraph|Lakeshore|Grand)\b/i, 1],
   [/\b(14th|12th|17th|19th|8th|9th|7th|Webster|Franklin|Washington)\b/i, 0.9],
-  [/\b(Harrison|Alice|Jackson|Madison|Oak|Clay|Jefferson|San Pablo|Piedmont|40th|51st| Embarcadero)\b/i, 0.75],
+  [/\b(Harrison|Alice|Jackson|Madison|Oak|Clay|Jefferson|San Pablo|Piedmont|40th|51st|Embarcadero)\b/i, 0.75],
   [/\b(11th|13th|15th|16th|20th|21st|22nd|24th|27th|MacArthur|International|Adeline|Market|Mandela)\b/i, 0.6]
 ];
 const PLAZA = LANDMARKS.find((l) => l.id === 'city_hall') || { x: -89, z: -99 };

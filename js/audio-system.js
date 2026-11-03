@@ -84,8 +84,10 @@ class CityAudioSystem {
     this.ready = false;
     this.disposed = false;
     this.supported = !!(globalThis.AudioContext || globalThis.webkitAudioContext);
-    this.enabled = true;
-    try { this.enabled = localStorage.getItem('nyc-sound') !== 'off'; } catch { /* Private browsing. */ }
+    try {
+      const pref = localStorage.getItem('gta-sound') ?? localStorage.getItem('nyc-sound');
+      this.enabled = pref !== 'off';
+    } catch { /* Private browsing. */ }
     const smallDevice = navigator.hardwareConcurrency <= 4 || matchMedia('(pointer: coarse)').matches;
     this.limits = smallDevice ? { motors: 6, sirens: 1, events: 5 } : { motors: 8, sirens: 2, events: 8 };
     this.motors = new Map();
@@ -175,7 +177,7 @@ class CityAudioSystem {
 
   setEnabled(enabled) {
     this.enabled = !!enabled;
-    try { localStorage.setItem('nyc-sound', this.enabled ? 'on' : 'off'); } catch { /* Storage is optional. */ }
+    try { localStorage.setItem('gta-sound', this.enabled ? 'on' : 'off'); } catch { /* Storage is optional. */ }
     if (this.enabled) this.unlock();
     else {
       this.reset();

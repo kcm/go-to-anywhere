@@ -1,5 +1,6 @@
 # Python & Node environments
 .venv/
+.agents/
 node_modules/
 __pycache__/
 *.pyc

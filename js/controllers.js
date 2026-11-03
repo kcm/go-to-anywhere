@@ -133,17 +133,31 @@ const MOTO_THROW_SPEED = 7;
 const DIVE_GET_UP = 1.15; // where a dive's prone pause begins: a fallen body gets up from there
 const hash01 = (x) => { const v = Math.sin(x * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
 
+const MS_TO_MPH = 2.23694;
+const M_TO_FT = 3.28084;
+const compareColliderOrder = (a, b) => a._order - b._order;
+const ENTITY_KEYS = ['person', 'car', 'cyclist', 'helicopter', 'kayak'];
+
+const _reusableCollisionBody = {
+  car: false, sin: 0, cos: 0, hx: 0, hz: 0, radius: 0, extX: 0, extZ: 0, bottom: 0, top: 0
+};
+
 function collisionBody(mode, radius, heading, margin = 0) {
   const car = mode === 'car';
   const sin = Math.sin(heading), cos = Math.cos(heading);
   const hx = playerBox[0] + margin, hz = playerBox[1] + margin;
-  return {
-    car, sin, cos, hx, hz, radius: radius + margin,
-    extX: car ? Math.abs(cos) * hx + Math.abs(sin) * hz : radius + margin,
-    extZ: car ? Math.abs(sin) * hx + Math.abs(cos) * hz : radius + margin,
-    bottom: mode === 'helicopter' ? -0.25 : 0,
-    top: mode === 'helicopter' ? 3.2 : car ? 1.8 : 1.9
-  };
+  const body = _reusableCollisionBody;
+  body.car = car;
+  body.sin = sin;
+  body.cos = cos;
+  body.hx = hx;
+  body.hz = hz;
+  body.radius = radius + margin;
+  body.extX = car ? Math.abs(cos) * hx + Math.abs(sin) * hz : radius + margin;
+  body.extZ = car ? Math.abs(sin) * hx + Math.abs(cos) * hz : radius + margin;
+  body.bottom = mode === 'helicopter' ? -0.25 : 0;
+  body.top = mode === 'helicopter' ? 3.2 : car ? 1.8 : 1.9;
+  return body;
 }
 
 // The height of a building's roof at (x, z), or -Infinity outside it: a house's own pitched roofs (houses.js gives its
@@ -1430,7 +1444,7 @@ class ThirdPersonControllerManager {
         }
       }
     }
-    if (out.length > 1) out.sort((a, b) => a._order - b._order);
+    if (out.length > 1) out.sort(compareColliderOrder);
     return out;
   }
 
@@ -1784,7 +1798,7 @@ class ThirdPersonControllerManager {
       this.updateKayak(dt, elapsed);
     }
 
-    for (const key of Object.keys(this.entities)) {
+    for (const key of ENTITY_KEYS) {
       const e = this.entities[key];
       e.mesh.position.copy(e.position);
       // Lamp: a car or bike tilts with the slope under its wheels (terrain.js); yaw first, then pitch and roll
@@ -1882,7 +1896,7 @@ class ThirdPersonControllerManager {
     const v = speed * 0.9;
     if (hx || hz) this.knockDown(sn * v * 0.4 + hx, 2.4 + speed * 0.15, cs * v * 0.4 + hz, (hash01(speed) - 0.5) * 4, 0.9);
     else this.knockDown(sn * v, 2.6 + speed * 0.14, cs * v, (hash01(speed) - 0.5) * 2, 2 + speed * 0.2);
-    log(`[moto] thrown off at ${Math.round(speed * 2.237)} mph`);
+    log(`[moto] thrown off at ${Math.round(speed * MS_TO_MPH)} mph`);
   }
 
   updatePerson(dt) {
