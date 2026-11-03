@@ -358,13 +358,49 @@ describe('Codebase Review Fixes & Regression Guard Suite', () => {
       );
     });
 
-    it('DES-03: tools/deploy-gh-pages.py excludes dead lamp-phaser.js from RUNTIME_PATHS', () => {
+    it('DES-01: js/main.js delegates world building, render pipeline, HUD UI, and shader precompilation to dedicated modules', () => {
+      const mainSrc = fs.readFileSync(path.join(ROOT, 'js/main.js'), 'utf8');
+      assert.ok(mainSrc.split('\n').length < 750, 'js/main.js should be modularized under 750 lines (down from 1,641)');
+      for (const mod of ['world-builder.js', 'render-pipeline.js', 'hud-ui.js', 'shader-precompile.js']) {
+        assert.ok(fs.existsSync(path.join(ROOT, 'js', mod)), `js/${mod} must exist`);
+        assert.match(mainSrc, new RegExp(`from '\\./${mod.replace('.', '\\.')}'`), `js/main.js must import ./${mod}`);
+      }
+    });
+
+    it('DES-03: dead lamp-phaser.js is removed from repository and excluded from RUNTIME_PATHS', () => {
+      assert.strictEqual(fs.existsSync(path.join(ROOT, 'lamp-phaser.js')), false, 'dead lamp-phaser.js must be deleted');
       const deploySrc = fs.readFileSync(path.join(ROOT, 'tools/deploy-gh-pages.py'), 'utf8');
       assert.doesNotMatch(
         deploySrc,
         /'lamp-phaser\.js'/,
         'tools/deploy-gh-pages.py must not bundle dead lamp-phaser.js into GitHub Pages releases'
       );
+    });
+
+    it('DES-04: index.html loads lamp.js with defer so HTML parsing is not blocked', () => {
+      const htmlSrc = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+      assert.match(
+        htmlSrc,
+        /<script\s+src="lamp\.js"\s+defer><\/script>/,
+        'index.html must load lamp.js with the defer attribute'
+      );
+    });
+
+    it('DES-05: lamp-game.js guards global fetch monkey-patching behind preview/host check', () => {
+      const lampGameSrc = fs.readFileSync(path.join(ROOT, 'lamp-game.js'), 'utf8');
+      assert.match(
+        lampGameSrc,
+        /if\s*\(\(preview\s*\?\s*preview\.warm\s*:\s*host\(\)\)\s*&&\s*window\.fetch\)/,
+        'lamp-game.js must only monkey-patch window.fetch when running inside Lamp preview or host'
+      );
+    });
+
+    it('DES-06: orphan root geodata files are removed and unified cities/<id>/ paths are used', () => {
+      for (const orphan of ['data', 'js/building-geodata.bin.gz', 'js/tree-geodata.bin.gz', 'js/city-geodata-fallback.js']) {
+        assert.strictEqual(fs.existsSync(path.join(ROOT, orphan)), false, `orphan root path ${orphan} must not exist`);
+      }
+      const actransitSrc = fs.readFileSync(path.join(ROOT, 'js/actransit.js'), 'utf8');
+      assert.doesNotMatch(actransitSrc, /\.\/data\/actransit\.json\.gz/, 'js/actransit.js must not reference legacy ./data/actransit.json.gz');
     });
 
     it('DES-07: tools/package-existing-cities.py removes hardcoded local agent scratch paths', () => {

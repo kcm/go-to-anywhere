@@ -1,6 +1,6 @@
 import * as THREE from 'three/webgpu';
 import { asset, log } from '../lamp-game.js';
-import { ACTIVE_CITY_ID, CITY_PACK, cityAssetPath } from './city-packs.js';
+import { CITY_PACK, cityAssetPath } from './city-packs.js';
 import { groundHeight } from './terrain.js';
 
 // Real-time transit buses on their GTFS routes and timetable for the active city.
@@ -22,7 +22,6 @@ async function loadACTransit(url = cityAssetPath('data/transit.json.gz')) {
   try {
     let packed = await asset(url);
     if (!packed) packed = await asset(cityAssetPath('data/actransit.json.gz'));
-    if (!packed && ACTIVE_CITY_ID === 'oakland') packed = await asset('./data/actransit.json.gz');
     if (!packed) return null;
     const head = new Uint8Array(packed, 0, 2);
     const bytes = head[0] === 0x1f && head[1] === 0x8b

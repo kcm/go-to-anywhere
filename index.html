@@ -7,7 +7,7 @@
   <link id="app-favicon" rel="icon" href="img/icon-sanfrancisco.svg" />
   <meta name="description" content="Go To Anywhere (GTA): A 3D drive, ride, walk, paddle and fly engine for real-world city packs (San Francisco, Royal Oak, Oakland, Ann Arbor, New York, Pompano Beach), built from real streets, buildings, trees, hills and waterways." />
   <!-- Lamp's building blocks for the page (LampAI, LampStore, LampNative), then three.js as Lamp ships it (Web/three) -->
-  <script src="lamp.js"></script>
+  <script src="lamp.js" defer></script>
   <script type="importmap">
     {
       "imports": {
@@ -62,6 +62,10 @@
   <link rel="modulepreload" href="./js/audio-sources.js" />
   <link rel="modulepreload" href="./js/audio-acoustics.js" />
   <link rel="modulepreload" href="./js/audio-system.js" />
+  <link rel="modulepreload" href="./js/world-builder.js" />
+  <link rel="modulepreload" href="./js/render-pipeline.js" />
+  <link rel="modulepreload" href="./js/hud-ui.js" />
+  <link rel="modulepreload" href="./js/shader-precompile.js" />
   <link rel="modulepreload" href="./js/main.js" />
   <script type="module" src="./js/main.js"></script>
   <link rel="stylesheet" href="./css/style.css?v=20261031-titlebar" />

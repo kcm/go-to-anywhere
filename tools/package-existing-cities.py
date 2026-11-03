@@ -62,6 +62,11 @@ def package_oakland():
     ensure_dir(dst_dir)
     ensure_dir(dst_data)
 
+    src_data = os.path.join(ROOT_DIR, "data")
+    if not os.path.isdir(src_data) and os.path.isfile(os.path.join(dst_dir, "city-geodata.js")):
+        print("  cities/oakland/ is already packaged in the unified layout.")
+        return
+
     js_files = [
         "city-geodata.js",
         "building-geodata.bin.gz",
@@ -70,21 +75,23 @@ def package_oakland():
     for fn in js_files:
         src = os.path.join(ROOT_DIR, "js", fn)
         # If js/city-geodata.js was replaced by the dynamic loader router stub, use js/city-geodata-fallback.js
-        if fn == "city-geodata.js" and os.path.getsize(src) < 10000:
+        if fn == "city-geodata.js" and os.path.exists(src) and os.path.getsize(src) < 10000:
             fallback = os.path.join(ROOT_DIR, "js", "city-geodata-fallback.js")
             if os.path.exists(fallback):
                 src = fallback
+        if not os.path.exists(src):
+            continue
         dst = os.path.join(dst_dir, fn)
         shutil.copy2(src, dst)
         print(f"  Copied {fn} from {os.path.basename(src)} ({os.path.getsize(dst):,} bytes)")
 
-    src_data = os.path.join(ROOT_DIR, "data")
-    for fn in sorted(os.listdir(src_data)):
-        src = os.path.join(src_data, fn)
-        if os.path.isfile(src):
-            dst = os.path.join(dst_data, fn)
-            shutil.copy2(src, dst)
-            print(f"  Copied data/{fn} ({os.path.getsize(dst):,} bytes)")
+    if os.path.isdir(src_data):
+        for fn in sorted(os.listdir(src_data)):
+            src = os.path.join(src_data, fn)
+            if os.path.isfile(src):
+                dst = os.path.join(dst_data, fn)
+                shutil.copy2(src, dst)
+                print(f"  Copied data/{fn} ({os.path.getsize(dst):,} bytes)")
 
     # Provide unified transit.json.gz alias alongside actransit.json.gz
     actransit_src = os.path.join(dst_data, "actransit.json.gz")

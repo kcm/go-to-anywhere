@@ -29,6 +29,7 @@ export const STICK = { LEFT: 'stick-left', RIGHT: 'stick-right' };
 export const TRIGGER = { LT: 'lt', RT: 'rt' };
 
 const preview = window.lampPreview || null;   // set by Lamp's preview before the page runs
+const host = () => window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lampLive;
 const logs = [];
 // The browser's own functions, kept before the runtime starts watching what the game's code leaves running (see
 // "Running the game's code again"): the runtime's own listeners, timers and sound go through these, so they stay when
@@ -131,7 +132,7 @@ let changes = 0;
 const fresh = path => changes ? `${path}${String(path).includes('?') ? '&' : '?'}lamp=${changes}` : path;
 // So is a file of the page's that the game's own code fetches (a city's building data), once anything has changed. What
 // a part kept with keep() fetches as it's built is what it's built from (`read`), as a file loaded through the runtime is.
-if (window.fetch) {
+if ((preview ? preview.warm : host()) && window.fetch) {
     const fetchFile = window.fetch;
     window.fetch = function (input, init) {
         const url = typeof input === 'string' || input instanceof URL ? String(input) : input && input.url;
@@ -971,7 +972,6 @@ let hooks = {}, started = false, waiting = null, pill = null;
 // The place this copy starts in (claim()), whether the game read it (pendingRestore()), and whether an error now means
 // the state didn't take.
 let pending = null, reopened = false, taken = false, guarding = false;
-const host = () => window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lampLive;
 // Whether the game is past its loading screen, for the picture of the app Lamp's desk shows (`LampPagePlaying` in a Mac
 // app): 'loading' from when this runtime loads, 'playing' at the first frame of play.
 const tellPlaying = state => { try { const h = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lampPlaying; h && h.postMessage(state); } catch (e) {} };
