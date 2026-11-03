@@ -1365,34 +1365,37 @@ def fetch_overpass(cache_name, query, expected_bbox=None):
             print(f"  Using cached {cache_name} ({os.path.getsize(cache_path) / (1024*1024):.1f} MB)")
             return cached
 
-    for endpoint in OVERPASS_ENDPOINTS:
-        try:
-            print(f"  Querying {endpoint} for {cache_name} ...")
-            res = subprocess.run(
-                [
-                    'curl', '-sS', '-f', '--max-time', '240',
-                    '-A', 'go-to-traffic-city-pack-builder/1.0',
-                    '--data-urlencode', f'data={query}',
-                    endpoint,
-                ],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
-            raw = res.stdout
-            parsed = json.loads(raw)
-            if expected_bbox is not None:
-                parsed['_bbox'] = list(expected_bbox)
-                with open(cache_path, 'w', encoding='utf-8') as f:
-                    json.dump(parsed, f, separators=(',', ':'))
-            else:
-                with open(cache_path, 'w', encoding='utf-8') as f:
-                    f.write(raw)
-            print(f"  Saved {cache_name} ({len(parsed.get('elements', []))} elements)")
-            return parsed
-        except Exception as e:
-            print(f"  Warning: {endpoint} failed ({e}), trying next...")
-            time.sleep(2)
+    offset = int(os.environ.get('OVERPASS_OFFSET', sum(ord(c) for c in cache_name))) % len(OVERPASS_ENDPOINTS)
+    endpoints = OVERPASS_ENDPOINTS[offset:] + OVERPASS_ENDPOINTS[:offset]
+    for attempt in range(2):
+        for endpoint in endpoints:
+            try:
+                print(f"  Querying {endpoint} for {cache_name} ...", flush=True)
+                res = subprocess.run(
+                    [
+                        'curl', '-sS', '-f', '--max-time', '240',
+                        '-A', 'go-to-traffic-city-pack-builder/1.0',
+                        '--data-urlencode', f'data={query}',
+                        endpoint,
+                    ],
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                )
+                raw = res.stdout
+                parsed = json.loads(raw)
+                if expected_bbox is not None:
+                    parsed['_bbox'] = list(expected_bbox)
+                    with open(cache_path, 'w', encoding='utf-8') as f:
+                        json.dump(parsed, f, separators=(',', ':'))
+                else:
+                    with open(cache_path, 'w', encoding='utf-8') as f:
+                        f.write(raw)
+                print(f"  Saved {cache_name} ({len(parsed.get('elements', []))} elements)", flush=True)
+                return parsed
+            except Exception as e:
+                print(f"  Warning: {endpoint} failed ({e}), trying next...", flush=True)
+                time.sleep(3)
     raise RuntimeError(f"All Overpass endpoints failed for {cache_name}")
 
 
