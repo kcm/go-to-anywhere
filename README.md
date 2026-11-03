@@ -23,7 +23,7 @@ npm run city:list
 | `annarbor` | **Ann Arbor, MI** | University of Michigan Diag, Michigan Stadium (The Big House), Burton Memorial Tower, Huron River & Argo Cascades, TheRide buses & Amtrak Wolverine (`ARB`) |
 | `newyork` | **New York, NY** | Manhattan grid & Broadway, Central Park, Hudson & East Rivers, Empire State Building, Chrysler Building, One WTC, Brooklyn/Manhattan/Williamsburg/Queensboro/GWB bridges, Staten Island Ferry & MTA Subway |
 | `pompanobeach` | **Pompano Beach, FL** | Atlantic Ocean & **Fisher Family Pier**, **Hillsboro Inlet Lighthouse**, **Intracoastal Waterway & Finger Canals**, **Pompano Beach Airpark (`KPMP`) & Goodyear Blimp**, Civic Center & Amphitheater ("The Amp"), Broward County Transit & FEC/Brightline |
-| `sanfrancisco` | **San Francisco, CA** | **Union Square**, **Transamerica Pyramid**, **Salesforce Tower**, **San Francisco Ferry Building & Embarcadero**, **Coit Tower & Telegraph Hill**, **Lombard Street & Russian Hill**, **San Francisco City Hall**, **Chinatown Dragon Gate**, **Fisherman's Wharf & Pier 39**, **Alamo Square Painted Ladies** & SF Muni |
+| `sanfrancisco` | **San Francisco, CA** | Full **7x7 mile** City & County of San Francisco (`14.0 km x 13.4 km`): **Golden Gate Bridge**, **Union Square**, **Transamerica Pyramid**, **Salesforce Tower**, **Ferry Building & Embarcadero**, **Coit Tower**, **Lombard Street**, **Palace of Fine Arts**, **Golden Gate Park**, **Haight-Ashbury**, **The Castro**, **Mission District**, **Twin Peaks & Sutro Tower**, **Ocean Beach**, **Lake Merced**, **SF City Hall** & SF Muni |
 
 ### 2. Install / Build a City Pack Locally
 

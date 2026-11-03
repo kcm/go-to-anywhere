@@ -2217,6 +2217,140 @@ function buildSanFranciscoLandmarks(scene) {
     colliders.push({ minX: cx - 9, maxX: cx + 9, minZ: cz - 26, maxZ: cz + 26, maxY: 16, solid: true });
   }
 
+  // 8. Golden Gate Bridge (227m International Orange Art Deco twin towers + suspension cables + 1,980m deck)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Golden Gate Bridge'];
+    const cx = site ? site.x : -6229;
+    const cz = site ? site.z : -3556;
+    const intlOrange = [];
+    const piers = [];
+    const roadway = [];
+    const beacons = [];
+
+    // South & North concrete fender piers
+    for (const tz of [0, -1280]) {
+      pushBox(piers, 44, 14, 24, 0, 7, tz);
+      // Stepped Art Deco tower legs
+      for (const lx of [-13.5, 13.5]) {
+        pushBox(intlOrange, 7.5, 95, 9.5, lx, 61.5, tz);
+        pushBox(intlOrange, 6.2, 75, 8.0, lx, 146.5, tz);
+        pushBox(intlOrange, 4.8, 52, 6.6, lx, 210.0, tz);
+      }
+      // 4 Art Deco horizontal portal cross-struts above roadway + 2 below roadway
+      for (const sy of [34, 52, 98, 142, 184, 222]) {
+        pushBox(intlOrange, 27, 5.8, 6.4, 0, sy, tz);
+      }
+      pushCyl(beacons, 0.9, 0.9, 2.5, 8, -13.5, 237, tz);
+      pushCyl(beacons, 0.9, 0.9, 2.5, 8, 13.5, 237, tz);
+    }
+
+    // Suspension bridge roadway deck & stiffening truss from Toll Plaza (+650) across South Tower (0) to North Tower (-1280)
+    pushBox(intlOrange, 29, 7.5, 2200, 0, 67, -520);
+    pushBox(roadway, 26, 1.2, 2200, 0, 71.2, -520);
+
+    // Parabolic main suspension cables & vertical suspender ropes
+    const nSegs = 28;
+    for (let i = 0; i < nSegs; i++) {
+      const z0 = 420 - (i / nSegs) * 1960;
+      const z1 = 420 - ((i + 1) / nSegs) * 1960;
+      const zm = 0.5 * (z0 + z1);
+      let ym;
+      if (zm >= 0) {
+        const t = zm / 420;
+        ym = 74 + (1 - t) * (1 - t) * 156;
+      } else if (zm >= -1280) {
+        const u = (zm + 640) / 640;
+        ym = 76 + u * u * 154;
+      } else {
+        const t = (-zm - 1280) / 260;
+        ym = 74 + (1 - t) * (1 - t) * 156;
+      }
+      for (const lx of [-13.5, 13.5]) {
+        pushBox(intlOrange, 1.15, 1.15, Math.abs(z1 - z0) + 2, lx, ym, zm);
+        if (ym > 76) {
+          pushCyl(intlOrange, 0.22, 0.22, ym - 71, 6, lx, 71 + (ym - 71) * 0.5, zm);
+        }
+      }
+    }
+
+    addMergedMeshes(g, intlOrange, new THREE.MeshStandardNodeMaterial({ color: 0xc0362c, roughness: 0.48, metalness: 0.35 }));
+    addMergedMeshes(g, piers, new THREE.MeshStandardNodeMaterial({ color: 0xcbc6ba, roughness: 0.75 }));
+    addMergedMeshes(g, roadway, new THREE.MeshStandardNodeMaterial({ color: 0x33373d, roughness: 0.85 }));
+    addMergedMeshes(g, beacons, new THREE.MeshStandardNodeMaterial({ color: 0xff5252, emissive: 0xff1744, emissiveIntensity: 1.5, roughness: 0.2 }), false);
+
+    g.position.set(cx, 0, cz);
+    group.add(g);
+  }
+
+  // 9. Palace of Fine Arts (Greco-Roman terracotta rotunda dome & curved colonnade in the Marina)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Palace of Fine Arts'];
+    const cx = site ? site.x : -3598;
+    const cz = site ? site.z : -1667;
+    const travertine = [];
+    const terracotta = [];
+
+    for (let i = 0; i < 8; i++) {
+      const a = (i / 8) * Math.PI * 2;
+      pushCyl(travertine, 1.3, 1.45, 24, 10, Math.cos(a) * 15, 12, Math.sin(a) * 15);
+    }
+    pushCyl(travertine, 17, 17.5, 6, 16, 0, 27, 0);
+    pushCyl(terracotta, 4.5, 16.5, 15, 16, 0, 37.5, 0);
+    // Curved colonnade wings
+    for (let j = -5; j <= 5; j++) {
+      if (j === 0) continue;
+      const zOff = j * 11;
+      const xOff = -14 - Math.abs(j) * 2.2;
+      pushCyl(travertine, 0.95, 1.1, 18, 8, xOff, 9, zOff);
+      pushBox(travertine, 4.5, 3.2, 9.5, xOff, 19.6, zOff);
+    }
+
+    addMergedMeshes(g, travertine, new THREE.MeshStandardNodeMaterial({ color: 0xe6d3b3, roughness: 0.62 }));
+    addMergedMeshes(g, terracotta, new THREE.MeshStandardNodeMaterial({ color: 0xc87d55, roughness: 0.55 }));
+
+    g.position.set(cx, groundUnder(cx, cz, 40, 80), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 22, maxX: cx + 22, minZ: cz - 55, maxZ: cz + 55, maxY: 48, solid: true });
+  }
+
+  // 10. Sutro Tower (298m three-legged red-and-white lattice TV/radio broadcast tower atop Mount Sutro / Twin Peaks)
+  {
+    const g = new THREE.Group();
+    const site = LANDMARK_SITES['Sutro Tower'];
+    const cx = site ? site.x : -3985;
+    const cz = site ? site.z : 3634;
+    const redSteel = [];
+    const whiteSteel = [];
+    const beaconGlow = [];
+
+    // 3 tripod legs tapering inward to waist at y=180m then flaring out to top truss at y=235m + 3 upper masts to y=298m
+    for (let i = 0; i < 3; i++) {
+      const a = (i / 3) * Math.PI * 2;
+      const ca = Math.cos(a);
+      const sa = Math.sin(a);
+      pushCyl(redSteel, 1.6, 2.4, 75, 8, ca * 22, 37.5, sa * 22);
+      pushCyl(whiteSteel, 1.4, 1.6, 65, 8, ca * 15, 107.5, sa * 15);
+      pushCyl(redSteel, 1.3, 1.4, 55, 8, ca * 11, 167.5, sa * 11);
+      pushCyl(whiteSteel, 1.2, 1.3, 45, 8, ca * 13, 217.5, sa * 13);
+      pushCyl(redSteel, 0.45, 0.85, 58, 8, ca * 14, 269.0, sa * 14);
+      pushCyl(beaconGlow, 0.8, 0.8, 2.4, 8, ca * 14, 299.0, sa * 14);
+    }
+    // Horizontal ring trusses at 5 levels
+    for (const [ry, rad, arr] of [[75, 18, whiteSteel], [140, 12.5, redSteel], [195, 11.5, whiteSteel], [240, 14.5, redSteel]]) {
+      pushCyl(arr, rad, rad, 3.8, 6, 0, ry, 0);
+    }
+
+    addMergedMeshes(g, redSteel, new THREE.MeshStandardNodeMaterial({ color: 0xc92a2a, roughness: 0.45, metalness: 0.4 }));
+    addMergedMeshes(g, whiteSteel, new THREE.MeshStandardNodeMaterial({ color: 0xf4f6f8, roughness: 0.45, metalness: 0.35 }));
+    addMergedMeshes(g, beaconGlow, new THREE.MeshStandardNodeMaterial({ color: 0xff5252, emissive: 0xff1744, emissiveIntensity: 1.5, roughness: 0.2 }), false);
+
+    g.position.set(cx, groundUnder(cx, cz, 45, 45), cz);
+    group.add(g);
+    colliders.push({ minX: cx - 24, maxX: cx + 24, minZ: cz - 24, maxZ: cz + 24, maxY: 298, solid: true });
+  }
+
   if (scene && typeof scene.add === 'function') scene.add(group);
   return { group, colliders };
 }

@@ -340,18 +340,20 @@ CITY_CONFIGS = {
         'origin_desc': 'Union Square - Post St & Powell St (centreline)',
         'lat0': 37.7879,
         'lon0': -122.4075,
-        'bbox': (37.772, -122.438, 37.812, -122.384),
+        'bbox': (37.708, -122.515, 37.829, -122.356),  # Full 7x7 mile City & County of San Francisco + Golden Gate Bridge & Alcatraz
+        'overpass_tiles': (2, 2),
         'base_elev': 0.0,
-        'downtown_box': (-950, -1150, 1250, 750),
-        'in_town_box': (-1800, -2100, 1650, 1350),
+        'downtown_box': (-1350, -1450, 1450, 1150),
+        'in_town_box': (-3600, -2600, 2100, 3600),
         'metered_regex': re.compile(
             r'^(Market St|Mission St|Howard St|Folsom St|Harrison St|Bryant St|Brannan St|Townsend St|'
             r'Geary St|Geary Blvd|Post St|Sutter St|Bush St|Pine St|California St|Sacramento St|Clay St|Washington St|Jackson St|'
             r'Columbus Ave|Broadway|Grant Ave|Stockton St|Powell St|Mason St|Taylor St|Jones St|Leavenworth St|Hyde St|Larkin St|Polk St|Van Ness Ave|'
-            r'Montgomery St|Sansome St|Battery St|Front St|Davis St|Drumm St|The Embarcadero|2nd St|3rd St|4th St|5th St|6th St|7th St|8th St|9th St|10th St)$'
+            r'Montgomery St|Sansome St|Battery St|Front St|Davis St|Drumm St|The Embarcadero|2nd St|3rd St|4th St|5th St|6th St|7th St|8th St|9th St|10th St|'
+            r'Valencia St|Castro St|Haight St|Divisadero St|Fillmore St|Chestnut St|Union St|Clement St|Irving St|Judah St|Taraval St|Noriega St|24th St|3rd St)$'
         ),
         'rail_default_name': 'Caltrain / Muni Metro Corridor',
-        'rail_route_names': ['Caltrain Peninsula Commute', 'Muni Metro T Third', 'F Market & Wharves Historic Streetcar'],
+        'rail_route_names': ['Caltrain Peninsula Commute', 'Muni Metro N Judah / T Third', 'F Market & Wharves Historic Streetcar'],
         'amtrak_stop_id': 'SFC',
         'amtrak_station_name': 'San Francisco 4th & King Station (SFC)',
         'amtrak_west_keywords': ('San Francisco', 'Oakland', 'Emeryville'),
@@ -365,17 +367,17 @@ CITY_CONFIGS = {
         'transit_prefix': 'muni',
         'corridor_waypoints': [
             ("F", "Market & Wharves Historic Streetcar", "Fisherman's Wharf", "Castro & Market via Ferry Bldg", "#e31837",
-             [(-200, -2250), (650, -1800), (1180, -850), (650, -250), (0, 200), (-750, 750), (-1500, 1300)]),
-            ("38", "Geary Rapid", "Ocean Beach / Fillmore", "Salesforce Transit Center", "#cc0033",
-             [(-2400, 180), (-1200, 90), (-550, 40), (0, 0), (500, -80), (920, -190)]),
-            ("30", "Stockton - Marina", "Crissy Field / Chestnut", "Caltrain 4th & King", "#005a9c",
-             [(-1400, -1950), (-400, -1650), (120, -800), (120, 0), (450, 450), (950, 950)]),
-            ("49", "Van Ness - Mission BRT", "Fort Mason / North Point", "Mission District", "#f58220",
-             [(-1250, -2050), (-1180, -1100), (-1100, 0), (-1030, 850), (-980, 1550)]),
-            ("1", "California Trolley Coach", "Clay & Drumm (Embarcadero)", "Pacific Heights / Presidio", "#008566",
-             [(1050, -620), (400, -520), (-200, -430), (-1100, -300), (-2350, -120)]),
-            ("14R", "Mission Rapid", "Ferry Plaza", "Mission & 16th St", "#8c1d40",
-             [(1150, -780), (550, -150), (-100, 320), (-850, 900), (-1450, 1450)]),
+             [(-200, -2250), (650, -1800), (1180, -850), (650, -250), (0, 200), (-1100, 1000), (-2402, 2878)]),
+            ("38", "Geary Rapid", "Lands End / Ocean Beach", "Salesforce Transit Center", "#cc0033",
+             [(-8900, 950), (-6200, 680), (-3800, 380), (-1850, 150), (0, 0), (920, -190)]),
+            ("N", "Judah Muni Metro", "Ocean Beach & Great Hwy", "Caltrain 4th & King via Market", "#005a9c",
+             [(-8947, 3056), (-6200, 2850), (-4200, 2650), (-2200, 1650), (-800, 750), (0, 200), (1150, -780), (1350, 950)]),
+            ("28", "19th Avenue - Golden Gate Bridge", "Golden Gate Bridge Toll Plaza", "Daly City BART via Golden Gate Park", "#f58220",
+             [(-5938, -2189), (-5600, -800), (-5550, 1850), (-5450, 4200), (-5350, 6500), (-5200, 8200)]),
+            ("49", "Van Ness - Mission BRT", "Fort Mason / Aquatic Park", "Outer Mission / Geneva", "#008566",
+             [(-1250, -2050), (-1100, 0), (-1030, 950), (-1250, 3100), (-1600, 5200), (-2800, 7600)]),
+            ("22", "Fillmore - 16th Street", "Marina Green", "Mission Bay / Dogpatch", "#8c1d40",
+             [(-2250, -1950), (-2100, -400), (-1950, 1650), (-1100, 1750), (400, 1850), (1670, 3378)]),
         ],
         'historic_districts': [
             {'name': 'Union Square & Downtown Retail District', 'rings': [[-320, -260, 320, -260, 320, 260, -320, 260]]},
@@ -383,6 +385,9 @@ CITY_CONFIGS = {
             {'name': 'Jackson Square & Barbary Coast Historic District', 'rings': [[340, -1150, 780, -1150, 780, -750, 340, -750]]},
             {'name': 'Civic Center National Historic Landmark District', 'rings': [[-1350, 620, -750, 620, -750, 1180, -1350, 1180]]},
             {'name': 'Alamo Square Historic District', 'rings': [[-2500, 1050, -1950, 1050, -1950, 1500, -2500, 1500]]},
+            {'name': 'Haight-Ashbury Historic District', 'rings': [[-3950, 1800, -2950, 1800, -2950, 2250, -3950, 2250]]},
+            {'name': 'Presidio of San Francisco National Historic Landmark District', 'rings': [[-6800, -2600, -3800, -2600, -3800, -400, -6800, -400]]},
+            {'name': 'Golden Gate Park Historic District', 'rings': [[-9100, 1550, -4050, 1550, -4050, 2450, -9100, 2450]]},
         ],
         'neighborhood_places': [
             ('Union Square', 0, 0, 220),
@@ -400,6 +405,25 @@ CITY_CONFIGS = {
             ('Alamo Square & Painted Ladies', -2226, 1289, 260),
             ('Pacific Heights', -1950, -650, 280),
             ('Japantown', -1850, 280, 240),
+            ('Marina District & Palace of Fine Arts', -3598, -1667, 300),
+            ('The Presidio', -5164, -1223, 380),
+            ('Golden Gate Bridge', -6229, -3556, 350),
+            ('Golden Gate Park', -5384, 1823, 420),
+            ('Haight-Ashbury', -3466, 2000, 280),
+            ('The Castro', -2402, 2878, 280),
+            ('Mission District & Dolores Park', -1724, 3134, 320),
+            ('Twin Peaks & Sutro Tower', -3537, 3979, 340),
+            ('Richmond District', -6200, 650, 360),
+            ('Sunset District', -6800, 3400, 380),
+            ('Lands End & Cliff House', -9361, 1034, 300),
+            ('Ocean Beach', -8947, 3056, 340),
+            ('Lake Merced & SF Zoo', -7522, 7435, 380),
+            ('Potrero Hill & Dogpatch', 1672, 3378, 320),
+            ('Bayview & Hunters Point', 3035, 6323, 360),
+            ('Noe Valley', -2350, 4250, 280),
+            ('Bernal Heights', -950, 4850, 280),
+            ('Excelsior & McLaren Park', -1450, 6850, 340),
+            ('Alcatraz Island', -1364, -4312, 240),
         ],
         'landmarks_meta': {
             'Transamerica Pyramid': {
@@ -430,6 +454,18 @@ CITY_CONFIGS = {
                 'x': -2155, 'z': 1289, 'w': 28, 'd': 62, 'h': 15, 'area': 1736,
                 'ring': [-2169, 1258, -2141, 1258, -2141, 1320, -2169, 1320]
             },
+            'Golden Gate Bridge': {
+                'x': -6229, 'z': -3556, 'w': 46, 'd': 1980, 'h': 227, 'area': 91080,
+                'ring': [-6252, -4546, -6206, -4546, -6206, -2566, -6252, -2566]
+            },
+            'Palace of Fine Arts': {
+                'x': -3598, 'z': -1667, 'w': 68, 'd': 140, 'h': 49, 'area': 9520,
+                'ring': [-3632, -1737, -3564, -1737, -3564, -1597, -3632, -1597]
+            },
+            'Sutro Tower': {
+                'x': -3985, 'z': 3634, 'w': 62, 'd': 62, 'h': 298, 'area': 3844,
+                'ring': [-4016, 3603, -3954, 3603, -3954, 3665, -4016, 3665]
+            },
         },
         'rng_seed': 415,
     },
@@ -438,12 +474,14 @@ CITY_CONFIGS = {
 r1 = lambda v: round(float(v), 1)
 
 
-def fetch_overpass(cache_name, query):
+def fetch_overpass(cache_name, query, expected_bbox=None):
     cache_path = os.path.join(CACHE_DIR, cache_name)
     if os.path.exists(cache_path) and os.path.getsize(cache_path) > 100:
-        print(f"  Using cached {cache_name} ({os.path.getsize(cache_path) / (1024*1024):.1f} MB)")
         with open(cache_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            cached = json.load(f)
+        if expected_bbox is None or cached.get('_bbox') == list(expected_bbox):
+            print(f"  Using cached {cache_name} ({os.path.getsize(cache_path) / (1024*1024):.1f} MB)")
+            return cached
 
     for endpoint in OVERPASS_ENDPOINTS:
         try:
@@ -461,14 +499,54 @@ def fetch_overpass(cache_name, query):
             )
             raw = res.stdout
             parsed = json.loads(raw)
-            with open(cache_path, 'w', encoding='utf-8') as f:
-                f.write(raw)
+            if expected_bbox is not None:
+                parsed['_bbox'] = list(expected_bbox)
+                with open(cache_path, 'w', encoding='utf-8') as f:
+                    json.dump(parsed, f, separators=(',', ':'))
+            else:
+                with open(cache_path, 'w', encoding='utf-8') as f:
+                    f.write(raw)
             print(f"  Saved {cache_name} ({len(parsed.get('elements', []))} elements)")
             return parsed
         except Exception as e:
             print(f"  Warning: {endpoint} failed ({e}), trying next...")
             time.sleep(2)
     raise RuntimeError(f"All Overpass endpoints failed for {cache_name}")
+
+
+def fetch_overpass_tiled(cache_name, make_query, bbox, tiles=None):
+    if not tiles or tiles == (1, 1):
+        return fetch_overpass(cache_name, make_query(*bbox))
+    cache_path = os.path.join(CACHE_DIR, cache_name)
+    if os.path.exists(cache_path) and os.path.getsize(cache_path) > 100:
+        with open(cache_path, 'r', encoding='utf-8') as f:
+            cached = json.load(f)
+        if cached.get('_bbox') == list(bbox):
+            print(f"  Using cached {cache_name} ({os.path.getsize(cache_path) / (1024*1024):.1f} MB)")
+            return cached
+    s_lat, w_lon, n_lat, e_lon = bbox
+    ny, nx = tiles
+    dlat = (n_lat - s_lat) / ny
+    dlon = (e_lon - w_lon) / nx
+    merged_elements = {}
+    base_name = cache_name.replace('.json', '')
+    for iy in range(ny):
+        for ix in range(nx):
+            ts = round(s_lat + iy * dlat, 6)
+            tn = round(s_lat + (iy + 1) * dlat, 6)
+            tw = round(w_lon + ix * dlon, 6)
+            te = round(w_lon + (ix + 1) * dlon, 6)
+            sub_cache = f"{base_name}_tile_{iy}_{ix}.json"
+            sub_data = fetch_overpass(sub_cache, make_query(ts, tw, tn, te), expected_bbox=(ts, tw, tn, te))
+            for el in sub_data.get('elements', []):
+                key = (el['type'], el['id'])
+                if key not in merged_elements or 'tags' in el:
+                    merged_elements[key] = el
+    merged = {'version': 0.6, '_bbox': list(bbox), 'elements': list(merged_elements.values())}
+    with open(cache_path, 'w', encoding='utf-8') as f:
+        json.dump(merged, f, separators=(',', ':'))
+    print(f"  Merged {ny}x{nx} tiles into {cache_name} ({len(merged['elements'])} unique elements)")
+    return merged
 
 
 def parts(g):
@@ -508,7 +586,8 @@ def sint_var(d, v):
 
 
 def morton(x, z):
-    ix, iz = int(x / 16) + 4096, int(z / 16) + 4096
+    ix = max(0, min(16383, int(x / 16) + 8192))
+    iz = max(0, min(16383, int(z / 16) + 8192))
     k = 0
     for i in range(14):
         k |= ((ix >> i) & 1) << (2 * i) | ((iz >> i) & 1) << (2 * i + 1)
@@ -589,65 +668,69 @@ def build_city_pack(city_key):
                 out.append([flat(ext)] + holes)
         return out
 
-    INFRA_QUERY = f"""
+    def make_infra_query(s_, w_, n_, e_):
+        return f"""
 [out:json][timeout:180];
 (
-  way["highway"]({S},{W},{N},{E});
-  way["waterway"]({S},{W},{N},{E});
-  way["natural"~"^(water|wood|tree_row|coastline|beach|wetland|scrub|grassland)$"]({S},{W},{N},{E});
-  relation["natural"~"^(water|wood|wetland)$"]({S},{W},{N},{E});
-  way["landuse"~"^(park|grass|meadow|recreation_ground|village_green|cemetery|forest|retail|commercial|industrial|residential|railway|port|basin|reservoir|education|institutional|religious)$"]({S},{W},{N},{E});
-  relation["landuse"~"^(park|grass|meadow|recreation_ground|cemetery|forest|retail|commercial|industrial|residential)$"]({S},{W},{N},{E});
-  way["leisure"~"^(park|garden|playground|golf_course|nature_reserve|pitch|track|stadium|marina|slipway|dog_park|fitness_station|swimming_pool)$"]({S},{W},{N},{E});
-  relation["leisure"~"^(park|garden|golf_course|nature_reserve|stadium)$"]({S},{W},{N},{E});
-  way["golf"]({S},{W},{N},{E});
-  way["amenity"~"^(parking|school|university|college|hospital|place_of_worship|community_centre|library|fire_station|police|townhall|courthouse|theatre|cinema|arts_centre|marketplace|ferry_terminal|bus_station|fuel)$"]({S},{W},{N},{E});
-  way["railway"~"^(rail|light_rail|subway|tram|narrow_gauge|abandoned|disused|platform)$"]({S},{W},{N},{E});
-  way["man_made"~"^(pier|breakwater|groyne|bridge|water_tower)$"]({S},{W},{N},{E});
-  way["historic"]({S},{W},{N},{E});
-  way["tourism"~"^(zoo|attraction|museum|hotel)$"]({S},{W},{N},{E});
-  relation["tourism"~"^(zoo|attraction|museum)$"]({S},{W},{N},{E});
-  node["natural"="tree"]({S},{W},{N},{E});
-  node["highway"~"^(street_lamp|traffic_signals|stop|give_way|crossing|motorway_junction)$"]({S},{W},{N},{E});
-  node["railway"~"^(level_crossing|station|halt|tram_stop)$"]({S},{W},{N},{E});
-  node["emergency"="fire_hydrant"]({S},{W},{N},{E});
-  node["amenity"]({S},{W},{N},{E});
-  node["shop"]({S},{W},{N},{E});
-  node["tourism"]({S},{W},{N},{E});
-  node["leisure"]({S},{W},{N},{E});
-  node["historic"]({S},{W},{N},{E});
-  node["man_made"="water_tower"]({S},{W},{N},{E});
+  way["highway"]({s_},{w_},{n_},{e_});
+  way["waterway"]({s_},{w_},{n_},{e_});
+  way["natural"~"^(water|wood|tree_row|coastline|beach|wetland|scrub|grassland)$"]({s_},{w_},{n_},{e_});
+  relation["natural"~"^(water|wood|wetland)$"]({s_},{w_},{n_},{e_});
+  way["landuse"~"^(park|grass|meadow|recreation_ground|village_green|cemetery|forest|retail|commercial|industrial|residential|railway|port|basin|reservoir|education|institutional|religious)$"]({s_},{w_},{n_},{e_});
+  relation["landuse"~"^(park|grass|meadow|recreation_ground|cemetery|forest|retail|commercial|industrial|residential)$"]({s_},{w_},{n_},{e_});
+  way["leisure"~"^(park|garden|playground|golf_course|nature_reserve|pitch|track|stadium|marina|slipway|dog_park|fitness_station|swimming_pool)$"]({s_},{w_},{n_},{e_});
+  relation["leisure"~"^(park|garden|golf_course|nature_reserve|stadium)$"]({s_},{w_},{n_},{e_});
+  way["golf"]({s_},{w_},{n_},{e_});
+  way["amenity"~"^(parking|school|university|college|hospital|place_of_worship|community_centre|library|fire_station|police|townhall|courthouse|theatre|cinema|arts_centre|marketplace|ferry_terminal|bus_station|fuel)$"]({s_},{w_},{n_},{e_});
+  way["railway"~"^(rail|light_rail|subway|tram|narrow_gauge|abandoned|disused|platform)$"]({s_},{w_},{n_},{e_});
+  way["man_made"~"^(pier|breakwater|groyne|bridge|water_tower)$"]({s_},{w_},{n_},{e_});
+  way["historic"]({s_},{w_},{n_},{e_});
+  way["tourism"~"^(zoo|attraction|museum|hotel)$"]({s_},{w_},{n_},{e_});
+  relation["tourism"~"^(zoo|attraction|museum)$"]({s_},{w_},{n_},{e_});
+  node["natural"="tree"]({s_},{w_},{n_},{e_});
+  node["highway"~"^(street_lamp|traffic_signals|stop|give_way|crossing|motorway_junction)$"]({s_},{w_},{n_},{e_});
+  node["railway"~"^(level_crossing|station|halt|tram_stop)$"]({s_},{w_},{n_},{e_});
+  node["emergency"="fire_hydrant"]({s_},{w_},{n_},{e_});
+  node["amenity"]({s_},{w_},{n_},{e_});
+  node["shop"]({s_},{w_},{n_},{e_});
+  node["tourism"]({s_},{w_},{n_},{e_});
+  node["leisure"]({s_},{w_},{n_},{e_});
+  node["historic"]({s_},{w_},{n_},{e_});
+  node["man_made"="water_tower"]({s_},{w_},{n_},{e_});
 );
 out body;
 >;
 out skel qt;
 """
 
-    BUILDINGS_QUERY = f"""
+    def make_buildings_query(s_, w_, n_, e_):
+        return f"""
 [out:json][timeout:180];
 (
-  way["building"]({S},{W},{N},{E});
-  relation["building"]({S},{W},{N},{E});
-  node["addr:housenumber"]({S},{W},{N},{E});
+  way["building"]({s_},{w_},{n_},{e_});
+  relation["building"]({s_},{w_},{n_},{e_});
+  node["addr:housenumber"]({s_},{w_},{n_},{e_});
 );
 out body;
 >;
 out skel qt;
 """
 
-    TRANSIT_QUERY = f"""
+    def make_transit_query(s_, w_, n_, e_):
+        return f"""
 [out:json][timeout:60];
 (
-  node["highway"="bus_stop"]({S},{W},{N},{E});
-  node["public_transport"="platform"]({S},{W},{N},{E});
+  node["highway"="bus_stop"]({s_},{w_},{n_},{e_});
+  node["public_transport"="platform"]({s_},{w_},{n_},{e_});
 );
 out body;
 """
 
     print(f"Step 1: Loading OpenStreetMap data for {cfg['name']}...")
-    infra_osm = fetch_overpass(f"{city_id}_infra.json", INFRA_QUERY)
-    bldg_osm = fetch_overpass(f"{city_id}_buildings.json", BUILDINGS_QUERY)
-    transit_osm = fetch_overpass(f"{city_id}_transit.json", TRANSIT_QUERY)
+    tiles_cfg = cfg.get('overpass_tiles')
+    infra_osm = fetch_overpass_tiled(f"{city_id}_infra.json", make_infra_query, BBOX, tiles_cfg)
+    bldg_osm = fetch_overpass_tiled(f"{city_id}_buildings.json", make_buildings_query, BBOX, tiles_cfg)
+    transit_osm = fetch_overpass_tiled(f"{city_id}_transit.json", make_transit_query, BBOX, None)
 
     nodes = {}
     ways = {}
@@ -1471,6 +1554,9 @@ out body;
                 for j in range(int(math.floor(z0 / cell)), int(math.ceil(z1 / cell))):
                     yield from parts(p.intersection(box(i * cell, j * cell, (i + 1) * cell, (j + 1) * cell)))
 
+    is_huge_map = (E_X - W_X) * (S_Z - N_Z) > 60_000_000
+    it_x0, it_z0, it_x1, it_z1 = cfg['in_town_box']
+    IN_TOWN_BOX = box(it_x0, it_z0, it_x1, it_z1)
     blocks = []
     lawn_polys = []
     parking_list = [(pk.bounds, pk) for pk in parts(parking_union)]
@@ -1478,7 +1564,7 @@ out body;
         for q in split_holes(p):
             if q.area < 40:
                 continue
-            q = q.simplify(0.5, preserve_topology=True)
+            q = q.simplify(0.8 if is_huge_map else 0.5, preserve_topology=True)
             if q.is_empty or q.geom_type != 'Polygon' or q.area < 40:
                 continue
             q_ccw = orient(q, sign=1.0)
@@ -1489,7 +1575,7 @@ out body;
             paved = DOWNTOWN_BOX.contains(c)
             has_lawn = 0 if paved else 1
             blocks.append([flat(ring), [], 0.0, '', is_rect, None, has_lawn])
-            if has_lawn:
+            if has_lawn and (not is_huge_map or IN_TOWN_BOX.contains(c)):
                 inner = q_ccw.buffer(-SIDEWALK, join_style=2)
                 if not inner.is_empty:
                     ib = inner.bounds
@@ -1499,8 +1585,8 @@ out body;
                     ]
                     if near_pk:
                         inner = inner.difference(unary_union(near_pk))
-                    for ip in tiled(parts(inner.simplify(0.6))):
-                        if ip.area >= 25:
+                    for ip in tiled(parts(inner.simplify(0.8 if is_huge_map else 0.6)), cell=(200.0 if is_huge_map else 120.0)):
+                        if ip.area >= (60 if is_huge_map else 25):
                             ip = orient(ip, -1.0)
                             lawn_polys.append([flat(list(ip.exterior.coords)[:-1])] + [flat(list(r.coords)[:-1]) for r in ip.interiors if Polygon(r).area > 20])
 
@@ -1837,8 +1923,8 @@ out body;
     with gzip.open(elv_path, 'wb', compresslevel=9) as f:
         f.write(elv_header + cm_elev.tobytes())
 
-    DSTEP = 2.0
     wbounds = water_open.bounds if not water_open.is_empty else (-100, -100, 100, 100)
+    DSTEP = 5.0 if max(wbounds[2] - wbounds[0], wbounds[3] - wbounds[1]) > 8000 else 2.0
     dx0 = math.floor(wbounds[0] / STEP) * STEP - 20.0
     dz0 = math.floor(wbounds[1] / STEP) * STEP - 20.0
     dcols = int((wbounds[2] - dx0) / DSTEP) + 21
