@@ -1,0 +1,19 @@
+# Python & Node environments
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Cached upstream geodata & OSM/Terrain/GTFS downloads
+tools/.cache/
+
+# Local city data packs (installed/built locally like npm packages via `npm run city:install`)
+cities/*/
+!cities/README.md
+
+# Legacy root geodata files
+data/
+js/city-geodata-fallback.js
+js/building-geodata.bin.gz
+js/tree-geodata.bin.gz

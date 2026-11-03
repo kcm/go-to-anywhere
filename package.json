@@ -1,0 +1,20 @@
+{
+  "name": "go-to-anywhere",
+  "version": "1.0.0",
+  "description": "Go To Anywhere (GTA): A 3D WebGPU multi-city driving, walking, cycling, flying, and kayaking engine with locally installed OpenStreetMap + DEM + GTFS city packs.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "city:list": "python3 tools/build-city-pack.py --list",
+    "city:install": "python3 tools/build-city-pack.py",
+    "city:build": "python3 tools/build-city-pack.py",
+    "test": "node --test tests/city-packs.test.cjs",
+    "test:browser": "node --test tests/browser-smoke.test.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kcm/go-to-anywhere.git"
+  },
+  "license": "MIT"
+}
