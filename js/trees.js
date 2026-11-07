@@ -1,7 +1,7 @@
 import { TIER } from './device-tier.js';
 import * as THREE from 'three/webgpu';
 import { createTreeMaterial } from './tsl-materials.js';
-import { groundHeight } from './terrain.js';
+import { riverbedHeight as groundHeight } from './terrain.js';
 import { polygonBoxOverlaps } from './building-collision.js';
 import { dropBuffers } from './gpu-only.js';
 

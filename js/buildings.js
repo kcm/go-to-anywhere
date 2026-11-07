@@ -44,7 +44,7 @@ import { buildChurches, churchPlan } from './churches.js';
 import { log } from '../lamp-game.js';
 import { buildGasStations, canopyFootprints, insideCanopy } from './gas-stations.js';
 import { landUseAt, historicDistrictAt, LAND_USE } from './districts.js';
-import { groundHeight } from './terrain.js';
+import { riverbedHeight as groundHeight, riverDepth, bridgeDecks } from './terrain.js';
 import { polygonContains, polygonBoxOverlaps } from './building-collision.js';
 import { pavedPlazaRects, parkTreeSites, sidewalkBlocks } from './city-grid.js';
 
@@ -382,8 +382,29 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
     return { height: Infinity, x: t.x, z: t.z, x0: t.x - t.w / 2 - 3, x1: t.x + t.w / 2 + 3, z0: t.z - t.d / 2 - 3, z1: t.z + t.d / 2 + 3, ...(o || {}) };
   }).filter(Boolean);
   // Keep the authored landmark models; the survey supplies the surrounding buildings.
-  const surveyedBuildings = REAL_BUILDINGS.filter((b) => !LANDMARK_RESERVE.some((h) =>
-    b.polygons.some((p) => polygonContains({ outer: p.outer, holes: [] }, h.x, h.z)))
+  // Also exclude small bridge-support pylons/anchorages tagged as buildings in OSM along bridge spans.
+  const decks = bridgeDecks();
+  const isBridgeSupportBldg = (b) => {
+    if (b.maxX - b.minX > 65 || b.maxZ - b.minZ > 65 || !decks.length) return false;
+    for (const d of decks) {
+      if (d.length < 120) continue;
+      const P = d.points;
+      const reach = d.half + 20;
+      for (let i = 0; i < P.length; i += 2) {
+        if (Math.hypot(b.cx - P[i][0], b.cz - P[i][1]) <= reach) {
+          const nearWet = P[i][4]
+            || P[Math.max(0, i - 10)][4]
+            || P[Math.min(P.length - 1, i + 10)][4]
+            || riverDepth(b.cx, b.cz) > 0.1;
+          if (nearWet) return true;
+        }
+      }
+    }
+    return false;
+  };
+  const surveyedBuildings = REAL_BUILDINGS.filter((b) => !isBridgeSupportBldg(b)
+    && !LANDMARK_RESERVE.some((h) =>
+      b.polygons.some((p) => polygonContains({ outer: p.outer, holes: [] }, h.x, h.z)))
     && !landmarkColliders.some((c) => b.minX < c.maxX && b.maxX > c.minX && b.minZ < c.maxZ && b.maxZ > c.minZ
       && b.polygons.some((p) => polygonBoxOverlaps(p, (c.minX + c.maxX) / 2, (c.minZ + c.maxZ) / 2,
         (c.maxX - c.minX) / 2, (c.maxZ - c.minZ) / 2))));

@@ -16,7 +16,7 @@ import { ACTIVE_CITY_ID, cityAssetPath } from './city-packs.js';
 import { STADIUM, radiiAt, bowlSurface } from './stadium-shape.js';
 import { GEO } from './city-geodata.js';
 import { carveCascades, cascadeDepth, cascadeLevel } from './cascades.js';
-import { baseHeight, digAt, levelAt, onDeck, BUCKET, bucketKey, drapeLayer, CORE_SOURCE } from './ground-core.js';
+import { baseHeight, digAt, levelAt, onDeck, riverbedOf, BUCKET, bucketKey, drapeLayer, CORE_SOURCE } from './ground-core.js';
 
 let grid = null; // { x0, z0, step, cols, rows, heights: Float32Array }
 
@@ -131,6 +131,15 @@ function buildDecks(g, r) {
       return digAt(r, x, z) > 0.02 || [0, 1, -1, 2, -2].some((m) => digAt(r, x - tz * (reach + Math.abs(m) * 2) * Math.sign(m || 1), z + tx * (reach + Math.abs(m) * 2) * Math.sign(m || 1)) > 0.02
         || digAt(r, x + tz * (reach + Math.abs(m) * 2), z - tx * (reach + Math.abs(m) * 2)) > 0.02);
     });
+    // Bridge short dry gaps (<= 80 m) surrounded by water (e.g. bridge piers mapped as coastline islands in OSM)
+    for (let i = 1; i < wet.length - 1; i++) {
+      if (wet[i] || !wet[i - 1]) continue;
+      let j = i;
+      while (j < wet.length && !wet[j] && j - i <= 20) j++;
+      if (j < wet.length && wet[j]) {
+        for (let k = i; k < j; k++) wet[k] = true;
+      }
+    }
     let H = S.map(([x, z], i) => {
       const u = L[i] / s;
       const arch = 4 * u * (1 - u) * archCrown;
@@ -142,13 +151,70 @@ function buildDecks(g, r) {
     for (let pass = 0; pass < 8; pass++) {
       H = H.map((h, i) => (i === 0 || i === H.length - 1 ? h : Math.max(h, (H[i - 1] + h + H[i + 1]) / 3)));
     }
+    const landA = digAt(r, S[0][0], S[0][1]) < 0.25;
+    const landB = digAt(r, S.at(-1)[0], S.at(-1)[1]) < 0.25;
+    for (let i = 0; i < S.length; i++) {
+      const wA = landA ? Math.min(1, L[i] / 8) : 1;
+      const wB = landB ? Math.min(1, (s - L[i]) / 8) : 1;
+      const wEnd = Math.min(wA, wB);
+      if (wEnd < 1) {
+        const rb = riverbedOf(g, S[i][0], S[i][1]);
+        H[i] = rb + (H[i] - rb) * wEnd;
+      }
+    }
     const deck = { kind: b.kind, w: b.w, half: b.kind === 2 ? b.w / 2 : b.w / 2 + 1.5, length: s, points: S.map((p, i) => [p[0], p[1], L[i], H[i], wet[i]]) };
     r.bridges.push(deck);
-    if (b.kind === 2) continue;
-    for (let i = 0; i + 1 < S.length; i++) {
-      const seg = { deck, a: deck.points[i], b: deck.points[i + 1] };
-      const x0 = Math.min(S[i][0], S[i + 1][0]) - deck.half, x1 = Math.max(S[i][0], S[i + 1][0]) + deck.half;
-      const z0 = Math.min(S[i][1], S[i + 1][1]) - deck.half, z1 = Math.max(S[i][1], S[i + 1][1]) + deck.half;
+  }
+  // Synchronize parallel or double-deck sibling bridges (e.g. Bay Bridge West/East spans, Golden Gate Bridge)
+  for (let i = 0; i < r.bridges.length; i++) {
+    const d1 = r.bridges[i];
+    if (d1.kind !== 0 || d1.coincidentWith || d1.length < 80) continue;
+    for (let j = i + 1; j < r.bridges.length; j++) {
+      const d2 = r.bridges[j];
+      if (d2.kind !== 0 || d2.coincidentWith || d2.length < 80) continue;
+      const p1Mid = d1.points[d1.points.length >> 1];
+      const p2Mid = d2.points[d2.points.length >> 1];
+      if (Math.hypot(p1Mid[0] - p2Mid[0], p1Mid[1] - p2Mid[1]) > Math.max(d1.length, d2.length)) continue;
+      const dists = [];
+      const nearestIdx = new Int32Array(d2.points.length);
+      for (let k = 0; k < d2.points.length; k++) {
+        const [x2, z2] = d2.points[k];
+        let bestD = Infinity, bestM = 0;
+        for (let m = 0; m < d1.points.length; m++) {
+          const d = Math.hypot(x2 - d1.points[m][0], z2 - d1.points[m][1]);
+          if (d < bestD) { bestD = d; bestM = m; }
+        }
+        nearestIdx[k] = bestM;
+        if (bestD < 38) dists.push(bestD);
+      }
+      if (dists.length < Math.min(d1.points.length, d2.points.length) * 0.55) continue;
+      dists.sort((a, b) => a - b);
+      const medDist = dists[dists.length >> 1];
+      for (let k = 0; k < d2.points.length; k++) {
+        const m = nearestIdx[k];
+        if (Math.hypot(d2.points[k][0] - d1.points[m][0], d2.points[k][1] - d1.points[m][1]) < 42) {
+          d2.points[k][3] = d1.points[m][3];
+          if (d2.points[k][4]) d1.points[m][4] = true;
+          if (d1.points[m][4]) d2.points[k][4] = true;
+        }
+      }
+      if (medDist < Math.max(d1.w, d2.w) * 0.48) {
+        d2.coincidentWith = true;
+        d1.w = Math.max(d1.w, (d1.w + d2.w) * 0.5 + medDist);
+        d1.half = d1.w / 2 + 1.5;
+      } else if (medDist < d1.half + d2.half + 24) {
+        d2.twinOf = true;
+        d1.hasTwinDeck = true;
+      }
+    }
+  }
+  for (const deck of r.bridges) {
+    if (deck.kind === 2) continue;
+    const P = deck.points;
+    for (let i = 0; i + 1 < P.length; i++) {
+      const seg = { deck, a: P[i], b: P[i + 1] };
+      const x0 = Math.min(P[i][0], P[i + 1][0]) - deck.half, x1 = Math.max(P[i][0], P[i + 1][0]) + deck.half;
+      const z0 = Math.min(P[i][1], P[i + 1][1]) - deck.half, z1 = Math.max(P[i][1], P[i + 1][1]) + deck.half;
       for (let bx = Math.floor(x0 / BUCKET); bx <= Math.floor(x1 / BUCKET); bx++) {
         for (let bz = Math.floor(z0 / BUCKET); bz <= Math.floor(z1 / BUCKET); bz++) {
           const key = bucketKey(bx, bz);
@@ -354,12 +420,12 @@ function nearestWater(x, z, reach = 600) {
 // The lowest ground under a footprint: its middle and corners, so a building is never left floating on its low side.
 function groundUnder(x, z, halfW = 0, halfD = 0, rotY = 0) {
   if (!grid) return 0;
-  if (halfW <= 0 && halfD <= 0) return groundHeight(x, z);
+  if (halfW <= 0 && halfD <= 0) return riverbedHeight(x, z);
   const c = Math.cos(rotY), s = Math.sin(rotY);
-  let low = groundHeight(x, z);
+  let low = riverbedHeight(x, z);
   for (const [u, v] of [[-1, -1], [1, -1], [-1, 1], [1, 1], [-1, 0], [1, 0], [0, -1], [0, 1]]) {
     const dx = u * halfW, dz = v * halfD;
-    low = Math.min(low, groundHeight(x + dx * c + dz * s, z - dx * s + dz * c));
+    low = Math.min(low, riverbedHeight(x + dx * c + dz * s, z - dx * s + dz * c));
   }
   return low;
 }

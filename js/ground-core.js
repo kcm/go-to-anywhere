@@ -41,7 +41,7 @@ export function onDeck(r, x, z, h) {
     const u = Math.min(1, Math.max(0, t));
     if (Math.hypot(x - a[0] - ex * u, z - a[1] - ez * u) > deck.half) continue;
     const s = a[2] + (b[2] - a[2]) * u, top = a[3] + (b[3] - a[3]) * u;
-    const w = Math.min(1, Math.min(s, deck.length - s) / 8);
+    const w = Math.min(1, Math.min(s, deck.length - s) / 2);
     return h + (top - h) * w;
   }
   return h;
@@ -154,7 +154,7 @@ export function tessellateLayer(layer, tolerance, minEdge, h) {
 // A layer cut to follow the ground (unless `tolerance` is 0) and every vertex raised by the ground under it. The
 // layer's own position array is raised in place when it isn't cut.
 export function drapeLayer(g, layer, tolerance) {
-  const h = (x, z) => groundOf(g, x, z);
+  const h = (x, z) => riverbedOf(g, x, z);
   const tol = tolerance ? Math.min(tolerance, 0.06) : 0;
   const out = tol ? tessellateLayer(layer, tol, 5, h) : layer;
   const pos = out.attrs.find((a) => a.name === 'position').array;

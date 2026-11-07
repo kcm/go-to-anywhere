@@ -1890,7 +1890,7 @@ function buildCityGrid(scene) {
   // Their painted stalls (parking-stripes.js)
   if (stripeGeos.length) mergeInto(stripeGeos, createStripeMaterial());
   // The river sunk into its banks, with its bridges (river.js)
-  buildRiver(group, [...WATER_POLYGONS, ...cascadeGaps()].map((rings) => flatGeo(rings, 0)), waterMat);
+  buildRiver(group, [...WATER_POLYGONS, ...cascadeGaps()].map((rings) => flatGeo(rings, 0)), waterMat, roadMat);
   // Woods (kind 0: oaks & maples, close together), park and cemetery trees (1) and yard trees (2)
   const treeCov = CITY_PACK.archetypes?.treeCoverage || GEO.sampledArchetypes?.treeCoverage || {};
   const foliageScale = Math.max(0.75, Math.min(1.45, Number(treeCov.foliageScale) || 1.0));

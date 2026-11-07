@@ -30,7 +30,7 @@ function subdivide(geometry, tooBig) {
 const longest = (a, b, c) => Math.max((a[0] - b[0]) ** 2 + (a[2] - b[2]) ** 2, (b[0] - c[0]) ** 2 + (b[2] - c[2]) ** 2,
   (c[0] - a[0]) ** 2 + (c[2] - a[2]) ** 2);
 
-function meshOf(pos, material, name, colors = null) {
+function meshOf(pos, material, name, colors = null, cullDist = 4500) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   if (colors) g.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
@@ -38,12 +38,12 @@ function meshOf(pos, material, name, colors = null) {
   const m = new THREE.Mesh(g, material);
   m.name = name;
   m.receiveShadow = true;
-  m.userData.cullDistance = 1500;
+  m.userData.cullDistance = cullDist;
   return m;
 }
 
 // The banks and bed, and the water over them. `geos` are the water's polygons, flat at y = 0
-function buildRiver(group, geos, waterMat) {
+function buildRiver(group, geos, waterMat, roadMat = null) {
   const river = new THREE.Group();
   river.name = 'HuronRiver';
   river.userData.terrain = 'set';
@@ -149,19 +149,34 @@ function buildRiver(group, geos, waterMat) {
     }
   }
   group.add(river);
-  buildBridges(river);
+  buildBridges(river, roadMat);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Bridges
 // ---------------------------------------------------------------------------------------------------------------------
 
-function buildBridges(group) {
+function buildBridges(group, roadMat = null) {
   const decks = bridgeDecks();
   if (!decks.length) return;
-  const concrete = [], steel = [], wood = [], rail = [];
+  const asphalt = [], concrete = [], steel = [], wood = [], rail = [];
+  const upVec = new THREE.Vector3(0, 1, 0);
+  const dirVec = new THREE.Vector3();
+  const quat = new THREE.Quaternion();
+  const strut = (out, a, b, w) => {
+    const dx = b[0] - a[0], dy = b[1] - a[1], dz = b[2] - a[2];
+    const len = Math.hypot(dx, dy, dz);
+    if (len < 0.05) return;
+    const g = new THREE.BoxGeometry(w, len, w).toNonIndexed();
+    dirVec.set(dx / len, dy / len, dz / len);
+    quat.setFromUnitVectors(upVec, dirVec);
+    g.applyQuaternion(quat);
+    g.translate((a[0] + b[0]) * 0.5, (a[1] + b[1]) * 0.5, (a[2] + b[2]) * 0.5);
+    out.push(...g.attributes.position.array);
+  };
 
   for (const d of decks) {
+    if (d.coincidentWith) continue;
     const P = d.points;
     // each point's way along the bridge and across it (to the left)
     const T = P.map((p, i) => {
@@ -190,6 +205,7 @@ function buildBridges(group) {
     const under = d.kind === 2 ? -0.45 : -1.1; // the deck's underside, under its top
     if (d.kind === 0) {
       const curb = d.w / 2;
+      if (roadMat) along(asphalt, -curb, 0.0, curb, 0.0, false); // the asphalt roadway surface
       along(concrete, curb, 0.0, curb, 0.2);              // the curbs
       along(concrete, curb, 0.2, hw - 0.3, 0.2);          // the sidewalks
       along(concrete, hw - 0.3, 0.2, hw - 0.3, 1.05);     // the parapets
@@ -223,26 +239,194 @@ function buildBridges(group) {
         }
       }
     }
+    // Authored Golden Gate Bridge in landmarks.js supplies its own International Orange towers, cables & piers
+    if (ACTIVE_CITY_ID === 'sanfrancisco' && P[0][0] < -5000) continue;
+
     // Piers in the water (spaced wider on long suspension/harbour crossings), and an abutment where each end meets the bank
-    const wet = P.map((p) => riverDepth(p[0], p[1]) > 0.05);
+    const wet = P.map((p) => p[4] || riverDepth(p[0], p[1]) > 0.05);
     const first = wet.indexOf(true), last = wet.lastIndexOf(true);
     if (first < 0) continue;
     const span = P[last][2] - P[first][2];
+    const sFirst = P[first][2], sLast = P[last][2];
+    const ang = (i) => Math.atan2(T[i][0], T[i][1]);
+    const idxAtS = (targetS) => {
+      let i = first;
+      while (i < last && P[i][2] < targetS) i++;
+      return i;
+    };
+
+    // San Francisco-Oakland Bay Bridge West Span: tandem suspension bridges with 4 X-braced towers & Center Anchorage (W4)
+    if (ACTIVE_CITY_ID === 'sanfrancisco' && d.kind === 0 && span > 1800) {
+      const towerH = 78;
+      const trussDepth = 5.2;
+      // Double-deck stiffening truss chords & side diagonals beneath the roadway
+      along(steel, hw - 0.25, -trussDepth, hw - 0.25, -trussDepth + 0.55);
+      along(steel, -hw + 0.25, -trussDepth, hw - 0.25, -trussDepth, false);
+      for (let i = first; i + 4 <= last; i += 4) {
+        for (const s of [-1, 1]) {
+          const pTop0 = at(i, (hw - 0.25) * s, -0.3);
+          const pBot0 = at(i, (hw - 0.25) * s, -trussDepth);
+          const pTop1 = at(i + 4, (hw - 0.25) * s, -0.3);
+          const pBot1 = at(i + 4, (hw - 0.25) * s, -trussDepth);
+          strut(steel, pBot0, pTop0, 0.32);
+          strut(steel, pBot0, pTop1, 0.28);
+          strut(steel, pTop0, pBot1, 0.28);
+        }
+      }
+      // 4 West Span suspension towers: W6, W5 (East Bay side) and W3, W2 (SF side)
+      const tFracs = [0.115, 0.365, 0.635, 0.885];
+      const tIndices = tFracs.map((f) => idxAtS(sFirst + span * f));
+      for (const ti of tIndices) {
+        const deckY = P[ti][3], bed = riverbedHeight(P[ti][0], P[ti][1]) - 0.6;
+        pier(concrete, ti, hw * 2 + 5.0, 9.5, bed, deckY - trussDepth);
+        for (const s of [-1, 1]) {
+          const [lx, , lz] = at(ti, (hw - 0.35) * s, 0);
+          const leg = new THREE.BoxGeometry(2.6, towerH + trussDepth, 3.4).toNonIndexed();
+          leg.rotateY(ang(ti));
+          leg.translate(lx, deckY - trussDepth * 0.5 + towerH * 0.5, lz);
+          steel.push(...leg.attributes.position.array);
+        }
+        // Horizontal portal struts & signature diagonal X-bracing
+        for (const yOff of [19, 46, towerH - 2.5]) {
+          const beam = new THREE.BoxGeometry(hw * 2 + 0.6, 2.0, 2.2).toNonIndexed();
+          beam.rotateY(ang(ti));
+          beam.translate(P[ti][0], deckY + yOff, P[ti][1]);
+          steel.push(...beam.attributes.position.array);
+        }
+        for (const [y0, y1] of [[2, 18], [20, 45], [47, towerH - 3.5]]) {
+          strut(steel, at(ti, -(hw - 0.35), y0), at(ti, hw - 0.35, y1), 0.75);
+          strut(steel, at(ti, hw - 0.35, y0), at(ti, -(hw - 0.35), y1), 0.75);
+        }
+      }
+      // Concrete Center Anchorage (W4) at mid-span between W5 and W3
+      const mi = idxAtS(sFirst + span * 0.50);
+      const mDeckY = P[mi][3], mBed = riverbedHeight(P[mi][0], P[mi][1]) - 0.6;
+      pier(concrete, mi, hw * 2 + 4.5, 28.0, mBed, mDeckY - 0.2);
+      for (const s of [-1, 1]) {
+        const [ax, , az] = at(mi, (hw - 0.1) * s, 0);
+        const pylon = new THREE.BoxGeometry(3.2, 16.0, 24.0).toNonIndexed();
+        pylon.rotateY(ang(mi));
+        pylon.translate(ax, mDeckY + 8.0, az);
+        concrete.push(...pylon.attributes.position.array);
+      }
+      const mBeam = new THREE.BoxGeometry(hw * 2 + 2.0, 2.4, 8.0).toNonIndexed();
+      mBeam.rotateY(ang(mi));
+      mBeam.translate(P[mi][0], mDeckY + 14.8, P[mi][1]);
+      concrete.push(...mBeam.attributes.position.array);
+
+      // Approach piers near YBI and SF shorelines
+      for (const f of [0.04, 0.96]) {
+        const pi = idxAtS(sFirst + span * f);
+        const top = P[pi][3] - trussDepth, bed = riverbedHeight(P[pi][0], P[pi][1]) - 0.5;
+        if (top - bed > 1) pier(concrete, pi, hw * 2, 3.8, bed, top);
+      }
+
+      // Piecewise parabolic main suspension cables & vertical suspender ropes across both tandem spans
+      const sW6 = P[tIndices[0]][2], sW5 = P[tIndices[1]][2], sW4 = P[mi][2];
+      const sW3 = P[tIndices[2]][2], sW2 = P[tIndices[3]][2];
+      const cableH = (sPos) => {
+        if (sPos <= sW6) {
+          const u = (sPos - sFirst) / Math.max(1, sW6 - sFirst);
+          return 2.5 + (towerH - 3.0) * (u * u);
+        }
+        if (sPos <= sW5) {
+          const mid = 0.5 * (sW6 + sW5), half = Math.max(1, 0.5 * (sW5 - sW6));
+          const u = (sPos - mid) / half;
+          return 5.2 + (towerH - 5.7) * (u * u);
+        }
+        if (sPos <= sW4) {
+          const u = (sW4 - sPos) / Math.max(1, sW4 - sW5);
+          return 14.2 + (towerH - 14.7) * (u * u);
+        }
+        if (sPos <= sW3) {
+          const u = (sPos - sW4) / Math.max(1, sW3 - sW4);
+          return 14.2 + (towerH - 14.7) * (u * u);
+        }
+        if (sPos <= sW2) {
+          const mid = 0.5 * (sW3 + sW2), half = Math.max(1, 0.5 * (sW2 - sW3));
+          const u = (sPos - mid) / half;
+          return 5.2 + (towerH - 5.7) * (u * u);
+        }
+        const u = (sLast - sPos) / Math.max(1, sLast - sW2);
+        return 2.5 + (towerH - 3.0) * (u * u);
+      };
+      const step = 3;
+      for (let i = first; i < last; i += step) {
+        const j = Math.min(last, i + step);
+        const h0 = cableH(P[i][2]), h1 = cableH(P[j][2]);
+        for (const s of [-1, 1]) {
+          const p0 = at(i, (hw - 0.35) * s, h0);
+          const p1 = at(j, (hw - 0.35) * s, h1);
+          strut(steel, p0, p1, 0.62);
+          const base = at(i, (hw - 0.35) * s, 0.2);
+          strut(rail, base, p0, 0.16);
+        }
+      }
+      continue;
+    }
+
+    // San Francisco-Oakland Bay Bridge East Span: single-tower Self-Anchored Suspension (SAS) + twin skyway viaduct piers
+    if (ACTIVE_CITY_ID === 'sanfrancisco' && d.kind === 0 && P[0][0] > 3500 && span > 800) {
+      const nPiers = Math.max(2, Math.floor(span / 135));
+      for (let k = 1; k <= nPiers; k++) {
+        const pi = idxAtS(sFirst + (span * k) / (nPiers + 1));
+        const top = P[pi][3] + under, bed = riverbedHeight(P[pi][0], P[pi][1]) - 0.5;
+        if (top - bed > 1) pier(concrete, pi, hw * 2 - 1.2, 3.4, bed, top);
+      }
+      if (!d.twinOf) {
+        const ti = idxAtS(sFirst + Math.min(340, span * 0.18));
+        const deckY = P[ti][3], bed = riverbedHeight(P[ti][0], P[ti][1]) - 0.6;
+        const towerH = 92;
+        const midOff = d.hasTwinDeck ? -(hw + 5.5) : 0;
+        const [tx, , tz] = at(ti, midOff, 0);
+        const basePier = new THREE.BoxGeometry(16, deckY - bed, 12).toNonIndexed();
+        basePier.rotateY(ang(ti));
+        basePier.translate(tx, (deckY + bed) * 0.5, tz);
+        concrete.push(...basePier.attributes.position.array);
+        const mast = new THREE.BoxGeometry(5.2, towerH + 12, 6.2).toNonIndexed();
+        mast.rotateY(ang(ti));
+        mast.translate(tx, deckY + towerH * 0.5 - 4, tz);
+        concrete.push(...mast.attributes.position.array);
+        const topPt = [tx, deckY + towerH, tz];
+        const iStart = idxAtS(Math.max(sFirst, P[ti][2] - 180));
+        const iEnd = idxAtS(Math.min(sLast, P[ti][2] + 380));
+        const sT = P[ti][2];
+        for (let i = iStart; i < iEnd; i += 3) {
+          const j = Math.min(iEnd, i + 3);
+          const hOf = (idx) => {
+            const sPos = P[idx][2];
+            const u = sPos <= sT
+              ? (sPos - P[iStart][2]) / Math.max(1, sT - P[iStart][2])
+              : (P[iEnd][2] - sPos) / Math.max(1, P[iEnd][2] - sT);
+            return 2.0 + (towerH - 2.5) * (u * u);
+          };
+          const h0 = hOf(i), h1 = hOf(j);
+          for (const s of [-1, 1]) {
+            const c0 = at(i, (midOff * (1 - (h0 / towerH)) + (hw - 0.35) * s * (1 - h0 / towerH)), h0);
+            const c1 = at(j, (midOff * (1 - (h1 / towerH)) + (hw - 0.35) * s * (1 - h1 / towerH)), h1);
+            strut(steel, c0, c1, 0.52);
+            strut(rail, at(i, (hw - 0.35) * s, 0.2), c0, 0.15);
+          }
+        }
+        // Keep topPt referenced for clean linting
+        void topPt;
+      }
+      continue;
+    }
+
     const pierStep = span > 450 ? Math.max(140, span * 0.28) : span > 160 ? 55 : 25;
     const piers = span > 34 ? Math.max(1, Math.floor(span / pierStep)) : 0;
     const towerIndices = [];
     for (let k = 1; k <= piers; k++) {
-      const s = P[first][2] + (span * k) / (piers + 1);
-      let i = first;
-      while (i < last && P[i][2] < s) i++;
+      const s = sFirst + (span * k) / (piers + 1);
+      const i = idxAtS(s);
       const top = P[i][3] + under, bed = riverbedHeight(P[i][0], P[i][1]) - 0.4;
       if (top - bed > 1) pier(concrete, i, hw * 2 - (d.kind === 2 ? 0.4 : 1.0), d.kind === 2 ? 0.5 : (span > 200 ? 3.2 : 1.3), bed, top);
-      if (d.kind === 0 && span > 140 && (k === 1 || k === piers)) towerIndices.push(i);
+      if (d.kind === 0 && span > 140 && ACTIVE_CITY_ID !== 'venice' && (k === 1 || k === piers)) towerIndices.push(i);
     }
-    // Overhead steel portal towers & suspender cables on major road bridge spans (> 140 m)
+    // Overhead steel portal towers, continuous parabolic main cables & vertical suspender cables on major road bridges (> 140 m)
     if (d.kind === 0 && span > 140 && towerIndices.length > 0) {
       const towerH = Math.min(68, Math.max(18, span * 0.11));
-      const ang = (i) => Math.atan2(T[i][0], T[i][1]);
       for (const ti of towerIndices) {
         const deckY = P[ti][3];
         for (const s of [-1, 1]) {
@@ -260,23 +444,33 @@ function buildBridges(group) {
           steel.push(...beam.attributes.position.array);
         }
       }
-      // Vertical suspender cables every ~16 m along the wet span
       const t0 = towerIndices[0];
       const t1 = towerIndices[towerIndices.length - 1];
       const sTower0 = P[t0][2];
       const sTower1 = P[t1][2];
       const midS = (sTower0 + sTower1) * 0.5;
       const halfMain = Math.max(20, (sTower1 - sTower0) * 0.5);
-      for (let i = first; i <= last; i += 4) {
-        const sPos = P[i][2];
-        const norm = t0 !== t1
-          ? Math.min(1.2, Math.abs(sPos - midS) / halfMain)
-          : Math.min(1.2, Math.abs(sPos - sTower0) / (span * 0.5));
-        const cableTop = 2.2 + (towerH - 3.0) * (norm * norm);
+      const cableH = (sPos) => {
+        if (sPos <= sTower0) {
+          const u = (sPos - sFirst) / Math.max(1, sTower0 - sFirst);
+          return 2.0 + (towerH - 2.6) * (u * u);
+        }
+        if (t0 !== t1 && sPos <= sTower1) {
+          const u = (sPos - midS) / halfMain;
+          return 3.0 + (towerH - 3.6) * (u * u);
+        }
+        const u = (sLast - sPos) / Math.max(1, sLast - sTower1);
+        return 2.0 + (towerH - 2.6) * (u * u);
+      };
+      const step = 3;
+      for (let i = first; i < last; i += step) {
+        const j = Math.min(last, i + step);
+        const h0 = cableH(P[i][2]), h1 = cableH(P[j][2]);
         for (const s of [-1, 1]) {
-          const [cx, cy, cz] = at(i, (hw - 0.35) * s, 0);
-          const cGeo = new THREE.BoxGeometry(0.14, cableTop, 0.14).toNonIndexed().translate(cx, cy + cableTop * 0.5, cz);
-          rail.push(...cGeo.attributes.position.array);
+          const p0 = at(i, (hw - 0.35) * s, h0);
+          const p1 = at(j, (hw - 0.35) * s, h1);
+          strut(steel, p0, p1, 0.42);
+          strut(rail, at(i, (hw - 0.35) * s, 0.2), p0, 0.14);
         }
       }
     }
@@ -287,10 +481,14 @@ function buildBridges(group) {
   }
 
   const mat = (color, rough, metal = 0) => new THREE.MeshStandardNodeMaterial({ color, roughness: rough, metalness: metal, side: THREE.DoubleSide });
-  for (const [pos, m, name] of [[concrete, mat(0xb3ada3, 0.9), 'BridgeConcrete'], [steel, mat(0x4d5a5e, 0.6, 0.3), 'BridgeSteel'],
-    [wood, mat(0x8a7356, 0.9), 'BridgeDecks'], [rail, mat(0x2f3436, 0.5, 0.4), 'BridgeRailings']]) {
+  if (asphalt.length && roadMat) {
+    const mesh = meshOf(asphalt, roadMat, 'BridgeAsphalt', null, 6000);
+    group.add(mesh);
+  }
+  for (const [pos, m, name] of [[concrete, mat(0xb3ada3, 0.9), 'BridgeConcrete'], [steel, mat(0x6d777d, 0.55, 0.35), 'BridgeSteel'],
+    [wood, mat(0x8a7356, 0.9), 'BridgeDecks'], [rail, mat(0x3a4044, 0.5, 0.4), 'BridgeRailings']]) {
     if (!pos.length) continue;
-    const mesh = meshOf(pos, m, name);
+    const mesh = meshOf(pos, m, name, null, 6000);
     mesh.castShadow = true;
     group.add(mesh);
   }

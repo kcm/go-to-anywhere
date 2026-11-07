@@ -2378,6 +2378,9 @@ out body;
                         seen_addr.add(key)
                         addresses.extend([r1(cx), r1(cz), num])
 
+        if 'bridge:support' in tags or tags.get('man_made') in ('bridge', 'pier', 'groyne', 'breakwater'):
+            continue
+
         if 'building:part' in tags and tags.get('building:part') != 'no' and 'building' not in tags:
             minx = min(p[0] for p in pts[:-1])
             maxx = max(p[0] for p in pts[:-1])
@@ -2396,7 +2399,7 @@ out body;
                 'color': tags.get('building:colour', ''),
             })
 
-        if 'building' not in tags or tags.get('building') in ('no', 'bridge', 'construction', 'ruins'):
+        if 'building' not in tags or tags.get('building') in ('no', 'bridge', 'construction', 'ruins', 'pylon', 'anchorage', 'pier'):
             continue
 
         try:

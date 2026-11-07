@@ -4,7 +4,7 @@ import { Fn, attribute, float, vec2, vec3, color, fract, floor, abs, clamp, max,
 import { cityUniforms } from './tsl-materials.js';
 import { nearestRoads, districtAt } from './city-config.js';
 import { historicDistrictAt } from './districts.js';
-import { groundHeight } from './terrain.js';
+import { riverbedHeight as groundHeight } from './terrain.js';
 import { GEO } from './city-geodata.js';
 import { CITY_PACK } from './city-packs.js';
 

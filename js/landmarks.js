@@ -2221,66 +2221,65 @@ function buildSanFranciscoLandmarks(scene) {
   // 8. Golden Gate Bridge (227m International Orange Art Deco twin towers + suspension cables + 1,980m deck)
   {
     const g = new THREE.Group();
-    const site = LANDMARK_SITES['Golden Gate Bridge'];
-    const cx = site ? site.x : -6229;
-    const cz = site ? site.z : -3556;
+    const cx = -6360;
+    const cz = -3385;
     const intlOrange = [];
     const piers = [];
     const roadway = [];
     const beacons = [];
 
-    // South & North concrete fender piers
+    // South & North concrete fender piers (aligned along the real 1,280m main span bearing)
     for (const tz of [0, -1280]) {
-      pushBox(piers, 44, 14, 24, 0, 7, tz);
+      pushBox(piers, 44, 14, 24, 0, 5, tz);
       // Stepped Art Deco tower legs
-      for (const lx of [-13.5, 13.5]) {
-        pushBox(intlOrange, 7.5, 95, 9.5, lx, 61.5, tz);
-        pushBox(intlOrange, 6.2, 75, 8.0, lx, 146.5, tz);
-        pushBox(intlOrange, 4.8, 52, 6.6, lx, 210.0, tz);
+      for (const lx of [-15.5, 15.5]) {
+        pushBox(intlOrange, 7.5, 85, 9.5, lx, 52.5, tz);
+        pushBox(intlOrange, 6.2, 65, 8.0, lx, 127.5, tz);
+        pushBox(intlOrange, 4.8, 48, 6.6, lx, 184.0, tz);
       }
-      // 4 Art Deco horizontal portal cross-struts above roadway + 2 below roadway
-      for (const sy of [34, 52, 98, 142, 184, 222]) {
-        pushBox(intlOrange, 27, 5.8, 6.4, 0, sy, tz);
+      // Art Deco horizontal portal cross-struts above & below roadway
+      for (const sy of [16, 48, 88, 128, 166, 202]) {
+        pushBox(intlOrange, 31, 5.2, 6.0, 0, sy, tz);
       }
-      pushCyl(beacons, 0.9, 0.9, 2.5, 8, -13.5, 237, tz);
-      pushCyl(beacons, 0.9, 0.9, 2.5, 8, 13.5, 237, tz);
+      pushCyl(beacons, 0.9, 0.9, 2.5, 8, -15.5, 210, tz);
+      pushCyl(beacons, 0.9, 0.9, 2.5, 8, 15.5, 210, tz);
     }
 
-    // Suspension bridge roadway deck & stiffening truss from Toll Plaza (+650) across South Tower (0) to North Tower (-1280)
-    pushBox(intlOrange, 29, 7.5, 2200, 0, 67, -520);
-    pushBox(roadway, 26, 1.2, 2200, 0, 71.2, -520);
+    // Under-deck stiffening truss from South approach (+420) across South Tower (0) to North Tower (-1280) & North anchorage (-1660)
+    pushBox(intlOrange, 32, 6.5, 2120, 0, 23.2, -620);
 
     // Parabolic main suspension cables & vertical suspender ropes
-    const nSegs = 28;
+    const nSegs = 36;
     for (let i = 0; i < nSegs; i++) {
-      const z0 = 420 - (i / nSegs) * 1960;
-      const z1 = 420 - ((i + 1) / nSegs) * 1960;
+      const z0 = 420 - (i / nSegs) * 2080;
+      const z1 = 420 - ((i + 1) / nSegs) * 2080;
       const zm = 0.5 * (z0 + z1);
       let ym;
       if (zm >= 0) {
         const t = zm / 420;
-        ym = 74 + (1 - t) * (1 - t) * 156;
+        ym = 31 + (1 - t) * (1 - t) * 174;
       } else if (zm >= -1280) {
         const u = (zm + 640) / 640;
-        ym = 76 + u * u * 154;
+        ym = 33 + u * u * 172;
       } else {
-        const t = (-zm - 1280) / 260;
-        ym = 74 + (1 - t) * (1 - t) * 156;
+        const t = (-zm - 1280) / 380;
+        ym = 31 + (1 - t) * (1 - t) * 174;
       }
-      for (const lx of [-13.5, 13.5]) {
+      for (const lx of [-15.5, 15.5]) {
         pushBox(intlOrange, 1.15, 1.15, Math.abs(z1 - z0) + 2, lx, ym, zm);
-        if (ym > 76) {
-          pushCyl(intlOrange, 0.22, 0.22, ym - 71, 6, lx, 71 + (ym - 71) * 0.5, zm);
+        if (ym > 32) {
+          pushCyl(intlOrange, 0.22, 0.22, ym - 28, 6, lx, 28 + (ym - 28) * 0.5, zm);
         }
       }
     }
 
     addMergedMeshes(g, intlOrange, new THREE.MeshStandardNodeMaterial({ color: 0xc0362c, roughness: 0.48, metalness: 0.35 }));
     addMergedMeshes(g, piers, new THREE.MeshStandardNodeMaterial({ color: 0xcbc6ba, roughness: 0.75 }));
-    addMergedMeshes(g, roadway, new THREE.MeshStandardNodeMaterial({ color: 0x33373d, roughness: 0.85 }));
+    if (roadway.length) addMergedMeshes(g, roadway, new THREE.MeshStandardNodeMaterial({ color: 0x33373d, roughness: 0.85 }));
     addMergedMeshes(g, beacons, new THREE.MeshStandardNodeMaterial({ color: 0xff5252, emissive: 0xff1744, emissiveIntensity: 1.5, roughness: 0.2 }), false);
 
     g.position.set(cx, 0, cz);
+    g.rotation.y = 0.2355;
     group.add(g);
   }
 

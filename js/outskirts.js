@@ -1,7 +1,7 @@
 import * as THREE from 'three/webgpu';
 import { positionWorld, vec2, vec3, float, floor, fract, sin, dot, mix, smoothstep, abs, fwidth, min } from 'three/tsl';
 import { TOWN_BOUNDS } from './city-config.js';
-import { groundHeight } from './terrain.js';
+import { riverbedHeight as groundHeight } from './terrain.js';
 
 // Washtenaw County around the detailed city: the real hills and the Huron valley (terrain.js) as farm fields, woodlots
 // and the suburbs' tree cover, out to the fogged horizon. Nothing here is driven on; the city's edge is a lawn border.
