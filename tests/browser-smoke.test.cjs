@@ -214,4 +214,66 @@ describe('Headless Browser Multi-City 3D Runtime Verification', () => {
       }
     });
   }
+
+  it('prevents Street Atlas header and HUD overflow in ?city=rio across desktop and laptop widths', async () => {
+    await cdp.send('Page.navigate', { url: 'about:blank' }, sessionId);
+    await new Promise((r) => setTimeout(r, 150));
+    await cdp.send('Page.navigate', { url: `http://127.0.0.1:${port}/?city=rio&tier=lite` }, sessionId);
+
+    const deadline = Date.now() + 30000;
+    while (Date.now() < deadline) {
+      const evalRes = await cdp.send('Runtime.evaluate', {
+        expression: `Boolean(document.getElementById('loading-overlay')?.classList.contains('hidden'))`,
+        returnByValue: true
+      }, sessionId);
+      if (evalRes.result?.value) break;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+
+    for (const width of [1440, 1280, 1120, 960]) {
+      await cdp.send('Emulation.setDeviceMetricsOverride', {
+        width,
+        height: 800,
+        deviceScaleFactor: 1,
+        mobile: false
+      }, sessionId);
+      await new Promise((r) => setTimeout(r, 100));
+
+      const evalRes = await cdp.send('Runtime.evaluate', {
+        expression: `(() => {
+          const modal = document.getElementById('fullmap-modal');
+          modal.classList.remove('hidden');
+          const newCityBtn = document.getElementById('map-btn-new-city');
+          newCityBtn.hidden = false;
+          const title = document.querySelector('.fullmap-title').getBoundingClientRect();
+          const select = document.getElementById('map-city-select').getBoundingClientRect();
+          const tier = document.getElementById('map-tier-switch').getBoundingClientRect();
+          const newCity = newCityBtn.getBoundingClientRect();
+          const search = document.querySelector('.fullmap-search-wrap').getBoundingClientRect();
+          const close = document.getElementById('close-fullmap-btn').getBoundingClientRect();
+          newCityBtn.hidden = true;
+          const hiddenNewCityW = newCityBtn.getBoundingClientRect().width;
+          return {
+            vw: window.innerWidth,
+            titleRight: Math.round(title.right),
+            selectRight: Math.round(select.right),
+            tierRight: Math.round(tier.right),
+            newCityRight: Math.round(newCity.right),
+            searchRight: Math.round(search.right),
+            closeRight: Math.round(close.right),
+            hiddenNewCityW: Math.round(hiddenNewCityW)
+          };
+        })()`,
+        returnByValue: true
+      }, sessionId);
+
+      const m = evalRes.result?.value;
+      assert.ok(m, `Missing layout metrics at width ${width}`);
+      assert.equal(m.hiddenNewCityW, 0, `Expected [hidden] .new-city-btn to have 0 width at ${width}px`);
+      assert.ok(m.selectRight <= m.titleRight, `Select overflowed .fullmap-title at ${width}px (${m.selectRight} > ${m.titleRight})`);
+      assert.ok(m.tierRight <= m.titleRight, `Tier switch overflowed .fullmap-title at ${width}px (${m.tierRight} > ${m.titleRight})`);
+      assert.ok(m.newCityRight <= m.titleRight, `+ City button overflowed .fullmap-title at ${width}px (${m.newCityRight} > ${m.titleRight})`);
+      assert.ok(m.closeRight <= m.vw, `Close button overflowed viewport at ${width}px (${m.closeRight} > ${m.vw})`);
+    }
+  });
 });
