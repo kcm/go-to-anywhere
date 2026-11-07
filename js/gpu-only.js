@@ -13,6 +13,9 @@ let freedTotal = 0;
 
 export function gpuOnly(root) {
   root.traverse((o) => {
+    if (o.isInstancedMesh && renderer?.backend?.isWebGPUBackend && o.instanceMatrix) {
+      o.instanceMatrix.isStorageInstancedBufferAttribute = true;
+    }
     if (!(o.isMesh || o.isLine || o.isPoints) || o.userData.keepArrays) return;
     const g = o.geometry;
     if (!g || g.userData.keepArrays) return;

@@ -454,7 +454,7 @@ async function initApp() {
       antialias: QUALITY.antialias,
       powerPreference: QUALITY.tier === 'full' ? 'high-performance' : 'low-power',
       reversedDepthBuffer: true,
-      forceWebGL: true
+      forceWebGL: false
     });
     await made.init();
     return made;
@@ -679,8 +679,8 @@ async function initApp() {
 
   if (renderer.backend.isWebGPUBackend) {
     scene.traverse((object) => {
-      if (object.isInstancedMesh) {
-        object.instanceMatrix = new THREE.StorageInstancedBufferAttribute(object.instanceMatrix.array, 16);
+      if (object.isInstancedMesh && object.instanceMatrix) {
+        object.instanceMatrix.isStorageInstancedBufferAttribute = true;
       }
     });
   }
