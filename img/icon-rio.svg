@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b3954"/>
+      <stop offset="55%" stop-color="#087e8b"/>
+      <stop offset="100%" stop-color="#f5cb5c"/>
+    </linearGradient>
+    <linearGradient id="granite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2d6a4f"/>
+      <stop offset="65%" stop-color="#1b4332"/>
+      <stop offset="100%" stop-color="#081c15"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Tropical Sun -->
+  <circle cx="364" cy="148" r="52" fill="#ffe66d" opacity="0.9"/>
+  <!-- Sugarloaf Mountain (Pao de Acucar) Granite Dome on right & Cable Car -->
+  <path d="M248 394 C272 246 314 192 358 192 C402 192 430 264 456 394 Z" fill="url(#granite)" stroke="#081c15" stroke-width="3"/>
+  <!-- Morro da Urca lower dome & Bondinho cable car line -->
+  <path d="M196 394 C216 312 248 282 282 282 C314 282 342 322 360 394 Z" fill="#24553d" stroke="#081c15" stroke-width="3"/>
+  <line x1="176" y1="226" x2="356" y2="194" stroke="#f8f9fa" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <rect x="272" y="206" width="18" height="12" rx="3" fill="#e63946" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- Corcovado Peak on left -->
+  <path d="M42 394 C78 264 114 202 156 196 C198 202 228 278 258 394 Z" fill="url(#granite)" stroke="#081c15" stroke-width="3"/>
+  <!-- Iconic Christ the Redeemer (Cristo Redentor) Statue atop Corcovado -->
+  <g fill="#f8f9fa" stroke="#343a40" stroke-width="3" stroke-linejoin="round">
+    <!-- Pedestal -->
+    <polygon points="136,198 176,198 182,212 130,212" fill="#ced4da"/>
+    <!-- Robe / Torso -->
+    <polygon points="142,110 170,110 176,198 136,198"/>
+    <!-- Outstretched Arms -->
+    <polygon points="88,112 224,112 220,126 172,130 140,130 92,126"/>
+    <!-- Head -->
+    <ellipse cx="156" cy="94" rx="11" ry="14"/>
+    <!-- Sacred Heart & Robe Drape Lines -->
+    <line x1="156" y1="126" x2="156" y2="194" stroke="#adb5bd" stroke-width="2.5"/>
+    <line x1="142" y1="130" x2="168" y2="190" stroke="#adb5bd" stroke-width="2"/>
+  </g>
+  <!-- Guanabara Bay & Iconic Copacabana Portuguese Wave Promenade -->
+  <path d="M0 394 L512 394 L512 512 L0 512 Z" fill="#073b4c"/>
+  <path d="M0 442 Q64 418 128 442 T256 442 T384 442 T512 442 L512 512 L0 512 Z" fill="#f8f9fa"/>
+  <path d="M0 468 Q64 444 128 468 T256 468 T384 468 T512 468 L512 512 L0 512 Z" fill="#1d1e22"/>
+  <path d="M0 494 Q64 470 128 494 T256 494 T384 494 T512 494" fill="none" stroke="#f8f9fa" stroke-width="10"/>
+</svg>

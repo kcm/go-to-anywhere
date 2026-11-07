@@ -1,0 +1,398 @@
+{
+  "city": "tokyo",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 11,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x949fa9",
+    "0x7b8284",
+    "0xa27d79",
+    "0x7d7c78",
+    "0x615a55",
+    "0x808994"
+  ],
+  "sampled_roof_palette": [
+    "0x9b786d",
+    "0x828485",
+    "0x85898b",
+    "0x6b7478"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.16,
+    "streetTreeDensity": 0.65,
+    "streetTreeSpacing": 33.8,
+    "parkTreeDensity": 1.14,
+    "foliageScale": 0.84
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 3800,
+    "footprintCoverage": 0.47,
+    "wallEnclosure": 0.48,
+    "lotInfill": 0.28,
+    "rowhouseAttachment": 0.62,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 0.38,
+    "shrubDensity": 0.54
+  },
+  "neighborhoods": {
+    "tokyo_tower_shiba_park": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x949fa9"
+      ],
+      "sampled_roof_palette": [
+        "0x9b786d"
+      ],
+      "name": "Tokyo Tower & Shiba Park",
+      "center": [
+        -543,
+        767
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.21,
+        "streetTreeDensity": 0.86,
+        "streetTreeSpacing": 25.6,
+        "parkTreeDensity": 1.23,
+        "foliageScale": 0.87
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.45,
+        "wallEnclosure": 0.01,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.62,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.62
+      }
+    },
+    "toranomon_shimbashi": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7b8284"
+      ],
+      "sampled_roof_palette": [
+        "0x828485"
+      ],
+      "name": "Toranomon & Shimbashi",
+      "center": [
+        180,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.61,
+        "streetTreeSpacing": 36.1,
+        "parkTreeDensity": 1.08,
+        "foliageScale": 0.84
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.65,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.62,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.54
+      }
+    },
+    "ginza_yurakucho": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa27d79"
+      ],
+      "sampled_roof_palette": [
+        "0x85898b"
+      ],
+      "name": "Ginza & Yurakucho",
+      "center": [
+        1014,
+        -678
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.05,
+        "streetTreeDensity": 0.33,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.93,
+        "foliageScale": 0.81
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.63,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.31
+      }
+    },
+    "tokyo_station_marunouchi": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7d7c78"
+      ],
+      "sampled_roof_palette": [
+        "0x6b7478"
+      ],
+      "name": "Tokyo Station & Marunouchi",
+      "center": [
+        1421,
+        -1867
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.09,
+        "streetTreeDensity": 0.37,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.01,
+        "foliageScale": 0.81
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.66,
+        "wallEnclosure": 0.69,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.31
+      }
+    },
+    "imperial_palace_chiyoda": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x615a55"
+      ],
+      "sampled_roof_palette": [
+        "0x716c65"
+      ],
+      "name": "Imperial Palace (Chiyoda)",
+      "center": [
+        172,
+        -2289
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.12,
+        "streetTreeDensity": 0.6,
+        "streetTreeSpacing": 36.7,
+        "parkTreeDensity": 1.06,
+        "foliageScale": 0.84
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.44,
+        "wallEnclosure": 0.44,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.62,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.54
+      }
+    },
+    "akasaka_nagatacho": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x808994"
+      ],
+      "sampled_roof_palette": [
+        "0x8f8d85"
+      ],
+      "name": "Akasaka & Nagatacho",
+      "center": [
+        -652,
+        -834
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.65,
+        "streetTreeSpacing": 33.8,
+        "parkTreeDensity": 1.14,
+        "foliageScale": 0.84
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.45,
+        "wallEnclosure": 0.29,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.62,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.54
+      }
+    },
+    "roppongi_hills_azabu": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa09784"
+      ],
+      "sampled_roof_palette": [
+        "0x89908f"
+      ],
+      "name": "Roppongi Hills & Azabu",
+      "center": [
+        -1991,
+        567
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.21,
+        "streetTreeDensity": 0.73,
+        "streetTreeSpacing": 30.1,
+        "parkTreeDensity": 1.23,
+        "foliageScale": 0.85
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.48,
+        "wallEnclosure": 0.38,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.62,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.54
+      }
+    },
+    "hamamatsucho_shiodome": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x787c79"
+      ],
+      "sampled_roof_palette": [
+        "0x726964"
+      ],
+      "name": "Hamamatsucho & Shiodome",
+      "center": [
+        750,
+        720
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.23,
+        "streetTreeDensity": 0.76,
+        "streetTreeSpacing": 28.9,
+        "parkTreeDensity": 1.27,
+        "foliageScale": 0.85
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 3800,
+        "footprintCoverage": 0.44,
+        "wallEnclosure": 0.39,
+        "lotInfill": 0.28,
+        "rowhouseAttachment": 0.62,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.54
+      }
+    }
+  },
+  "landmarks": {
+    "Tokyo Tower": {
+      "form": "lattice_tower",
+      "x": -543,
+      "z": 767,
+      "w": 88,
+      "d": 88,
+      "h": 333,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x775153"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Roppongi Hills Mori Tower": {
+      "form": "stepped_bundled_tube",
+      "x": -1991,
+      "z": 567,
+      "w": 78,
+      "d": 78,
+      "h": 238,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x9c9d9b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Tokyo Station Marunouchi Building": {
+      "form": "canal_palazzo",
+      "x": 1421,
+      "z": -1867,
+      "w": 48,
+      "d": 335,
+      "h": 46,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x787b7a"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

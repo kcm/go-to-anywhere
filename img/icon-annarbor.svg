@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Outer Michigan Maize frame -->
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="#ffcb05"/>
+  <!-- Deep Michigan Blue background -->
+  <rect x="18" y="18" width="220" height="220" rx="44" fill="#00274c"/>
+  <!-- Inner Maize pinstripe -->
+  <rect x="23" y="23" width="210" height="210" rx="40" fill="none" stroke="#ffe47a" stroke-width="3"/>
+
+  <!-- Tree Town Canopy (Left & Right of Burton Tower) -->
+  <g fill="#2b8a56">
+    <circle cx="78" cy="142" r="24"/>
+    <circle cx="94" cy="130" r="22"/>
+    <circle cx="178" cy="142" r="24"/>
+    <circle cx="162" cy="130" r="22"/>
+  </g>
+
+  <!-- Burton Memorial Carillon Bell Tower -->
+  <!-- Stepped Base -->
+  <rect x="102" y="168" width="52" height="16" rx="2" fill="#f5e6c4"/>
+  <!-- Limestone Tower Shaft -->
+  <rect x="108" y="78" width="40" height="92" fill="#ffcb05"/>
+  <!-- Carillon Belfry Section -->
+  <rect x="112" y="56" width="32" height="24" fill="#ffe47a"/>
+  <!-- Pyramidal Copper Roof -->
+  <polygon points="110,56 128,38 146,56" fill="#47b89c"/>
+
+  <!-- Clock Face & Belfry Arches -->
+  <circle cx="128" cy="96" r="10" fill="#00274c"/>
+  <line x1="128" y1="96" x2="128" y2="90" stroke="#ffcb05" stroke-width="2.4" stroke-linecap="round"/>
+  <line x1="128" y1="96" x2="133" y2="98" stroke="#ffcb05" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Belfry Louvers -->
+  <rect x="118" y="61" width="6" height="14" rx="3" fill="#00274c"/>
+  <rect x="132" y="61" width="6" height="14" rx="3" fill="#00274c"/>
+  <!-- Vertical Pilaster Striations -->
+  <line x1="118" y1="114" x2="118" y2="164" stroke="#00274c" stroke-width="2.8"/>
+  <line x1="128" y1="114" x2="128" y2="164" stroke="#00274c" stroke-width="2.8"/>
+  <line x1="138" y1="114" x2="138" y2="164" stroke="#00274c" stroke-width="2.8"/>
+
+  <!-- Huron River / Diag Bars -->
+  <rect x="58" y="196" width="140" height="7" rx="3.5" fill="#ffcb05"/>
+  <rect x="76" y="212" width="104" height="7" rx="3.5" fill="#ffe47a"/>
+</svg>

@@ -1,0 +1,359 @@
+{
+  "city": "rio",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 9,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x656259",
+    "0x6f6f67",
+    "0x72726f",
+    "0x6f7570",
+    "0x85847e",
+    "0xb0b2ae"
+  ],
+  "sampled_roof_palette": [
+    "0x908d87",
+    "0x778381",
+    "0x9fa5a4",
+    "0x9ea09c"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.32,
+    "streetTreeDensity": 0.96,
+    "streetTreeSpacing": 22.9,
+    "parkTreeDensity": 1.38,
+    "foliageScale": 1.13
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 2250,
+    "footprintCoverage": 0.39,
+    "wallEnclosure": 0.43,
+    "lotInfill": 0.32,
+    "rowhouseAttachment": 0.58,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 0.68,
+    "shrubDensity": 1.08
+  },
+  "neighborhoods": {
+    "copacabana": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x656259"
+      ],
+      "sampled_roof_palette": [
+        "0x908d87"
+      ],
+      "name": "Copacabana",
+      "center": [
+        0,
+        420
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 0.95,
+        "streetTreeSpacing": 23.2,
+        "parkTreeDensity": 1.37,
+        "foliageScale": 1.13
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2250,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.57,
+        "lotInfill": 0.32,
+        "rowhouseAttachment": 0.58,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 1.08
+      }
+    },
+    "pao_de_acucar_urca": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x6f6f67"
+      ],
+      "sampled_roof_palette": [
+        "0x778381"
+      ],
+      "name": "Pao de Acucar & Urca",
+      "center": [
+        2534,
+        -1256
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.27,
+        "streetTreeDensity": 0.91,
+        "streetTreeSpacing": 24.2,
+        "parkTreeDensity": 1.33,
+        "foliageScale": 1.13
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2250,
+        "footprintCoverage": 0.32,
+        "wallEnclosure": 0.27,
+        "lotInfill": 0.32,
+        "rowhouseAttachment": 0.58,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 1.08
+      }
+    },
+    "corcovado_cristo_redentor": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x72726f"
+      ],
+      "sampled_roof_palette": [
+        "0x9fa5a4"
+      ],
+      "name": "Corcovado & Cristo Redentor",
+      "center": [
+        -3068,
+        -1123
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.37,
+        "streetTreeDensity": 1.01,
+        "streetTreeSpacing": 21.8,
+        "parkTreeDensity": 1.43,
+        "foliageScale": 1.14
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2250,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.65,
+        "lotInfill": 0.32,
+        "rowhouseAttachment": 0.58,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 1.08
+      }
+    },
+    "ipanema_arpoador": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x6f7570"
+      ],
+      "sampled_roof_palette": [
+        "0x9ea09c"
+      ],
+      "name": "Ipanema & Arpoador",
+      "center": [
+        -2390,
+        2668
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.33,
+        "streetTreeDensity": 0.97,
+        "streetTreeSpacing": 22.7,
+        "parkTreeDensity": 1.39,
+        "foliageScale": 1.14
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2250,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.11,
+        "lotInfill": 0.32,
+        "rowhouseAttachment": 0.58,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 1.08
+      }
+    },
+    "lagoa_rodrigo_de_freitas": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x85847e"
+      ],
+      "sampled_roof_palette": [
+        "0x8b9495"
+      ],
+      "name": "Lagoa Rodrigo de Freitas",
+      "center": [
+        -2842,
+        1345
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.26,
+        "streetTreeDensity": 0.9,
+        "streetTreeSpacing": 24.4,
+        "parkTreeDensity": 1.32,
+        "foliageScale": 1.13
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2250,
+        "footprintCoverage": 0.38,
+        "wallEnclosure": 0.74,
+        "lotInfill": 0.32,
+        "rowhouseAttachment": 0.58,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 1.08
+      }
+    },
+    "botafogo": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb0b2ae"
+      ],
+      "sampled_roof_palette": [
+        "0xb3a28d"
+      ],
+      "name": "Botafogo",
+      "center": [
+        15,
+        -1556
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.25,
+        "streetTreeDensity": 0.89,
+        "streetTreeSpacing": 24.7,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 1.12
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2250,
+        "footprintCoverage": 0.44,
+        "wallEnclosure": 0.69,
+        "lotInfill": 0.32,
+        "rowhouseAttachment": 0.58,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 1.08
+      }
+    },
+    "leme": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [
+        "0xbcc8be"
+      ],
+      "name": "Leme",
+      "center": [
+        965,
+        511
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.32,
+        "streetTreeDensity": 0.96,
+        "streetTreeSpacing": 22.9,
+        "parkTreeDensity": 1.38,
+        "foliageScale": 1.13
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2250,
+        "footprintCoverage": 0.33,
+        "wallEnclosure": 0.0,
+        "lotInfill": 0.32,
+        "rowhouseAttachment": 0.58,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 1.08
+      }
+    }
+  },
+  "landmarks": {
+    "Christ the Redeemer": {
+      "form": "mountain_statue",
+      "x": -3068,
+      "z": -1123,
+      "w": 28,
+      "d": 28,
+      "h": 38,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xe4f4f7"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Sugarloaf Cable Car Station": {
+      "form": "mountain_statue",
+      "x": 2534,
+      "z": -1256,
+      "w": 36,
+      "d": 36,
+      "h": 24,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x828881"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Copacabana Palace": {
+      "form": "canal_palazzo",
+      "x": 210,
+      "z": 240,
+      "w": 110,
+      "d": 54,
+      "h": 32,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x9d9b98"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

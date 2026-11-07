@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b1947"/>
+      <stop offset="52%" stop-color="#6b3054"/>
+      <stop offset="100%" stop-color="#e3824f"/>
+    </linearGradient>
+    <linearGradient id="ferro" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f4eb"/>
+      <stop offset="50%" stop-color="#cfd6df"/>
+      <stop offset="100%" stop-color="#8b95a3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Sunset over Grand Canal -->
+  <circle cx="290" cy="186" r="56" fill="#ffcf70" opacity="0.88"/>
+  <!-- Rialto Bridge & San Marco Campanile silhouette in background -->
+  <polygon points="366,112 382,70 398,112" fill="#3a1c38"/>
+  <rect x="368" y="112" width="28" height="150" fill="#472241"/>
+  <!-- Rialto Bridge iconic portico & arch -->
+  <path d="M88 332 L196 276 L296 276 L424 332 L424 366 L364 366 A118 58 0 0 0 148 366 L88 366 Z" fill="#f0dec2" stroke="#5a352c" stroke-width="4"/>
+  <polygon points="190,276 246,242 302,276" fill="#d96b43" stroke="#5a352c" stroke-width="3.5"/>
+  <!-- Bridge arcade arches -->
+  <g fill="#472241">
+    <path d="M208 276 V258 A8 8 0 0 1 224 258 V276 Z"/>
+    <path d="M236 276 V254 A10 10 0 0 1 256 254 V276 Z"/>
+    <path d="M268 276 V258 A8 8 0 0 1 284 258 V276 Z"/>
+  </g>
+  <!-- Grand Canal lagoon water -->
+  <path d="M0 366 L512 366 L512 512 L0 512 Z" fill="#103c54"/>
+  <!-- Barber-pole mooring Bricole poles -->
+  <g>
+    <rect x="412" y="246" width="14" height="158" rx="4" fill="#f7f1e3" stroke="#2c1d18" stroke-width="2.5"/>
+    <path d="M412 268 L426 258 V276 L412 286 Z M412 304 L426 294 V312 L412 322 Z M412 340 L426 330 V348 L412 358 Z" fill="#b8292f"/>
+  </g>
+  <!-- Iconic Venetian Gondola Prow & Steel Ferro (6 Sestieri prongs) -->
+  <path d="M64 438 Q182 444 338 418 L312 454 Q174 470 54 456 Z" fill="#141821" stroke="#d4af37" stroke-width="3"/>
+  <!-- Ferro del Prua (Swan-neck S-curve with 6 Sestieri teeth + Doge's cap) -->
+  <path d="M116 442 C96 368 94 278 118 214 C132 178 168 152 204 164 C216 168 220 184 202 192 C176 202 152 198 140 220 C128 244 128 338 142 442 Z" fill="url(#ferro)" stroke="#1b222c" stroke-width="3.5"/>
+  <!-- 6 Sestieri teeth -->
+  <g fill="url(#ferro)" stroke="#1b222c" stroke-width="2.5">
+    <rect x="134" y="232" width="38" height="10" rx="2"/>
+    <rect x="132" y="252" width="38" height="10" rx="2"/>
+    <rect x="131" y="272" width="38" height="10" rx="2"/>
+    <rect x="131" y="292" width="38" height="10" rx="2"/>
+    <rect x="132" y="312" width="38" height="10" rx="2"/>
+    <rect x="134" y="332" width="38" height="10" rx="2"/>
+    <!-- Rear Giudecca tooth -->
+    <rect x="86" y="272" width="26" height="10" rx="2"/>
+  </g>
+  <!-- Golden canal ripples -->
+  <path d="M196 402 Q256 394 316 402" fill="none" stroke="#ffcf70" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 482 Q246 472 362 482" fill="none" stroke="#53b3cb" stroke-width="4" stroke-linecap="round"/>
+</svg>

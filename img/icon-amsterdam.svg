@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#102542"/>
+      <stop offset="60%" stop-color="#1d4e78"/>
+      <stop offset="100%" stop-color="#457b9d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Left Canal House: Dutch Stepped Gable (Trapgevel) in warm brick -->
+  <polygon points="76,374 76,204 94,204 94,182 112,182 112,160 130,160 130,138 158,138 158,160 176,160 176,182 194,182 194,204 212,204 212,374" fill="#9e3b2b" stroke="#f5efe2" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Middle Canal House: Neck Gable (Halsgevel) in dark Dutch brick with sandstone scrolls -->
+  <path d="M212,374 V178 H234 V122 Q262,102 290,122 V178 H312 V374 Z" fill="#2c3540" stroke="#f5efe2" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M214,178 Q234,174 234,152 M310,178 Q290,174 290,152" fill="none" stroke="#e8dcc4" stroke-width="5" stroke-linecap="round"/>
+  <!-- Right Canal House: Bell Gable (Klokgevel) in ochre-red brick -->
+  <path d="M312,374 V196 C332,196 340,144 374,144 C408,144 416,196 436,196 V374 Z" fill="#b85332" stroke="#f5efe2" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Hoist beams (Hijsbalken) at top of gables -->
+  <line x1="144" y1="150" x2="144" y2="126" stroke="#f5efe2" stroke-width="4" stroke-linecap="round"/>
+  <line x1="262" y1="126" x2="262" y2="100" stroke="#f5efe2" stroke-width="4" stroke-linecap="round"/>
+  <line x1="374" y1="156" x2="374" y2="130" stroke="#f5efe2" stroke-width="4" stroke-linecap="round"/>
+  <!-- Tall multi-pane Dutch canal windows -->
+  <g fill="#192838" stroke="#f5efe2" stroke-width="3">
+    <!-- Left house windows -->
+    <rect x="100" y="222" width="32" height="50" rx="2"/>
+    <rect x="156" y="222" width="32" height="50" rx="2"/>
+    <rect x="100" y="290" width="32" height="50" rx="2"/>
+    <rect x="156" y="290" width="32" height="50" rx="2"/>
+    <circle cx="144" cy="184" r="12" fill="#f2c14e"/>
+    <!-- Center house windows -->
+    <rect x="230" y="202" width="24" height="48" rx="2"/>
+    <rect x="270" y="202" width="24" height="48" rx="2"/>
+    <rect x="230" y="268" width="24" height="48" rx="2"/>
+    <rect x="270" y="268" width="24" height="48" rx="2"/>
+    <rect x="248" y="142" width="28" height="36" rx="14" fill="#f2c14e"/>
+    <!-- Right house windows -->
+    <rect x="336" y="222" width="30" height="50" rx="2"/>
+    <rect x="382" y="222" width="30" height="50" rx="2"/>
+    <rect x="336" y="290" width="30" height="50" rx="2"/>
+    <rect x="382" y="290" width="30" height="50" rx="2"/>
+    <circle cx="374" cy="184" r="12" fill="#f2c14e"/>
+  </g>
+  <!-- Iconic Amsterdam XXX Saint Andrew's Crosses Banner on Canal Quay -->
+  <rect x="56" y="370" width="400" height="28" rx="4" fill="#d92626"/>
+  <rect x="56" y="379" width="400" height="10" fill="#141414"/>
+  <g stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+    <path d="M206 377 L218 391 M218 377 L206 391"/>
+    <path d="M250 377 L262 391 M262 377 L250 391"/>
+    <path d="M294 377 L306 391 M306 377 L294 391"/>
+  </g>
+  <!-- Arched brick canal bridge & Grachtengordel water -->
+  <path d="M0 398 L512 398 L512 512 L0 512 Z" fill="#0d2b45"/>
+  <path d="M88 432 Q172 420 256 432 T424 432" fill="none" stroke="#76c5e8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M128 466 Q212 454 296 466 T404 466" fill="none" stroke="#f2c14e" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Outer California Gold frame -->
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="#f0af1e"/>
+  <!-- Deep Oakland Forest Green background -->
+  <rect x="18" y="18" width="220" height="220" rx="44" fill="#033228"/>
+  <!-- Inner Pale Gold pinstripe -->
+  <rect x="23" y="23" width="210" height="210" rx="40" fill="none" stroke="#f7dc88" stroke-width="3"/>
+
+  <!-- Classic Oakland Oak Tree Canopy -->
+  <g fill="#f0af1e">
+    <circle cx="108" cy="86" r="28"/>
+    <circle cx="148" cy="86" r="28"/>
+    <circle cx="84" cy="108" r="26"/>
+    <circle cx="172" cy="108" r="26"/>
+    <circle cx="76" cy="126" r="22"/>
+    <circle cx="180" cy="126" r="22"/>
+    <circle cx="128" cy="108" r="36"/>
+    <!-- Trunk & Flared Roots -->
+    <path d="M 116 134 L 140 134 L 143 172 L 162 184 L 94 184 L 113 172 Z"/>
+  </g>
+
+  <!-- Inner Dark Green Branch Cutout (signature Oakland emblem motif) -->
+  <g stroke="#033228" stroke-width="7.5" stroke-linecap="square">
+    <line x1="128" y1="98" x2="128" y2="138"/>
+    <line x1="128" y1="126" x2="107" y2="106"/>
+    <line x1="128" y1="122" x2="149" y2="104"/>
+  </g>
+
+  <!-- Ground / Lake Merritt Horizon Bars -->
+  <rect x="58" y="196" width="140" height="7" rx="3.5" fill="#f0af1e"/>
+  <rect x="76" y="212" width="104" height="7" rx="3.5" fill="#f7d774"/>
+</svg>

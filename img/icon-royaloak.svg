@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Outer Royal Gold frame -->
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="#e5a928"/>
+  <!-- Deep Royal Blue background -->
+  <rect x="18" y="18" width="220" height="220" rx="44" fill="#102344"/>
+  <!-- Inner Pale Gold pinstripe -->
+  <rect x="23" y="23" width="210" height="210" rx="40" fill="none" stroke="#f7de9c" stroke-width="3"/>
+
+  <!-- Left White Oak Leaf (lobed silhouette) -->
+  <path d="M 116 178
+           C 94 170, 74 156, 66 142
+           C 56 142, 46 132, 52 120
+           C 60 112, 70 118, 72 114
+           C 60 104, 56 88, 66 80
+           C 76 72, 88 84, 92 80
+           C 86 68, 92 54, 102 56
+           C 112 58, 114 72, 114 84
+           Z"
+        fill="#2e6f40" stroke="#f7de9c" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Left Oak Leaf central vein -->
+  <path d="M 114 172 C 96 146, 84 114, 96 66" fill="none" stroke="#f7de9c" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- Right White Oak Leaf (lobed silhouette) -->
+  <path d="M 140 178
+           C 162 170, 182 156, 190 142
+           C 200 142, 210 132, 204 120
+           C 196 112, 186 118, 184 114
+           C 196 104, 200 88, 190 80
+           C 180 72, 168 84, 164 80
+           C 170 68, 164 54, 154 56
+           C 144 58, 142 72, 142 84
+           Z"
+        fill="#2e6f40" stroke="#f7de9c" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Right Oak Leaf central vein -->
+  <path d="M 142 172 C 160 146, 172 114, 160 66" fill="none" stroke="#f7de9c" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- Central Royal Oak Acorn -->
+  <!-- Acorn Stem -->
+  <path d="M 128 66 C 128 52, 136 44, 142 40" fill="none" stroke="#f7de9c" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Acorn Nut Body -->
+  <path d="M 94 110
+           L 162 110
+           C 164 148, 150 176, 128 190
+           C 106 176, 92 148, 94 110 Z"
+        fill="#e5a928" stroke="#102344" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Acorn Nut Specular Highlight -->
+  <path d="M 108 120 C 106 144, 114 164, 124 174" fill="none" stroke="#f7de9c" stroke-width="5" stroke-linecap="round"/>
+  <!-- Acorn Basal Tip -->
+  <circle cx="128" cy="191" r="4.5" fill="#f7de9c"/>
+
+  <!-- Acorn Cupule (Cap) -->
+  <path d="M 84 102
+           C 84 78, 104 64, 128 64
+           C 152 64, 172 78, 172 102
+           C 172 111, 164 116, 154 116
+           L 102 116
+           C 92 116, 84 111, 84 102 Z"
+        fill="#b87914" stroke="#f7de9c" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Cupule Cross-Hatch Scales -->
+  <path d="M 96 84 L 112 108 M 112 74 L 132 108 M 132 74 L 152 108 M 150 80 L 162 104" stroke="#102344" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 160 84 L 144 108 M 144 74 L 124 108 M 124 74 L 104 108 M 106 80 L 94 104" stroke="#102344" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Horizon Bars -->
+  <rect x="64" y="204" width="128" height="7" rx="3.5" fill="#e5a928"/>
+  <rect x="84" y="218" width="88" height="6" rx="3" fill="#f7de9c"/>
+</svg>

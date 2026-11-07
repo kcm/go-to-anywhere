@@ -1,0 +1,1738 @@
+{
+  "city": "sanfrancisco",
+  "osm_sampled_walls": {
+    "stucco": 45,
+    "clapboard": 222,
+    "brick": 27,
+    "stone": 1
+  },
+  "osm_sampled_roofs": {
+    "gable": 80,
+    "flat": 152,
+    "hip": 73,
+    "gambrel": 1
+  },
+  "street_view_samples": 20,
+  "building_count": 160838,
+  "avg_height_m": 8.0,
+  "max_height_m": 326.0,
+  "walls": {
+    "clapboard": 0.75,
+    "brick": 0.09,
+    "stone": 0.0,
+    "stucco": 0.15,
+    "shake": 0.0
+  },
+  "roofs": {
+    "flat": 0.5,
+    "hip": 0.24,
+    "gable": 0.26,
+    "gambrel": 0.0
+  },
+  "sampled_facade_palette": [
+    "0xf4f0e6",
+    "0xcccccc",
+    "0x9c3e2e",
+    "0xffccaa",
+    "0xddd2b6",
+    "0xe4cd85"
+  ],
+  "sampled_roof_palette": [
+    "0x9c3e2e",
+    "0xcbb8a3",
+    "0xf4f0e6",
+    "0x8e9498"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.13,
+    "streetTreeDensity": 0.67,
+    "streetTreeSpacing": 32.8,
+    "parkTreeDensity": 1.0,
+    "foliageScale": 0.88
+  },
+  "housingDensity": {
+    "form": "rowhouse",
+    "buildingsPerKm2": 1952,
+    "footprintCoverage": 0.51,
+    "wallEnclosure": 0.66,
+    "lotInfill": 0.15,
+    "rowhouseAttachment": 0.78,
+    "maxHouseHeight": 12.2,
+    "maxHouseFootprint": 310,
+    "porchProbScale": 0.65,
+    "shrubDensity": 0.58
+  },
+  "neighborhoods": {
+    "union_square": {
+      "building_count": 277,
+      "avg_height_m": 22.3,
+      "max_height_m": 105.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xf4f0e6",
+        "0x575551",
+        "0xe4cd85",
+        "0x2b2325",
+        "0x707179",
+        "0x9c8472"
+      ],
+      "sampled_roof_palette": [
+        "0x8d887f"
+      ],
+      "name": "Union Square",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.43,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.86
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 1955,
+        "footprintCoverage": 0.66,
+        "wallEnclosure": 0.75,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.34
+      }
+    },
+    "financial_district": {
+      "building_count": 289,
+      "avg_height_m": 42.1,
+      "max_height_m": 260.0,
+      "walls": null,
+      "roofs": {
+        "flat": 0.67,
+        "hip": 0.17,
+        "gable": 0.17,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [
+        "0xaac3c4",
+        "0xae9a99"
+      ],
+      "sampled_roof_palette": [
+        "0x97938e",
+        "0xaaaaaa"
+      ],
+      "name": "Financial District",
+      "center": [
+        620,
+        -520
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.05,
+        "streetTreeDensity": 0.37,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.87,
+        "foliageScale": 0.85
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 1837,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.1,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.34
+      }
+    },
+    "chinatown": {
+      "building_count": 488,
+      "avg_height_m": 17.4,
+      "max_height_m": 226.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5a4e40",
+        "0xf4f0e6",
+        "0xae9a99"
+      ],
+      "sampled_roof_palette": [
+        "0x949393",
+        "0xaaaaaa"
+      ],
+      "name": "Chinatown",
+      "center": [
+        170,
+        -580
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.05,
+        "streetTreeDensity": 0.37,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.87,
+        "foliageScale": 0.85
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2187,
+        "footprintCoverage": 0.64,
+        "wallEnclosure": 0.98,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.34
+      }
+    },
+    "north_beach_little_italy": {
+      "building_count": 1103,
+      "avg_height_m": 10.0,
+      "max_height_m": 64.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x767a7a",
+        "0xe0e0e0"
+      ],
+      "sampled_roof_palette": [
+        "0x8c8b89"
+      ],
+      "name": "North Beach & Little Italy",
+      "center": [
+        40,
+        -1450
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.12,
+        "streetTreeDensity": 0.66,
+        "streetTreeSpacing": 33.3,
+        "parkTreeDensity": 0.98,
+        "foliageScale": 0.88
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2760,
+        "footprintCoverage": 0.62,
+        "wallEnclosure": 0.77,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "telegraph_hill_coit_tower": {
+      "building_count": 765,
+      "avg_height_m": 10.0,
+      "max_height_m": 64.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x585c67",
+        "0xe0e0e0"
+      ],
+      "sampled_roof_palette": [
+        "0x8b837a"
+      ],
+      "name": "Telegraph Hill & Coit Tower",
+      "center": [
+        150,
+        -1611
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.27,
+        "streetTreeDensity": 0.89,
+        "streetTreeSpacing": 24.7,
+        "parkTreeDensity": 1.23,
+        "foliageScale": 0.91
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2638,
+        "footprintCoverage": 0.35,
+        "wallEnclosure": 0.09,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "russian_hill_lombard_street": {
+      "building_count": 803,
+      "avg_height_m": 10.9,
+      "max_height_m": 62.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x707a7f"
+      ],
+      "sampled_roof_palette": [
+        "0x8e8982"
+      ],
+      "name": "Russian Hill & Lombard Street",
+      "center": [
+        -985,
+        -1578
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.17,
+        "streetTreeDensity": 0.74,
+        "streetTreeSpacing": 29.7,
+        "parkTreeDensity": 1.07,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2436,
+        "footprintCoverage": 0.57,
+        "wallEnclosure": 0.77,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "nob_hill": {
+      "building_count": 465,
+      "avg_height_m": 14.8,
+      "max_height_m": 105.0,
+      "walls": {
+        "clapboard": 0.0,
+        "brick": 1.0,
+        "stone": 0.0,
+        "stucco": 0.0,
+        "shake": 0.0
+      },
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xf4f0e6",
+        "0xab8750",
+        "0xd97a4a",
+        "0xe4cd85",
+        "0x2b2325",
+        "0x707179"
+      ],
+      "sampled_roof_palette": [
+        "0x9f9890"
+      ],
+      "name": "Nob Hill",
+      "center": [
+        -260,
+        -420
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.09,
+        "streetTreeDensity": 0.61,
+        "streetTreeSpacing": 36.1,
+        "parkTreeDensity": 0.94,
+        "foliageScale": 0.88
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2157,
+        "footprintCoverage": 0.62,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "fisherman_s_wharf_pier_39": {
+      "building_count": 99,
+      "avg_height_m": 8.9,
+      "max_height_m": 15.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x4e494d"
+      ],
+      "sampled_roof_palette": [
+        "0x888580"
+      ],
+      "name": "Fisherman's Wharf & Pier 39",
+      "center": [
+        -202,
+        -2312
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.09,
+        "streetTreeDensity": 0.61,
+        "streetTreeSpacing": 36.1,
+        "parkTreeDensity": 0.94,
+        "foliageScale": 0.88
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1770,
+        "footprintCoverage": 0.56,
+        "wallEnclosure": 0.86,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "the_embarcadero_ferry_building": {
+      "building_count": 67,
+      "avg_height_m": 23.4,
+      "max_height_m": 174.0,
+      "walls": null,
+      "roofs": {
+        "flat": 0.67,
+        "hip": 0.25,
+        "gable": 0.08,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [
+        "0x6c624c"
+      ],
+      "sampled_roof_palette": [
+        "0x7c7f7f"
+      ],
+      "name": "The Embarcadero & Ferry Building",
+      "center": [
+        1214,
+        -845
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.64,
+        "streetTreeSpacing": 34.4,
+        "parkTreeDensity": 0.97,
+        "foliageScale": 0.88
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1770,
+        "footprintCoverage": 0.58,
+        "wallEnclosure": 0.91,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "south_of_market_soma": {
+      "building_count": 234,
+      "avg_height_m": 18.0,
+      "max_height_m": 160.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5c5e5a"
+      ],
+      "sampled_roof_palette": [
+        "0xa3a09d"
+      ],
+      "name": "South of Market (SoMa)",
+      "center": [
+        380,
+        520
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.43,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.86
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 1770,
+        "footprintCoverage": 0.62,
+        "wallEnclosure": 0.4,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.34
+      }
+    },
+    "civic_center": {
+      "building_count": 123,
+      "avg_height_m": 21.0,
+      "max_height_m": 126.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Civic Center",
+      "center": [
+        -1038,
+        956
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1770,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "china_basin_oracle_park": {
+      "building_count": 56,
+      "avg_height_m": 16.4,
+      "max_height_m": 73.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "China Basin & Oracle Park",
+      "center": [
+        1601,
+        1034
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1770,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "alamo_square_painted_ladies": {
+      "building_count": 583,
+      "avg_height_m": 10.9,
+      "max_height_m": 38.0,
+      "walls": null,
+      "roofs": {
+        "flat": 0.12,
+        "hip": 0.12,
+        "gable": 0.75,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [
+        "0xd4ceb0",
+        "0x96a55b",
+        "0xe4c78b",
+        "0xcad8d5",
+        "0xc9b085",
+        "0xd5c09d"
+      ],
+      "sampled_roof_palette": [
+        "0x4a4a4a",
+        "0x756759",
+        "0x8f7d67",
+        "0x515151"
+      ],
+      "name": "Alamo Square & Painted Ladies",
+      "center": [
+        -2226,
+        1289
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2198,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "pacific_heights": {
+      "building_count": 673,
+      "avg_height_m": 12.3,
+      "max_height_m": 70.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Pacific Heights",
+      "center": [
+        -1950,
+        -650
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2195,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "japantown": {
+      "building_count": 266,
+      "avg_height_m": 9.7,
+      "max_height_m": 84.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Japantown",
+      "center": [
+        -1850,
+        280
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1905,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "marina_district_palace_of_fine_arts": {
+      "building_count": 437,
+      "avg_height_m": 9.4,
+      "max_height_m": 48.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc78d1d"
+      ],
+      "sampled_roof_palette": [
+        "0x9c3e2e"
+      ],
+      "name": "Marina District & Palace of Fine Arts",
+      "center": [
+        -3598,
+        -1667
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1923,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "the_presidio": {
+      "building_count": 109,
+      "avg_height_m": 7.2,
+      "max_height_m": 12.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "The Presidio",
+      "center": [
+        -5164,
+        -1223
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1770,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "golden_gate_bridge": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Golden Gate Bridge",
+      "center": [
+        -6229,
+        -3556
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2850,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "golden_gate_park": {
+      "building_count": 713,
+      "avg_height_m": 9.1,
+      "max_height_m": 14.0,
+      "walls": null,
+      "roofs": {
+        "flat": 0.56,
+        "hip": 0.22,
+        "gable": 0.22,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [
+        "0x96a1b3"
+      ],
+      "sampled_roof_palette": [
+        "0xcf806d"
+      ],
+      "name": "Golden Gate Park",
+      "center": [
+        -5384,
+        1823
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1863,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "haight_ashbury": {
+      "building_count": 907,
+      "avg_height_m": 10.8,
+      "max_height_m": 17.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Haight-Ashbury",
+      "center": [
+        -3466,
+        2000
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2413,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "the_castro": {
+      "building_count": 1132,
+      "avg_height_m": 9.2,
+      "max_height_m": 16.0,
+      "walls": {
+        "clapboard": 1.0,
+        "brick": 0.0,
+        "stone": 0.0,
+        "stucco": 0.0,
+        "shake": 0.0
+      },
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "The Castro",
+      "center": [
+        -2402,
+        2878
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2623,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "mission_district_dolores_park": {
+      "building_count": 1332,
+      "avg_height_m": 9.3,
+      "max_height_m": 17.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Mission District & Dolores Park",
+      "center": [
+        -1724,
+        3134
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2518,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "twin_peaks_sutro_tower": {
+      "building_count": 788,
+      "avg_height_m": 6.9,
+      "max_height_m": 17.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Twin Peaks & Sutro Tower",
+      "center": [
+        -3537,
+        3979
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2066,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "richmond_district": {
+      "building_count": 1857,
+      "avg_height_m": 8.9,
+      "max_height_m": 23.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Richmond District",
+      "center": [
+        -6200,
+        650
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.23,
+        "streetTreeDensity": 0.98,
+        "streetTreeSpacing": 22.4,
+        "parkTreeDensity": 1.16,
+        "foliageScale": 0.92
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2615,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.51,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.73,
+        "shrubDensity": 0.67
+      }
+    },
+    "sunset_district": {
+      "building_count": 2241,
+      "avg_height_m": 6.5,
+      "max_height_m": 14.0,
+      "walls": {
+        "clapboard": 0.22,
+        "brick": 0.0,
+        "stone": 0.0,
+        "stucco": 0.78,
+        "shake": 0.0
+      },
+      "roofs": {
+        "flat": 0.56,
+        "hip": 0.11,
+        "gable": 0.33,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Sunset District",
+      "center": [
+        -6800,
+        3400
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.23,
+        "streetTreeDensity": 0.98,
+        "streetTreeSpacing": 22.4,
+        "parkTreeDensity": 1.16,
+        "foliageScale": 0.92
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2702,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.51,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.73,
+        "shrubDensity": 0.67
+      }
+    },
+    "lands_end_cliff_house": {
+      "building_count": 11,
+      "avg_height_m": 6.1,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Lands End & Cliff House",
+      "center": [
+        -9361,
+        1034
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2850,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "ocean_beach": {
+      "building_count": 940,
+      "avg_height_m": 7.0,
+      "max_height_m": 13.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xcccccc",
+        "0xddd2b6",
+        "0xad4552",
+        "0xacbcd0",
+        "0x60798f",
+        "0x686671"
+      ],
+      "sampled_roof_palette": [
+        "0xcbb8a3",
+        "0xac9e8c",
+        "0xc5c1b3",
+        "0xae9779"
+      ],
+      "name": "Ocean Beach",
+      "center": [
+        -8947,
+        3056
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2162,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "lake_merced_sf_zoo": {
+      "building_count": 3,
+      "avg_height_m": 6.8,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Lake Merced & SF Zoo",
+      "center": [
+        -7522,
+        7435
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2850,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "potrero_hill_dogpatch": {
+      "building_count": 322,
+      "avg_height_m": 8.3,
+      "max_height_m": 24.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Potrero Hill & Dogpatch",
+      "center": [
+        1672,
+        3378
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1797,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "bayview_hunters_point": {
+      "building_count": 349,
+      "avg_height_m": 8.4,
+      "max_height_m": 17.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Bayview & Hunters Point",
+      "center": [
+        3035,
+        6323
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1770,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "noe_valley": {
+      "building_count": 1248,
+      "avg_height_m": 8.4,
+      "max_height_m": 15.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Noe Valley",
+      "center": [
+        -2350,
+        4250
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.23,
+        "streetTreeDensity": 0.98,
+        "streetTreeSpacing": 22.4,
+        "parkTreeDensity": 1.16,
+        "foliageScale": 0.92
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2731,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.51,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.73,
+        "shrubDensity": 0.67
+      }
+    },
+    "bernal_heights": {
+      "building_count": 1194,
+      "avg_height_m": 7.9,
+      "max_height_m": 65.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Bernal Heights",
+      "center": [
+        -950,
+        4850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    },
+    "excelsior_mclaren_park": {
+      "building_count": 1828,
+      "avg_height_m": 6.5,
+      "max_height_m": 23.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Excelsior & McLaren Park",
+      "center": [
+        -1450,
+        6850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2723,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.67
+      }
+    },
+    "alcatraz_island": {
+      "building_count": 27,
+      "avg_height_m": 9.2,
+      "max_height_m": 26.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc69e7b",
+        "0xf4f0e6"
+      ],
+      "sampled_roof_palette": [
+        "0x8a796e"
+      ],
+      "name": "Alcatraz Island",
+      "center": [
+        -1364,
+        -4312
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.89
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2850,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.6,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.78,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.65,
+        "shrubDensity": 0.58
+      }
+    }
+  },
+  "landmarks": {
+    "Transamerica Pyramid": {
+      "form": "diagrid_prism",
+      "x": 414,
+      "z": -811,
+      "w": 54,
+      "d": 54,
+      "h": 260,
+      "matched_osm_elements": 31,
+      "parts_count": 1,
+      "dominant_materials": [
+        "glass"
+      ],
+      "dominant_roof_shapes": [
+        "pyramidal"
+      ],
+      "sampled_colors": [
+        "0x838179"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "office",
+        "roof:shape": "pyramidal",
+        "tourism": "attraction",
+        "building:material": "glass"
+      },
+      "parts": [
+        {
+          "dx": 12.6,
+          "dz": 1.2,
+          "w": 62.3,
+          "d": 62.4,
+          "h": 260.0,
+          "roofShape": "pyramidal",
+          "color": null
+        }
+      ]
+    },
+    "Salesforce Tower": {
+      "form": "diagrid_prism",
+      "x": 933,
+      "z": -200,
+      "w": 52,
+      "d": 52,
+      "h": 326,
+      "matched_osm_elements": 9,
+      "parts_count": 1,
+      "dominant_materials": [
+        "glass"
+      ],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa6a7a3",
+        "0xffffff"
+      ],
+      "sampled_roof_colors": [
+        "0x8e9498"
+      ],
+      "tags": {
+        "building": "office",
+        "building:material": "glass"
+      },
+      "parts": [
+        {
+          "dx": -5.7,
+          "dz": -8.9,
+          "w": 67.0,
+          "d": 64.0,
+          "h": 326.0,
+          "roofShape": "flat",
+          "color": "0xffffff"
+        }
+      ]
+    },
+    "Ferry Building": {
+      "form": "clock_tower",
+      "x": 1214,
+      "z": -845,
+      "w": 48,
+      "d": 200,
+      "h": 75,
+      "matched_osm_elements": 15,
+      "parts_count": 2,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [
+        "flat",
+        "pyramidal"
+      ],
+      "sampled_colors": [
+        "0x868984"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "office",
+        "tourism": "attraction",
+        "historic": "landmark"
+      },
+      "parts": [
+        {
+          "dx": 104.2,
+          "dz": -14.0,
+          "w": 60.6,
+          "d": 40.6,
+          "h": 11.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": 30.2,
+          "dz": -0.6,
+          "w": 157.2,
+          "d": 190.3,
+          "h": 15.0,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    },
+    "Coit Tower": {
+      "form": "canal_palazzo",
+      "x": 150,
+      "z": -1611,
+      "w": 26,
+      "d": 26,
+      "h": 64,
+      "matched_osm_elements": 13,
+      "parts_count": 1,
+      "dominant_materials": [
+        "concrete"
+      ],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa6a293",
+        "0xe0e0e0"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "office",
+        "building:material": "concrete",
+        "man_made": "tower",
+        "tourism": "viewpoint",
+        "historic": "building"
+      },
+      "parts": [
+        {
+          "dx": -4.0,
+          "dz": 2.2,
+          "w": 22.5,
+          "d": 23.3,
+          "h": 64.0,
+          "roofShape": "flat",
+          "color": "0xe0e0e0"
+        }
+      ]
+    },
+    "San Francisco City Hall": {
+      "form": "dome_palace",
+      "x": -1038,
+      "z": 956,
+      "w": 118,
+      "d": 94,
+      "h": 94,
+      "matched_osm_elements": 10,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa5a099"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "office"
+      },
+      "parts": []
+    },
+    "Chinatown Dragon Gate": {
+      "form": "torii_temple",
+      "x": 167,
+      "z": -311,
+      "w": 22,
+      "d": 10,
+      "h": 32.0,
+      "matched_osm_elements": 30,
+      "parts_count": 0,
+      "dominant_materials": [
+        "brick"
+      ],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x85817c",
+        "0xf4f0e6"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "office"
+      },
+      "parts": []
+    },
+    "Painted Ladies": {
+      "form": "historic_row",
+      "x": -2155,
+      "z": 1289,
+      "w": 28,
+      "d": 62,
+      "h": 24.0,
+      "matched_osm_elements": 67,
+      "parts_count": 7,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [
+        "gabled",
+        "hipped"
+      ],
+      "sampled_colors": [
+        "0x877c74",
+        "0xd4ceb0",
+        "0x96a55b"
+      ],
+      "sampled_roof_colors": [
+        "0x4a4a4a",
+        "0x756759"
+      ],
+      "tags": {
+        "building": "office"
+      },
+      "parts": [
+        {
+          "dx": -18.4,
+          "dz": -23.4,
+          "w": 9.5,
+          "d": 15.8,
+          "h": 9.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": -11.0,
+          "dz": -25.4,
+          "w": 9.7,
+          "d": 15.8,
+          "h": 9.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": 4.8,
+          "dz": -28.7,
+          "w": 10.9,
+          "d": 16.1,
+          "h": 9.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": 33.9,
+          "dz": -1.6,
+          "w": 33.0,
+          "d": 13.8,
+          "h": 12.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": 21.5,
+          "dz": -29.1,
+          "w": 9.4,
+          "d": 15.3,
+          "h": 10.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": -3.1,
+          "dz": -27.2,
+          "w": 8.9,
+          "d": 15.7,
+          "h": 9.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": 11.5,
+          "dz": -28.4,
+          "w": 9.6,
+          "d": 15.3,
+          "h": 9.0,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    },
+    "Golden Gate Bridge": {
+      "form": "suspension_bridge",
+      "x": -6229,
+      "z": -3556,
+      "w": 46,
+      "d": 1980,
+      "h": 227,
+      "matched_osm_elements": 81,
+      "parts_count": 0,
+      "dominant_materials": [
+        "glass"
+      ],
+      "dominant_roof_shapes": [
+        "gabled"
+      ],
+      "sampled_colors": [
+        "0xffccaa",
+        "0x72454a",
+        "0xbf4e3b"
+      ],
+      "sampled_roof_colors": [
+        "0x9c3e2e"
+      ],
+      "tags": {
+        "building": "office"
+      },
+      "parts": []
+    },
+    "Palace of Fine Arts": {
+      "form": "torii_temple",
+      "x": -3598,
+      "z": -1667,
+      "w": 68,
+      "d": 140,
+      "h": 49,
+      "matched_osm_elements": 22,
+      "parts_count": 5,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x999594"
+      ],
+      "sampled_roof_colors": [
+        "0x9c3e2e"
+      ],
+      "tags": {
+        "building": "temple",
+        "tourism": "attraction"
+      },
+      "parts": [
+        {
+          "dx": -0.2,
+          "dz": -2.3,
+          "w": 60.7,
+          "d": 71.9,
+          "h": 48.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": -51.5,
+          "dz": 8.3,
+          "w": 119.4,
+          "d": 269.9,
+          "h": 20.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": 6.2,
+          "dz": 58.7,
+          "w": 79.7,
+          "d": 76.1,
+          "h": 20.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": -12.2,
+          "dz": -63.5,
+          "w": 58.6,
+          "d": 94.1,
+          "h": 19.0,
+          "roofShape": "flat",
+          "color": null
+        },
+        {
+          "dx": 15.3,
+          "dz": -32.0,
+          "w": 4.0,
+          "d": 4.0,
+          "h": 16.0,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    },
+    "Sutro Tower": {
+      "form": "lattice_tower",
+      "x": -3985,
+      "z": 3634,
+      "w": 62,
+      "d": 62,
+      "h": 298,
+      "matched_osm_elements": 14,
+      "parts_count": 0,
+      "dominant_materials": [
+        "concrete",
+        "steel"
+      ],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x534837"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "service",
+        "building:material": "concrete"
+      },
+      "parts": []
+    }
+  }
+}

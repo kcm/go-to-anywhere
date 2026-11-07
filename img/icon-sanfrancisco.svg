@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Outer International Orange frame -->
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="#d94826"/>
+  <!-- Deep Bay Navy background -->
+  <rect x="18" y="18" width="220" height="220" rx="44" fill="#0d2238"/>
+  <!-- Inner California Gold/Cream pinstripe -->
+  <rect x="23" y="23" width="210" height="210" rx="40" fill="none" stroke="#f5d89a" stroke-width="3"/>
+
+  <!-- Subtle Golden Sun / Fog Halo behind the tower -->
+  <circle cx="128" cy="126" r="54" fill="#f5b942" fill-opacity="0.14"/>
+
+  <!-- Parabolic Main Suspension Cables -->
+  <path d="M 28 148 Q 78 144 108 58" fill="none" stroke="#f05a38" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M 148 58 Q 178 144 228 148" fill="none" stroke="#f05a38" stroke-width="5.5" stroke-linecap="round"/>
+
+  <!-- Vertical Suspender Ropes (Left & Right spans) -->
+  <g stroke="#f05a38" stroke-width="2.4" stroke-opacity="0.88">
+    <line x1="48" y1="146" x2="48" y2="162"/>
+    <line x1="68" y1="136" x2="68" y2="162"/>
+    <line x1="88" y1="112" x2="88" y2="162"/>
+    <line x1="168" y1="112" x2="168" y2="162"/>
+    <line x1="188" y1="136" x2="188" y2="162"/>
+    <line x1="208" y1="146" x2="208" y2="162"/>
+  </g>
+
+  <!-- Golden Gate Bridge Art Deco Tower Legs (stepped taper) -->
+  <!-- Left Leg -->
+  <path d="M 101 182 L 104 54 L 114 54 L 116 182 Z" fill="#e84e2c"/>
+  <!-- Right Leg -->
+  <path d="M 140 182 L 142 54 L 152 54 L 155 182 Z" fill="#e84e2c"/>
+  <!-- Tower Top Finials -->
+  <rect x="105" y="48" width="8" height="7" rx="1.5" fill="#f5b942"/>
+  <rect x="143" y="48" width="8" height="7" rx="1.5" fill="#f5b942"/>
+
+  <!-- Art Deco Horizontal Portal Struts above roadway -->
+  <rect x="105" y="64" width="46" height="7" rx="1" fill="#e84e2c"/>
+  <rect x="104" y="88" width="48" height="7" rx="1" fill="#e84e2c"/>
+  <rect x="103" y="114" width="50" height="7" rx="1" fill="#e84e2c"/>
+  <rect x="102" y="140" width="52" height="7" rx="1" fill="#e84e2c"/>
+
+  <!-- Art Deco Vertical Deco Ribs inside portal struts -->
+  <g stroke="#0d2238" stroke-width="2.2">
+    <line x1="122" y1="64" x2="122" y2="71"/>
+    <line x1="128" y1="64" x2="128" y2="71"/>
+    <line x1="134" y1="64" x2="134" y2="71"/>
+    <line x1="122" y1="88" x2="122" y2="95"/>
+    <line x1="128" y1="88" x2="128" y2="95"/>
+    <line x1="134" y1="88" x2="134" y2="95"/>
+    <line x1="122" y1="114" x2="122" y2="121"/>
+    <line x1="128" y1="114" x2="128" y2="121"/>
+    <line x1="134" y1="114" x2="134" y2="121"/>
+  </g>
+
+  <!-- Roadway Deck Truss -->
+  <rect x="28" y="160" width="200" height="8" rx="3" fill="#f05a38"/>
+  <rect x="28" y="165" width="200" height="3" rx="1.5" fill="#b83518"/>
+
+  <!-- Concrete Pier Base -->
+  <path d="M 94 182 L 162 182 L 168 190 L 88 190 Z" fill="#e8d5b5"/>
+
+  <!-- Golden Gate Strait Water Lines -->
+  <rect x="56" y="198" width="144" height="7" rx="3.5" fill="#f5b942"/>
+  <rect x="76" y="213" width="104" height="7" rx="3.5" fill="#f5d89a"/>
+</svg>

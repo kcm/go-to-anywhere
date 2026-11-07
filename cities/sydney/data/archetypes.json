@@ -1,0 +1,435 @@
+{
+  "city": "sydney",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 12,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x5a5758",
+    "0x222b30",
+    "0x454747",
+    "0x7c6a6b",
+    "0x978875",
+    "0x7a807c"
+  ],
+  "sampled_roof_palette": [
+    "0x9c9d9c",
+    "0xc6b8b0",
+    "0x9c9e9d",
+    "0xb5aea6"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.18,
+    "streetTreeDensity": 0.8,
+    "streetTreeSpacing": 27.5,
+    "parkTreeDensity": 1.08,
+    "foliageScale": 1.02
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 1950,
+    "footprintCoverage": 0.45,
+    "wallEnclosure": 0.68,
+    "lotInfill": 0.3,
+    "rowhouseAttachment": 0.52,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 0.88,
+    "shrubDensity": 0.92
+  },
+  "neighborhoods": {
+    "circular_quay": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5a5758"
+      ],
+      "sampled_roof_palette": [
+        "0x9c9d9c"
+      ],
+      "name": "Circular Quay",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.22,
+        "streetTreeDensity": 0.85,
+        "streetTreeSpacing": 25.9,
+        "parkTreeDensity": 1.13,
+        "foliageScale": 1.03
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.45,
+        "wallEnclosure": 0.5,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.52,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.88,
+        "shrubDensity": 0.92
+      }
+    },
+    "sydney_opera_house": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x222b30"
+      ],
+      "sampled_roof_palette": [
+        "0xc6b8b0"
+      ],
+      "name": "Sydney Opera House",
+      "center": [
+        388,
+        -534
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.74,
+        "streetTreeSpacing": 29.7,
+        "parkTreeDensity": 1.02,
+        "foliageScale": 1.02
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.96,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.52,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.88,
+        "shrubDensity": 0.92
+      }
+    },
+    "the_rocks": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x454747"
+      ],
+      "sampled_roof_palette": [
+        "0x9c9e9d"
+      ],
+      "name": "The Rocks",
+      "center": [
+        -231,
+        -244
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.28,
+        "streetTreeDensity": 0.93,
+        "streetTreeSpacing": 23.7,
+        "parkTreeDensity": 1.2,
+        "foliageScale": 1.04
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.48,
+        "wallEnclosure": 0.53,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.88,
+        "shrubDensity": 0.92
+      }
+    },
+    "barangaroo": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7c6a6b"
+      ],
+      "sampled_roof_palette": [
+        "0xb5aea6"
+      ],
+      "name": "Barangaroo",
+      "center": [
+        -814,
+        -44
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.74,
+        "streetTreeSpacing": 29.7,
+        "parkTreeDensity": 1.02,
+        "foliageScale": 1.02
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.44,
+        "wallEnclosure": 0.23,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.52,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.88,
+        "shrubDensity": 0.92
+      }
+    },
+    "sydney_cbd": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x978875"
+      ],
+      "sampled_roof_palette": [
+        "0xa8a9a8"
+      ],
+      "name": "Sydney CBD",
+      "center": [
+        -175,
+        680
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.08,
+        "streetTreeDensity": 0.46,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.96,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.56,
+        "wallEnclosure": 0.9,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.57,
+        "shrubDensity": 0.53
+      }
+    },
+    "darling_harbour": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7a807c"
+      ],
+      "sampled_roof_palette": [
+        "0x9b9899"
+      ],
+      "name": "Darling Harbour",
+      "center": [
+        -860,
+        1056
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.18,
+        "streetTreeDensity": 0.8,
+        "streetTreeSpacing": 27.5,
+        "parkTreeDensity": 1.08,
+        "foliageScale": 1.02
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.31,
+        "wallEnclosure": 0.27,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.52,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.88,
+        "shrubDensity": 0.92
+      }
+    },
+    "royal_botanic_garden": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc77e17"
+      ],
+      "sampled_roof_palette": [
+        "0xb4afa9"
+      ],
+      "name": "Royal Botanic Garden",
+      "center": [
+        650,
+        750
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.14,
+        "streetTreeSpacing": 19.3,
+        "parkTreeDensity": 1.23,
+        "foliageScale": 1.07
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.52,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.88,
+        "shrubDensity": 1.06
+      }
+    },
+    "woolloomooloo_potts_point": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x683332"
+      ],
+      "sampled_roof_palette": [
+        "0xa3a3a3"
+      ],
+      "name": "Woolloomooloo & Potts Point",
+      "center": [
+        1156,
+        1467
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.17,
+        "streetTreeDensity": 0.79,
+        "streetTreeSpacing": 27.8,
+        "parkTreeDensity": 1.07,
+        "foliageScale": 1.02
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.48,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.52,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.88,
+        "shrubDensity": 0.92
+      }
+    },
+    "milsons_point_kirribilli": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7d7e7c"
+      ],
+      "sampled_roof_palette": [
+        "0x8a8078"
+      ],
+      "name": "Milsons Point & Kirribilli",
+      "center": [
+        -55,
+        -2034
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.2,
+        "streetTreeDensity": 0.83,
+        "streetTreeSpacing": 26.5,
+        "parkTreeDensity": 1.1,
+        "foliageScale": 1.03
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1950,
+        "footprintCoverage": 0.47,
+        "wallEnclosure": 0.72,
+        "lotInfill": 0.3,
+        "rowhouseAttachment": 0.52,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.88,
+        "shrubDensity": 0.92
+      }
+    }
+  },
+  "landmarks": {
+    "Sydney Opera House": {
+      "form": "opera_sails",
+      "x": 388,
+      "z": -534,
+      "w": 120,
+      "d": 185,
+      "h": 67,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x72594c"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Sydney Harbour Bridge": {
+      "form": "arch_bridge",
+      "x": -120,
+      "z": -1045,
+      "w": 52,
+      "d": 1149,
+      "h": 134,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x2f3e4f"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Sydney Tower Eye": {
+      "form": "observation_needle",
+      "x": -175,
+      "z": 989,
+      "w": 56,
+      "d": 56,
+      "h": 309,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x807c6f"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

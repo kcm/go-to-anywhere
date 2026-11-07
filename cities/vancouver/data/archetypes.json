@@ -1,0 +1,451 @@
+{
+  "city": "vancouver",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 12,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x5e5f5d",
+    "0xa1a7a4",
+    "0xa7a09d",
+    "0x4e565c",
+    "0xa1a3a4",
+    "0x807f81"
+  ],
+  "sampled_roof_palette": [
+    "0xabaaa2",
+    "0xa59c94",
+    "0x94979d",
+    "0x6c888a"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.26,
+    "streetTreeDensity": 1.06,
+    "streetTreeSpacing": 20.8,
+    "parkTreeDensity": 1.27,
+    "foliageScale": 1.16
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 1850,
+    "footprintCoverage": 0.37,
+    "wallEnclosure": 0.65,
+    "lotInfill": 0.26,
+    "rowhouseAttachment": 0.32,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 1.04,
+    "shrubDensity": 1.18
+  },
+  "neighborhoods": {
+    "downtown_robson_square": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5e5f5d"
+      ],
+      "sampled_roof_palette": [
+        "0xabaaa2"
+      ],
+      "name": "Downtown & Robson Square",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.17,
+        "streetTreeDensity": 0.65,
+        "streetTreeSpacing": 33.8,
+        "parkTreeDensity": 1.18,
+        "foliageScale": 1.1
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.7,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 0.68
+      }
+    },
+    "canada_place_waterfront": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa1a7a4"
+      ],
+      "sampled_roof_palette": [
+        "0xa59c94"
+      ],
+      "name": "Canada Place & Waterfront",
+      "center": [
+        480,
+        -689
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.18,
+        "streetTreeDensity": 0.97,
+        "streetTreeSpacing": 22.7,
+        "parkTreeDensity": 1.19,
+        "foliageScale": 1.15
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.33,
+        "wallEnclosure": 0.74,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.32,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.04,
+        "shrubDensity": 1.18
+      }
+    },
+    "coal_harbour": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa7a09d"
+      ],
+      "sampled_roof_palette": [
+        "0x94979d"
+      ],
+      "name": "Coal Harbour",
+      "center": [
+        -760,
+        -680
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.19,
+        "streetTreeDensity": 0.98,
+        "streetTreeSpacing": 22.4,
+        "parkTreeDensity": 1.2,
+        "foliageScale": 1.15
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.43,
+        "wallEnclosure": 0.97,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.32,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.04,
+        "shrubDensity": 1.18
+      }
+    },
+    "stanley_park": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x4e565c"
+      ],
+      "sampled_roof_palette": [
+        "0x6c888a"
+      ],
+      "name": "Stanley Park",
+      "center": [
+        -2150,
+        -1820
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.56,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.55,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.28,
+        "wallEnclosure": 0.39,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.32,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.04,
+        "shrubDensity": 1.36
+      }
+    },
+    "west_end_english_bay": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa1a3a4"
+      ],
+      "sampled_roof_palette": [
+        "0x9c988e"
+      ],
+      "name": "West End & English Bay",
+      "center": [
+        -1450,
+        280
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.29,
+        "streetTreeDensity": 1.1,
+        "streetTreeSpacing": 20.0,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 1.16
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.81,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.32,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.04,
+        "shrubDensity": 1.18
+      }
+    },
+    "gastown_chinatown": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x807f81"
+      ],
+      "sampled_roof_palette": [
+        "0x788695"
+      ],
+      "name": "Gastown & Chinatown",
+      "center": [
+        982,
+        -100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.6,
+        "streetTreeSpacing": 36.7,
+        "parkTreeDensity": 1.12,
+        "foliageScale": 1.09
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.82,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.68,
+        "shrubDensity": 0.68
+      }
+    },
+    "yaletown": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x656461"
+      ],
+      "sampled_roof_palette": [
+        "0x9b9a97"
+      ],
+      "name": "Yaletown",
+      "center": [
+        80,
+        950
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.29,
+        "streetTreeDensity": 1.1,
+        "streetTreeSpacing": 20.0,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 1.16
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.36,
+        "wallEnclosure": 0.51,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.32,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.04,
+        "shrubDensity": 1.18
+      }
+    },
+    "granville_island_kitsilano": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x6e7068"
+      ],
+      "sampled_roof_palette": [
+        "0x9a9c9b"
+      ],
+      "name": "Granville Island & Kitsilano",
+      "center": [
+        -996,
+        2001
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.42,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.43,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.28,
+        "wallEnclosure": 0.2,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.21,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.16,
+        "shrubDensity": 1.36
+      }
+    },
+    "science_world_false_creek": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x6e6d6e"
+      ],
+      "sampled_roof_palette": [
+        "0x9f998d"
+      ],
+      "name": "Science World & False Creek",
+      "center": [
+        1309,
+        1212
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.26,
+        "streetTreeDensity": 1.06,
+        "streetTreeSpacing": 20.8,
+        "parkTreeDensity": 1.27,
+        "foliageScale": 1.16
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1850,
+        "footprintCoverage": 0.38,
+        "wallEnclosure": 0.71,
+        "lotInfill": 0.26,
+        "rowhouseAttachment": 0.32,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.04,
+        "shrubDensity": 1.18
+      }
+    }
+  },
+  "landmarks": {
+    "Canada Place": {
+      "form": "opera_sails",
+      "x": 480,
+      "z": -689,
+      "w": 95,
+      "d": 260,
+      "h": 38,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x344358"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Harbour Centre": {
+      "form": "observation_needle",
+      "x": 610,
+      "z": -310,
+      "w": 48,
+      "d": 48,
+      "h": 168,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x454442"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Science World": {
+      "form": "canal_palazzo",
+      "x": 1309,
+      "z": 1212,
+      "w": 62,
+      "d": 62,
+      "h": 48,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x35404a"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Lions Gate Bridge": {
+      "form": "suspension_bridge",
+      "x": -2734,
+      "z": -3650,
+      "w": 32,
+      "d": 1200,
+      "h": 111,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

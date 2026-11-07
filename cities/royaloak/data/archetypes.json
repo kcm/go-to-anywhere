@@ -1,0 +1,864 @@
+{
+  "city": "royaloak",
+  "osm_sampled_walls": {
+    "brick": 2
+  },
+  "osm_sampled_roofs": {
+    "gable": 129,
+    "hip": 49,
+    "flat": 38,
+    "gambrel": 2
+  },
+  "street_view_samples": 21,
+  "building_count": 54091,
+  "avg_height_m": 8.5,
+  "max_height_m": 63.0,
+  "walls": null,
+  "roofs": {
+    "flat": 0.17,
+    "hip": 0.22,
+    "gable": 0.59,
+    "gambrel": 0.01
+  },
+  "sampled_facade_palette": [
+    "0xadb1b2",
+    "0x92918c",
+    "0x848275",
+    "0x75766f",
+    "0x4e4842",
+    "0x999389"
+  ],
+  "sampled_roof_palette": [
+    "0x8e9498",
+    "0x7b5640",
+    "0x2e3136",
+    "0x9c3e2e"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.33,
+    "streetTreeDensity": 1.2,
+    "streetTreeSpacing": 18.3,
+    "parkTreeDensity": 1.22,
+    "foliageScale": 1.18
+  },
+  "housingDensity": {
+    "form": "suburban",
+    "buildingsPerKm2": 1351,
+    "footprintCoverage": 0.28,
+    "wallEnclosure": 0.43,
+    "lotInfill": 0.2,
+    "rowhouseAttachment": 0.04,
+    "maxHouseHeight": 9.8,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 1.22,
+    "shrubDensity": 1.28
+  },
+  "neighborhoods": {
+    "downtown_royal_oak": {
+      "building_count": 205,
+      "avg_height_m": 8.5,
+      "max_height_m": 63.0,
+      "walls": null,
+      "roofs": {
+        "flat": 0.89,
+        "hip": 0.0,
+        "gable": 0.0,
+        "gambrel": 0.11
+      },
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [
+        "0x9aa1ad"
+      ],
+      "name": "Downtown Royal Oak",
+      "center": [
+        0,
+        80
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.68,
+        "streetTreeSpacing": 32.4,
+        "parkTreeDensity": 1.08,
+        "foliageScale": 1.11
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1002,
+        "footprintCoverage": 0.4,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.79,
+        "shrubDensity": 0.74
+      }
+    },
+    "centennial_commons": {
+      "building_count": 193,
+      "avg_height_m": 8.5,
+      "max_height_m": 52.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xadb1b2"
+      ],
+      "sampled_roof_palette": [
+        "0x9fa5ac"
+      ],
+      "name": "Centennial Commons",
+      "center": [
+        190,
+        40
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.23,
+        "streetTreeDensity": 1.08,
+        "streetTreeSpacing": 20.4,
+        "parkTreeDensity": 1.14,
+        "foliageScale": 1.16
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1051,
+        "footprintCoverage": 0.27,
+        "wallEnclosure": 0.16,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.28
+      }
+    },
+    "shrine_of_the_little_flower": {
+      "building_count": 322,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x92918c"
+      ],
+      "sampled_roof_palette": [
+        "0x9fa9b0"
+      ],
+      "name": "Shrine of the Little Flower",
+      "center": [
+        -2154,
+        -1624
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.27,
+        "streetTreeDensity": 1.13,
+        "streetTreeSpacing": 19.5,
+        "parkTreeDensity": 1.17,
+        "foliageScale": 1.17
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1231,
+        "footprintCoverage": 0.36,
+        "wallEnclosure": 0.91,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.28
+      }
+    },
+    "detroit_zoo": {
+      "building_count": 268,
+      "avg_height_m": 7.8,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x848275"
+      ],
+      "sampled_roof_palette": [
+        "0xa6a1a0"
+      ],
+      "name": "Detroit Zoo",
+      "center": [
+        -850,
+        1420
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.59,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.45,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1031,
+        "footprintCoverage": 0.26,
+        "wallEnclosure": 0.22,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.38
+      }
+    },
+    "rackham_golf_course": {
+      "building_count": 404,
+      "avg_height_m": 8.3,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x75766f"
+      ],
+      "sampled_roof_palette": [
+        "0x9d9fa1"
+      ],
+      "name": "Rackham Golf Course",
+      "center": [
+        -1050,
+        1750
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.62,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.48,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1294,
+        "footprintCoverage": 0.22,
+        "wallEnclosure": 0.19,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.38
+      }
+    },
+    "red_run_golf_club": {
+      "building_count": 292,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [
+        "0x799190"
+      ],
+      "name": "Red Run Golf Club",
+      "center": [
+        850,
+        -1950
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.62,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.48,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1053,
+        "footprintCoverage": 0.18,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.38
+      }
+    },
+    "vinsetta": {
+      "building_count": 598,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x4e4842"
+      ],
+      "sampled_roof_palette": [
+        "0x898f97"
+      ],
+      "name": "Vinsetta",
+      "center": [
+        -950,
+        -1150
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.33,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.22,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1540,
+        "footprintCoverage": 0.23,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.32,
+        "shrubDensity": 1.38
+      }
+    },
+    "huntington_woods": {
+      "building_count": 847,
+      "avg_height_m": 8.4,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": {
+        "flat": 0.0,
+        "hip": 0.22,
+        "gable": 0.78,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [
+        "0x999389"
+      ],
+      "sampled_roof_palette": [
+        "0x9197a2"
+      ],
+      "name": "Huntington Woods",
+      "center": [
+        -1850,
+        650
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.43,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.31,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1697,
+        "footprintCoverage": 0.25,
+        "wallEnclosure": 0.55,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.32,
+        "shrubDensity": 1.38
+      }
+    },
+    "pleasant_ridge": {
+      "building_count": 316,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x545f60"
+      ],
+      "sampled_roof_palette": [],
+      "name": "Pleasant Ridge",
+      "center": [
+        -350,
+        1850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.52,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.39,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1182,
+        "footprintCoverage": 0.19,
+        "wallEnclosure": 0.38,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.32,
+        "shrubDensity": 1.38
+      }
+    },
+    "berkley": {
+      "building_count": 563,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x919497"
+      ],
+      "sampled_roof_palette": [
+        "0x868e96"
+      ],
+      "name": "Berkley",
+      "center": [
+        -2600,
+        -1200
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.37,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.26,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1390,
+        "footprintCoverage": 0.26,
+        "wallEnclosure": 0.79,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.32,
+        "shrubDensity": 1.38
+      }
+    },
+    "normandy_oaks_park": {
+      "building_count": 323,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Normandy Oaks Park",
+      "center": [
+        -2550,
+        -4150
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.59,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.45,
+        "foliageScale": 1.2
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1130,
+        "footprintCoverage": 0.18,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.32,
+        "shrubDensity": 1.38
+      }
+    },
+    "royal_oak_high_school": {
+      "building_count": 84,
+      "avg_height_m": 8.4,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Royal Oak High School",
+      "center": [
+        -1350,
+        -3850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.35,
+        "streetTreeDensity": 1.23,
+        "streetTreeSpacing": 17.9,
+        "parkTreeDensity": 1.24,
+        "foliageScale": 1.18
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 984,
+        "footprintCoverage": 0.21,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.28
+      }
+    },
+    "14_mile_crooks_north_royal_oak": {
+      "building_count": 351,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": {
+        "flat": 0.0,
+        "hip": 0.57,
+        "gable": 0.43,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "14 Mile & Crooks (North Royal Oak)",
+      "center": [
+        -1600,
+        -4830
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.35,
+        "streetTreeDensity": 1.23,
+        "streetTreeSpacing": 17.9,
+        "parkTreeDensity": 1.24,
+        "foliageScale": 1.18
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1160,
+        "footprintCoverage": 0.21,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.28
+      }
+    },
+    "14_mile_rochester": {
+      "building_count": 310,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "14 Mile & Rochester",
+      "center": [
+        830,
+        -4830
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.35,
+        "streetTreeDensity": 1.23,
+        "streetTreeSpacing": 17.9,
+        "parkTreeDensity": 1.24,
+        "foliageScale": 1.18
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1174,
+        "footprintCoverage": 0.21,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.22,
+        "shrubDensity": 1.28
+      }
+    }
+  },
+  "landmarks": {
+    "Shrine of the Little Flower": {
+      "form": "canal_palazzo",
+      "x": -2154,
+      "z": -1624,
+      "w": 124,
+      "d": 64,
+      "h": 38,
+      "matched_osm_elements": 32,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xbec2c4"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "National Shrine of the Little Flower Basilica": {
+      "form": "cathedral_spires",
+      "x": -2154,
+      "z": -1624,
+      "w": 124,
+      "d": 64,
+      "h": 38,
+      "matched_osm_elements": 32,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xbec2c4"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Royal Oak Music Theatre": {
+      "form": "canal_palazzo",
+      "x": -196,
+      "z": 301,
+      "w": 35,
+      "d": 38,
+      "h": 63.0,
+      "matched_osm_elements": 14,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [
+        "flat"
+      ],
+      "sampled_colors": [
+        "0x797b79"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "apartments",
+        "roof:shape": "flat"
+      },
+      "parts": []
+    },
+    "Detroit Zoo Water Tower": {
+      "form": "canal_palazzo",
+      "x": -256,
+      "z": 1460,
+      "w": 23,
+      "d": 23,
+      "h": 42,
+      "matched_osm_elements": 1,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x453a2a"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Royal Oak City Hall": {
+      "form": "dome_palace",
+      "x": 253,
+      "z": 86,
+      "w": 38,
+      "d": 55,
+      "h": 14,
+      "matched_osm_elements": 4,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xb3a99a"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "civic"
+      },
+      "parts": []
+    },
+    "Royal Oak Farmers Market": {
+      "form": "canal_palazzo",
+      "x": 284,
+      "z": 8,
+      "w": 41,
+      "d": 69,
+      "h": 10,
+      "matched_osm_elements": 7,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xaaa9a5"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "yes"
+      },
+      "parts": []
+    },
+    "Royal Oak Amtrak Station": {
+      "form": "canal_palazzo",
+      "x": -240,
+      "z": 37,
+      "w": 33,
+      "d": 52,
+      "h": 8,
+      "matched_osm_elements": 4,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xc6cbd1"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Emagine Royal Oak": {
+      "form": "canal_palazzo",
+      "x": 176,
+      "z": -109,
+      "w": 53,
+      "d": 110,
+      "h": 31.5,
+      "matched_osm_elements": 21,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xad9e91"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "yes"
+      },
+      "parts": []
+    },
+    "Henry Ford Medical Center": {
+      "form": "canal_palazzo",
+      "x": 110,
+      "z": 101,
+      "w": 36,
+      "d": 76,
+      "h": 26,
+      "matched_osm_elements": 14,
+      "parts_count": 1,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x535355"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "office"
+      },
+      "parts": [
+        {
+          "dx": -4.2,
+          "dz": -15.2,
+          "w": 35.6,
+          "d": 75.7,
+          "h": 21.0,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    },
+    "Royal Oak Public Library": {
+      "form": "canal_palazzo",
+      "x": 168,
+      "z": 10,
+      "w": 55,
+      "d": 39,
+      "h": 21.0,
+      "matched_osm_elements": 2,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xb2b8be"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "public"
+      },
+      "parts": []
+    },
+    "Stagecrafters Baldwin Theatre": {
+      "form": "canal_palazzo",
+      "x": -231,
+      "z": 338,
+      "w": 40,
+      "d": 27,
+      "h": 63.0,
+      "matched_osm_elements": 16,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [
+        "flat"
+      ],
+      "sampled_colors": [
+        "0x98938e"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "apartments",
+        "roof:shape": "flat"
+      },
+      "parts": []
+    },
+    "The Fifth": {
+      "form": "canal_palazzo",
+      "x": -194,
+      "z": 334,
+      "w": 34,
+      "d": 33,
+      "h": 64,
+      "matched_osm_elements": 20,
+      "parts_count": 1,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [
+        "flat"
+      ],
+      "sampled_colors": [
+        "0x988a78"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "apartments",
+        "roof:shape": "flat"
+      },
+      "parts": [
+        {
+          "dx": -7.2,
+          "dz": -1.4,
+          "w": 34.2,
+          "d": 32.9,
+          "h": 63.0,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    },
+    "Washington Square Plaza": {
+      "form": "canal_palazzo",
+      "x": -216,
+      "z": 204,
+      "w": 76,
+      "d": 81,
+      "h": 26,
+      "matched_osm_elements": 10,
+      "parts_count": 1,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [
+        "flat"
+      ],
+      "sampled_colors": [
+        "0x6f6a63"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "yes"
+      },
+      "parts": [
+        {
+          "dx": -1.4,
+          "dz": 1.5,
+          "w": 75.4,
+          "d": 80.4,
+          "h": 21.0,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "city": "annarbor",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 12,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x5c4a3c",
+    "0x706b69",
+    "0x726f6a",
+    "0x837d7b",
+    "0x9f9c90",
+    "0x717372"
+  ],
+  "sampled_roof_palette": [
+    "0x8b867e",
+    "0x7f7e78",
+    "0x968e80",
+    "0x837e78"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.31,
+    "streetTreeDensity": 1.14,
+    "streetTreeSpacing": 19.3,
+    "parkTreeDensity": 1.24,
+    "foliageScale": 1.18
+  },
+  "housingDensity": {
+    "form": "suburban",
+    "buildingsPerKm2": 1180,
+    "footprintCoverage": 0.29,
+    "wallEnclosure": 0.62,
+    "lotInfill": 0.25,
+    "rowhouseAttachment": 0.08,
+    "maxHouseHeight": 9.8,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 1.24,
+    "shrubDensity": 1.25
+  },
+  "neighborhoods": {
+    "main_street": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5c4a3c"
+      ],
+      "sampled_roof_palette": [
+        "0x8b867e"
+      ],
+      "name": "Main Street",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.22,
+        "streetTreeDensity": 1.04,
+        "streetTreeSpacing": 21.2,
+        "parkTreeDensity": 1.16,
+        "foliageScale": 1.17
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1180,
+        "footprintCoverage": 0.37,
+        "wallEnclosure": 0.9,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.08,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.24,
+        "shrubDensity": 1.25
+      }
+    },
+    "kerrytown": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x706b69"
+      ],
+      "sampled_roof_palette": [
+        "0x7f7e78"
+      ],
+      "name": "Kerrytown",
+      "center": [
+        180,
+        -520
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.32,
+        "streetTreeDensity": 1.15,
+        "streetTreeSpacing": 19.1,
+        "parkTreeDensity": 1.25,
+        "foliageScale": 1.18
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1180,
+        "footprintCoverage": 0.24,
+        "wallEnclosure": 0.43,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.08,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.24,
+        "shrubDensity": 1.25
+      }
+    },
+    "state_street": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x726f6a"
+      ],
+      "sampled_roof_palette": [
+        "0x968e80"
+      ],
+      "name": "State Street",
+      "center": [
+        680,
+        140
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.29,
+        "streetTreeDensity": 1.12,
+        "streetTreeSpacing": 19.6,
+        "parkTreeDensity": 1.22,
+        "foliageScale": 1.18
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1180,
+        "footprintCoverage": 0.28,
+        "wallEnclosure": 0.5,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.08,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.24,
+        "shrubDensity": 1.25
+      }
+    },
+    "central_campus": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x837d7b"
+      ],
+      "sampled_roof_palette": [
+        "0x837e78"
+      ],
+      "name": "Central Campus",
+      "center": [
+        950,
+        260
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.65,
+        "streetTreeSpacing": 33.8,
+        "parkTreeDensity": 1.1,
+        "foliageScale": 1.11
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1180,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.74,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.81,
+        "shrubDensity": 0.72
+      }
+    },
+    "old_west_side": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9f9c90"
+      ],
+      "sampled_roof_palette": [
+        "0x727372"
+      ],
+      "name": "Old West Side",
+      "center": [
+        -540,
+        240
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.48,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.39,
+        "foliageScale": 1.21
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1180,
+        "footprintCoverage": 0.19,
+        "wallEnclosure": 0.46,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.05,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.32,
+        "shrubDensity": 1.38
+      }
+    },
+    "burns_park": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x717372"
+      ],
+      "sampled_roof_palette": [
+        "0x646a6c"
+      ],
+      "name": "Burns Park",
+      "center": [
+        1280,
+        1050
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.62,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.51,
+        "foliageScale": 1.21
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1180,
+        "footprintCoverage": 0.21,
+        "wallEnclosure": 0.72,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.05,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.32,
+        "shrubDensity": 1.38
+      }
+    }
+  },
+  "landmarks": {
+    "Michigan Stadium": {
+      "form": "stadium_bowl",
+      "x": -120,
+      "z": 1760,
+      "w": 210,
+      "d": 260,
+      "h": 36,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa2a3a2"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Burton Memorial Tower": {
+      "form": "clock_tower",
+      "x": 740,
+      "z": 60,
+      "w": 18,
+      "d": 18,
+      "h": 65,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x877d62"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Michigan Theater": {
+      "form": "canal_palazzo",
+      "x": 520,
+      "z": 40,
+      "w": 36,
+      "d": 58,
+      "h": 22,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xaa937a"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Nickels Arcade": {
+      "form": "canal_palazzo",
+      "x": 660,
+      "z": 180,
+      "w": 28,
+      "d": 82,
+      "h": 14,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x595e64"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Law Quadrangle": {
+      "form": "canal_palazzo",
+      "x": 780,
+      "z": 460,
+      "w": 110,
+      "d": 120,
+      "h": 24,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x8e8583"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Huron River": {
+      "form": "canal_palazzo",
+      "x": 450,
+      "z": -1050,
+      "w": 60,
+      "d": 280,
+      "h": 8,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x455a5d"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

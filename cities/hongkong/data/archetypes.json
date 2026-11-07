@@ -1,0 +1,396 @@
+{
+  "city": "hongkong",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 11,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x868279",
+    "0x4f5158",
+    "0x5d3c24",
+    "0x544c3e",
+    "0x3b2517",
+    "0x907a6f"
+  ],
+  "sampled_roof_palette": [
+    "0x95999d",
+    "0x8d929a",
+    "0xa3a1a3",
+    "0x8c9097"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.11,
+    "streetTreeDensity": 0.4,
+    "streetTreeSpacing": 38.0,
+    "parkTreeDensity": 1.14,
+    "foliageScale": 0.8
+  },
+  "housingDensity": {
+    "form": "highrise",
+    "buildingsPerKm2": 2600,
+    "footprintCoverage": 0.58,
+    "wallEnclosure": 0.82,
+    "lotInfill": 0.12,
+    "rowhouseAttachment": 0.82,
+    "maxHouseHeight": 8.8,
+    "maxHouseFootprint": 240,
+    "porchProbScale": 0.28,
+    "shrubDensity": 0.42
+  },
+  "neighborhoods": {
+    "central": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x868279"
+      ],
+      "sampled_roof_palette": [
+        "0x95999d"
+      ],
+      "name": "Central",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.07,
+        "streetTreeDensity": 0.25,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.07,
+        "foliageScale": 0.78
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.72,
+        "wallEnclosure": 0.72,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.24
+      }
+    },
+    "admiralty": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x4f5158"
+      ],
+      "sampled_roof_palette": [
+        "0x8d929a"
+      ],
+      "name": "Admiralty",
+      "center": [
+        520,
+        689
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.4,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.12,
+        "foliageScale": 0.8
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.59,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.28,
+        "shrubDensity": 0.42
+      }
+    },
+    "soho_mid_levels": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5d3c24"
+      ],
+      "sampled_roof_palette": [
+        "0xa3a1a3"
+      ],
+      "name": "SoHo & Mid-Levels",
+      "center": [
+        -515,
+        420
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.4,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.12,
+        "foliageScale": 0.8
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.28,
+        "shrubDensity": 0.42
+      }
+    },
+    "victoria_peak": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x544c3e"
+      ],
+      "sampled_roof_palette": [],
+      "name": "Victoria Peak",
+      "center": [
+        -1154,
+        1656
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.34,
+        "streetTreeDensity": 0.71,
+        "streetTreeSpacing": 31.0,
+        "parkTreeDensity": 1.5,
+        "foliageScale": 0.83
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.45,
+        "wallEnclosure": 0.7,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.28,
+        "shrubDensity": 0.48
+      }
+    },
+    "wan_chai": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x3b2517"
+      ],
+      "sampled_roof_palette": [
+        "0x8c9097"
+      ],
+      "name": "Wan Chai",
+      "center": [
+        1762,
+        622
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.06,
+        "streetTreeDensity": 0.25,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.06,
+        "foliageScale": 0.78
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.74,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.24
+      }
+    },
+    "causeway_bay": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x907a6f"
+      ],
+      "sampled_roof_palette": [
+        "0xa2a3a6"
+      ],
+      "name": "Causeway Bay",
+      "center": [
+        2720,
+        622
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.06,
+        "streetTreeDensity": 0.25,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.06,
+        "foliageScale": 0.78
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.74,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.24
+      }
+    },
+    "tsim_sha_tsui": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x837c76"
+      ],
+      "sampled_roof_palette": [
+        "0xaca6a5"
+      ],
+      "name": "Tsim Sha Tsui",
+      "center": [
+        1236,
+        -967
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.06,
+        "streetTreeDensity": 0.25,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.06,
+        "foliageScale": 0.78
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.76,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.24
+      }
+    },
+    "west_kowloon": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xdde4ea"
+      ],
+      "sampled_roof_palette": [
+        "0xa3a5a8"
+      ],
+      "name": "West Kowloon",
+      "center": [
+        412,
+        -1934
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.4,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.12,
+        "foliageScale": 0.8
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 2600,
+        "footprintCoverage": 0.61,
+        "wallEnclosure": 0.58,
+        "lotInfill": 0.12,
+        "rowhouseAttachment": 0.82,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.28,
+        "shrubDensity": 0.42
+      }
+    }
+  },
+  "landmarks": {
+    "Bank of China Tower": {
+      "form": "diagrid_prism",
+      "x": 402,
+      "z": 689,
+      "w": 56,
+      "d": 56,
+      "h": 367,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x858788"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Two International Finance Centre": {
+      "form": "stepped_bundled_tube",
+      "x": 85,
+      "z": -45,
+      "w": 64,
+      "d": 64,
+      "h": 412,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa8adaf"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Hong Kong Convention Centre": {
+      "form": "canal_palazzo",
+      "x": 1762,
+      "z": 245,
+      "w": 220,
+      "d": 140,
+      "h": 48,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xc4aeb9"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

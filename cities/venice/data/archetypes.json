@@ -1,0 +1,433 @@
+{
+  "city": "venice",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 12,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x89867b",
+    "0x626162",
+    "0x2d2c2c",
+    "0x565247",
+    "0xa09181",
+    "0xb3b4aa"
+  ],
+  "sampled_roof_palette": [
+    "0x9e7f7d",
+    "0xa59797",
+    "0x9a706a",
+    "0xa57069"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.05,
+    "streetTreeDensity": 0.21,
+    "streetTreeSpacing": 38.0,
+    "parkTreeDensity": 0.5,
+    "foliageScale": 0.76
+  },
+  "housingDensity": {
+    "form": "rowhouse",
+    "buildingsPerKm2": 3650,
+    "footprintCoverage": 0.57,
+    "wallEnclosure": 0.68,
+    "lotInfill": 0.15,
+    "rowhouseAttachment": 0.94,
+    "maxHouseHeight": 12.2,
+    "maxHouseFootprint": 310,
+    "porchProbScale": 0.25,
+    "shrubDensity": 0.28
+  },
+  "neighborhoods": {
+    "ponte_di_rialto": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x89867b"
+      ],
+      "sampled_roof_palette": [
+        "0x9e7f7d"
+      ],
+      "name": "Ponte di Rialto",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.06,
+        "streetTreeDensity": 0.22,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.52,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.17,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "piazza_san_marco": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x626162"
+      ],
+      "sampled_roof_palette": [
+        "0xa59797"
+      ],
+      "name": "Piazza San Marco",
+      "center": [
+        251,
+        412
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.04,
+        "streetTreeDensity": 0.2,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.48,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 0.98,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "san_polo": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x2d2c2c"
+      ],
+      "sampled_roof_palette": [
+        "0x9a706a"
+      ],
+      "name": "San Polo",
+      "center": [
+        -251,
+        89
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.05,
+        "streetTreeDensity": 0.21,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.5,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.65,
+        "wallEnclosure": 0.92,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "dorsoduro_accademia": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x565247"
+      ],
+      "sampled_roof_palette": [
+        "0xa57069"
+      ],
+      "name": "Dorsoduro & Accademia",
+      "center": [
+        -376,
+        656
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.07,
+        "streetTreeDensity": 0.23,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.53,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 0.83,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "cannaregio": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa09181"
+      ],
+      "sampled_roof_palette": [
+        "0x9b7e79"
+      ],
+      "name": "Cannaregio",
+      "center": [
+        -548,
+        -500
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.07,
+        "streetTreeDensity": 0.23,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.53,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.64,
+        "wallEnclosure": 0.78,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "castello_arsenale": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb3b4aa"
+      ],
+      "sampled_roof_palette": [
+        "0xb79e98"
+      ],
+      "name": "Castello & Arsenale",
+      "center": [
+        1190,
+        689
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.05,
+        "streetTreeDensity": 0.21,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.5,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.56,
+        "wallEnclosure": 0.41,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "santa_croce_piazzale_roma": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5f574c"
+      ],
+      "sampled_roof_palette": [
+        "0x987570"
+      ],
+      "name": "Santa Croce & Piazzale Roma",
+      "center": [
+        -1034,
+        -100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.04,
+        "streetTreeDensity": 0.2,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.48,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.64,
+        "wallEnclosure": 0.96,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "giudecca": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb0afae"
+      ],
+      "sampled_roof_palette": [],
+      "name": "Giudecca",
+      "center": [
+        -141,
+        1278
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.04,
+        "streetTreeDensity": 0.2,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.48,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.48,
+        "wallEnclosure": 0.66,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    },
+    "san_giorgio_maggiore": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9b9692"
+      ],
+      "sampled_roof_palette": [
+        "0x727f91"
+      ],
+      "name": "San Giorgio Maggiore",
+      "center": [
+        407,
+        1023
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.04,
+        "streetTreeDensity": 0.2,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.48,
+        "foliageScale": 0.76
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3650,
+        "footprintCoverage": 0.44,
+        "wallEnclosure": 0.38,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.94,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.25,
+        "shrubDensity": 0.28
+      }
+    }
+  },
+  "landmarks": {
+    "St Mark's Campanile": {
+      "form": "clock_tower",
+      "x": 251,
+      "z": 445,
+      "w": 24,
+      "d": 24,
+      "h": 99,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xb99169"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Ponte di Rialto": {
+      "form": "arch_bridge",
+      "x": 0,
+      "z": 0,
+      "w": 48,
+      "d": 28,
+      "h": 14,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa0a6a4"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Basilica di San Marco": {
+      "form": "cathedral_spires",
+      "x": 312,
+      "z": 405,
+      "w": 76,
+      "d": 62,
+      "h": 43,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x6e4f39"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

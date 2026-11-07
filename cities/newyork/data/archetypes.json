@@ -1,0 +1,452 @@
+{
+  "city": "newyork",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 14,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x896c70",
+    "0x878680",
+    "0x655e50",
+    "0x9c9792",
+    "0x98897a",
+    "0xb2aeb5"
+  ],
+  "sampled_roof_palette": [
+    "0x595153",
+    "0x605b5a",
+    "0x7e706d",
+    "0x867f7d"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.21,
+    "streetTreeDensity": 0.68,
+    "streetTreeSpacing": 32.4,
+    "parkTreeDensity": 1.28,
+    "foliageScale": 0.81
+  },
+  "housingDensity": {
+    "form": "highrise",
+    "buildingsPerKm2": 3200,
+    "footprintCoverage": 0.58,
+    "wallEnclosure": 0.62,
+    "lotInfill": 0.1,
+    "rowhouseAttachment": 0.88,
+    "maxHouseHeight": 8.8,
+    "maxHouseFootprint": 240,
+    "porchProbScale": 0.42,
+    "shrubDensity": 0.35
+  },
+  "neighborhoods": {
+    "midtown": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x896c70"
+      ],
+      "sampled_roof_palette": [
+        "0x595153"
+      ],
+      "name": "Midtown",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.04,
+        "streetTreeDensity": 0.28,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.9,
+        "foliageScale": 0.77
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.76,
+        "wallEnclosure": 0.91,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.27,
+        "shrubDensity": 0.22
+      }
+    },
+    "financial_district": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x878680"
+      ],
+      "sampled_roof_palette": [
+        "0x605b5a"
+      ],
+      "name": "Financial District",
+      "center": [
+        -1150,
+        5600
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.07,
+        "streetTreeDensity": 0.31,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.97,
+        "foliageScale": 0.77
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.76,
+        "wallEnclosure": 0.78,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.27,
+        "shrubDensity": 0.22
+      }
+    },
+    "greenwich_village": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x655e50"
+      ],
+      "sampled_roof_palette": [
+        "0x7e706d"
+      ],
+      "name": "Greenwich Village",
+      "center": [
+        -650,
+        2850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.51,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.04,
+        "foliageScale": 0.79
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 0.89,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.35
+      }
+    },
+    "soho_tribeca": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9c9792"
+      ],
+      "sampled_roof_palette": [
+        "0x867f7d"
+      ],
+      "name": "SoHo & Tribeca",
+      "center": [
+        -820,
+        3850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.25,
+        "streetTreeDensity": 0.74,
+        "streetTreeSpacing": 29.7,
+        "parkTreeDensity": 1.37,
+        "foliageScale": 0.81
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.65,
+        "wallEnclosure": 0.56,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.35
+      }
+    },
+    "upper_west_side": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x98897a"
+      ],
+      "sampled_roof_palette": [
+        "0x9d9fa4"
+      ],
+      "name": "Upper West Side",
+      "center": [
+        650,
+        -2400
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.09,
+        "streetTreeDensity": 0.49,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 1.01,
+        "foliageScale": 0.79
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 0.95,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.35
+      }
+    },
+    "upper_east_side": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb2aeb5"
+      ],
+      "sampled_roof_palette": [
+        "0x7e8d8b"
+      ],
+      "name": "Upper East Side",
+      "center": [
+        1450,
+        -1850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.36,
+        "streetTreeDensity": 0.92,
+        "streetTreeSpacing": 23.9,
+        "parkTreeDensity": 1.55,
+        "foliageScale": 0.83
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.49,
+        "wallEnclosure": 0.24,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.35
+      }
+    },
+    "harlem": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xada99f"
+      ],
+      "sampled_roof_palette": [
+        "0xa4a0a0"
+      ],
+      "name": "Harlem",
+      "center": [
+        1950,
+        -5200
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.59,
+        "streetTreeSpacing": 37.3,
+        "parkTreeDensity": 1.15,
+        "foliageScale": 0.8
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.6,
+        "wallEnclosure": 0.43,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.35
+      }
+    },
+    "lower_east_side": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa5a9a6"
+      ],
+      "sampled_roof_palette": [
+        "0x645c53"
+      ],
+      "name": "Lower East Side",
+      "center": [
+        320,
+        3550
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.35,
+        "streetTreeDensity": 0.9,
+        "streetTreeSpacing": 24.4,
+        "parkTreeDensity": 1.55,
+        "foliageScale": 0.83
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 3200,
+        "footprintCoverage": 0.47,
+        "wallEnclosure": 0.2,
+        "lotInfill": 0.1,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.42,
+        "shrubDensity": 0.35
+      }
+    }
+  },
+  "landmarks": {
+    "Empire State Building": {
+      "form": "stepped_bundled_tube",
+      "x": 120,
+      "z": 1150,
+      "w": 58,
+      "d": 128,
+      "h": 381,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x8d5237"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "One World Trade Center": {
+      "form": "stepped_bundled_tube",
+      "x": -1380,
+      "z": 5450,
+      "w": 61,
+      "d": 61,
+      "h": 541,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x342611"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Chrysler Building": {
+      "form": "stepped_bundled_tube",
+      "x": 680,
+      "z": 420,
+      "w": 48,
+      "d": 60,
+      "h": 319,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x7c7d7e"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Flatiron Building": {
+      "form": "canal_palazzo",
+      "x": -80,
+      "z": 2080,
+      "w": 26,
+      "d": 56,
+      "h": 87,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x968479"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Central Park": {
+      "form": "canal_palazzo",
+      "x": 1050,
+      "z": -2100,
+      "w": 800,
+      "d": 4000,
+      "h": 18,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x9ca1a9"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Times Square": {
+      "form": "canal_palazzo",
+      "x": -180,
+      "z": 120,
+      "w": 70,
+      "d": 140,
+      "h": 110,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x7d786a"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

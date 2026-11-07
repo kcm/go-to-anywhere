@@ -1,0 +1,416 @@
+{
+  "city": "chicago",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 12,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x686761",
+    "0x9f9789",
+    "0x877d74",
+    "0xafa39f",
+    "0x9c947c",
+    "0x40443e"
+  ],
+  "sampled_roof_palette": [
+    "0x9b9891",
+    "0x7c7e75",
+    "0xa89f93",
+    "0x8e877d"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.19,
+    "streetTreeDensity": 0.81,
+    "streetTreeSpacing": 27.2,
+    "parkTreeDensity": 1.05,
+    "foliageScale": 0.96
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 2450,
+    "footprintCoverage": 0.46,
+    "wallEnclosure": 0.63,
+    "lotInfill": 0.22,
+    "rowhouseAttachment": 0.64,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 0.78,
+    "shrubDensity": 0.72
+  },
+  "neighborhoods": {
+    "the_loop": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x686761"
+      ],
+      "sampled_roof_palette": [
+        "0x9b9891"
+      ],
+      "name": "The Loop",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.5,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.98,
+        "foliageScale": 0.92
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.55,
+        "wallEnclosure": 0.58,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.51,
+        "shrubDensity": 0.42
+      }
+    },
+    "willis_tower_west_loop": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9f9789"
+      ],
+      "sampled_roof_palette": [
+        "0x7c7e75"
+      ],
+      "name": "Willis Tower & West Loop",
+      "center": [
+        -672,
+        433
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.09,
+        "streetTreeDensity": 0.46,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.93,
+        "foliageScale": 0.92
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.57,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.51,
+        "shrubDensity": 0.42
+      }
+    },
+    "millennium_park": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x877d74"
+      ],
+      "sampled_roof_palette": [
+        "0xa89f93"
+      ],
+      "name": "Millennium Park",
+      "center": [
+        357,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.38,
+        "streetTreeDensity": 1.27,
+        "streetTreeSpacing": 17.3,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 1.01
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.89,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.64,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.78,
+        "shrubDensity": 0.83
+      }
+    },
+    "grant_park": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xafa39f"
+      ],
+      "sampled_roof_palette": [
+        "0x8e877d"
+      ],
+      "name": "Grant Park",
+      "center": [
+        620,
+        920
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.49,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.44,
+        "foliageScale": 1.02
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.4,
+        "wallEnclosure": 0.32,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.64,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.78,
+        "shrubDensity": 0.83
+      }
+    },
+    "michigan_ave_riverwalk": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9c947c"
+      ],
+      "sampled_roof_palette": [
+        "0x878078"
+      ],
+      "name": "Michigan Ave & Riverwalk",
+      "center": [
+        340,
+        -645
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.18,
+        "streetTreeDensity": 0.8,
+        "streetTreeSpacing": 27.5,
+        "parkTreeDensity": 1.04,
+        "foliageScale": 0.96
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.4,
+        "wallEnclosure": 0.58,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.64,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.78,
+        "shrubDensity": 0.72
+      }
+    },
+    "river_north": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x40443e"
+      ],
+      "sampled_roof_palette": [
+        "0x97938c"
+      ],
+      "name": "River North",
+      "center": [
+        -320,
+        -1100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.18,
+        "streetTreeDensity": 0.8,
+        "streetTreeSpacing": 27.5,
+        "parkTreeDensity": 1.04,
+        "foliageScale": 0.96
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.42,
+        "wallEnclosure": 0.33,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.64,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.78,
+        "shrubDensity": 0.72
+      }
+    },
+    "magnificent_mile_streeterville": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x716d61"
+      ],
+      "sampled_roof_palette": [
+        "0xa39f97"
+      ],
+      "name": "Magnificent Mile & Streeterville",
+      "center": [
+        520,
+        -1450
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.19,
+        "streetTreeDensity": 0.81,
+        "streetTreeSpacing": 27.2,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.96
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.76,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.64,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.78,
+        "shrubDensity": 0.72
+      }
+    },
+    "navy_pier": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x8d8f8d"
+      ],
+      "sampled_roof_palette": [
+        "0xb0b3af"
+      ],
+      "name": "Navy Pier",
+      "center": [
+        1825,
+        -990
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.73,
+        "streetTreeSpacing": 30.1,
+        "parkTreeDensity": 0.98,
+        "foliageScale": 0.95
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 2450,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.56,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.64,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.78,
+        "shrubDensity": 0.72
+      }
+    }
+  },
+  "landmarks": {
+    "Willis Tower": {
+      "form": "stepped_bundled_tube",
+      "x": -672,
+      "z": 433,
+      "w": 69,
+      "d": 69,
+      "h": 442,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x76645d"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "875 North Michigan Avenue": {
+      "form": "bascule_bridge",
+      "x": 415,
+      "z": -1812,
+      "w": 58,
+      "d": 80,
+      "h": 344,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x6b6c6b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Wrigley Building": {
+      "form": "stepped_bundled_tube",
+      "x": 310,
+      "z": -780,
+      "w": 48,
+      "d": 58,
+      "h": 134,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x63615e"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Cloud Gate": {
+      "form": "canal_palazzo",
+      "x": 357,
+      "z": 0,
+      "w": 24,
+      "d": 14,
+      "h": 11,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x8a9393"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

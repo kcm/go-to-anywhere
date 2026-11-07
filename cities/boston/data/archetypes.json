@@ -1,0 +1,379 @@
+{
+  "city": "boston",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 11,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x784c2d",
+    "0x858e8e",
+    "0xb09886",
+    "0xa3a298",
+    "0x7a7e7d",
+    "0x9a918a"
+  ],
+  "sampled_roof_palette": [
+    "0xa3a1a4",
+    "0xa09a9b",
+    "0x898c93",
+    "0x9f9994"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.19,
+    "streetTreeDensity": 0.83,
+    "streetTreeSpacing": 26.5,
+    "parkTreeDensity": 1.06,
+    "foliageScale": 0.98
+  },
+  "housingDensity": {
+    "form": "rowhouse",
+    "buildingsPerKm2": 2680,
+    "footprintCoverage": 0.44,
+    "wallEnclosure": 0.63,
+    "lotInfill": 0.2,
+    "rowhouseAttachment": 0.76,
+    "maxHouseHeight": 12.2,
+    "maxHouseFootprint": 310,
+    "porchProbScale": 0.72,
+    "shrubDensity": 0.74
+  },
+  "neighborhoods": {
+    "boston_common_beacon_hill": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x784c2d"
+      ],
+      "sampled_roof_palette": [
+        "0xa3a1a4"
+      ],
+      "name": "Boston Common & Beacon Hill",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.14,
+        "streetTreeDensity": 0.77,
+        "streetTreeSpacing": 28.6,
+        "parkTreeDensity": 1.0,
+        "foliageScale": 0.97
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.56,
+        "wallEnclosure": 0.98,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.76,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.72,
+        "shrubDensity": 0.74
+      }
+    },
+    "faneuil_hall_waterfront": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x858e8e"
+      ],
+      "sampled_roof_palette": [
+        "0xa09a9b"
+      ],
+      "name": "Faneuil Hall & Waterfront",
+      "center": [
+        920,
+        -120
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.24,
+        "streetTreeDensity": 0.9,
+        "streetTreeSpacing": 24.4,
+        "parkTreeDensity": 1.12,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.42,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.76,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.72,
+        "shrubDensity": 0.74
+      }
+    },
+    "north_end": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb09886"
+      ],
+      "sampled_roof_palette": [
+        "0x898c93"
+      ],
+      "name": "North End",
+      "center": [
+        780,
+        -820
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.18,
+        "streetTreeDensity": 0.82,
+        "streetTreeSpacing": 26.8,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.47,
+        "wallEnclosure": 0.64,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.76,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.72,
+        "shrubDensity": 0.74
+      }
+    },
+    "west_end_zakim_bridge": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa3a298"
+      ],
+      "sampled_roof_palette": [
+        "0x9f9994"
+      ],
+      "name": "West End & Zakim Bridge",
+      "center": [
+        115,
+        -1100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.76,
+        "streetTreeSpacing": 28.9,
+        "parkTreeDensity": 0.99,
+        "foliageScale": 0.97
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.41,
+        "wallEnclosure": 0.14,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.76,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.72,
+        "shrubDensity": 0.74
+      }
+    },
+    "back_bay_copley_square": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7a7e7d"
+      ],
+      "sampled_roof_palette": [
+        "0x7e858c"
+      ],
+      "name": "Back Bay & Copley Square",
+      "center": [
+        -1038,
+        667
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.28,
+        "streetTreeDensity": 0.95,
+        "streetTreeSpacing": 23.2,
+        "parkTreeDensity": 1.17,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.44,
+        "wallEnclosure": 0.44,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.76,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.72,
+        "shrubDensity": 0.74
+      }
+    },
+    "prudential_south_end": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9a918a"
+      ],
+      "sampled_roof_palette": [
+        "0x8f96a2"
+      ],
+      "name": "Prudential & South End",
+      "center": [
+        -1507,
+        1289
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.78,
+        "streetTreeSpacing": 28.2,
+        "parkTreeDensity": 1.02,
+        "foliageScale": 0.97
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.92,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.76,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.72,
+        "shrubDensity": 0.74
+      }
+    },
+    "cambridge_mit": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x373022"
+      ],
+      "sampled_roof_palette": [
+        "0xabaeb5"
+      ],
+      "name": "Cambridge & MIT",
+      "center": [
+        -1943,
+        -12
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.8,
+        "streetTreeSpacing": 27.5,
+        "parkTreeDensity": 1.03,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2680,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.76,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.72,
+        "shrubDensity": 0.74
+      }
+    }
+  },
+  "landmarks": {
+    "Custom House Tower": {
+      "form": "clock_tower",
+      "x": 1046,
+      "z": -18,
+      "w": 38,
+      "d": 38,
+      "h": 151,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x9e9685"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Leonard P. Zakim Bunker Hill Bridge": {
+      "form": "cable_stayed_bridge",
+      "x": 115,
+      "z": -1100,
+      "w": 56,
+      "d": 436,
+      "h": 98,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x7c7c7a"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Massachusetts State House": {
+      "form": "dome_palace",
+      "x": 0,
+      "z": -45,
+      "w": 115,
+      "d": 68,
+      "h": 65,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x86765f"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Prudential Tower": {
+      "form": "stepped_bundled_tube",
+      "x": -1507,
+      "z": 1289,
+      "w": 64,
+      "d": 64,
+      "h": 228,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xafb1ad"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

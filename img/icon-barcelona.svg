@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1d2d50"/>
+      <stop offset="55%" stop-color="#8c3b4a"/>
+      <stop offset="100%" stop-color="#f2a65a"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5e6cc"/>
+      <stop offset="55%" stop-color="#d9bc8c"/>
+      <stop offset="100%" stop-color="#a88451"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Catalan sun glow -->
+  <circle cx="256" cy="184" r="98" fill="#ffd166" opacity="0.28"/>
+  <!-- Sagrada Familia Central Tower of Jesus Christ & Star of the Virgin -->
+  <polygon points="256,42 264,66 288,66 268,80 276,104 256,90 236,104 244,80 224,66 248,66" fill="#fff3b0" stroke="#e09f3e" stroke-width="2.5"/>
+  <path d="M226 392 C228 242 238 144 256 96 C274 144 284 242 286 392 Z" fill="url(#stone)" stroke="#5c4222" stroke-width="3.5"/>
+  <!-- Four Iconic Tapered Honeycomb Spires (Nativity & Passion Facades) -->
+  <!-- Inner Left Spire -->
+  <path d="M168 392 C170 258 178 166 194 118 C210 166 218 258 220 392 Z" fill="url(#stone)" stroke="#5c4222" stroke-width="3.5"/>
+  <circle cx="194" cy="110" r="12" fill="#ffbe0b" stroke="#5c4222" stroke-width="2.5"/>
+  <!-- Inner Right Spire -->
+  <path d="M292 392 C294 258 302 166 318 118 C334 166 342 258 344 392 Z" fill="url(#stone)" stroke="#5c4222" stroke-width="3.5"/>
+  <circle cx="318" cy="110" r="12" fill="#ffbe0b" stroke="#5c4222" stroke-width="2.5"/>
+  <!-- Outer Left Spire -->
+  <path d="M114 392 C116 284 124 202 138 158 C152 202 160 284 162 392 Z" fill="url(#stone)" stroke="#5c4222" stroke-width="3.5"/>
+  <circle cx="138" cy="150" r="10" fill="#fb5607" stroke="#5c4222" stroke-width="2.5"/>
+  <!-- Outer Right Spire -->
+  <path d="M350 392 C352 284 360 202 374 158 C388 202 396 284 398 392 Z" fill="url(#stone)" stroke="#5c4222" stroke-width="3.5"/>
+  <circle cx="374" cy="150" r="10" fill="#fb5607" stroke="#5c4222" stroke-width="2.5"/>
+  <!-- Spire vertical fenestration slots -->
+  <g stroke="#5c4222" stroke-width="3" stroke-dasharray="6 8">
+    <line x1="138" y1="190" x2="138" y2="330"/>
+    <line x1="194" y1="154" x2="194" y2="320"/>
+    <line x1="256" y1="136" x2="256" y2="310"/>
+    <line x1="318" y1="154" x2="318" y2="320"/>
+    <line x1="374" y1="190" x2="374" y2="330"/>
+  </g>
+  <!-- Portal Facade & Rose Window -->
+  <polygon points="154,392 256,268 358,392" fill="#e6ccb2" stroke="#5c4222" stroke-width="3.5"/>
+  <circle cx="256" cy="340" r="24" fill="#3a86ff" stroke="#5c4222" stroke-width="3"/>
+  <circle cx="256" cy="340" r="12" fill="#ff006e"/>
+  <!-- Eixample Chamfered Octagonal Block & Mediterranean Base -->
+  <path d="M0 392 L512 392 L512 512 L0 512 Z" fill="#142d4c"/>
+  <polygon points="196,416 316,416 340,440 340,472 316,496 196,496 172,472 172,440" fill="none" stroke="#ffd166" stroke-width="4"/>
+  <polygon points="214,432 298,432 314,448 314,464 298,480 214,480 198,464 198,448" fill="#e07a5f" opacity="0.85"/>
+</svg>

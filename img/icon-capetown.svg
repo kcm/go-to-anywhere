@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1d3557"/>
+      <stop offset="52%" stop-color="#e07a5f"/>
+      <stop offset="100%" stop-color="#f2cc8f"/>
+    </linearGradient>
+    <linearGradient id="mesa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a4e69"/>
+      <stop offset="50%" stop-color="#35384d"/>
+      <stop offset="100%" stop-color="#22223b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Atlantic Sunset Orb -->
+  <circle cx="404" cy="156" r="50" fill="#ffd166" opacity="0.9"/>
+  <!-- Devil's Peak on left -->
+  <polygon points="18,378 88,184 156,378" fill="#2b2d42"/>
+  <!-- Iconic Flat-Topped Table Mountain (Tafelberg) Central Mesa -->
+  <polygon points="84,378 134,172 346,172 396,378" fill="url(#mesa)" stroke="#1a1b2e" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Platteklip Gorge & Sandstone Cliff Striations -->
+  <path d="M138 196 H342 M130 224 H350" stroke="#6c757d" stroke-width="3" opacity="0.65"/>
+  <path d="M236 172 L224 274 L232 356" fill="none" stroke="#1a1b2e" stroke-width="4"/>
+  <!-- White "Tablecloth" Cloud Draping Over Table Mountain Rim -->
+  <path d="M128 172 Q154 152 184 166 Q216 146 252 164 Q288 148 318 166 Q340 156 352 174 Q338 192 314 184 Q284 196 254 184 Q218 198 186 184 Q154 194 128 172 Z" fill="#f8f9fa" opacity="0.92"/>
+  <!-- Lion's Head Conical Spire & Signal Hill on right -->
+  <path d="M332 378 L412 204 L446 296 L486 322 L502 378 Z" fill="#2b2d42" stroke="#1a1b2e" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Vibrant Bo-Kaap / V&A Waterfront Terraced Houses at Foot of Mountain -->
+  <g stroke="#1a1b2e" stroke-width="2.5">
+    <rect x="116" y="338" width="42" height="40" fill="#ffbe0b"/>
+    <rect x="158" y="330" width="42" height="48" fill="#fb5607"/>
+    <rect x="200" y="340" width="42" height="38" fill="#ff006e"/>
+    <rect x="242" y="332" width="42" height="46" fill="#06d6a0"/>
+    <rect x="284" y="338" width="42" height="40" fill="#3a86ff"/>
+  </g>
+  <!-- Table Bay Ocean & Waves -->
+  <path d="M0 378 L512 378 L512 512 L0 512 Z" fill="#0d3b66"/>
+  <path d="M68 418 Q162 404 256 418 T444 418" fill="none" stroke="#8ecae6" stroke-width="5" stroke-linecap="round"/>
+  <path d="M108 456 Q202 442 296 456 T416 456" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+</svg>
