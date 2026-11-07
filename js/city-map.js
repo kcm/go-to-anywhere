@@ -1087,6 +1087,11 @@ class CityMapSystem {
     // Ground layers, names & landmark pins: re-rendered only when the view, the search or the buildings change
     const fp = footprintLayers(this.allBlocks);
     const key = `${v.cx}|${v.cz}|${v.s}|${this.fullCanvas.width}|${this.fullCanvas.height}|${this.searchHighlight}|${fp ? fp.version : 0}`;
+    const wpKey = this.waypoint ? `${this.waypoint.x},${this.waypoint.z}` : '';
+    const now = performance.now();
+    if (key === this.fullStaticKey && wpKey === this.lastWpKey && now - (this.lastFullDraw || 0) < 66) return;
+    this.lastFullDraw = now;
+    this.lastWpKey = wpKey;
     if (!this.fullStatic) this.fullStatic = document.createElement('canvas');
     if (key !== this.fullStaticKey) {
       this.fullStaticKey = key;

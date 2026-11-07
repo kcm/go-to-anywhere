@@ -22,6 +22,7 @@ import { SunLight } from 'three/addons/lights/SunLight.js';
 import { SunLightNode } from 'three/addons/lights/SunLightNode.js';
 import { cityUniforms } from './tsl-materials.js';
 import { CITY_PACK } from './city-packs.js';
+import { TIER, FIREFOX } from './device-tier.js';
 import { groundHeight } from './terrain.js';
 import { hot } from '../lamp-game.js';
 import { weatherPreset } from './weather.js';
@@ -272,8 +273,8 @@ class LightingSystem {
     this.sunLight = new SunLight(0xffca92, 5.8);
     this.sunLight.position.copy(TIME_PRESETS.golden.sunDir);
     this.sunLight.castShadow = true;
-    // Two cascades share an atlas: use 1536px tiles for fast shadow passes without pegging the GPU.
-    const tile = 1536;
+    // Two cascades share an atlas: use 1536px tiles in Full mode and 1024px in Lite/Firefox to cut shadow fill cost by 55%.
+    const tile = TIER.name === 'full' && !FIREFOX ? 1536 : 1024;
     this.sunLight.shadow.mapSize.set(tile, tile);
     this.sunLight.shadow.camera.near = 0.5;
     this.sunLight.shadow.camera.far = 200;

@@ -729,18 +729,18 @@ function step(dt) {
 // pixels the usual cure. A step that doesn't make frames faster is undone and no more are tried, since then the
 // drawing isn't what's slow (a busy frame function, or a screen that refreshes only 30 times a second).
 const SCALES = [1, 0.75, 0.5], SLOW = 45;
-let level = 0, adapting = true, rateBefore = 0, lastTick = 0;
+let level = 0, adapting = true, rateBefore = 0, lastTick = 0, baseW = WIDTH, baseH = HEIGHT;
 const report = { frames: 0, time: 0, slowest: 0 }, check = { times: [], time: 0, warm: false };
 
 function drawScale(to) {
     level = to;
     check.warm = false;
-    renderer.setSize(Math.round(WIDTH * SCALES[level]), Math.round(HEIGHT * SCALES[level]), false);
+    renderer.setSize(Math.round(baseW * SCALES[level]), Math.round(baseH * SCALES[level]), false);
 }
 // A page that sizes its own canvas (`fill`) is drawn at whatever it chose.
 let fills = false;
 const drawn = () => fills ? `${renderer.domElement.width}x${renderer.domElement.height}`
-    : `${Math.round(WIDTH * SCALES[level])}x${Math.round(HEIGHT * SCALES[level])}`;
+    : `${Math.round(baseW * SCALES[level])}x${Math.round(baseH * SCALES[level])}`;
 
 function measure(now) {
     const ms = lastTick ? now - lastTick : 0;
@@ -862,6 +862,8 @@ export async function game({ renderer: given, init, frame, touch: buttons, keybo
             throw e;
         }
     }
+    baseW = renderer.domElement?.width || WIDTH;
+    baseH = renderer.domElement?.height || HEIGHT;
     if (preview) { if (again) { ranAgain(again); firstDrawn(0); } return runPreview(); }
     // Whatever the start set on a camera, it's where the player left it at the first frame.
     if (restoring) for (const entry of cameras.values()) putPose(entry, restoring.cameras[entry.id]);

@@ -450,7 +450,12 @@ async function initApp() {
     outskirts: TIER.outskirts
   };
   const renderer = await live.keep('renderer', async () => {
-    const made = new THREE.WebGPURenderer({ antialias: QUALITY.antialias, powerPreference: 'high-performance', reversedDepthBuffer: true, forceWebGL: true });
+    const made = new THREE.WebGPURenderer({
+      antialias: QUALITY.antialias,
+      powerPreference: QUALITY.tier === 'full' ? 'high-performance' : 'low-power',
+      reversedDepthBuffer: true,
+      forceWebGL: true
+    });
     await made.init();
     return made;
   });
@@ -762,11 +767,19 @@ async function initApp() {
   renderer.info.autoReset = false;
 
   const frame = (f) => {
+    const rawDt = f.dt;
+    const dt = Math.min(Math.max(rawDt, 0.001), 0.05);
+    if (warmedUp) {
+      if (document.hidden) return;
+      if (mapSystem.isFullMapOpen) {
+        tickNotice(dt);
+        mapSystem.update();
+        return;
+      }
+    }
     profAt = performance.now();
     renderer.info.reset();
     const now = f.time * 1000;
-    const rawDt = f.dt;
-    const dt = Math.min(Math.max(rawDt, 0.001), 0.05);
     elapsed += dt;
     tickNotice(dt);
     knockdowns.update(dt);
