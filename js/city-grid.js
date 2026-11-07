@@ -1766,24 +1766,30 @@ function buildCityGrid(scene) {
   // few millimetres apart the lawn would show through the driveways and front walks in wedges (drawOver, terrain.js)
   for (const m of [drivewayConcreteMat, drivewayBlacktopMat]) drawOver(m);
   const lawnGeos = [];
-  const lawnCellSet = new Set();
+  const lawnBBoxes = [];
   for (const rings of GEO.lawns) {
     lawnGeos.push(flatGeo(rings.map(toRing), LAWN_Y));
     const r0 = rings[0];
     if (r0 && r0.length >= 2) {
-      let sx = 0, sz = 0, n = r0.length >> 1;
-      for (let i = 0; i < r0.length; i += 2) { sx += r0[i]; sz += r0[i + 1]; }
-      lawnCellSet.add(`${Math.round((sx / n) / 60)},${Math.round((sz / n) / 60)}`);
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      for (let i = 0; i < r0.length; i += 2) {
+        const x = r0[i], z = r0[i + 1];
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (z < minZ) minZ = z;
+        if (z > maxZ) maxZ = z;
+      }
+      lawnBBoxes.push(minX - 6, maxX + 6, minZ - 6, maxZ + 6);
     }
   }
   for (const b of BLOCKS) {
     if (!b.rect && b.lawn && !b.median && b.area > 400) {
       const cx = (b.minX + b.maxX) * 0.5, cz = (b.minZ + b.maxZ) * 0.5;
-      const gx = Math.round(cx / 60), gz = Math.round(cz / 60);
       let covered = false;
-      for (let dx = -1; dx <= 1 && !covered; dx++) {
-        for (let dz = -1; dz <= 1 && !covered; dz++) {
-          if (lawnCellSet.has(`${gx + dx},${gz + dz}`)) covered = true;
+      for (let i = 0; i < lawnBBoxes.length; i += 4) {
+        if (cx >= lawnBBoxes[i] && cx <= lawnBBoxes[i + 1] && cz >= lawnBBoxes[i + 2] && cz <= lawnBBoxes[i + 3]) {
+          covered = true;
+          break;
         }
       }
       if (!covered) {

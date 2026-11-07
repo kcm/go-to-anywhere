@@ -2022,7 +2022,7 @@ out body;
                     playground_ways.append(poly)
                 elif leis == 'golf_course':
                     green_spaces.append({'name': name or 'Golf Course', 'kind': 'golf', 'geom': poly.intersection(CLIP_BOX)})
-                elif leis in ('park', 'nature_reserve', 'garden', 'recreation_ground', 'common', 'dog_park') or lu in ('park', 'grass', 'meadow', 'recreation_ground', 'village_green') or t.get('tourism') == 'zoo':
+                elif leis in ('park', 'nature_reserve', 'garden', 'recreation_ground', 'common', 'dog_park') or lu in ('park', 'grass', 'meadow', 'recreation_ground', 'village_green') or nat in ('grassland', 'heath', 'fell') or t.get('tourism') == 'zoo':
                     g_c = poly.intersection(CLIP_BOX)
                     if g_c.area >= 150:
                         green_spaces.append({'name': name, 'kind': 'park', 'geom': g_c})
@@ -2049,7 +2049,7 @@ out body;
         leis = t.get('leisure')
         tour = t.get('tourism')
         name = t.get('name', '')
-        if not (nat in ('water', 'wood', 'scrub', 'wetland', 'bay') or lu in ('park', 'grass', 'meadow', 'recreation_ground', 'cemetery', 'forest', 'basin', 'reservoir') or leis in ('park', 'garden', 'golf_course', 'nature_reserve') or tour == 'zoo'):
+        if not (nat in ('water', 'wood', 'scrub', 'grassland', 'heath', 'fell', 'wetland', 'bay') or lu in ('park', 'grass', 'meadow', 'recreation_ground', 'village_green', 'cemetery', 'forest', 'basin', 'reservoir') or leis in ('park', 'garden', 'golf_course', 'nature_reserve', 'recreation_ground', 'common', 'dog_park') or tour == 'zoo'):
             continue
         for poly in relation_to_polygons(rel):
             if nat == 'water' and not t.get('layer') and t.get('intermittent') != 'yes':
@@ -2057,7 +2057,7 @@ out body;
                     water_polys.append(poly)
             elif leis == 'golf_course':
                 green_spaces.append({'name': name or 'Golf Course', 'kind': 'golf', 'geom': poly.intersection(CLIP_BOX)})
-            elif leis in ('park', 'garden', 'nature_reserve') or lu in ('park', 'grass', 'meadow', 'recreation_ground') or tour == 'zoo':
+            elif leis in ('park', 'garden', 'nature_reserve', 'recreation_ground', 'common', 'dog_park') or lu in ('park', 'grass', 'meadow', 'recreation_ground', 'village_green') or nat in ('grassland', 'heath', 'fell') or tour == 'zoo':
                 g_c = poly.intersection(CLIP_BOX)
                 if g_c.area >= 200:
                     green_spaces.append({'name': name, 'kind': 'park', 'geom': g_c})
@@ -2685,6 +2685,11 @@ out body;
     it_x0, it_z0, it_x1, it_z1 = cfg['in_town_box']
     IN_TOWN_BOX = box(it_x0, it_z0, it_x1, it_z1)
     parks_prep = prep(parks_union.buffer(2.0)) if not parks_union.is_empty else None
+    named_parks = [
+        (g['geom'].bounds, g['geom'], g['name'])
+        for g in sorted(green_spaces, key=lambda x: x['geom'].area, reverse=True)
+        if g.get('name') and not g['geom'].is_empty
+    ]
     blocks = []
     lawn_polys = []
     parking_list = [(pk.bounds, pk) for pk in parts(parking_union)]
@@ -2702,10 +2707,17 @@ out body;
             c = q.centroid
             paved = DOWNTOWN_BOX.contains(c)
             is_park_block = bool(parks_prep and parks_prep.intersects(q))
-            has_lawn = 0 if (paved and not is_park_block) else 1
+            want_lawn = not (paved and not is_park_block)
             park_frac = 0.85 if is_park_block else 0.0
-            blocks.append([flat(ring), [], park_frac, '', is_rect, None, has_lawn])
-            if has_lawn and (not is_huge_map or is_park_block or IN_TOWN_BOX.contains(c)):
+            park_name = ''
+            if is_park_block and named_parks:
+                qb = q.bounds
+                for (gx0, gz0, gx1, gz1), g_geom, g_name in named_parks:
+                    if gx1 > qb[0] and gx0 < qb[2] and gz1 > qb[1] and gz0 < qb[3] and g_geom.intersects(q):
+                        park_name = g_name
+                        break
+            block_lawns = []
+            if want_lawn:
                 inner = q_ccw.buffer(-SIDEWALK, join_style=2)
                 if not inner.is_empty:
                     ib = inner.bounds
@@ -2718,7 +2730,11 @@ out body;
                     for ip in tiled(parts(inner.simplify(0.8 if is_huge_map else 0.6)), cell=(200.0 if is_huge_map else 120.0)):
                         if ip.area >= (60 if is_huge_map else 25):
                             ip = orient(ip, -1.0)
-                            lawn_polys.append([flat(list(ip.exterior.coords)[:-1])] + [flat(list(r.coords)[:-1]) for r in ip.interiors if Polygon(r).area > 20])
+                            block_lawns.append([flat(list(ip.exterior.coords)[:-1])] + [flat(list(r.coords)[:-1]) for r in ip.interiors if Polygon(r).area > 20])
+            has_lawn = 1 if block_lawns else 0
+            blocks.append([flat(ring), [], park_frac, park_name, is_rect, None, has_lawn])
+            if block_lawns:
+                lawn_polys.extend(block_lawns)
 
     print(f"Blocks: {len(blocks)}, Lawns: {len(lawn_polys)}")
 
@@ -3029,7 +3045,13 @@ out body;
             dist_acc += seg_len
 
     park_density_mult = float(city_tree_cov.get('parkTreeDensity', 1.0))
-    forested_kw = ('presidio', 'golden gate park', 'stanley park', 'table mountain', 'lands end', 'sutro', 'mclaren', 'lincoln park', 'buena vista', 'glen canyon', 'forest', 'woods', 'arboretum', 'botanical', 'reserve', 'tiergarten', 'bois')
+    forested_kw = (
+        'presidio', 'golden gate park', 'stanley park', 'table mountain', 'lands end', 'sutro',
+        'mclaren', 'lincoln park', 'buena vista', 'glen canyon', 'forest', 'woods', 'arboretum',
+        'botanical', 'botanic', 'reserve', 'tiergarten', 'bois', 'yoyogi', 'meiji', 'gyoen',
+        'imperial', 'peak', 'tijuca', 'floresta', 'bosque', 'montju', 'vondel', 'hyde', 'regent',
+        'kensington', 'victoria', 'emerald', 'discovery', 'domain', 'shrine', 'sanctuary', 'hill', 'mountain',
+    )
     green_sorted = sorted(green_spaces, key=lambda g: 0 if g['kind'] == 'wood' else 1)
     for gs in green_sorted:
         gp = gs['geom']
@@ -3044,7 +3066,7 @@ out body;
         elif is_forested:
             density = 0.0016 * park_density_mult
             max_gs_trees = 4500
-            w_kind = 0 if 'presidio' in gname_l or 'forest' in gname_l or 'woods' in gname_l else 1
+            w_kind = 0 if any(k in gname_l for k in ('presidio', 'forest', 'woods', 'floresta', 'bosque', 'bois', 'mountain', 'peak', 'stanley')) else 1
         else:
             density = 0.0009 * park_density_mult
             max_gs_trees = 900
