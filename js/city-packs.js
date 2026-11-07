@@ -4126,9 +4126,66 @@ function normalizeCityPack(spec = {}, fallbackId = 'localcity') {
     landmarks: { ...(rawArch.landmarks || {}) }
   };
 
+  const LEFT_DRIVE_IDS = new Set(['sydney', 'hongkong', 'london', 'tokyo', 'capetown']);
+  const tzLower = String(spec.timeZone || '').toLowerCase();
+  const inferredDriveSide = spec.driveSide || (
+    LEFT_DRIVE_IDS.has(id) ||
+    tzLower.startsWith('australia/') ||
+    tzLower.includes('london') ||
+    tzLower.includes('tokyo') ||
+    tzLower.includes('hong_kong') ||
+    tzLower.includes('johannesburg')
+      ? 'left'
+      : 'right'
+  );
+  const WATERCRAFT_BY_CITY = {
+    venice: 'gondola',
+    amsterdam: 'canal_boat',
+    paris: 'canal_boat',
+    london: 'canal_boat',
+    sanfrancisco: 'harbor_craft',
+    sydney: 'harbor_craft',
+    hongkong: 'harbor_craft',
+    vancouver: 'harbor_craft',
+    capetown: 'harbor_craft',
+    seattle: 'harbor_craft',
+    tampa: 'harbor_craft',
+    pompanobeach: 'harbor_craft',
+    rio: 'harbor_craft',
+    barcelona: 'harbor_craft',
+    boston: 'harbor_craft',
+    newyork: 'harbor_craft'
+  };
+  const DEFAULT_WEATHER_BY_CITY = {
+    sanfrancisco: { kind: 'partly', text: 'Partly Cloudy & Bay Breeze', condition: 'Partly Cloudy & Bay Breeze', tempF: 62, clouds: 0.32, windSpeed: 12, windDir: 285 },
+    sydney:       { kind: 'fair',   text: 'Sunny & Harbour Breeze',     condition: 'Sunny & Harbour Breeze',     tempF: 74, clouds: 0.18, windSpeed: 11, windDir: 75 },
+    venice:       { kind: 'fair',   text: 'Sunny Adriatic Sky',         condition: 'Sunny Adriatic Sky',         tempF: 71, clouds: 0.20, windSpeed: 6,  windDir: 135 },
+    amsterdam:    { kind: 'partly', text: 'North Sea Scattered Clouds', condition: 'North Sea Scattered Clouds', tempF: 61, clouds: 0.48, windSpeed: 11, windDir: 250 },
+    hongkong:     { kind: 'partly', text: 'Warm Harbour Haze',          condition: 'Warm Harbour Haze',          tempF: 79, clouds: 0.38, windSpeed: 9,  windDir: 110 },
+    paris:        { kind: 'partly', text: 'Fair Ile-de-France Sky',     condition: 'Fair Ile-de-France Sky',     tempF: 66, clouds: 0.30, windSpeed: 7,  windDir: 240 },
+    london:       { kind: 'cloudy', text: 'Thames Partly Cloudy',       condition: 'Thames Partly Cloudy',       tempF: 60, clouds: 0.54, windSpeed: 9,  windDir: 245 },
+    tokyo:        { kind: 'fair',   text: 'Clear Kanto Sky',            condition: 'Clear Kanto Sky',            tempF: 67, clouds: 0.22, windSpeed: 8,  windDir: 160 },
+    barcelona:    { kind: 'fair',   text: 'Mediterranean Sun',          condition: 'Mediterranean Sun',          tempF: 75, clouds: 0.15, windSpeed: 8,  windDir: 140 },
+    rio:          { kind: 'fair',   text: 'Tropical Atlantic Sun',      condition: 'Tropical Atlantic Sun',      tempF: 83, clouds: 0.22, windSpeed: 9,  windDir: 120 },
+    vancouver:    { kind: 'partly', text: 'Pacific Northwest Breeze',   condition: 'Pacific Northwest Breeze',   tempF: 61, clouds: 0.44, windSpeed: 8,  windDir: 280 },
+    capetown:     { kind: 'fair',   text: 'Clear Cape Doctor Breeze',   condition: 'Clear Cape Doctor Breeze',   tempF: 70, clouds: 0.20, windSpeed: 14, windDir: 165 },
+    chicago:      { kind: 'partly', text: 'Lakefront Breeze',           condition: 'Lakefront Breeze',           tempF: 66, clouds: 0.30, windSpeed: 13, windDir: 70 },
+    boston:       { kind: 'partly', text: 'Harbor Fair Sky',            condition: 'Harbor Fair Sky',            tempF: 65, clouds: 0.32, windSpeed: 10, windDir: 260 },
+    seattle:      { kind: 'cloudy', text: 'Puget Sound Marine Clouds',  condition: 'Puget Sound Marine Clouds',  tempF: 60, clouds: 0.52, windSpeed: 8,  windDir: 220 },
+    tampa:        { kind: 'fair',   text: 'Gulf Bay Sunshine',          condition: 'Gulf Bay Sunshine',          tempF: 82, clouds: 0.24, windSpeed: 9,  windDir: 250 },
+    pompanobeach: { kind: 'fair',   text: 'Atlantic Trade Breeze',      condition: 'Atlantic Trade Breeze',      tempF: 82, clouds: 0.22, windSpeed: 11, windDir: 105 },
+    oakland:      { kind: 'fair',   text: 'East Bay Sunshine',          condition: 'East Bay Sunshine',          tempF: 68, clouds: 0.20, windSpeed: 9,  windDir: 290 },
+    newyork:      { kind: 'fair',   text: 'Clear Hudson Sky',           condition: 'Clear Hudson Sky',           tempF: 68, clouds: 0.25, windSpeed: 8,  windDir: 270 },
+    annarbor:     { kind: 'fair',   text: 'Great Lakes Fair Sky',       condition: 'Great Lakes Fair Sky',       tempF: 67, clouds: 0.28, windSpeed: 7,  windDir: 240 },
+    royaloak:     { kind: 'fair',   text: 'Midwest Fair Sky',           condition: 'Midwest Fair Sky',           tempF: 67, clouds: 0.28, windSpeed: 8,  windDir: 245 }
+  };
+
   return {
     ...spec,
     id,
+    driveSide: inferredDriveSide,
+    watercraft: spec.watercraft || WATERCRAFT_BY_CITY[id] || 'kayak',
+    defaultWeather: spec.defaultWeather || DEFAULT_WEATHER_BY_CITY[id] || { kind: 'fair', text: 'Clear', condition: 'Clear', tempF: 68, clouds: 0.25, windSpeed: 6, windDir: 270 },
     isLocal: Boolean(spec.isLocal ?? !BUILTIN_CITY_IDS.has(id)),
     _hasDefaultCoords: !hasExplicitCoords,
     _hasDefaultLandmarks: !hasExplicitLandmarks,
@@ -4357,6 +4414,25 @@ async function loadLocalCityPacks(targetCityId = null, { fetchManifest = false }
     }
   }
   return CITY_PACKS;
+}
+
+for (const [cid, pack] of Object.entries(CITY_PACKS)) {
+  if (!pack.driveSide) {
+    pack.driveSide = ['sydney', 'hongkong', 'london', 'tokyo', 'capetown'].includes(cid) ? 'left' : 'right';
+  }
+  if (!pack.watercraft) {
+    pack.watercraft = cid === 'venice'
+      ? 'gondola'
+      : ['amsterdam', 'paris', 'london'].includes(cid)
+        ? 'canal_boat'
+        : ['sanfrancisco', 'sydney', 'hongkong', 'vancouver', 'capetown', 'seattle', 'tampa', 'pompanobeach', 'rio', 'barcelona', 'boston', 'newyork'].includes(cid)
+          ? 'harbor_craft'
+          : 'kayak';
+  }
+  if (!pack.defaultWeather) {
+    const norm = normalizeCityPack(pack, cid);
+    pack.defaultWeather = norm.defaultWeather;
+  }
 }
 
 await loadLocalCityPacks(BUILTIN_CITY_IDS.has(ACTIVE_CITY_ID) ? null : ACTIVE_CITY_ID);

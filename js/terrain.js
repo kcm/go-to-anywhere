@@ -120,7 +120,9 @@ function buildDecks(g, r) {
     for (let i = 1; i < S.length; i++) L.push(s += Math.hypot(S[i][0] - S[i - 1][0], S[i][1] - S[i - 1][1]));
     if (s < 3) continue;
     const ha = baseHeight(g, ...S[0]), hb = baseHeight(g, ...S.at(-1));
-    const clear = b.kind === 2 ? 2.6 : 3.7, reach = b.kind === 2 ? 0 : b.w / 2 + 2.5;
+    const spanClear = b.kind === 2 ? 0 : Math.min(14.0, Math.max(0, (s - 80) * 0.014));
+    const clear = (b.kind === 2 ? 2.6 : 3.7) + spanClear, reach = b.kind === 2 ? 0 : b.w / 2 + 2.5;
+    const archCrown = b.kind === 2 ? 0.4 : Math.min(12.0, Math.max(0.5, (s - 40) * 0.012));
     const wet = S.map(([x, z], i) => {
       const j = Math.min(i + 1, S.length - 1), k = Math.max(i - 1, 0);
       let tx = S[j][0] - S[k][0], tz = S[j][1] - S[k][1];
@@ -130,11 +132,14 @@ function buildDecks(g, r) {
         || digAt(r, x + tz * (reach + Math.abs(m) * 2), z - tx * (reach + Math.abs(m) * 2)) > 0.02);
     });
     let H = S.map(([x, z], i) => {
-      const h = ha + (hb - ha) * (L[i] / s);
-      return wet[i] ? Math.max(h, levelAt(r, x, z) + clear) : h;
+      const u = L[i] / s;
+      const arch = 4 * u * (1 - u) * archCrown;
+      const h = ha + (hb - ha) * u + (wet[i] ? arch : arch * 0.35);
+      const groundH = wet[i] ? levelAt(r, x, z) + clear : baseHeight(g, x, z);
+      return Math.max(h, groundH);
     });
     // eased into a gentle arch, its ends kept on the ground
-    for (let pass = 0; pass < 6; pass++) {
+    for (let pass = 0; pass < 8; pass++) {
       H = H.map((h, i) => (i === 0 || i === H.length - 1 ? h : Math.max(h, (H[i - 1] + h + H[i + 1]) / 3)));
     }
     const deck = { kind: b.kind, w: b.w, half: b.kind === 2 ? b.w / 2 : b.w / 2 + 1.5, length: s, points: S.map((p, i) => [p[0], p[1], L[i], H[i], wet[i]]) };

@@ -5,7 +5,7 @@ import { GamepadControls } from './gamepad-controls.js';
 import { CAMERA_PRESETS } from './cameras.js';
 import { sunTimes } from './lighting.js';
 import { CityMapSystem } from './city-map.js';
-import { groundHeight } from './terrain.js';
+import { groundHeight, nearestWater } from './terrain.js';
 import { fetchWeather } from './weather.js';
 import { fetchRiverFlow } from './river-gauge.js';
 
@@ -239,8 +239,24 @@ export function setupHudUI({
     if (mode === cm.activeMode || !cm.entities[mode]) { selectMode(mode); return; }
     const here = cm.getActiveEntity().position, there = cm.entities[mode].position;
     const close = Math.hypot(there.x - here.x, there.z - here.z) < 40;
+    const prevHeading = cm.getActiveEntity().heading || 0;
     selectMode(mode);
-    if (!close) goToStart(mode);
+    if (!close) {
+      if (mode === 'kayak') {
+        const nearW = nearestWater(here.x, here.z, 180);
+        if (nearW) {
+          const h = cm.downstreamHeading(nearW.x, nearW.z, prevHeading);
+          cm.teleportActiveTo(nearW.x, nearW.z, h);
+          touchControls.reset();
+          gamepadControls.reset();
+          cameraSystem.resetForTeleport();
+          selectCamera('chase', true);
+          savePlayerState();
+          return;
+        }
+      }
+      goToStart(mode);
+    }
   }
 
   function resetGame() {

@@ -183,8 +183,9 @@ function buildBusSignGeometry() {
   panels.push(front);
   const sideZ = 3.74;
   const sideY = 2.26;
-  const side = new THREE.PlaneGeometry(1.08, 0.19).rotateY(-Math.PI / 2);
-  side.translate(-(carBodyHalfWidthAt(s, sideZ, sideY) + 0.007), sideY, sideZ);
+  const curbSign = CITY_PACK.driveSide === 'left' ? 1 : -1;
+  const side = new THREE.PlaneGeometry(1.08, 0.19).rotateY(curbSign * Math.PI / 2);
+  side.translate(curbSign * (carBodyHalfWidthAt(s, sideZ, sideY) + 0.007), sideY, sideZ);
   panels.push(side);
   const yR = 2.58;
   const zR0 = s.zRear - busRake(yR - 0.1, s.zRear, -0.45);
@@ -390,7 +391,7 @@ function createLoftedBusMaterial() {
   const front = smoothstep(0.15, 0.42, n.z).mul(smoothstep(s.zFront - 0.98, s.zFront - 0.9, p.z)).mul(isBody);
   const rear = smoothstep(0.15, 0.42, n.z.negate()).mul(smoothstep(s.zRear + 0.98, s.zRear + 0.9, p.z)).mul(isBody);
   const side = smoothstep(0.45, 0.72, abs(n.x)).mul(isSkin);
-  const curb = step(p.x, 0.0);
+  const curb = CITY_PACK.driveSide === 'left' ? step(0.0, p.x) : step(p.x, 0.0);
 
   // 1. Front mask: unified black Xcelsior windshield + destination sign surround, split windshield glass & wipers
   const frontMaskEdge = rBoxEdge(p.x, p.y.sub(1.97), 1.22, 0.8, 0.15, invX, invY);
@@ -546,13 +547,24 @@ function createLoftedBusMaterial() {
   let baseLivery;
   if (ACTIVE_CITY_ID === 'newyork') {
     baseLivery = mix(modernLivery, legacyLivery, isLegacy);
+  } else if (ACTIVE_CITY_ID === 'london') {
+    const tflRed = color(CITY_PACK.transit?.bodyColor ?? 0xdc241f);
+    const tflGold = color(CITY_PACK.transit?.accentColor ?? 0xffd300);
+    const whiteBelt = band(p.y.sub(1.16), 0.045, invY).mul(max(side, rear));
+    const goldPin = band(p.y.sub(1.08), 0.018, invY).mul(side);
+    baseLivery = mix(mix(tflRed, color(0xf7f8fa), whiteBelt), tflGold, goldPin);
   } else {
     const shell = max(side, max(front, rear));
-    const upperHalf = one.sub(covAt(1.2, p.y, invY)).mul(shell);
-    const bandHex = CITY_PACK.transit?.bandColor ?? 0xd83b1e;
+    const upperCrown = covUp(2.44, p.y, invY).mul(shell);
     const bodyHex = CITY_PACK.transit?.bodyColor ?? 0xf4f6f8;
-    let rideLivery = mix(color(bodyHex), color(0xdde1e5), upperHalf);
-    rideLivery = mix(rideLivery, color(bandHex), band(p.y.sub(0.58), 0.16, invY).mul(max(side, rear)));
+    const bandHex = CITY_PACK.transit?.bandColor ?? 0xd83b1e;
+    const accentHex = CITY_PACK.transit?.accentColor ?? bandHex;
+    const beltBand = band(p.y.sub(1.04), 0.14, invY).mul(shell);
+    const lowerBand = band(p.y.sub(0.58), 0.15, invY).mul(max(side, rear));
+    const accentRibbon = band(p.y.sub(0.84), 0.045, invY).mul(shell);
+    let rideLivery = mix(color(bodyHex), color(bandHex), max(lowerBand, beltBand.mul(isSBS)));
+    rideLivery = mix(rideLivery, color(accentHex), max(accentRibbon, midGoldBand.mul(one.sub(isLegacy))));
+    rideLivery = mix(rideLivery, color(bandHex), upperCrown.mul(0.85));
     baseLivery = rideLivery;
   }
   const livery = mix(baseLivery, color(0x181c22), skirt).mul(shadeY);

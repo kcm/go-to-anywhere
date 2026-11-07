@@ -344,7 +344,7 @@ CITY_CONFIGS = {
         'overpass_tiles': (2, 2),
         'base_elev': 0.0,
         'downtown_box': (-1350, -1450, 1450, 1150),
-        'in_town_box': (-3600, -2600, 2100, 3600),
+        'in_town_box': (-9200, -3200, 2600, 4200),
         'metered_regex': re.compile(
             r'^(Market St|Mission St|Howard St|Folsom St|Harrison St|Bryant St|Brannan St|Townsend St|'
             r'Geary St|Geary Blvd|Post St|Sutter St|Bush St|Pine St|California St|Sacramento St|Clay St|Washington St|Jackson St|'
@@ -1869,6 +1869,7 @@ out body;
 
     drive = []
     trails_raw = []
+    tree_row_ways = []
     rail_tracks = []
     rail_by_name = defaultdict(list)
     water_polys = []
@@ -1885,6 +1886,16 @@ out body;
     golf_paths = []
     golf_pins = []
 
+    def is_bridge_tag(tags):
+        b = tags.get('bridge')
+        if b and b not in ('no', 'false', '0'):
+            return True
+        if tags.get('bridge:structure') or tags.get('bridge:name') or tags.get('man_made') == 'bridge':
+            return True
+        if 'Bridge' in (tags.get('name') or '') and tags.get('layer') in ('1', '2', '3', '4', '5'):
+            return True
+        return False
+
     for wid, w in ways.items():
         t = w.get('tags', {})
         if not t:
@@ -1893,6 +1904,9 @@ out body;
         if len(pts) < 2:
             continue
         is_closed = len(pts) >= 4 and pts[0] == pts[-1]
+
+        if not is_closed and t.get('natural') == 'tree_row':
+            tree_row_ways.append(pts)
 
         hw = t.get('highway')
         if hw in DRIVE and t.get('area') != 'yes' and t.get('access') not in ('private', 'no'):
@@ -1916,7 +1930,7 @@ out body;
                 'dir': d,
                 'hw': hw_flag,
                 'name': name,
-                'bridge': t.get('bridge') in ('yes', 'viaduct', 'cantilever', 'movable', 'trestle'),
+                'bridge': is_bridge_tag(t),
                 'cls': road_class(t),
                 'bike': bike,
                 'lf': int_tag(t, 'lanes:forward'),
@@ -2035,7 +2049,7 @@ out body;
         leis = t.get('leisure')
         tour = t.get('tourism')
         name = t.get('name', '')
-        if not (nat in ('water', 'wood', 'wetland', 'bay') or lu in ('park', 'grass', 'meadow', 'recreation_ground', 'cemetery', 'forest', 'basin', 'reservoir') or leis in ('park', 'garden', 'golf_course', 'nature_reserve') or tour == 'zoo'):
+        if not (nat in ('water', 'wood', 'scrub', 'wetland', 'bay') or lu in ('park', 'grass', 'meadow', 'recreation_ground', 'cemetery', 'forest', 'basin', 'reservoir') or leis in ('park', 'garden', 'golf_course', 'nature_reserve') or tour == 'zoo'):
             continue
         for poly in relation_to_polygons(rel):
             if nat == 'water' and not t.get('layer') and t.get('intermittent') != 'yes':
@@ -2051,7 +2065,7 @@ out body;
                 g_c = poly.intersection(CLIP_BOX)
                 if g_c.area >= 200:
                     green_spaces.append({'name': name or 'Cemetery', 'kind': 'cemetery', 'geom': g_c})
-            elif nat == 'wood' or lu == 'forest':
+            elif nat in ('wood', 'scrub') or lu == 'forest':
                 g_c = poly.intersection(CLIP_BOX)
                 if g_c.area >= 200:
                     green_spaces.append({'name': name, 'kind': 'wood', 'geom': g_c})
@@ -2142,25 +2156,28 @@ out body;
 
     river_bridges = []
     if not water.is_empty:
-        w_prep = prep(water.buffer(4.0))
+        w_buf = water.buffer(5.0)
+        w_prep = prep(w_buf)
         for r in drive:
-            if r['bridge'] and not r['hw']:
+            if r['bridge']:
                 ls = LineString(r['pts'])
-                if ls.length < 320 and w_prep.intersects(ls):
-                    r['is_river_bridge'] = True
-                    river_bridges.append([0, r['w']] + flat(r['pts']))
+                if w_prep.intersects(ls):
+                    if ls.length < 320 or ls.intersection(w_buf).length >= 8.0:
+                        r['is_river_bridge'] = True
+                        if ls.length < 3600:
+                            river_bridges.append([0, r['w']] + flat(rdp(r['pts'], 0.6)))
         for tr_flat, is_br, _ in rail_tracks:
             if is_br:
                 pts = list(zip(tr_flat[0::2], tr_flat[1::2]))
                 if len(pts) >= 2:
                     ls = LineString(pts)
-                    if ls.length < 320 and w_prep.intersects(ls):
+                    if ls.length < 2500 and w_prep.intersects(ls):
                         river_bridges.append([1, 5.0] + tr_flat)
         for t_tags, pts in trails_raw:
-            if t_tags.get('bridge') in ('yes', 'boardwalk', 'viaduct'):
+            if t_tags.get('bridge') in ('yes', 'boardwalk', 'viaduct', 'suspension'):
                 ls = LineString(pts)
-                if ls.length < 320 and w_prep.intersects(ls):
-                    river_bridges.append([2, 2.8] + flat(pts))
+                if ls.length < 600 and w_prep.intersects(ls):
+                    river_bridges.append([2, 2.8] + flat(rdp(pts, 0.5)))
 
     surface = [LineString(r['pts']).buffer(r['w'] / 2, quad_segs=3) for r in drive if not r.get('is_river_bridge')]
     road_union = unary_union(surface).buffer(0) if surface else Polygon()
@@ -2464,10 +2481,21 @@ out body;
                         seen_addr.add(key)
                         addresses.extend([r1(x), r1(z), num])
 
-    # Load Street View + Satellite + OSM sampled archetypes (housingDensity & treeCoverage)
+    # Load or compute Street View + Satellite + OSM sampled archetypes (housingDensity & treeCoverage)
     sampled_arch_path = os.path.join(CACHE_DIR, f"{city_id}_archetypes.json")
     sampled_archetypes = {}
-    if os.path.isfile(sampled_arch_path):
+    if not os.path.isfile(sampled_arch_path):
+        try:
+            import importlib.util
+            sampler_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sample-city-archetypes.py')
+            if os.path.isfile(sampler_path):
+                s_spec = importlib.util.spec_from_file_location('sample_city_archetypes', sampler_path)
+                s_mod = importlib.util.module_from_spec(s_spec)
+                s_spec.loader.exec_module(s_mod)
+                sampled_archetypes = s_mod.sample_city_archetypes(city_id, num_samples=8, write_geodata=False) or {}
+        except Exception as e:
+            print(f"  Note: Archetype auto-sampler skipped ({e})")
+    if not sampled_archetypes and os.path.isfile(sampled_arch_path):
         try:
             with open(sampled_arch_path, 'r', encoding='utf-8') as f:
                 sampled_archetypes = json.load(f)
@@ -2656,6 +2684,7 @@ out body;
     is_huge_map = (E_X - W_X) * (S_Z - N_Z) > 60_000_000
     it_x0, it_z0, it_x1, it_z1 = cfg['in_town_box']
     IN_TOWN_BOX = box(it_x0, it_z0, it_x1, it_z1)
+    parks_prep = prep(parks_union.buffer(2.0)) if not parks_union.is_empty else None
     blocks = []
     lawn_polys = []
     parking_list = [(pk.bounds, pk) for pk in parts(parking_union)]
@@ -2672,9 +2701,11 @@ out body;
             is_rect = 0
             c = q.centroid
             paved = DOWNTOWN_BOX.contains(c)
-            has_lawn = 0 if paved else 1
-            blocks.append([flat(ring), [], 0.0, '', is_rect, None, has_lawn])
-            if has_lawn and (not is_huge_map or IN_TOWN_BOX.contains(c)):
+            is_park_block = bool(parks_prep and parks_prep.intersects(q))
+            has_lawn = 0 if (paved and not is_park_block) else 1
+            park_frac = 0.85 if is_park_block else 0.0
+            blocks.append([flat(ring), [], park_frac, '', is_rect, None, has_lawn])
+            if has_lawn and (not is_huge_map or is_park_block or IN_TOWN_BOX.contains(c)):
                 inner = q_ccw.buffer(-SIDEWALK, join_style=2)
                 if not inner.is_empty:
                     ib = inner.bounds
@@ -2780,6 +2811,29 @@ out body;
                 w_sign = min(7.5, max(2.4, 0.42 * len(name) + 0.8))
                 signs_out += [r1(x), r1(z), int(abs(x * 7 + z * 13)) % 360, r1(w_sign), 3.4, sign_name_id[name], cat]
 
+    for wid, w in ways.items():
+        t = w.get('tags', {})
+        if not t:
+            continue
+        name = (t.get('name') or '').strip()
+        if not name or len(name) > 34 or name in sign_name_id:
+            continue
+        amen = t.get('amenity')
+        cat = SIGN_CATS.get(amen) if amen else None
+        if cat is None and t.get('tourism') in ('hotel', 'museum', 'gallery'):
+            cat = SIGN_CATS[t['tourism']]
+        if cat is None and t.get('shop'):
+            cat = 1 if t['shop'] in ('bakery', 'coffee', 'confectionery', 'pastry') else 3
+        if cat is not None:
+            pts = way_coords(w)
+            if pts:
+                sx, sz = pts[0]
+                if W_X <= sx <= E_X and N_Z <= sz <= S_Z:
+                    sign_name_id[name] = len(sign_names)
+                    sign_names.append(name)
+                    w_sign = min(7.5, max(2.4, 0.42 * len(name) + 0.8))
+                    signs_out += [r1(sx), r1(sz), int(abs(sx * 7 + sz * 13)) % 360, r1(w_sign), 3.4, sign_name_id[name], cat]
+
     # Synthesize streetlights along arterials and downtown streets where not mapped in OSM
     lamp_grid = {(round(streetlights[i] / 18), round(streetlights[i + 1] / 18)) for i in range(0, len(streetlights), 4)}
     for r in drive:
@@ -2881,6 +2935,9 @@ out body;
         return False
 
     water_prep_trees = prep(water_open.buffer(3.0)) if not water_open.is_empty else None
+    road_prep_trees = prep(road_union.buffer(2.2)) if not road_union.is_empty else None
+    parking_prep_trees = prep(parking_union.buffer(1.5)) if not parking_union.is_empty else None
+    wood_cells = set()
 
     for nid, (x, z, tags) in nodes.items():
         if tags and tags.get('natural') == 'tree' and (W_X <= x <= E_X and N_Z <= z <= S_Z):
@@ -2890,7 +2947,36 @@ out body;
                     k = abs(qx * 17 + qz * 31) % 7
                     h_q = min(255, int(round((10.0 + (abs(qx * 13 + qz * 29) % 36) * 0.25) * 4)))
                     tree_dict[(qx, qz)] = (k, h_q)
-                woods_flat += [r1(x), r1(z), 1]
+                wc = (int(round(x / 4)), int(round(z / 4)))
+                if wc not in wood_cells:
+                    wood_cells.add(wc)
+                    woods_flat += [r1(x), r1(z), 1]
+
+    for pts in tree_row_ways:
+        for i in range(len(pts) - 1):
+            x0, z0 = pts[i]
+            x1, z1 = pts[i + 1]
+            seg_len = math.hypot(x1 - x0, z1 - z0)
+            if seg_len < 3.0:
+                continue
+            steps = max(1, int(seg_len // 9.0))
+            for s in range(steps + 1):
+                u = s / steps
+                px = x0 + (x1 - x0) * u
+                pz = z0 + (z1 - z0) * u
+                if not (W_X + 10 <= px <= E_X - 10 and N_Z + 10 <= pz <= S_Z - 10):
+                    continue
+                if hits_building(px, pz):
+                    continue
+                qx, qz = int(round(px * 2)), int(round(pz * 2))
+                if (qx, qz) not in tree_dict:
+                    k = abs(qx * 17 + qz * 31) % 7
+                    h_q = min(255, int(round((11.0 + (abs(qx * 13 + qz * 29) % 32) * 0.25) * 4)))
+                    tree_dict[(qx, qz)] = (k, h_q)
+                wc = (int(round(px / 4)), int(round(pz / 4)))
+                if wc not in wood_cells:
+                    wood_cells.add(wc)
+                    woods_flat += [r1(px), r1(pz), 1]
 
     base_tree_spacing = float(city_tree_cov.get('streetTreeSpacing', 22.0))
     base_tree_density = float(city_tree_cov.get('streetTreeDensity', 0.88))
@@ -2943,24 +3029,58 @@ out body;
             dist_acc += seg_len
 
     park_density_mult = float(city_tree_cov.get('parkTreeDensity', 1.0))
-    for gs in green_spaces:
+    forested_kw = ('presidio', 'golden gate park', 'stanley park', 'table mountain', 'lands end', 'sutro', 'mclaren', 'lincoln park', 'buena vista', 'glen canyon', 'forest', 'woods', 'arboretum', 'botanical', 'reserve', 'tiergarten', 'bois')
+    green_sorted = sorted(green_spaces, key=lambda g: 0 if g['kind'] == 'wood' else 1)
+    for gs in green_sorted:
         gp = gs['geom']
-        if gp.is_empty or gp.area < 400:
+        if gp.is_empty or gp.area < 300:
             continue
-        density = (0.0018 if gs['kind'] == 'wood' else 0.0005) * park_density_mult
+        gname_l = (gs.get('name') or '').lower()
+        is_forested = gs['kind'] == 'wood' or gp.area > 250000 or any(k in gname_l for k in forested_kw)
+        if gs['kind'] == 'wood':
+            density = 0.0028 * park_density_mult
+            max_gs_trees = 2400
+            w_kind = 0
+        elif is_forested:
+            density = 0.0016 * park_density_mult
+            max_gs_trees = 4500
+            w_kind = 0 if 'presidio' in gname_l or 'forest' in gname_l or 'woods' in gname_l else 1
+        else:
+            density = 0.0009 * park_density_mult
+            max_gs_trees = 900
+            w_kind = 1
+        target_trees = min(max_gs_trees, max(2, int(gp.area * density)))
         minx, minz, maxx, maxz = gp.bounds
-        n_trees = min(500, int(gp.area * density))
         gp_prep = prep(gp)
-        w_kind = 0 if gs['kind'] == 'wood' else 1
-        for _ in range(n_trees):
-            px = rng.uniform(minx, maxx)
-            pz = rng.uniform(minz, maxz)
-            if not (W_X + 10 <= px <= E_X - 10 and N_Z + 10 <= pz <= S_Z - 10):
-                continue
-            if gp_prep.contains(Point(px, pz)) and not hits_building(px, pz):
-                if water_prep_trees and water_prep_trees.contains(Point(px, pz)):
+        step = max(11.0, math.sqrt(gp.area / max(1, target_trees)))
+        gx = minx + rng.uniform(1.5, step * 0.85)
+        added_gs = 0
+        while gx < maxx and added_gs < target_trees:
+            gz = minz + rng.uniform(1.5, step * 0.85)
+            while gz < maxz and added_gs < target_trees:
+                px = gx + rng.uniform(-step * 0.38, step * 0.38)
+                pz = gz + rng.uniform(-step * 0.38, step * 0.38)
+                gz += step
+                if not (W_X + 10 <= px <= E_X - 10 and N_Z + 10 <= pz <= S_Z - 10):
                     continue
+                wc = (int(round(px / 4)), int(round(pz / 4)))
+                if wc in wood_cells:
+                    continue
+                pt = Point(px, pz)
+                if not gp_prep.contains(pt):
+                    continue
+                if hits_building(px, pz):
+                    continue
+                if water_prep_trees and water_prep_trees.contains(pt):
+                    continue
+                if road_prep_trees and road_prep_trees.contains(pt):
+                    continue
+                if parking_prep_trees and parking_prep_trees.contains(pt):
+                    continue
+                wood_cells.add(wc)
                 woods_flat += [r1(px), r1(pz), w_kind]
+                added_gs += 1
+            gx += step
 
     street_trees = sorted(tree_dict.keys(), key=lambda p: morton(p[0] / 2, p[1] / 2))
     txs, tzs = bytearray(), bytearray()

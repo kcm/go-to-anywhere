@@ -167,6 +167,8 @@ describe('Headless Browser Multi-City 3D Runtime Verification', () => {
       cdp.on('Runtime.exceptionThrown', onException);
 
       try {
+        await cdp.send('Page.navigate', { url: 'about:blank' }, sessionId);
+        await new Promise((r) => setTimeout(r, 150));
         await cdp.send('Page.navigate', { url: `http://127.0.0.1:${port}/?city=${exp.id}` }, sessionId);
 
         const deadline = Date.now() + 45000;

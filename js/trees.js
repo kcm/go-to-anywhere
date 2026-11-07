@@ -1413,6 +1413,7 @@ function createTreeField(_scene, sites, colliders = [], { stream = 0, at = null 
   const planted = new Map();
   let onObstacles = null;
   const fieldObstacles = new Map();
+  let pendingChunks = false;
   function streamChunks(x, z, all = false) {
     const added = [], removed = [];
     for (const [k, field] of planted) {
@@ -1422,10 +1423,11 @@ function createTreeField(_scene, sites, colliders = [], { stream = 0, at = null 
       for (const o of fieldObstacles.get(field)) removed.push(o);
       fieldObstacles.delete(field);
     }
-    // the nearest one not planted yet (all of them within reach as the city's built)
+    // the nearest one not planted yet (all of them within reach as the city's built or on a teleport)
     const want = [...chunks.keys()].filter((k) => !planted.has(k) && chunkDistance(k, x, z) < stream)
       .sort((a, b) => chunkDistance(a, x, z) - chunkDistance(b, x, z));
-    for (const k of all ? want : want.slice(0, 1)) {
+    const batch = all ? want : want.slice(0, 1);
+    for (const k of batch) {
       const field = plant(unpack(chunks.get(k)), true);
       group.add(field.group);
       planted.set(k, field);
@@ -1433,6 +1435,7 @@ function createTreeField(_scene, sites, colliders = [], { stream = 0, at = null 
       fieldObstacles.set(field, obs);
       for (const o of obs) added.push(o);
     }
+    pendingChunks = want.length > batch.length;
     if (added.length || removed.length) onObstacles?.(added, removed);
   }
   const start = at || { x: 0, z: 0 };
@@ -1443,9 +1446,10 @@ function createTreeField(_scene, sites, colliders = [], { stream = 0, at = null 
   group.matrixWorldAutoUpdate = false;
   let lastX = start.x, lastZ = start.z;
   function update(position) {
-    if (Math.hypot(position.x - lastX, position.z - lastZ) > 60) {
+    const stepD = Math.hypot(position.x - lastX, position.z - lastZ);
+    if (stepD > 60 || pendingChunks) {
       lastX = position.x; lastZ = position.z;
-      streamChunks(lastX, lastZ);
+      streamChunks(lastX, lastZ, stepD > 350);
     }
     let changed = false;
     for (const field of planted.values()) if (field.update(position)) changed = true;

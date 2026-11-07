@@ -224,5 +224,51 @@ print("OK")
     const out = execFileSync('python3', ['-c', pyCheck], { cwd: ROOT, encoding: 'utf8' });
     assert.equal(out.trim(), 'OK');
   });
+
+  it('configures regional driveSide, watercraft, and defaultWeather across all 21 city packs', async () => {
+    const { CITY_PACKS } = await import('../js/city-packs.js');
+    const leftDriveCities = new Set(['london', 'tokyo', 'sydney', 'hongkong', 'capetown']);
+    for (const id of Object.keys(CITY_PACKS)) {
+      const pack = CITY_PACKS[id];
+      assert.equal(pack.driveSide, leftDriveCities.has(id) ? 'left' : 'right', `${id} driveSide mismatch`);
+      assert.ok(['kayak', 'gondola', 'canal_boat', 'harbor_craft'].includes(pack.watercraft), `${id} invalid watercraft`);
+      assert.ok(pack.defaultWeather && typeof pack.defaultWeather.kind === 'string', `${id} missing defaultWeather`);
+      assert.ok(Number.isFinite(pack.defaultWeather.tempF), `${id} missing defaultWeather.tempF`);
+    }
+    assert.equal(CITY_PACKS.venice.watercraft, 'gondola');
+    assert.equal(CITY_PACKS.amsterdam.watercraft, 'canal_boat');
+  });
+
+  it('includes dense Presidio and Golden Gate Park tree cover, park lawns, and Golden Gate Bridge spans in sanfrancisco', () => {
+    const script = `
+      globalThis.__CITY_ID__ = 'sanfrancisco';
+      const geo = (await import('./js/city-geodata.js')).GEO;
+      const woods = geo.woods || [];
+      let presidioTrees = 0;
+      let ggpTrees = 0;
+      for (let i = 0; i < woods.length; i += 3) {
+        const x = woods[i], z = woods[i + 1];
+        if (x > -6800 && x < -3800 && z > -2700 && z < -600) presidioTrees++;
+        if (x > -9100 && x < -4050 && z > 100 && z < 1600) ggpTrees++;
+      }
+      console.log(JSON.stringify({
+        presidioTrees,
+        ggpTrees,
+        lawns: (geo.lawns || []).length,
+        riverBridges: (geo.riverBridges || []).length,
+        signs: ((geo.signs && geo.signs.list) || []).length / 7
+      }));
+    `;
+    const out = execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: ROOT,
+      encoding: 'utf8'
+    });
+    const stats = JSON.parse(out.trim().split('\n').pop());
+    assert.ok(stats.presidioTrees > 4000, `Expected > 4000 Presidio woods trees, got ${stats.presidioTrees}`);
+    assert.ok(stats.ggpTrees > 2500, `Expected > 2500 Golden Gate Park woods trees, got ${stats.ggpTrees}`);
+    assert.ok(stats.lawns > 5000, `Expected > 5000 SF park/lawn polygons, got ${stats.lawns}`);
+    assert.ok(stats.riverBridges > 100, `Expected > 100 SF bridges, got ${stats.riverBridges}`);
+    assert.ok(stats.signs > 5000, `Expected > 5000 SF storefront signs, got ${stats.signs}`);
+  });
 });
 

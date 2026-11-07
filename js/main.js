@@ -835,7 +835,7 @@ async function initApp() {
     for (const root of dynamicRoots) root.updateMatrixWorld();
     mark('culling');
 
-    if (!warmedUp && !warmStart) {
+    if (!warmedUp && !warmStart && !window.__SKIP_SHADER_PRECOMPILE__) {
       const culled = [];
       const pipelines = new Set();
       scene.traverseVisible((o) => {

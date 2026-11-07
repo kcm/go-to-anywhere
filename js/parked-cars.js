@@ -1,5 +1,6 @@
 import * as THREE from 'three/webgpu';
 import { GEO } from './city-geodata.js';
+import { CITY_PACK } from './city-packs.js';
 import { PARKING_LOTS } from './city-config.js';
 import { BODY_SPECS, buildCarGeometry, buildCarProxyGeometry, buildSteerableWheelGeo, createLoftedCarMaterial, annArborCar } from './cars.js';
 import { groundHeight, groundTilt } from './terrain.js';
@@ -97,9 +98,10 @@ function streetCars(out) {
     return false;
   };
   // about seven in ten of the stalls marked along the parking lanes (curb-parking.js), facing the way traffic goes
+  const driveSign = CITY_PACK.driveSide === 'left' ? -1 : 1;
   for (const st of curbStalls()) {
     if (hash(st.x, st.z, 3) > 0.72 || nearCut(st.x, st.z)) continue;
-    const yaw = st.side > 0 ? Math.atan2(st.tx, st.tz) : Math.atan2(-st.tx, -st.tz);
+    const yaw = st.side * driveSign > 0 ? Math.atan2(st.tx, st.tz) : Math.atan2(-st.tx, -st.tz);
     out.push({ x: st.x, z: st.z, yaw, y: 0, street: true });
   }
 }

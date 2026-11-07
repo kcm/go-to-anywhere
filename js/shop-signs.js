@@ -1,4 +1,5 @@
 import * as THREE from 'three/webgpu';
+import { ACTIVE_CITY_ID } from './city-packs.js';
 import { GEO } from './city-geodata.js';
 import { groundHeight } from './terrain.js';
 import { TIER } from './device-tier.js';
@@ -10,8 +11,25 @@ import { TIER } from './device-tier.js';
 const CELL_W = 384, CELL_H = 60, COLS = 10, ROWS = 68; // an atlas up to 3840 x 4080: 680 signs
 const BOARD_H = 0.62;
 const DEPTH = 0.1;
-// food, coffee & sweets, bars, shops, services, culture
-const BOARD_COLORS = ['#7d2320', '#5a3824', '#1f4030', '#1f2f52', '#2c3138', '#4c2650'];
+// Regional board palettes: food, coffee & sweets, bars, shops, services, culture
+const REGIONAL_BOARD_COLORS = {
+  east_asia: ['#b81d24', '#8f4716', '#165238', '#14386b', '#222834', '#6b1d5c'],
+  europe: ['#66181c', '#4a2f1d', '#163828', '#182848', '#252a30', '#3f1f44'],
+  coastal: ['#9e2b25', '#6e4222', '#175448', '#164268', '#2c3540', '#5c2852'],
+  default: ['#7d2320', '#5a3824', '#1f4030', '#1f2f52', '#2c3138', '#4c2650']
+};
+function getRegionalSignStyle() {
+  if (ACTIVE_CITY_ID === 'tokyo' || ACTIVE_CITY_ID === 'hongkong') {
+    return { colors: REGIONAL_BOARD_COLORS.east_asia, text: '#fff8e8', border: 'rgba(255, 224, 140, 0.78)', glow: 0.38 };
+  }
+  if (['paris', 'london', 'rome', 'venice', 'amsterdam', 'barcelona'].includes(ACTIVE_CITY_ID)) {
+    return { colors: REGIONAL_BOARD_COLORS.europe, text: '#f5e8c8', border: 'rgba(228, 196, 122, 0.68)', glow: 0.22 };
+  }
+  if (['honolulu', 'riodejaneiro', 'pompanobeach', 'sydney', 'capetown'].includes(ACTIVE_CITY_ID)) {
+    return { colors: REGIONAL_BOARD_COLORS.coastal, text: '#faf2dc', border: 'rgba(245, 232, 198, 0.62)', glow: 0.24 };
+  }
+  return { colors: REGIONAL_BOARD_COLORS.default, text: '#f3e7c9', border: 'rgba(243, 231, 201, 0.55)', glow: 0.18 };
+}
 const FONTS = ['Georgia, serif', 'Inter, Arial, sans-serif', 'Georgia, serif', 'Inter, Arial, sans-serif',
   'Inter, Arial, sans-serif', 'Georgia, serif'];
 
@@ -20,6 +38,8 @@ function buildShopSigns(group) {
   const { names = [], list = [] } = GEO.signs || {};
   const count = Math.min(list.length / 7, COLS * ROWS);
   if (!count) return { count: 0 };
+  const signStyle = getRegionalSignStyle();
+  const BOARD_COLORS = signStyle.colors;
 
   // painted at half the size where memory is short (a phone, a Mac with less memory: device-tier.js)
   const K = TIER.stream ? 0.5 : 1;
@@ -47,7 +67,7 @@ function buildShopSigns(group) {
     const cx = (i % COLS) * CELL_W, cy = Math.floor(i / COLS) * CELL_H;
     ctx.fillStyle = BOARD_COLORS[cat] || BOARD_COLORS[3];
     ctx.fillRect(cx, cy, CELL_W, CELL_H);
-    ctx.strokeStyle = 'rgba(243, 231, 201, 0.55)';
+    ctx.strokeStyle = signStyle.border;
     ctx.lineWidth = 3;
     ctx.strokeRect(cx + 5, cy + 5, CELL_W - 10, CELL_H - 10);
     const squeeze = (CELL_W / CELL_H) / (w / BOARD_H);
@@ -62,7 +82,7 @@ function buildShopSigns(group) {
       size = Math.max(16, Math.floor(size * room / tw));
       ctx.font = `700 ${size}px ${FONTS[cat] || FONTS[1]}`;
     }
-    ctx.fillStyle = '#f3e7c9';
+    ctx.fillStyle = signStyle.text;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(name, 0, 0);
@@ -109,7 +129,7 @@ function buildShopSigns(group) {
   faceGeo.setAttribute('normal', new THREE.Float32BufferAttribute(face.nrm, 3));
   faceGeo.setAttribute('uv', new THREE.Float32BufferAttribute(face.uv, 2));
   faceGeo.computeBoundingSphere();
-  const faceMat = new THREE.MeshStandardNodeMaterial({ map: tex, emissiveMap: tex, emissive: 0xffffff, emissiveIntensity: 0.18, roughness: 0.6 });
+  const faceMat = new THREE.MeshStandardNodeMaterial({ map: tex, emissiveMap: tex, emissive: 0xffffff, emissiveIntensity: signStyle.glow, roughness: 0.6 });
   const faces = new THREE.Mesh(faceGeo, faceMat);
   faces.name = 'ShopSignFaces';
   faces.receiveShadow = true;

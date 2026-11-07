@@ -1174,7 +1174,7 @@ class ThirdPersonControllerManager {
   }
 
   // =========================================================================
-  // 5. KAYAK (A RED SIT-IN TOURING KAYAK, ITS PADDLER AND A TWO-BLADED PADDLE)
+  // 5. KAYAK / WATERCRAFT (TOURING KAYAK, VENETIAN GONDOLA, OR CANAL CRUISER)
   // =========================================================================
   createKayakEntity() {
     const root = new THREE.Group();
@@ -1182,19 +1182,31 @@ class ThirdPersonControllerManager {
     const tiltPivot = new THREE.Group();
     root.add(tiltPivot);
 
-    const hullMat = createCarPaintMaterial(0xc8372a);
-    const deckMat = createCarPaintMaterial(0xe0533a);
+    const craftKind = CITY_PACK.watercraft || 'kayak';
+    const isGondola = craftKind === 'gondola';
+    const isCanalBoat = craftKind === 'canal_boat';
+    const isHarbor = craftKind === 'harbor_craft';
+
+    const hullHex = isGondola ? 0x111317 : isCanalBoat ? 0x1b344d : isHarbor ? 0x0f6e8c : 0xc8372a;
+    const deckHex = isGondola ? 0x8f1a24 : isCanalBoat ? 0x9c6b3b : isHarbor ? 0xf4b41a : 0xe0533a;
+    const bladeHex = isGondola ? 0xc89b52 : isCanalBoat ? 0xd9a84e : 0xf2c230;
+    const craftLabel = isGondola ? 'Venetian Gondola' : isCanalBoat ? 'Canal Cruiser' : isHarbor ? 'Harbor Kayak' : 'Kayak';
+
+    const hullMat = createCarPaintMaterial(hullHex);
+    const deckMat = createCarPaintMaterial(deckHex);
     const darkMat = new THREE.MeshStandardNodeMaterial({ color: 0x15171a, roughness: 0.75 });
-    const shaftMat = new THREE.MeshStandardNodeMaterial({ color: 0x2a2d33, roughness: 0.4, metalness: 0.5 });
-    const bladeMat = new THREE.MeshStandardNodeMaterial({ color: 0xf2c230, roughness: 0.45 });
+    const shaftMat = new THREE.MeshStandardNodeMaterial({ color: isGondola ? 0x5c3e26 : 0x2a2d33, roughness: 0.4, metalness: isGondola ? 0.15 : 0.5 });
+    const bladeMat = new THREE.MeshStandardNodeMaterial({ color: bladeHex, roughness: 0.45 });
 
     // The hull and deck: halves of a long ellipsoid, narrowed to points at the bow and stern and rising a little there
-    const L = 1.85, B = 0.36;
+    const L = isGondola ? 2.55 : isCanalBoat ? 2.15 : 1.85;
+    const B = isGondola ? 0.42 : isCanalBoat ? 0.48 : 0.36;
+    const bowRise = isGondola ? 0.24 : 0.09;
     const shape = (geo, height) => {
       const pos = geo.attributes.position;
       for (let i = 0; i < pos.count; i++) {
         const t = Math.min(1, Math.abs(pos.getZ(i)));
-        pos.setXYZ(i, pos.getX(i) * B * (1 - 0.55 * t * t), pos.getY(i) * height * (1 - 0.25 * t * t) + 0.1 + 0.09 * t ** 3, pos.getZ(i) * L);
+        pos.setXYZ(i, pos.getX(i) * B * (1 - 0.55 * t * t), pos.getY(i) * height * (1 - 0.25 * t * t) + 0.1 + bowRise * t ** 3, pos.getZ(i) * L);
       }
       geo.computeVertexNormals();
       return geo;
@@ -1206,6 +1218,16 @@ class ThirdPersonControllerManager {
     const coaming = new THREE.Mesh(new THREE.TorusGeometry(1, 0.08, 6, 28).rotateX(Math.PI / 2).scale(0.24, 0.3, 0.38), darkMat);
     coaming.position.set(0, 0.236, -0.12);
     tiltPivot.add(hull, deck, cockpit, coaming);
+
+    if (isGondola) {
+      // Iconic Venetian silver ferro di prua (prow ornament) and gilded stern finial
+      const ferroMat = new THREE.MeshStandardNodeMaterial({ color: 0xdce2e8, roughness: 0.22, metalness: 0.85 });
+      const ferro = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.42, 0.16), ferroMat);
+      ferro.position.set(0, 0.48, L * 0.94);
+      const sternPost = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.34, 0.12), ferroMat);
+      sternPost.position.set(0, 0.42, -L * 0.94);
+      tiltPivot.add(ferro, sternPost);
+    }
 
     // The paddle: a shaft across the paddler's lap with a blade at each end, turned about by the stroke (see updateKayak)
     const paddle = new THREE.Group();
@@ -1235,7 +1257,7 @@ class ThirdPersonControllerManager {
     paddlerCrowd.meshes.forEach((m) => this.scene.add(m));
     const paddlerRig = new PersonRig({ seed: 31.4, scale: 1.0, girth: 1.0, hair: 0.3 });
 
-    const kayakShadowGeo = new THREE.PlaneGeometry(0.9, 3.9);
+    const kayakShadowGeo = new THREE.PlaneGeometry(0.9, L * 2.1);
     kayakShadowGeo.rotateX(-Math.PI * 0.5);
     const kayakShadow = new THREE.Mesh(kayakShadowGeo, createContactShadowMaterial());
     kayakShadow.position.set(0, 0.015, 0);
@@ -1249,11 +1271,11 @@ class ThirdPersonControllerManager {
     // them off (updateRipples sets them on the water's own surface, tsl-materials.js)
     const ripples = Array.from({ length: WATER_RIPPLES }, () => ({ x: 0, z: 0, age: 99, strength: 0 }));
 
-    const launch = nearestWater(KAYAK_LAUNCH.x, KAYAK_LAUNCH.z, 400) || KAYAK_LAUNCH;
+    const launch = nearestWater(KAYAK_LAUNCH.x, KAYAK_LAUNCH.z, 600) || KAYAK_LAUNCH;
     const y = waterLevel(launch.x, launch.z) ?? groundHeight(launch.x, launch.z);
     return {
       type: 'kayak',
-      label: 'Kayak',
+      label: craftLabel,
       mesh: root,
       tiltPivot,
       paddle,

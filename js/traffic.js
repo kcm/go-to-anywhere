@@ -203,14 +203,21 @@ function createTrafficSystem(scene, sidewalks, obstacles, signalIntersections) {
   carWheelRightGeo.setAttribute('wheelStyle', carWheelStyles);
   const carWheelMat = createCarWheelMaterial({ instanced: true });
 
-  // Active city's police cruisers
+  // Active city's police cruisers & regional fleet mix (taxis, compact sedans, vans, pickups)
   const policeWhite = new THREE.Color(CITY_PACK.police?.baseColor ?? 0xf6f9fc);
-  const taxiYellow = new THREE.Color(0xf7b512);
-  const FLEET_MIX = ACTIVE_CITY_ID === 'newyork'
-    ? ['taxi', 'sedan', 'taxi', 'suv', 'sedan', 'taxi', 'van', 'sedan', 'suv', 'minivan',
-       'taxi', 'pickup', 'suv', 'taxi', 'suv', 'sedan', 'minivan', 'taxi', 'suv', 'sedan']
-    : ['sedan', 'sedan', 'van', 'sedan', 'suv', 'sedan', 'suv', 'minivan', 'suv', 'pickup',
-       'sedan', 'pickup', 'suv', 'pickup', 'suv', 'sedan', 'minivan', 'sedan', 'suv', 'sedan'];
+  const HIGH_TAXI_CITIES = new Set(['newyork', 'london', 'tokyo', 'hongkong', 'barcelona', 'paris', 'riodejaneiro']);
+  const EURO_ASIAN_CITIES = new Set(['london', 'paris', 'amsterdam', 'rome', 'venice', 'barcelona', 'tokyo', 'hongkong']);
+  const FLEET_MIX = HIGH_TAXI_CITIES.has(ACTIVE_CITY_ID)
+    ? (EURO_ASIAN_CITIES.has(ACTIVE_CITY_ID)
+      ? ['taxi', 'sedan', 'taxi', 'suv', 'sedan', 'taxi', 'van', 'sedan', 'suv', 'minivan',
+         'taxi', 'van', 'sedan', 'taxi', 'suv', 'sedan', 'minivan', 'taxi', 'sedan', 'sedan']
+      : ['taxi', 'sedan', 'taxi', 'suv', 'sedan', 'taxi', 'van', 'sedan', 'suv', 'minivan',
+         'taxi', 'pickup', 'suv', 'taxi', 'suv', 'sedan', 'minivan', 'taxi', 'suv', 'sedan'])
+    : EURO_ASIAN_CITIES.has(ACTIVE_CITY_ID)
+      ? ['sedan', 'taxi', 'van', 'sedan', 'suv', 'sedan', 'suv', 'minivan', 'sedan', 'van',
+         'sedan', 'taxi', 'suv', 'sedan', 'suv', 'sedan', 'minivan', 'sedan', 'suv', 'sedan']
+      : ['sedan', 'taxi', 'van', 'sedan', 'suv', 'sedan', 'suv', 'minivan', 'suv', 'pickup',
+         'sedan', 'pickup', 'suv', 'taxi', 'suv', 'sedan', 'minivan', 'sedan', 'suv', 'sedan'];
 
   const cars = [];
   const counts = Object.fromEntries(Object.keys(CAR_KINDS).map((kind) => [kind, 0]));
@@ -237,9 +244,6 @@ function createTrafficSystem(scene, sidewalks, obstacles, signalIntersections) {
       col = policeWhite;
       style = carStyleCode({ livery: 1, metallic: 0, trim: 2, wheel: 3, plate: i });
       policeCounts[bodyType]++;
-    } else if (bodyType === 'taxi') {
-      col = taxiYellow;
-      style = carStyleCode({ livery: 0, metallic: 0, trim: 1, wheel: i & 3, plate: i });
     } else {
       const look = annArborCar(bodyType, counts[bodyType] * 7 + i);
       col = new THREE.Color(look.hex);

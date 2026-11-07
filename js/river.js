@@ -223,18 +223,62 @@ function buildBridges(group) {
         }
       }
     }
-    // Piers in the water every 25 m or so, and an abutment where each end meets the bank
+    // Piers in the water (spaced wider on long suspension/harbour crossings), and an abutment where each end meets the bank
     const wet = P.map((p) => riverDepth(p[0], p[1]) > 0.05);
     const first = wet.indexOf(true), last = wet.lastIndexOf(true);
     if (first < 0) continue;
     const span = P[last][2] - P[first][2];
-    const piers = span > 34 ? Math.floor(span / 25) : 0;
+    const pierStep = span > 450 ? Math.max(140, span * 0.28) : span > 160 ? 55 : 25;
+    const piers = span > 34 ? Math.max(1, Math.floor(span / pierStep)) : 0;
+    const towerIndices = [];
     for (let k = 1; k <= piers; k++) {
       const s = P[first][2] + (span * k) / (piers + 1);
       let i = first;
       while (i < last && P[i][2] < s) i++;
       const top = P[i][3] + under, bed = riverbedHeight(P[i][0], P[i][1]) - 0.4;
-      if (top - bed > 1) pier(d.kind === 1 ? concrete : concrete, i, hw * 2 - (d.kind === 2 ? 0.4 : 1.2), d.kind === 2 ? 0.5 : 1.3, bed, top);
+      if (top - bed > 1) pier(concrete, i, hw * 2 - (d.kind === 2 ? 0.4 : 1.0), d.kind === 2 ? 0.5 : (span > 200 ? 3.2 : 1.3), bed, top);
+      if (d.kind === 0 && span > 140 && (k === 1 || k === piers)) towerIndices.push(i);
+    }
+    // Overhead steel portal towers & suspender cables on major road bridge spans (> 140 m)
+    if (d.kind === 0 && span > 140 && towerIndices.length > 0) {
+      const towerH = Math.min(68, Math.max(18, span * 0.11));
+      const ang = (i) => Math.atan2(T[i][0], T[i][1]);
+      for (const ti of towerIndices) {
+        const deckY = P[ti][3];
+        for (const s of [-1, 1]) {
+          const [lx, , lz] = at(ti, (hw - 0.35) * s, 0);
+          const leg = new THREE.BoxGeometry(1.6, towerH, 2.2).toNonIndexed();
+          leg.rotateY(ang(ti));
+          leg.translate(lx, deckY + towerH * 0.5, lz);
+          steel.push(...leg.attributes.position.array);
+        }
+        // Portal cross-struts above the roadway clearance
+        for (const frac of [0.58, 0.92]) {
+          const beam = new THREE.BoxGeometry(hw * 2, 1.5, 1.6).toNonIndexed();
+          beam.rotateY(ang(ti));
+          beam.translate(P[ti][0], deckY + towerH * frac, P[ti][1]);
+          steel.push(...beam.attributes.position.array);
+        }
+      }
+      // Vertical suspender cables every ~16 m along the wet span
+      const t0 = towerIndices[0];
+      const t1 = towerIndices[towerIndices.length - 1];
+      const sTower0 = P[t0][2];
+      const sTower1 = P[t1][2];
+      const midS = (sTower0 + sTower1) * 0.5;
+      const halfMain = Math.max(20, (sTower1 - sTower0) * 0.5);
+      for (let i = first; i <= last; i += 4) {
+        const sPos = P[i][2];
+        const norm = t0 !== t1
+          ? Math.min(1.2, Math.abs(sPos - midS) / halfMain)
+          : Math.min(1.2, Math.abs(sPos - sTower0) / (span * 0.5));
+        const cableTop = 2.2 + (towerH - 3.0) * (norm * norm);
+        for (const s of [-1, 1]) {
+          const [cx, cy, cz] = at(i, (hw - 0.35) * s, 0);
+          const cGeo = new THREE.BoxGeometry(0.14, cableTop, 0.14).toNonIndexed().translate(cx, cy + cableTop * 0.5, cz);
+          rail.push(...cGeo.attributes.position.array);
+        }
+      }
     }
     for (const i of [Math.max(0, first - 1), Math.min(P.length - 1, last + 1)]) {
       const top = P[i][3] + under, bed = riverbedHeight(P[i][0], P[i][1]) - 0.5;

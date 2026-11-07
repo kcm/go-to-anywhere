@@ -6,7 +6,7 @@
 // one instanced mesh each, and the people in them are posed like the player's paddler (pedestrians.js) while near.
 import * as THREE from 'three/webgpu';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { riverFlow, riverDepth, waterLevel } from './terrain.js';
+import { nearestWater, riverFlow, riverDepth, waterLevel } from './terrain.js';
 import { chuteNear, CASCADE_ENTRY } from './cascades.js';
 import { PersonCrowd, PersonRig } from './pedestrians.js';
 
@@ -21,6 +21,10 @@ const DRAWN = 320, POSED = 140; // drawn within this far of the view, their peop
 function traceWay() {
   const pts = [];
   let x = CASCADE_ENTRY.x, z = CASCADE_ENTRY.z, tx = CASCADE_ENTRY.tx, tz = CASCADE_ENTRY.tz;
+  if (riverDepth(x, z) < 0.3) {
+    const nw = nearestWater(x, z, 600);
+    if (nw) { x = nw.x; z = nw.z; }
+  }
   const flow = { x: 0, z: 0 };
   const room = (nx, nz, side) => {
     let w = 0;

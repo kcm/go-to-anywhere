@@ -350,9 +350,25 @@ const EAST_RIVER_BRIDGES = IS_GRID_CITY && GEO.bridges
 const SUSPENSION_BRIDGES = EAST_RIVER_BRIDGES;
 const OUTER_BRIDGES = [];
 
-// Water and parking lots
+// Water, parking lots, and named parks/forests
 const WATER_POLYGONS = (GEO.water || []).map((rings) => rings.map(toPts));
 const PARKING_LOTS = (GEO.parking || []).map((rings) => rings.map(toPts));
+const PARKS = (GEO.parks || []).map((entry) => {
+  const [name, acres, cx, cz, rawRings, cat] = Array.isArray(entry)
+    ? entry
+    : [entry.name || '', entry.acres || 0, entry.cx || 0, entry.cz || 0, entry.rings || [], entry.cat || 'park'];
+  const rings = (rawRings || []).map(toPts);
+  let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  for (const r of rings) {
+    for (const p of r) {
+      if (p.x < minX) minX = p.x;
+      if (p.x > maxX) maxX = p.x;
+      if (p.z < minZ) minZ = p.z;
+      if (p.z > maxZ) maxZ = p.z;
+    }
+  }
+  return { name, acres, cx, cz, rings, cat: cat || 'park', minX, maxX, minZ, maxZ };
+});
 
 // Named roads & spatial index
 const ROADS = (GEO.roads || []).map((entry) => {
@@ -672,6 +688,7 @@ function walkSignal(time, isAvenue) {
 export {
   WATER_POLYGONS,
   PARKING_LOTS,
+  PARKS,
   districtLabel,
   AVENUES,
   ALL_AVENUES,

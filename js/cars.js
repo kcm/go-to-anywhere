@@ -1,5 +1,5 @@
 import * as THREE from 'three/webgpu';
-import { CITY_PACK } from './city-packs.js';
+import { ACTIVE_CITY_ID, CITY_PACK } from './city-packs.js';
 import { cityUniforms } from './tsl-materials.js';
 import {
   Fn,
@@ -1296,11 +1296,48 @@ const ANN_ARBOR_PAINT = {
   sports: [[0xc8102e, 1], [0xffcb05, 0], [0xf26a1b, 1], [0x7fbf2a, 1], [0x1e5bd8, 1], [0x00274c, 1], [0x5b2a86, 1],
     [0x0f8a8a, 1], [0xf2f3f4, 0], [0x121417, 1], [0xc3c8cd, 1]]
 };
+
+const REGIONAL_TAXI_PAINT = {
+  newyork: [[0xf7b512, 0], [0xf7b512, 0], [0xf7b512, 0], [0x78be20, 0]],
+  london: [[0x14171c, 1], [0x181c22, 1], [0x101317, 1], [0x1c2b24, 1], [0x2a1820, 1]],
+  tokyo: [[0x14223d, 1], [0x14171c, 1], [0x1b5e3a, 1], [0xd96b1b, 0], [0xf2f4f7, 0]],
+  hongkong: [[0xc92026, 0, true], [0xc92026, 0, true], [0xc92026, 0, true], [0x1f8a3b, 0, true], [0x1e6bb8, 0, true]],
+  barcelona: [[0xf5b800, 0, true], [0x181a1e, 1, true]],
+  riodejaneiro: [[0xf5c400, 0], [0xf5c400, 0], [0xe8b800, 0]],
+  paris: [[0x181c22, 1], [0xdadfe4, 1], [0xf2f4f7, 0], [0x222c3c, 1]],
+  rome: [[0xf5f6f8, 0], [0xf5f6f8, 0], [0xeeeff2, 0]],
+  venice: [[0xf5f6f8, 0], [0x181c22, 1]],
+  amsterdam: [[0x161b22, 1], [0x202a38, 1], [0xd8dee6, 1]],
+  sanfrancisco: [[0xf7b512, 0], [0xd83b26, 0], [0xf0f2f5, 0], [0x1b4d8a, 1]],
+  chicago: [[0xf7b512, 0], [0xf0f2f5, 0], [0x1f4e8c, 0], [0x2b6e3f, 0]],
+  boston: [[0xf2f4f7, 0], [0xf7b512, 0], [0xd95b1b, 0]],
+  seattle: [[0xf7b512, 0], [0x2a6b3c, 0], [0xd83b26, 0]],
+  sydney: [[0xf2f4f7, 0], [0xf7b512, 0], [0xc8ced5, 1]],
+  capetown: [[0xf2f4f7, 0], [0xf7b512, 0], [0xdadfe4, 1]],
+  vancouver: [[0xf7b512, 0], [0xd83b26, 0], [0x2a6b3c, 0]],
+  honolulu: [[0xf7b512, 0], [0xf2f4f7, 0], [0x1e5bd8, 1]]
+};
+
 // One of them for car number i (or a hash 0..1 times 1000), with its own trim, wheels and plate
 function annArborCar(kind, i) {
+  if (kind === 'taxi') {
+    const tList = REGIONAL_TAXI_PAINT[ACTIVE_CITY_ID] || [[0xf7b512, 0], [0xc8ced5, 1]];
+    const [hex, metallic, roofTwoTone] = tList[i % tList.length];
+    const isBoro = ACTIVE_CITY_ID === 'newyork' && hex === 0x78be20;
+    return {
+      hex,
+      style: carStyleCode({
+        livery: isBoro ? 2 : (roofTwoTone ? 4 : 0),
+        metallic: metallic || 0,
+        trim: 1,
+        wheel: (i * 3) % 4,
+        plate: (i * 11 + 3) % 16
+      })
+    };
+  }
   const list = ANN_ARBOR_PAINT[kind] || ANN_ARBOR_PAINT.sedan;
   const [hex, metallic] = list[i % list.length];
-  const twoTone = kind === 'suv' && i % 9 === 4; // the odd black-roofed crossover
+  const twoTone = (kind === 'suv' && i % 9 === 4) || (ACTIVE_CITY_ID === 'tokyo' && kind === 'sedan' && i % 7 === 2);
   return {
     hex,
     style: carStyleCode({ livery: twoTone ? 4 : 0, metallic, trim: (i * 5) % 3, wheel: (i * 7) % 4, plate: (i * 11 + 3) % 16 })

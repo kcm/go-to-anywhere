@@ -40,8 +40,10 @@ import {
   SUSPENSION_BRIDGES,
   CUT_Z,
   WATER_POLYGONS,
-  PARKING_LOTS
+  PARKING_LOTS,
+  PARKS
 } from './city-config.js';
+import { CITY_PACK } from './city-packs.js';
 import {
   createRoadSurfaceMaterial,
   createSidewalkMaterial,
@@ -1764,7 +1766,32 @@ function buildCityGrid(scene) {
   // few millimetres apart the lawn would show through the driveways and front walks in wedges (drawOver, terrain.js)
   for (const m of [drivewayConcreteMat, drivewayBlacktopMat]) drawOver(m);
   const lawnGeos = [];
-  for (const rings of GEO.lawns) lawnGeos.push(flatGeo(rings.map(toRing), LAWN_Y));
+  const lawnCellSet = new Set();
+  for (const rings of GEO.lawns) {
+    lawnGeos.push(flatGeo(rings.map(toRing), LAWN_Y));
+    const r0 = rings[0];
+    if (r0 && r0.length >= 2) {
+      let sx = 0, sz = 0, n = r0.length >> 1;
+      for (let i = 0; i < r0.length; i += 2) { sx += r0[i]; sz += r0[i + 1]; }
+      lawnCellSet.add(`${Math.round((sx / n) / 60)},${Math.round((sz / n) / 60)}`);
+    }
+  }
+  for (const b of BLOCKS) {
+    if (!b.rect && b.lawn && !b.median && b.area > 400) {
+      const cx = (b.minX + b.maxX) * 0.5, cz = (b.minZ + b.maxZ) * 0.5;
+      const gx = Math.round(cx / 60), gz = Math.round(cz / 60);
+      let covered = false;
+      for (let dx = -1; dx <= 1 && !covered; dx++) {
+        for (let dz = -1; dz <= 1 && !covered; dz++) {
+          if (lawnCellSet.has(`${gx + dx},${gz + dz}`)) covered = true;
+        }
+      }
+      if (!covered) {
+        const innerLawn = offsetPolygonInward(b.poly, 4.6);
+        if (innerLawn && innerLawn.length >= 3) lawnGeos.push(flatGeo([innerLawn], LAWN_Y));
+      }
+    }
+  }
   mergeInto(lawnGeos, cpLawnMat);
   if (bankLawn.length) {
     const g = new THREE.BufferGeometry();
@@ -1859,7 +1886,11 @@ function buildCityGrid(scene) {
   // The river sunk into its banks, with its bridges (river.js)
   buildRiver(group, [...WATER_POLYGONS, ...cascadeGaps()].map((rings) => flatGeo(rings, 0)), waterMat);
   // Woods (kind 0: oaks & maples, close together), park and cemetery trees (1) and yard trees (2)
+  const treeCov = CITY_PACK.archetypes?.treeCoverage || GEO.sampledArchetypes?.treeCoverage || {};
+  const foliageScale = Math.max(0.75, Math.min(1.45, Number(treeCov.foliageScale) || 1.0));
+  const parkDensityMult = Math.max(0.5, Math.min(2.2, Number(treeCov.parkTreeDensity) || 1.0));
   const W = GEO.woods;
+  const woodGrid = new Set();
   for (let i = 0; i < W.length; i += 3) {
     const x = W[i], z = W[i + 1], kind = W[i + 2];
     const r = prand(x, z, 2);
@@ -1868,7 +1899,61 @@ function buildCityGrid(scene) {
     const species = kind === 0 ? (r < 0.45 ? 3 : r < 0.85 ? 4 : 2)
       : kind === 1 ? (r < 0.3 ? 3 : r < 0.55 ? 4 : r < 0.65 ? 0 : r < 0.72 ? 1 : r < 0.86 ? 6 : 2)
         : (r < 0.35 ? 3 : r < 0.55 ? 5 : r < 0.7 ? 6 : r < 0.82 ? 4 : r < 0.88 ? 1 : 2);
-    treeSites.push({ x, y: LAWN_Y, z, scale: (kind === 0 ? 1.0 : 0.85) + prand(x, z, 3) * 0.4, species });
+    treeSites.push({ x, y: LAWN_Y, z, scale: ((kind === 0 ? 1.0 : 0.85) + prand(x, z, 3) * 0.4) * foliageScale, species });
+    woodGrid.add(`${Math.round(x / 10)},${Math.round(z / 10)}`);
+  }
+
+  // Supplemental park & woodland grove filler for any park/forest polygon with sparse tree cover
+  if (!CITY_PACK.features?.bigParkClearings && PARKS && PARKS.length) {
+    const inRingPt = (x, z, ring) => {
+      let inside = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const xi = ring[i].x, zi = ring[i].z, xj = ring[j].x, zj = ring[j].z;
+        if ((zi > z) !== (zj > z) && x < ((xj - xi) * (z - zi)) / (zj - zi) + xi) inside = !inside;
+      }
+      return inside;
+    };
+    const forestRe = /presidio|golden gate|stanley|table mountain|forest|woods|reserve|lands end|sutro|arboretum|botanical|tiergarten|bois|lincoln park|mclaren|glen canyon|buena vista/i;
+    let addedParkTrees = 0;
+    const maxSupplemental = 5500;
+    for (const pk of PARKS) {
+      if (addedParkTrees >= maxSupplemental) break;
+      const acres = Number(pk.acres) || 0;
+      if (acres < 1.0 || !pk.rings || !pk.rings.length) continue;
+      const areaM2 = acres * 4046.86;
+      const isForested = pk.cat === 'wood' || acres > 25 || forestRe.test(pk.name || '');
+      const density = (isForested ? 0.0014 : 0.0007) * parkDensityMult;
+      const target = Math.min(isForested ? 1800 : 350, Math.floor(areaM2 * density));
+      if (target < 4) continue;
+      const step = Math.max(13, Math.sqrt(areaM2 / target));
+      let pkAdded = 0;
+      for (let gx = pk.minX + step * 0.5; gx < pk.maxX - step * 0.25 && pkAdded < target && addedParkTrees < maxSupplemental; gx += step) {
+        for (let gz = pk.minZ + step * 0.5; gz < pk.maxZ - step * 0.25 && pkAdded < target && addedParkTrees < maxSupplemental; gz += step) {
+          const jx = (prand(gx, gz, 11) - 0.5) * step * 0.75;
+          const jz = (prand(gx, gz, 17) - 0.5) * step * 0.75;
+          const px = Math.round((gx + jx) * 10) / 10;
+          const pz = Math.round((gz + jz) * 10) / 10;
+          const gk = `${Math.round(px / 10)},${Math.round(pz / 10)}`;
+          if (woodGrid.has(gk)) continue;
+          const blk = blockAt(px, pz);
+          if (!blk || blk.median) continue;
+          let inPk = false;
+          for (const ring of pk.rings) {
+            if (inRingPt(px, pz, ring)) { inPk = true; break; }
+          }
+          if (!inPk) continue;
+          woodGrid.add(gk);
+          const r = prand(px, pz, 23);
+          const species = isForested
+            ? (r < 0.38 ? 6 : r < 0.68 ? 3 : r < 0.88 ? 4 : 2)
+            : (r < 0.30 ? 3 : r < 0.55 ? 4 : r < 0.75 ? 6 : r < 0.88 ? 0 : 2);
+          const scale = ((isForested ? 1.02 : 0.88) + prand(px, pz, 29) * 0.42) * foliageScale;
+          treeSites.push({ x: px, y: LAWN_Y, z: pz, scale, species });
+          pkAdded++;
+          addedParkTrees++;
+        }
+      }
+    }
   }
 
   // Park playgrounds (playgrounds.js, GEO.playgrounds)

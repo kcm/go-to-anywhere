@@ -6,7 +6,15 @@ import { CITY_PACK } from './city-packs.js';
 // asked for when the city opens and every 15 minutes.
 
 const STATION = CITY_PACK.weatherStation || 'KDTW';
-const FAIR = { kind: 'fair', amount: 0, text: 'Fair', tempF: null, wind: [0, 0], live: false };
+const DEFAULT_W = CITY_PACK.defaultWeather || {};
+const FAIR = {
+  kind: DEFAULT_W.kind || 'fair',
+  amount: DEFAULT_W.kind === 'rain' ? 0.45 : DEFAULT_W.kind === 'snow' ? 0.4 : 0,
+  text: DEFAULT_W.text || 'Fair',
+  tempF: Number.isFinite(DEFAULT_W.tempF) ? DEFAULT_W.tempF : null,
+  wind: [0, 0],
+  live: false
+};
 
 // The observation's words and cloud layers, as one of: fair, partly, cloudy, overcast, fog, rain, storm, snow
 function classify(props) {
@@ -28,7 +36,56 @@ function classify(props) {
   return { kind, amount };
 }
 
+function classifyOpenMeteo(cur) {
+  const code = Number(cur.weather_code ?? 0);
+  const cover = Number(cur.cloud_cover ?? 0);
+  if (code >= 95) return { kind: 'storm', amount: 0.9, text: 'Thunderstorm' };
+  if ((code >= 71 && code <= 77) || code === 85 || code === 86) {
+    return { kind: 'snow', amount: code >= 75 ? 0.85 : 0.5, text: code >= 75 ? 'Heavy Snow' : 'Snow' };
+  }
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) {
+    const drizzle = code < 60;
+    const heavy = code === 65 || code === 82;
+    return { kind: 'rain', amount: heavy ? 0.95 : drizzle ? 0.35 : 0.65, text: drizzle ? 'Light Drizzle' : heavy ? 'Heavy Rain' : 'Rain' };
+  }
+  if (code === 45 || code === 48) return { kind: 'fog', amount: 0, text: 'Fog' };
+  if (cover >= 85 || code === 3) return { kind: 'overcast', amount: 0, text: 'Overcast' };
+  if (cover >= 55 || code === 2) return { kind: 'cloudy', amount: 0, text: 'Mostly Cloudy' };
+  if (cover >= 22 || code === 1) return { kind: 'partly', amount: 0, text: 'Partly Cloudy' };
+  return { kind: 'fair', amount: 0, text: 'Clear' };
+}
+
+async function fetchOpenMeteoWeather() {
+  const lat = Number(CITY_PACK.lat);
+  const lon = Number(CITY_PACK.lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return FAIR;
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(4)}&longitude=${lon.toFixed(4)}&current=temperature_2m,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m&temperature_unit=fahrenheit&wind_speed_unit=ms`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return FAIR;
+    const data = await res.json();
+    const cur = data && data.current;
+    if (!cur) return FAIR;
+    const { kind, amount, text } = classifyOpenMeteo(cur);
+    const speed = Number(cur.wind_speed_10m) || 0;
+    const from = ((Number(cur.wind_direction_10m) || 0) * Math.PI) / 180;
+    const wind = [-Math.sin(from) * speed, Math.cos(from) * speed];
+    return {
+      kind,
+      amount,
+      wind,
+      live: true,
+      text,
+      tempF: Number.isFinite(cur.temperature_2m) ? Math.round(cur.temperature_2m) : FAIR.tempF
+    };
+  } catch {
+    return FAIR;
+  }
+}
+
 async function fetchWeather() {
+  const isUSStation = /^[KP][A-Z0-9]{3}$/i.test(String(STATION).trim());
+  if (!isUSStation) return fetchOpenMeteoWeather();
   try {
     // A browser sends its own User-Agent, which the service accepts from a page; nothing of the player's goes with it
     const safeStation = encodeURIComponent(String(STATION).trim());
@@ -36,7 +93,7 @@ async function fetchWeather() {
       headers: { Accept: 'application/geo+json' },
       signal: AbortSignal.timeout(8000)
     });
-    if (!res.ok) return FAIR;
+    if (!res.ok) return fetchOpenMeteoWeather();
     const props = (await res.json()).properties || {};
     const { kind, amount } = classify(props);
     const c = props.temperature && props.temperature.value;
@@ -46,11 +103,11 @@ async function fetchWeather() {
     const wind = [-Math.sin(from) * speed, Math.cos(from) * speed];
     return {
       kind, amount, wind, live: true,
-      text: props.textDescription || 'Fair',
-      tempF: Number.isFinite(c) ? Math.round(c * 9 / 5 + 32) : null
+      text: props.textDescription || FAIR.text,
+      tempF: Number.isFinite(c) ? Math.round(c * 9 / 5 + 32) : FAIR.tempF
     };
   } catch {
-    return FAIR;
+    return fetchOpenMeteoWeather();
   }
 }
 

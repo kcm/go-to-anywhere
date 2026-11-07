@@ -6,6 +6,7 @@ import {
   BLOCKS
 } from './city-config.js';
 import { GEO } from './city-geodata.js';
+import { CITY_PACK } from './city-packs.js';
 import { polygonBoxOverlaps } from './building-collision.js';
 import { curbParking } from './curb-parking.js';
 
@@ -422,11 +423,16 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
       let nf = l.lf || Math.max(1, Math.floor((l.lanes || 2) / 2));
       let nb = l.lb || Math.max(1, (l.lanes || 2) - nf);
       const turn = (l.lanes || 0) - nf - nb >= 1 ? 1.6 : 0; // a shared centre turn lane
-      const fwd = fill(nf, turn ? turn : 0.15, half - bR);
-      const back = fill(nb, turn ? turn : 0.15, half - bL);
+      const driveSign = CITY_PACK.driveSide === 'left' ? -1 : 1;
+      const curbF = driveSign > 0 ? bR : bL;
+      const curbB = driveSign > 0 ? bL : bR;
+      const fwdRaw = fill(nf, turn ? turn : 0.15, half - curbF);
+      const backRaw = fill(nb, turn ? turn : 0.15, half - curbB);
       // as before: a lane each way sits 1.8 m off the centre line
-      if (nf === 1 && !turn && fwd[0] < 1.8 && half - bR >= 3.6) fwd[0] = 1.8;
-      if (nb === 1 && !turn && back[0] < 1.8 && half - bL >= 3.6) back[0] = 1.8;
+      if (nf === 1 && !turn && fwdRaw[0] < 1.8 && half - curbF >= 3.6) fwdRaw[0] = 1.8;
+      if (nb === 1 && !turn && backRaw[0] < 1.8 && half - curbB >= 3.6) backRaw[0] = 1.8;
+      const fwd = driveSign > 0 ? fwdRaw : fwdRaw.map((o) => -o).reverse();
+      const back = driveSign > 0 ? backRaw : backRaw.map((o) => -o).reverse();
       return { half, axis, fwd, back, turn, fi: { ...info(true), bikeL: 0, turn }, bi: { ...info(false), bikeL: 0, turn } };
     }
     const DEG = Math.PI / 180;
@@ -539,9 +545,12 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
     if (!o || o.divided) continue;
     for (const q of [r, o]) {
       const lanes = q.fwd.length ? q.fwd : q.back;
-      const right = lanes.map((x) => x - lanes[0] + 1.8); // as on a two-way street, from 1.8 m right of the centreline
-      if (q.fwd.length) q.fwd = right;
-      else q.back = right;
+      const driveSign = CITY_PACK.driveSide === 'left' ? -1 : 1;
+      const shifted = driveSign > 0
+        ? lanes.map((x) => x - lanes[0] + 1.8)
+        : lanes.map((x) => x - lanes[lanes.length - 1] - 1.8);
+      if (q.fwd.length) q.fwd = shifted;
+      else q.back = shifted;
       q.divided = true;
     }
     r.half = o.half = r.half + o.half;
@@ -613,7 +622,11 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
       }
     }
     for (const [e, other] of partner) {
-      e.lanes = e.cand.map((o) => o - e.cand[0] + 1.8).filter((o) => laneOpen(e.x0, e.z0, e.dx, e.dz, e.span, o));
+      const driveSign = CITY_PACK.driveSide === 'left' ? -1 : 1;
+      const shifted = driveSign > 0
+        ? e.cand.map((o) => o - e.cand[0] + 1.8)
+        : e.cand.map((o) => o - e.cand[e.cand.length - 1] - 1.8);
+      e.lanes = shifted.filter((o) => laneOpen(e.x0, e.z0, e.dx, e.dz, e.span, o)).sort((p, q) => p - q);
       e.half += other;
       if (e.half >= 7.25) e.axis = 'ave'; // as wide as a major road (see lanesOf)
       e.divided = true;

@@ -2736,6 +2736,56 @@ function buildLandmarkFromArchetype(name, spec, site) {
   return { group: g, collider };
 }
 
+function inferLandmarkSpecFromName(name, site) {
+  const n = String(name || '').toLowerCase();
+  if (/\b(park|beach|mountain|peak|hill|head|bay|lagoon|island|harbor|harbour|canal|gardens|woods|presidio)\b/.test(n)) {
+    return null;
+  }
+  if (/suspension|golden gate|brooklyn bridge|manhattan bridge|lions gate/.test(n)) {
+    return { form: 'suspension_bridge', w: 32, d: 340, h: 95, primaryColor: 0xc84b31 };
+  }
+  if (/\bbridge\b|ponte|pont\b/.test(n)) {
+    return { form: 'arch_bridge', w: 28, d: 180, h: 48 };
+  }
+  if (/cathedral|basilica|church|sagrada|notre-dame|duomo|minster|abbey/.test(n)) {
+    return { form: 'cathedral_spires', w: 56, d: 88, h: 86 };
+  }
+  if (/temple|shrine|pagoda|senso-ji|meiji|torii/.test(n)) {
+    return { form: 'torii_temple', w: 54, d: 68, h: 46, primaryColor: 0xc92a2a, roofColor: 0x2c3038 };
+  }
+  if (/capitol|pantheon|state house|dome|sacr[eé]-c|reichstag|city hall/.test(n)) {
+    return { form: 'dome_palace', w: 68, d: 64, h: 64 };
+  }
+  if (/clock|campanile|big ben|belfry|carillon/.test(n)) {
+    return { form: 'clock_tower', w: 24, d: 24, h: 84 };
+  }
+  if (/needle|observation|cn tower|fernsehturm/.test(n)) {
+    return { form: 'observation_needle', w: 42, d: 42, h: 145 };
+  }
+  if (/skytree|eiffel|lattice|radio tower|sutro/.test(n)) {
+    return { form: 'lattice_tower', w: 56, d: 56, h: 180 };
+  }
+  if (/wheel|eye\b/.test(n)) {
+    return { form: 'ferris_wheel', w: 34, d: 68, h: 96 };
+  }
+  if (/stadium|arena|colosseum|bowl|field|fenway|wrigley|maracan/.test(n)) {
+    return { form: 'stadium_bowl', w: 145, d: 130, h: 38 };
+  }
+  if (/fort|castle|citadel|bastion/.test(n)) {
+    return { form: 'fortress_bastion', w: 110, d: 110, h: 20 };
+  }
+  if (/tower|skyscraper|center|centre|building/.test(n) && (site?.h || 0) > 90) {
+    return { form: 'stepped_bundled_tube', w: 54, d: 54, h: Math.max(120, site?.h || 150) };
+  }
+  if (/market|arcade|row|quincy|pike place/.test(n)) {
+    return { form: 'historic_row', w: 88, d: 36, h: 20 };
+  }
+  if (/museum|palace|palazzo|louvre|opera|gallery|station|terminal/.test(n)) {
+    return { form: 'canal_palazzo', w: 68, d: 56, h: 32 };
+  }
+  return null;
+}
+
 function buildArchetypeCityLandmarks(scene, baseResult = null, builtNames = new Set()) {
   const group = baseResult ? baseResult.group : new THREE.Group();
   if (!baseResult) group.name = `${ACTIVE_CITY_ID}_ArchetypeLandmarks`;
@@ -2743,12 +2793,16 @@ function buildArchetypeCityLandmarks(scene, baseResult = null, builtNames = new 
 
   const packLandmarks = (CITY_PACK && CITY_PACK.archetypes && CITY_PACK.archetypes.landmarks) || {};
   const sampledLandmarks = (GEO && GEO.sampledArchetypes && GEO.sampledArchetypes.landmarks) || {};
-  const allNames = new Set([...Object.keys(packLandmarks), ...Object.keys(sampledLandmarks)]);
+  const cityLandmarkNames = (CITY_PACK.landmarks || []).map((l) => l.name).filter(Boolean);
+  const allNames = new Set([...Object.keys(packLandmarks), ...Object.keys(sampledLandmarks), ...cityLandmarkNames]);
 
   for (const name of allNames) {
     if (builtNames.has(name)) continue;
-    const spec = { ...(sampledLandmarks[name] || {}), ...(packLandmarks[name] || {}) };
     const site = LANDMARK_SITES[name] || (CITY_PACK.landmarks || []).find((l) => l.name === name) || null;
+    const explicit = packLandmarks[name] || sampledLandmarks[name];
+    const inferred = !explicit ? inferLandmarkSpecFromName(name, site) : null;
+    if (!explicit && !inferred) continue;
+    const spec = { ...(inferred || {}), ...(sampledLandmarks[name] || {}), ...(packLandmarks[name] || {}) };
     const { group: lmGroup, collider } = buildLandmarkFromArchetype(name, spec, site);
     group.add(lmGroup);
     if (collider) colliders.push(collider);
