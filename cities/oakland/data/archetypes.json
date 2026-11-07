@@ -1,0 +1,658 @@
+{
+  "city": "oakland",
+  "osm_sampled_walls": {
+    "stucco": 3,
+    "brick": 3,
+    "clapboard": 2
+  },
+  "osm_sampled_roofs": {
+    "gable": 48,
+    "hip": 36,
+    "flat": 23,
+    "gambrel": 1
+  },
+  "street_view_samples": 17,
+  "building_count": 54256,
+  "avg_height_m": 8.7,
+  "max_height_m": 123.0,
+  "walls": {
+    "clapboard": 0.25,
+    "brick": 0.38,
+    "stone": 0.0,
+    "stucco": 0.38,
+    "shake": 0.0
+  },
+  "roofs": {
+    "flat": 0.21,
+    "hip": 0.33,
+    "gable": 0.44,
+    "gambrel": 0.01
+  },
+  "sampled_facade_palette": [
+    "0xf4f2f1",
+    "0x6b88a2",
+    "0xf4f0e6",
+    "0xfbd914",
+    "0xb0a798",
+    "0x807262"
+  ],
+  "sampled_roof_palette": [
+    "0x808096",
+    "0x8e9498",
+    "0x7b5640",
+    "0x313131"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.19,
+    "streetTreeDensity": 0.84,
+    "streetTreeSpacing": 26.2,
+    "parkTreeDensity": 1.05,
+    "foliageScale": 1.02
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 1385,
+    "footprintCoverage": 0.41,
+    "wallEnclosure": 0.65,
+    "lotInfill": 0.22,
+    "rowhouseAttachment": 0.22,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 1.08,
+    "shrubDensity": 1.05
+  },
+  "neighborhoods": {
+    "downtown_oakland": {
+      "building_count": 297,
+      "avg_height_m": 18.1,
+      "max_height_m": 122.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb0a798"
+      ],
+      "sampled_roof_palette": [
+        "0xa6a6a9"
+      ],
+      "name": "Downtown Oakland",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.49,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "highrise",
+        "buildingsPerKm2": 1136,
+        "footprintCoverage": 0.53,
+        "wallEnclosure": 0.94,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 8.8,
+        "maxHouseFootprint": 240,
+        "porchProbScale": 0.7,
+        "shrubDensity": 0.61
+      }
+    },
+    "uptown": {
+      "building_count": 247,
+      "avg_height_m": 14.0,
+      "max_height_m": 120.4,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x807262"
+      ],
+      "sampled_roof_palette": [
+        "0xa79f94"
+      ],
+      "name": "Uptown",
+      "center": [
+        60,
+        -450
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.18,
+        "streetTreeDensity": 0.83,
+        "streetTreeSpacing": 26.5,
+        "parkTreeDensity": 1.04,
+        "foliageScale": 1.02
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1154,
+        "footprintCoverage": 0.44,
+        "wallEnclosure": 0.88,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.22,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.08,
+        "shrubDensity": 1.05
+      }
+    },
+    "old_oakland": {
+      "building_count": 162,
+      "avg_height_m": 16.6,
+      "max_height_m": 112.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x796e66"
+      ],
+      "sampled_roof_palette": [
+        "0xa3a8ae"
+      ],
+      "name": "Old Oakland",
+      "center": [
+        -250,
+        260
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.79,
+        "streetTreeSpacing": 27.8,
+        "parkTreeDensity": 1.01,
+        "foliageScale": 1.01
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1130,
+        "footprintCoverage": 0.4,
+        "wallEnclosure": 0.48,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.22,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.08,
+        "shrubDensity": 1.05
+      }
+    },
+    "chinatown": {
+      "building_count": 185,
+      "avg_height_m": 15.4,
+      "max_height_m": 122.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x999995"
+      ],
+      "sampled_roof_palette": [
+        "0xa1a8b0"
+      ],
+      "name": "Chinatown",
+      "center": [
+        235,
+        250
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.49,
+        "streetTreeSpacing": 38.0,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1159,
+        "footprintCoverage": 0.49,
+        "wallEnclosure": 0.53,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.7,
+        "shrubDensity": 0.61
+      }
+    },
+    "lake_merritt_adams_point": {
+      "building_count": 578,
+      "avg_height_m": 9.3,
+      "max_height_m": 87.5,
+      "walls": null,
+      "roofs": {
+        "flat": 0.2,
+        "hip": 0.6,
+        "gable": 0.2,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [
+        "0x4b4d4e",
+        "0xe2f1f3"
+      ],
+      "sampled_roof_palette": [
+        "0x99a0a3",
+        "0xe8edf1"
+      ],
+      "name": "Lake Merritt & Adams Point",
+      "center": [
+        1350,
+        -350
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.44,
+        "streetTreeDensity": 1.37,
+        "streetTreeSpacing": 16.1,
+        "parkTreeDensity": 1.33,
+        "foliageScale": 1.09
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1163,
+        "footprintCoverage": 0.32,
+        "wallEnclosure": 0.51,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.22,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.08,
+        "shrubDensity": 1.21
+      }
+    },
+    "grand_lake_lakeshore": {
+      "building_count": 784,
+      "avg_height_m": 8.7,
+      "max_height_m": 24.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9d9c99"
+      ],
+      "sampled_roof_palette": [
+        "0x9fa2a5"
+      ],
+      "name": "Grand Lake & Lakeshore",
+      "center": [
+        1950,
+        -780
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.39,
+        "streetTreeDensity": 1.3,
+        "streetTreeSpacing": 16.9,
+        "parkTreeDensity": 1.28,
+        "foliageScale": 1.08
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1419,
+        "footprintCoverage": 0.37,
+        "wallEnclosure": 0.74,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.14,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.21,
+        "shrubDensity": 1.21
+      }
+    },
+    "piedmont_avenue": {
+      "building_count": 773,
+      "avg_height_m": 8.7,
+      "max_height_m": 48.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x807f78"
+      ],
+      "sampled_roof_palette": [
+        "0xacacba"
+      ],
+      "name": "Piedmont Avenue",
+      "center": [
+        1100,
+        -2100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.23,
+        "streetTreeDensity": 1.06,
+        "streetTreeSpacing": 20.8,
+        "parkTreeDensity": 1.1,
+        "foliageScale": 1.05
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1413,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.87,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.14,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.21,
+        "shrubDensity": 1.21
+      }
+    },
+    "temescal": {
+      "building_count": 1069,
+      "avg_height_m": 8.6,
+      "max_height_m": 79.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5d5a51"
+      ],
+      "sampled_roof_palette": [
+        "0xa29ca3"
+      ],
+      "name": "Temescal",
+      "center": [
+        180,
+        -2400
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.34,
+        "streetTreeDensity": 1.22,
+        "streetTreeSpacing": 18.0,
+        "parkTreeDensity": 1.22,
+        "foliageScale": 1.07
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1527,
+        "footprintCoverage": 0.35,
+        "wallEnclosure": 0.56,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.14,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.21,
+        "shrubDensity": 1.21
+      }
+    },
+    "rockridge": {
+      "building_count": 1470,
+      "avg_height_m": 8.5,
+      "max_height_m": 21.0,
+      "walls": null,
+      "roofs": {
+        "flat": 0.45,
+        "hip": 0.55,
+        "gable": 0.0,
+        "gambrel": 0.0
+      },
+      "sampled_facade_palette": [
+        "0x999790",
+        "0xf4f0e6",
+        "0x7b5640"
+      ],
+      "sampled_roof_palette": [
+        "0x8e9498",
+        "0xa19ca7",
+        "0x7b5640"
+      ],
+      "name": "Rockridge",
+      "center": [
+        880,
+        -3800
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.22,
+        "streetTreeDensity": 1.04,
+        "streetTreeSpacing": 21.2,
+        "parkTreeDensity": 1.09,
+        "foliageScale": 1.04
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1668,
+        "footprintCoverage": 0.32,
+        "wallEnclosure": 0.22,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.14,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.21,
+        "shrubDensity": 1.21
+      }
+    },
+    "west_oakland": {
+      "building_count": 1410,
+      "avg_height_m": 8.5,
+      "max_height_m": 42.0,
+      "walls": null,
+      "roofs": {
+        "flat": 0.0,
+        "hip": 0.2,
+        "gable": 0.77,
+        "gambrel": 0.02
+      },
+      "sampled_facade_palette": [
+        "0xf4f2f1",
+        "0x8e8d7f",
+        "0xf4f0e6",
+        "0x6b88a2",
+        "0xc7bfac",
+        "0xeff3d6"
+      ],
+      "sampled_roof_palette": [
+        "0x808096",
+        "0x313131",
+        "0x8e9498",
+        "0x9d9e9b"
+      ],
+      "name": "West Oakland",
+      "center": [
+        -1600,
+        -150
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.25,
+        "streetTreeDensity": 0.92,
+        "streetTreeSpacing": 23.9,
+        "parkTreeDensity": 1.12,
+        "foliageScale": 1.03
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1508,
+        "footprintCoverage": 0.43,
+        "wallEnclosure": 0.75,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.22,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.08,
+        "shrubDensity": 1.05
+      }
+    },
+    "jack_london_square": {
+      "building_count": 198,
+      "avg_height_m": 9.7,
+      "max_height_m": 63.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "Jack London Square",
+      "center": [
+        -280,
+        950
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.24,
+        "streetTreeDensity": 0.91,
+        "streetTreeSpacing": 24.2,
+        "parkTreeDensity": 1.11,
+        "foliageScale": 1.03
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1126,
+        "footprintCoverage": 0.3,
+        "wallEnclosure": 0.39,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.22,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.08,
+        "shrubDensity": 1.05
+      }
+    }
+  },
+  "landmarks": {
+    "Tribune Tower": {
+      "form": "clock_tower",
+      "x": 106,
+      "z": 144,
+      "w": 28,
+      "d": 26,
+      "h": 122.0,
+      "matched_osm_elements": 9,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xaa7f59"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "yes",
+        "historic": "yes"
+      },
+      "parts": []
+    },
+    "Oakland City Hall": {
+      "form": "dome_palace",
+      "x": -114,
+      "z": -100,
+      "w": 56,
+      "d": 38,
+      "h": 97,
+      "matched_osm_elements": 6,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x83807c"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Fox Theater": {
+      "form": "canal_palazzo",
+      "x": 70,
+      "z": -400,
+      "w": 48,
+      "d": 38,
+      "h": 36,
+      "matched_osm_elements": 11,
+      "parts_count": 1,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x575041"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "theatre",
+        "historic": "yes"
+      },
+      "parts": [
+        {
+          "dx": -5.6,
+          "dz": -6.5,
+          "w": 87.1,
+          "d": 78.4,
+          "h": 10.5,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    },
+    "Cathedral of Christ the Light": {
+      "form": "cathedral_spires",
+      "x": 774,
+      "z": -610,
+      "w": 68,
+      "d": 68,
+      "h": 41.0,
+      "matched_osm_elements": 2,
+      "parts_count": 1,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x949f9b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": [
+        {
+          "dx": -96.4,
+          "dz": -27.1,
+          "w": 19.5,
+          "d": 31.0,
+          "h": 7.0,
+          "roofShape": "flat",
+          "color": null
+        }
+      ]
+    },
+    "Lake Merritt Pergola": {
+      "form": "canal_palazzo",
+      "x": 1794,
+      "z": -710,
+      "w": 48,
+      "d": 48,
+      "h": 17.5,
+      "matched_osm_elements": 36,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xbcc2c5"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "residential",
+        "historic": "tomb"
+      },
+      "parts": []
+    },
+    "Port of Oakland Cranes": {
+      "form": "canal_palazzo",
+      "x": -2460,
+      "z": 580,
+      "w": 220,
+      "d": 90,
+      "h": 58,
+      "matched_osm_elements": 8,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xd0d4da"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Lake Merritt Amphitheater": {
+      "form": "canal_palazzo",
+      "x": 1073,
+      "z": 688,
+      "w": 96,
+      "d": 112,
+      "h": 99.0,
+      "matched_osm_elements": 5,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa9a8a6"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "yes",
+        "historic": "tomb"
+      },
+      "parts": []
+    }
+  }
+}

@@ -1,0 +1,568 @@
+{
+  "city": "pompanobeach",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {
+    "flat": 6
+  },
+  "street_view_samples": 14,
+  "building_count": 13469,
+  "avg_height_m": 8.6,
+  "max_height_m": 84.2,
+  "walls": null,
+  "roofs": {
+    "flat": 1.0,
+    "hip": 0.0,
+    "gable": 0.0,
+    "gambrel": 0.0
+  },
+  "sampled_facade_palette": [
+    "0x7f7d6b",
+    "0x9da0ab",
+    "0xa6a8a7",
+    "0xb5c0b6",
+    "0xa4abb0",
+    "0xc1cbcd"
+  ],
+  "sampled_roof_palette": [
+    "0x8d9595",
+    "0x5f8481",
+    "0x9f9b8c",
+    "0x969a98"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.23,
+    "streetTreeDensity": 0.94,
+    "streetTreeSpacing": 23.4,
+    "parkTreeDensity": 1.07,
+    "foliageScale": 1.07
+  },
+  "housingDensity": {
+    "form": "suburban",
+    "buildingsPerKm2": 835,
+    "footprintCoverage": 0.3,
+    "wallEnclosure": 0.37,
+    "lotInfill": 0.68,
+    "rowhouseAttachment": 0.06,
+    "maxHouseHeight": 9.8,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 0.95,
+    "shrubDensity": 1.22
+  },
+  "neighborhoods": {
+    "atlantic_federal_downtown_east": {
+      "building_count": 151,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7f7d6b"
+      ],
+      "sampled_roof_palette": [
+        "0x8d9595"
+      ],
+      "name": "Atlantic & Federal (Downtown East)",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.19,
+        "streetTreeDensity": 0.6,
+        "streetTreeSpacing": 36.7,
+        "parkTreeDensity": 1.03,
+        "foliageScale": 1.03
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 835,
+        "footprintCoverage": 0.34,
+        "wallEnclosure": 0.24,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.62,
+        "shrubDensity": 0.71
+      }
+    },
+    "pompano_beach_fisher_family_pier": {
+      "building_count": 13,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9da0ab"
+      ],
+      "sampled_roof_palette": [
+        "0x5f8481"
+      ],
+      "name": "Pompano Beach Fisher Family Pier",
+      "center": [
+        1728,
+        -345
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.81,
+        "streetTreeSpacing": 27.2,
+        "parkTreeDensity": 0.96,
+        "foliageScale": 1.06
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1150,
+        "footprintCoverage": 0.21,
+        "wallEnclosure": 0.27,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.22
+      }
+    },
+    "hillsboro_inlet_lighthouse": {
+      "building_count": 26,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa6a8a7"
+      ],
+      "sampled_roof_palette": [
+        "0x9f9b8c"
+      ],
+      "name": "Hillsboro Inlet Lighthouse",
+      "center": [
+        2317,
+        -3034
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.18,
+        "streetTreeDensity": 0.87,
+        "streetTreeSpacing": 25.3,
+        "parkTreeDensity": 1.02,
+        "foliageScale": 1.06
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1150,
+        "footprintCoverage": 0.41,
+        "wallEnclosure": 0.96,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.22
+      }
+    },
+    "intracoastal_waterway_atlantic_drawbridge": {
+      "building_count": 51,
+      "avg_height_m": 10.8,
+      "max_height_m": 70.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb5c0b6"
+      ],
+      "sampled_roof_palette": [
+        "0x969a98"
+      ],
+      "name": "Intracoastal Waterway & Atlantic Drawbridge",
+      "center": [
+        1188,
+        -11
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.35,
+        "streetTreeDensity": 1.1,
+        "streetTreeSpacing": 20.0,
+        "parkTreeDensity": 1.2,
+        "foliageScale": 1.09
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 835,
+        "footprintCoverage": 0.28,
+        "wallEnclosure": 0.27,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.22
+      }
+    },
+    "pompano_beach_airpark_blimp_base": {
+      "building_count": 4,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [
+        "0x86867e"
+      ],
+      "name": "Pompano Beach Airpark & Blimp Base",
+      "center": [
+        -719,
+        -1689
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.34,
+        "streetTreeDensity": 1.28,
+        "streetTreeSpacing": 17.2,
+        "parkTreeDensity": 1.18,
+        "foliageScale": 1.12
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1150,
+        "footprintCoverage": 0.36,
+        "wallEnclosure": 0.3,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.38
+      }
+    },
+    "pompano_beach_municipal_golf_course": {
+      "building_count": 10,
+      "avg_height_m": 8.0,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa4abb0"
+      ],
+      "sampled_roof_palette": [
+        "0x83847e"
+      ],
+      "name": "Pompano Beach Municipal Golf Course",
+      "center": [
+        -450,
+        -1350
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.29,
+        "streetTreeDensity": 1.2,
+        "streetTreeSpacing": 18.3,
+        "parkTreeDensity": 1.13,
+        "foliageScale": 1.11
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1150,
+        "footprintCoverage": 0.33,
+        "wallEnclosure": 0.15,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.38
+      }
+    },
+    "pompano_beach_civic_center_amphitheater": {
+      "building_count": 82,
+      "avg_height_m": 8.4,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc1cbcd"
+      ],
+      "sampled_roof_palette": [
+        "0x969b9d"
+      ],
+      "name": "Pompano Beach Civic Center & Amphitheater",
+      "center": [
+        -1867,
+        -22
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.24,
+        "streetTreeDensity": 0.95,
+        "streetTreeSpacing": 23.2,
+        "parkTreeDensity": 1.08,
+        "foliageScale": 1.07
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 835,
+        "footprintCoverage": 0.34,
+        "wallEnclosure": 0.61,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.22
+      }
+    },
+    "old_town_pompano": {
+      "building_count": 59,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc0c7c8"
+      ],
+      "sampled_roof_palette": [
+        "0x949795"
+      ],
+      "name": "Old Town Pompano",
+      "center": [
+        -2217,
+        -78
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.05,
+        "streetTreeSpacing": 21.0,
+        "parkTreeDensity": 1.15,
+        "foliageScale": 1.09
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 835,
+        "footprintCoverage": 0.27,
+        "wallEnclosure": 0.28,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.22
+      }
+    },
+    "harbor_village_finger_canals": {
+      "building_count": 355,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x958b6e"
+      ],
+      "sampled_roof_palette": [
+        "0x858685"
+      ],
+      "name": "Harbor Village Finger Canals",
+      "center": [
+        879,
+        533
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.31,
+        "streetTreeDensity": 1.23,
+        "streetTreeSpacing": 17.9,
+        "parkTreeDensity": 1.15,
+        "foliageScale": 1.11
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 963,
+        "footprintCoverage": 0.19,
+        "wallEnclosure": 0.27,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.06,
+        "shrubDensity": 1.38
+      }
+    },
+    "santa_barbara_shores_canals": {
+      "building_count": 316,
+      "avg_height_m": 8.6,
+      "max_height_m": 39.9,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x374351"
+      ],
+      "sampled_roof_palette": [
+        "0x908682"
+      ],
+      "name": "Santa Barbara Shores Canals",
+      "center": [
+        750,
+        1650
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.32,
+        "streetTreeDensity": 1.25,
+        "streetTreeSpacing": 17.6,
+        "parkTreeDensity": 1.16,
+        "foliageScale": 1.11
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 927,
+        "footprintCoverage": 0.22,
+        "wallEnclosure": 0.27,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.04,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.06,
+        "shrubDensity": 1.38
+      }
+    },
+    "ne_14th_st_causeway": {
+      "building_count": 32,
+      "avg_height_m": 8.5,
+      "max_height_m": 8.5,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [],
+      "name": "NE 14th St Causeway",
+      "center": [
+        1538,
+        -2112
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.25,
+        "streetTreeDensity": 0.97,
+        "streetTreeSpacing": 22.7,
+        "parkTreeDensity": 1.09,
+        "foliageScale": 1.08
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1150,
+        "footprintCoverage": 0.23,
+        "wallEnclosure": 0.3,
+        "lotInfill": 0.68,
+        "rowhouseAttachment": 0.06,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.95,
+        "shrubDensity": 1.22
+      }
+    }
+  },
+  "landmarks": {
+    "Pompano Beach Fisher Family Pier": {
+      "form": "canal_palazzo",
+      "x": 1728,
+      "z": -345,
+      "w": 260,
+      "d": 28,
+      "h": 14,
+      "matched_osm_elements": 4,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xdad8dd"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Hillsboro Inlet Lighthouse": {
+      "form": "canal_palazzo",
+      "x": 2317,
+      "z": -3034,
+      "w": 28,
+      "d": 28,
+      "h": 42,
+      "matched_osm_elements": 4,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x93999b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Pompano Beach Amphitheater": {
+      "form": "canal_palazzo",
+      "x": -1867,
+      "z": -22,
+      "w": 64,
+      "d": 58,
+      "h": 18,
+      "matched_osm_elements": 5,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xc7ced2"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "yes"
+      },
+      "parts": []
+    },
+    "Pompano Airpark Goodyear Blimp Hangar": {
+      "form": "canal_palazzo",
+      "x": -719,
+      "z": -1689,
+      "w": 95,
+      "d": 46,
+      "h": 26,
+      "matched_osm_elements": 1,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "hangar"
+      },
+      "parts": []
+    },
+    "Atlantic Blvd Intracoastal Control Tower": {
+      "form": "canal_palazzo",
+      "x": 1188,
+      "z": -11,
+      "w": 22,
+      "d": 22,
+      "h": 20,
+      "matched_osm_elements": 3,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x777772"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {
+        "building": "retail"
+      },
+      "parts": []
+    },
+    "Old Town Pompano Civic Plaza": {
+      "form": "canal_palazzo",
+      "x": -2217,
+      "z": -78,
+      "w": 48,
+      "d": 42,
+      "h": 16,
+      "matched_osm_elements": 1,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x6b7776"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

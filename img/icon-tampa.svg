@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Outer Tampa Bay Crimson-Gold frame -->
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="#d97706"/>
+  <!-- Deep Hillsborough Bay Navy-Teal background -->
+  <rect x="18" y="18" width="220" height="220" rx="44" fill="#0c2438"/>
+  <!-- Inner Sunshine Gold pinstripe -->
+  <rect x="23" y="23" width="210" height="210" rx="40" fill="none" stroke="#fbbf24" stroke-width="3"/>
+
+  <!-- Warm Florida Sun Disc behind skyline -->
+  <circle cx="128" cy="112" r="54" fill="#f59e0b" fill-opacity="0.22"/>
+
+  <!-- Left: Plant Hall Silver Moorish Minaret & Crescent -->
+  <rect x="64" y="114" width="26" height="68" rx="2" fill="#b91c1c"/>
+  <path d="M 77 70 C 56 84 58 108 77 114 C 96 108 98 84 77 70 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="77" y1="52" x2="77" y2="70" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 72 52 A 6 6 0 1 0 82 52 A 4.5 4.5 0 1 1 72 52 Z" fill="#fbbf24"/>
+
+  <!-- Center: Rivergate Tower ("Beer Can Building") cylinder + 100 North Tampa spire -->
+  <rect x="104" y="84" width="32" height="98" rx="14" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+  <line x1="112" y1="94" x2="128" y2="94" stroke="#0c2438" stroke-width="2.5"/>
+  <line x1="112" y1="108" x2="128" y2="108" stroke="#0c2438" stroke-width="2.5"/>
+  <line x1="112" y1="122" x2="128" y2="122" stroke="#0c2438" stroke-width="2.5"/>
+  <line x1="112" y1="136" x2="128" y2="136" stroke="#0c2438" stroke-width="2.5"/>
+  <line x1="112" y1="150" x2="128" y2="150" stroke="#0c2438" stroke-width="2.5"/>
+
+  <!-- Right: 100 North Tampa Postmodern Stepped Crown Tower -->
+  <rect x="148" y="68" width="38" height="114" rx="2" fill="#94a3b8"/>
+  <polygon points="148,68 167,46 186,68" fill="#e2e8f0"/>
+  <line x1="167" y1="36" x2="167" y2="46" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+  <rect x="155" y="78" width="8" height="94" fill="#0ea5e9" fill-opacity="0.45"/>
+  <rect x="171" y="78" width="8" height="94" fill="#0ea5e9" fill-opacity="0.45"/>
+
+  <!-- Tampa Riverwalk & Hillsborough River Waterfront Promenade -->
+  <rect x="46" y="180" width="164" height="7" rx="3.5" fill="#f59e0b"/>
+  <rect x="56" y="195" width="144" height="7" rx="3.5" fill="#38bdf8"/>
+  <rect x="76" y="210" width="104" height="7" rx="3.5" fill="#fbbf24"/>
+</svg>

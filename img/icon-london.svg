@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1b2a"/>
+      <stop offset="60%" stop-color="#1b3a5c"/>
+      <stop offset="100%" stop-color="#415a77"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8d3a7"/>
+      <stop offset="60%" stop-color="#d1b57f"/>
+      <stop offset="100%" stop-color="#a88a54"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Palace of Westminster Neo-Gothic wing -->
+  <rect x="74" y="294" width="144" height="114" fill="#b89b67" stroke="#47381f" stroke-width="3"/>
+  <g stroke="#47381f" stroke-width="2.5">
+    <line x1="98" y1="294" x2="98" y2="408"/>
+    <line x1="122" y1="294" x2="122" y2="408"/>
+    <line x1="146" y1="294" x2="146" y2="408"/>
+    <line x1="170" y1="294" x2="170" y2="408"/>
+    <line x1="194" y1="294" x2="194" y2="408"/>
+    <!-- Gothic pinnacles -->
+    <polygon points="94,294 98,274 102,294" fill="#e8d3a7"/>
+    <polygon points="142,294 146,274 150,294" fill="#e8d3a7"/>
+    <polygon points="190,294 194,274 198,294" fill="#e8d3a7"/>
+  </g>
+  <!-- Elizabeth Tower (Big Ben) -->
+  <!-- Cast-iron spire & Ayrton Light -->
+  <line x1="286" y1="42" x2="286" y2="68" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="264,122 286,64 308,122" fill="#2d4739" stroke="#47381f" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Belfry lantern stage -->
+  <rect x="248" y="122" width="76" height="32" fill="url(#stone)" stroke="#47381f" stroke-width="3"/>
+  <polygon points="236,168 248,150 324,150 336,168" fill="#2d4739" stroke="#47381f" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Corner spirelets -->
+  <polygon points="232,168 236,144 240,168" fill="#e8d3a7"/>
+  <polygon points="332,168 336,144 340,168" fill="#e8d3a7"/>
+  <!-- Great Clock stage -->
+  <rect x="228" y="168" width="116" height="106" rx="3" fill="url(#stone)" stroke="#47381f" stroke-width="3.5"/>
+  <!-- Iconic Illuminated Clock Dial -->
+  <circle cx="286" cy="221" r="38" fill="#fff8dc" stroke="#b8860b" stroke-width="5"/>
+  <circle cx="286" cy="221" r="28" fill="none" stroke="#3d2c11" stroke-width="2" stroke-dasharray="4 4"/>
+  <!-- Clock hands at 9:00 -->
+  <line x1="286" y1="221" x2="286" y2="193" stroke="#1b263b" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="286" y1="221" x2="264" y2="221" stroke="#1b263b" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="286" cy="221" r="4" fill="#b8860b"/>
+  <!-- Main Tower Shaft with vertical Gothic fluting -->
+  <rect x="236" y="274" width="100" height="134" fill="url(#stone)" stroke="#47381f" stroke-width="3.5"/>
+  <g stroke="#7d6438" stroke-width="2.5">
+    <line x1="256" y1="282" x2="256" y2="402"/>
+    <line x1="276" y1="282" x2="276" y2="402"/>
+    <line x1="296" y1="282" x2="296" y2="402"/>
+    <line x1="316" y1="282" x2="316" y2="402"/>
+  </g>
+  <!-- Westminster Bridge arches in green & River Thames -->
+  <path d="M40 398 H472 V428 H418 A44 24 0 0 0 330 428 H298 A44 24 0 0 0 210 428 H178 A44 24 0 0 0 90 428 H40 Z" fill="#3a6b56" stroke="#1e3b2f" stroke-width="3"/>
+  <path d="M0 426 L512 426 L512 512 L0 512 Z" fill="#0b2038"/>
+  <path d="M92 458 Q182 446 272 458 T432 458" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+</svg>

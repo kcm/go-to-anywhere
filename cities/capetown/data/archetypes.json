@@ -1,0 +1,394 @@
+{
+  "city": "capetown",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 9,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x625947",
+    "0xa0a29b",
+    "0x797767",
+    "0x717373",
+    "0x8a8b80",
+    "0xa1988a"
+  ],
+  "sampled_roof_palette": [
+    "0x91887e",
+    "0x88807a",
+    "0x90938d",
+    "0x877d63"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.26,
+    "streetTreeDensity": 0.84,
+    "streetTreeSpacing": 26.2,
+    "parkTreeDensity": 1.14,
+    "foliageScale": 1.0
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 1720,
+    "footprintCoverage": 0.35,
+    "wallEnclosure": 0.43,
+    "lotInfill": 0.34,
+    "rowhouseAttachment": 0.48,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 0.86,
+    "shrubDensity": 0.95
+  },
+  "neighborhoods": {
+    "city_bowl_long_street": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x625947"
+      ],
+      "sampled_roof_palette": [
+        "0x91887e"
+      ],
+      "name": "City Bowl & Long Street",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.14,
+        "streetTreeDensity": 0.7,
+        "streetTreeSpacing": 31.4,
+        "parkTreeDensity": 1.0,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.5,
+        "wallEnclosure": 0.94,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.48,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.86,
+        "shrubDensity": 0.95
+      }
+    },
+    "v_a_waterfront": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [],
+      "sampled_roof_palette": [
+        "0x88807a"
+      ],
+      "name": "V&A Waterfront",
+      "center": [
+        -35,
+        -2250
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 1.03,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.28,
+        "wallEnclosure": 0.44,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.48,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.86,
+        "shrubDensity": 0.95
+      }
+    },
+    "bo_kaap": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa0a29b"
+      ],
+      "sampled_roof_palette": [
+        "0x90938d"
+      ],
+      "name": "Bo-Kaap",
+      "center": [
+        -832,
+        -8
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.26,
+        "streetTreeDensity": 0.84,
+        "streetTreeSpacing": 26.2,
+        "parkTreeDensity": 1.14,
+        "foliageScale": 1.0
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.35,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.86,
+        "shrubDensity": 0.95
+      }
+    },
+    "signal_hill": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x797767"
+      ],
+      "sampled_roof_palette": [
+        "0x877d63"
+      ],
+      "name": "Signal Hill",
+      "center": [
+        -2033,
+        -722
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.33,
+        "streetTreeDensity": 0.93,
+        "streetTreeSpacing": 23.7,
+        "parkTreeDensity": 1.23,
+        "foliageScale": 1.01
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.3,
+        "wallEnclosure": 0.26,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.48,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.86,
+        "shrubDensity": 0.95
+      }
+    },
+    "lion_s_head": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x717373"
+      ],
+      "sampled_roof_palette": [
+        "0x69664e"
+      ],
+      "name": "Lion's Head",
+      "center": [
+        -3189,
+        1189
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.21,
+        "streetTreeDensity": 0.78,
+        "streetTreeSpacing": 28.2,
+        "parkTreeDensity": 1.09,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.35,
+        "wallEnclosure": 0.07,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.48,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.86,
+        "shrubDensity": 0.95
+      }
+    },
+    "table_mountain": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x8a8b80"
+      ],
+      "sampled_roof_palette": [
+        "0x7a765c"
+      ],
+      "name": "Table Mountain",
+      "center": [
+        -1500,
+        3556
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.62,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.55,
+        "foliageScale": 1.07
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.35,
+        "wallEnclosure": 0.67,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.48,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.86,
+        "shrubDensity": 1.09
+      }
+    },
+    "gardens_oranjezicht": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa1988a"
+      ],
+      "sampled_roof_palette": [
+        "0x87857f"
+      ],
+      "name": "Gardens & Oranjezicht",
+      "center": [
+        -289,
+        1100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.33,
+        "streetTreeDensity": 0.93,
+        "streetTreeSpacing": 23.7,
+        "parkTreeDensity": 1.23,
+        "foliageScale": 1.01
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.39,
+        "wallEnclosure": 0.73,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.48,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.86,
+        "shrubDensity": 0.95
+      }
+    },
+    "green_point_sea_point": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x848085"
+      ],
+      "sampled_roof_palette": [
+        "0x798177"
+      ],
+      "name": "Green Point & Sea Point",
+      "center": [
+        -2450,
+        -2100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.28,
+        "streetTreeDensity": 0.87,
+        "streetTreeSpacing": 25.3,
+        "parkTreeDensity": 1.17,
+        "foliageScale": 1.0
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1720,
+        "footprintCoverage": 0.28,
+        "wallEnclosure": 0.03,
+        "lotInfill": 0.34,
+        "rowhouseAttachment": 0.48,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.86,
+        "shrubDensity": 0.95
+      }
+    }
+  },
+  "landmarks": {
+    "Cape Town City Hall": {
+      "form": "dome_palace",
+      "x": 156,
+      "z": 20,
+      "w": 86,
+      "d": 54,
+      "h": 42,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x7f9093"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Cape Wheel V&A Waterfront": {
+      "form": "ferris_wheel",
+      "x": -35,
+      "z": -2156,
+      "w": 32,
+      "d": 32,
+      "h": 50,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xa3a09f"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Table Mountain Cableway": {
+      "form": "canal_palazzo",
+      "x": -1924,
+      "z": 3450,
+      "w": 48,
+      "d": 48,
+      "h": 26,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

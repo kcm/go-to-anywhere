@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b2545"/>
+      <stop offset="55%" stop-color="#134074"/>
+      <stop offset="100%" stop-color="#8da9c4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- North Shore Mountains & The Lions Twin Peaks (Ch'ich'iyuy Elxwkn) -->
+  <polygon points="24,332 146,124 222,236 286,112 384,244 442,174 496,332" fill="#1e3f66" stroke="#eef4ed" stroke-width="2"/>
+  <!-- Snow caps on The Lions -->
+  <polygon points="146,124 114,178 138,168 154,186 176,166" fill="#ffffff"/>
+  <polygon points="286,112 252,172 276,160 294,182 320,158" fill="#ffffff"/>
+  <polygon points="442,174 416,214 438,206 462,216" fill="#ffffff"/>
+  <!-- Stanley Park Coastal Douglas Fir Evergreens on left promontory -->
+  <g fill="#1b4332">
+    <polygon points="32,366 64,268 96,366"/>
+    <polygon points="68,366 96,284 124,366"/>
+    <polygon points="102,366 126,298 150,366"/>
+  </g>
+  <!-- Iconic Lions Gate Suspension Bridge (Emerald Green Steel Towers) -->
+  <g stroke="#52b788" stroke-width="4" fill="none">
+    <!-- Main suspension cables -->
+    <path d="M44 338 Q106 332 168 192 Q256 328 344 192 Q406 332 468 338" stroke-width="5"/>
+    <!-- Vertical suspender cables -->
+    <line x1="196" y1="238" x2="196" y2="342" stroke-width="2.5"/>
+    <line x1="226" y1="268" x2="226" y2="342" stroke-width="2.5"/>
+    <line x1="256" y1="278" x2="256" y2="342" stroke-width="2.5"/>
+    <line x1="286" y1="268" x2="286" y2="342" stroke-width="2.5"/>
+    <line x1="316" y1="238" x2="316" y2="342" stroke-width="2.5"/>
+    <!-- Left Tower -->
+    <line x1="168" y1="184" x2="168" y2="386" stroke-width="10"/>
+    <line x1="154" y1="226" x2="182" y2="226" stroke-width="5"/>
+    <line x1="154" y1="284" x2="182" y2="284" stroke-width="5"/>
+    <!-- Right Tower -->
+    <line x1="344" y1="184" x2="344" y2="386" stroke-width="10"/>
+    <line x1="330" y1="226" x2="358" y2="226" stroke-width="5"/>
+    <line x1="330" y1="284" x2="358" y2="284" stroke-width="5"/>
+    <!-- Bridge Roadway Deck -->
+    <line x1="36" y1="342" x2="476" y2="342" stroke="#d8f3dc" stroke-width="8"/>
+  </g>
+  <!-- Concrete bridge piers -->
+  <rect x="156" y="380" width="24" height="22" fill="#ced4da"/>
+  <rect x="332" y="380" width="24" height="22" fill="#ced4da"/>
+  <!-- Burrard Inlet / English Bay Water -->
+  <path d="M0 396 L512 396 L512 512 L0 512 Z" fill="#0d3b66"/>
+  <path d="M76 432 Q166 420 256 432 T436 432" fill="none" stroke="#74c69d" stroke-width="5" stroke-linecap="round"/>
+  <path d="M116 468 Q206 456 296 468 T416 468" fill="none" stroke="#eef4ed" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111d3b"/>
+      <stop offset="55%" stop-color="#264373"/>
+      <stop offset="100%" stop-color="#d4916a"/>
+    </linearGradient>
+    <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e3b261"/>
+      <stop offset="55%" stop-color="#b88238"/>
+      <stop offset="100%" stop-color="#784f1b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Golden Paris sun / beacon glow behind summit -->
+  <circle cx="256" cy="116" r="54" fill="#ffe28a" opacity="0.38"/>
+  <!-- Eiffel Tower Silhouette & Lattice -->
+  <!-- Spire -->
+  <line x1="256" y1="42" x2="256" y2="96" stroke="#ffe28a" stroke-width="5" stroke-linecap="round"/>
+  <!-- Top Cupola / Lantern -->
+  <path d="M240 112 Q256 88 272 112 Z" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3"/>
+  <rect x="234" y="112" width="44" height="12" rx="3" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3"/>
+  <!-- Upper Shaft (above 2nd platform) -->
+  <path d="M240 124 C238 188 228 242 214 278 H298 C284 242 274 188 272 124 Z" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3.5"/>
+  <!-- Center vertical slit in upper shaft -->
+  <path d="M252 140 L248 258 H264 L260 140 Z" fill="#233d69"/>
+  <!-- Second Platform (double deck) -->
+  <rect x="196" y="276" width="120" height="12" rx="3" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3"/>
+  <rect x="202" y="288" width="108" height="10" rx="2" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3"/>
+  <!-- Middle Section (between 1st and 2nd platforms) -->
+  <path d="M206 298 L178 358 H212 L232 298 Z" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3.5"/>
+  <path d="M306 298 L334 358 H300 L280 298 Z" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3.5"/>
+  <!-- First Platform (wide deck) -->
+  <rect x="156" y="356" width="200" height="16" rx="4" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3.5"/>
+  <!-- Base Legs & Iconic Decorative Arch -->
+  <path d="M168 372 L120 448 H172 L192 406 A68 58 0 0 1 320 406 L340 448 H392 L344 372 Z" fill="url(#iron)" stroke="#4a2e0b" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Lattice X-bracing highlights -->
+  <g stroke="#4a2e0b" stroke-width="2.5" opacity="0.75">
+    <line x1="240" y1="156" x2="272" y2="182"/>
+    <line x1="272" y1="156" x2="240" y2="182"/>
+    <line x1="236" y1="196" x2="276" y2="226"/>
+    <line x1="276" y1="196" x2="236" y2="226"/>
+    <line x1="228" y1="236" x2="284" y2="268"/>
+    <line x1="284" y1="236" x2="228" y2="268"/>
+    <line x1="198" y1="304" x2="220" y2="352"/>
+    <line x1="226" y1="304" x2="184" y2="352"/>
+    <line x1="314" y1="304" x2="292" y2="352"/>
+    <line x1="286" y1="304" x2="328" y2="352"/>
+  </g>
+  <!-- Seine River & Pont d'Iena foreground -->
+  <path d="M0 444 L512 444 L512 512 L0 512 Z" fill="#102542"/>
+  <path d="M84 474 Q170 462 256 474 T428 474" fill="none" stroke="#ffe28a" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+</svg>

@@ -1,0 +1,453 @@
+{
+  "city": "paris",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 13,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x857565",
+    "0x423c37",
+    "0x75654c",
+    "0xb2b6b9",
+    "0x8b867c",
+    "0x908b84"
+  ],
+  "sampled_roof_palette": [
+    "0x857a70",
+    "0x6a5a51",
+    "0x766e6c",
+    "0x7b7675"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.11,
+    "streetTreeDensity": 0.73,
+    "streetTreeSpacing": 30.1,
+    "parkTreeDensity": 0.95,
+    "foliageScale": 0.93
+  },
+  "housingDensity": {
+    "form": "rowhouse",
+    "buildingsPerKm2": 3400,
+    "footprintCoverage": 0.64,
+    "wallEnclosure": 0.83,
+    "lotInfill": 0.15,
+    "rowhouseAttachment": 0.92,
+    "maxHouseHeight": 12.2,
+    "maxHouseFootprint": 310,
+    "porchProbScale": 0.32,
+    "shrubDensity": 0.45
+  },
+  "neighborhoods": {
+    "musee_du_louvre": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x857565"
+      ],
+      "sampled_roof_palette": [
+        "0x857a70"
+      ],
+      "name": "Musee du Louvre",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 0.93,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.67,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "tour_eiffel_champ_de_mars": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x423c37"
+      ],
+      "sampled_roof_palette": [
+        "0x6a5a51"
+      ],
+      "name": "Tour Eiffel & Champ de Mars",
+      "center": [
+        -3168,
+        256
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.73,
+        "streetTreeSpacing": 30.1,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.66,
+        "wallEnclosure": 0.98,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "ile_de_la_cite_notre_dame": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x75654c"
+      ],
+      "sampled_roof_palette": [
+        "0x766e6c"
+      ],
+      "name": "Ile de la Cite & Notre-Dame",
+      "center": [
+        907,
+        845
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.73,
+        "streetTreeSpacing": 30.1,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.66,
+        "wallEnclosure": 0.95,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "place_de_la_concorde": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xb2b6b9"
+      ],
+      "sampled_roof_palette": [
+        "0x7b7675"
+      ],
+      "name": "Place de la Concorde",
+      "center": [
+        -1200,
+        -490
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.8,
+        "streetTreeSpacing": 27.5,
+        "parkTreeDensity": 1.0,
+        "foliageScale": 0.94
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.56,
+        "wallEnclosure": 0.41,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "champs_elysees_arc_de_triomphe": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x8b867c"
+      ],
+      "sampled_roof_palette": [
+        "0x897e76"
+      ],
+      "name": "Champs-Elysees & Arc de Triomphe",
+      "center": [
+        -3116,
+        -1467
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.73,
+        "streetTreeSpacing": 30.1,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.63,
+        "wallEnclosure": 0.74,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "saint_germain_des_pres": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x908b84"
+      ],
+      "sampled_roof_palette": [
+        "0x6a6566"
+      ],
+      "name": "Saint-Germain-des-Pres",
+      "center": [
+        -337,
+        520
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.73,
+        "streetTreeSpacing": 30.1,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 0.95,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "quartier_latin_pantheon": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x676864"
+      ],
+      "sampled_roof_palette": [
+        "0x6f6866"
+      ],
+      "name": "Quartier Latin & Pantheon",
+      "center": [
+        797,
+        1590
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.76,
+        "streetTreeSpacing": 28.9,
+        "parkTreeDensity": 0.98,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.64,
+        "wallEnclosure": 0.82,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "jardin_du_luxembourg": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x726f68"
+      ],
+      "sampled_roof_palette": [
+        "0x6f6b68"
+      ],
+      "name": "Jardin du Luxembourg",
+      "center": [
+        -406,
+        1701
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.12,
+        "streetTreeDensity": 0.75,
+        "streetTreeSpacing": 29.3,
+        "parkTreeDensity": 0.96,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.62,
+        "wallEnclosure": 0.65,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    },
+    "le_marais": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9e968e"
+      ],
+      "sampled_roof_palette": [
+        "0x6b686a"
+      ],
+      "name": "Le Marais",
+      "center": [
+        1240,
+        220
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.1,
+        "streetTreeDensity": 0.72,
+        "streetTreeSpacing": 30.6,
+        "parkTreeDensity": 0.93,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3400,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 0.97,
+        "lotInfill": 0.15,
+        "rowhouseAttachment": 0.92,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.32,
+        "shrubDensity": 0.45
+      }
+    }
+  },
+  "landmarks": {
+    "Tour Eiffel": {
+      "form": "lattice_tower",
+      "x": -3168,
+      "z": 256,
+      "w": 125,
+      "d": 125,
+      "h": 330,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x272e47"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Louvre Pyramid": {
+      "form": "canal_palazzo",
+      "x": 0,
+      "z": 0,
+      "w": 36,
+      "d": 36,
+      "h": 22,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xbab09e"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Arc de Triomphe": {
+      "form": "triumphal_arch",
+      "x": -3116,
+      "z": -1467,
+      "w": 45,
+      "d": 22,
+      "h": 50,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x96948b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Cathedrale Notre-Dame de Paris": {
+      "form": "cathedral_spires",
+      "x": 907,
+      "z": 845,
+      "w": 128,
+      "d": 48,
+      "h": 96,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x8d7f6f"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

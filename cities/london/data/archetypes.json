@@ -1,0 +1,453 @@
+{
+  "city": "london",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 13,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x8f8d88",
+    "0x624653",
+    "0x7b8275",
+    "0x998e85",
+    "0x9d816e",
+    "0xa57874"
+  ],
+  "sampled_roof_palette": [
+    "0x7d7f85",
+    "0xa0a6ad",
+    "0x8b9193",
+    "0x9e8d8e"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.16,
+    "streetTreeDensity": 0.75,
+    "streetTreeSpacing": 29.3,
+    "parkTreeDensity": 1.09,
+    "foliageScale": 0.99
+  },
+  "housingDensity": {
+    "form": "rowhouse",
+    "buildingsPerKm2": 2750,
+    "footprintCoverage": 0.53,
+    "wallEnclosure": 0.87,
+    "lotInfill": 0.22,
+    "rowhouseAttachment": 0.84,
+    "maxHouseHeight": 12.2,
+    "maxHouseFootprint": 310,
+    "porchProbScale": 0.52,
+    "shrubDensity": 0.68
+  },
+  "neighborhoods": {
+    "westminster_big_ben": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x8f8d88"
+      ],
+      "sampled_roof_palette": [
+        "0x7d7f85"
+      ],
+      "name": "Westminster & Big Ben",
+      "center": [
+        -542,
+        534
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.17,
+        "streetTreeDensity": 0.76,
+        "streetTreeSpacing": 28.9,
+        "parkTreeDensity": 1.1,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.59,
+        "wallEnclosure": 0.98,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "south_bank_london_eye": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x624653"
+      ],
+      "sampled_roof_palette": [
+        "0xa0a6ad"
+      ],
+      "name": "South Bank & London Eye",
+      "center": [
+        -156,
+        245
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.2,
+        "streetTreeDensity": 0.8,
+        "streetTreeSpacing": 27.5,
+        "parkTreeDensity": 1.14,
+        "foliageScale": 1.0
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.51,
+        "wallEnclosure": 0.86,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "trafalgar_square_whitehall": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7b8275"
+      ],
+      "sampled_roof_palette": [
+        "0x8b9193"
+      ],
+      "name": "Trafalgar Square & Whitehall",
+      "center": [
+        -780,
+        -289
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.24,
+        "streetTreeDensity": 0.85,
+        "streetTreeSpacing": 25.9,
+        "parkTreeDensity": 1.19,
+        "foliageScale": 1.0
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.54,
+        "wallEnclosure": 0.55,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "st_james_s_buckingham_palace": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x998e85"
+      ],
+      "sampled_roof_palette": [
+        "0x9e8d8e"
+      ],
+      "name": "St James's & Buckingham Palace",
+      "center": [
+        -1704,
+        489
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.12,
+        "streetTreeDensity": 0.7,
+        "streetTreeSpacing": 31.4,
+        "parkTreeDensity": 1.04,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.6,
+        "wallEnclosure": 0.91,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "covent_garden_strand": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9d816e"
+      ],
+      "sampled_roof_palette": [
+        "0x7e838d"
+      ],
+      "name": "Covent Garden & Strand",
+      "center": [
+        -380,
+        -680
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.12,
+        "streetTreeDensity": 0.7,
+        "streetTreeSpacing": 31.4,
+        "parkTreeDensity": 1.04,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.9,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "soho_west_end": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa57874"
+      ],
+      "sampled_roof_palette": [
+        "0x737781"
+      ],
+      "name": "Soho & West End",
+      "center": [
+        -1150,
+        -780
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.71,
+        "streetTreeSpacing": 31.0,
+        "parkTreeDensity": 1.05,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.59,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "city_of_london_st_paul_s": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9b9c9a"
+      ],
+      "sampled_roof_palette": [
+        "0x9a9ca3"
+      ],
+      "name": "City of London & St Paul's",
+      "center": [
+        1273,
+        -934
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.74,
+        "streetTreeSpacing": 29.7,
+        "parkTreeDensity": 1.08,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.52,
+        "wallEnclosure": 0.9,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "bankside_tate_modern": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7e7565"
+      ],
+      "sampled_roof_palette": [
+        "0x7e7b7e"
+      ],
+      "name": "Bankside & Tate Modern",
+      "center": [
+        924,
+        -67
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.74,
+        "streetTreeSpacing": 29.7,
+        "parkTreeDensity": 1.08,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.53,
+        "wallEnclosure": 0.92,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    },
+    "southwark_the_shard": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xbfc4c2"
+      ],
+      "sampled_roof_palette": [
+        "0x99a2aa"
+      ],
+      "name": "Southwark & The Shard",
+      "center": [
+        2100,
+        111
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.16,
+        "streetTreeDensity": 0.75,
+        "streetTreeSpacing": 29.3,
+        "parkTreeDensity": 1.09,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2750,
+        "footprintCoverage": 0.49,
+        "wallEnclosure": 0.8,
+        "lotInfill": 0.22,
+        "rowhouseAttachment": 0.84,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.52,
+        "shrubDensity": 0.68
+      }
+    }
+  },
+  "landmarks": {
+    "Elizabeth Tower (Big Ben)": {
+      "form": "clock_tower",
+      "x": -542,
+      "z": 534,
+      "w": 24,
+      "d": 24,
+      "h": 96,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xb99c4d"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "London Eye": {
+      "form": "ferris_wheel",
+      "x": -156,
+      "z": 245,
+      "w": 36,
+      "d": 120,
+      "h": 135,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x4c5475"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "St Paul's Cathedral": {
+      "form": "cathedral_spires",
+      "x": 1273,
+      "z": -934,
+      "w": 158,
+      "d": 78,
+      "h": 111,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x6f706c"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "The Shard": {
+      "form": "diagrid_prism",
+      "x": 2100,
+      "z": 111,
+      "w": 72,
+      "d": 72,
+      "h": 310,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x797268"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

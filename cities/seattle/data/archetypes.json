@@ -1,0 +1,416 @@
+{
+  "city": "seattle",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 12,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0xc4dad6",
+    "0x44484c",
+    "0xacadb0",
+    "0x9a9995",
+    "0x7d7f7f",
+    "0x5c5952"
+  ],
+  "sampled_roof_palette": [
+    "0xaaaaac",
+    "0x979e9b",
+    "0xa5abb2",
+    "0x9a9ea1"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.27,
+    "streetTreeDensity": 1.07,
+    "streetTreeSpacing": 20.6,
+    "parkTreeDensity": 1.26,
+    "foliageScale": 1.15
+  },
+  "housingDensity": {
+    "form": "urban",
+    "buildingsPerKm2": 1780,
+    "footprintCoverage": 0.36,
+    "wallEnclosure": 0.5,
+    "lotInfill": 0.25,
+    "rowhouseAttachment": 0.28,
+    "maxHouseHeight": 10.5,
+    "maxHouseFootprint": 285,
+    "porchProbScale": 1.06,
+    "shrubDensity": 1.16
+  },
+  "neighborhoods": {
+    "pike_place_market": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc4dad6"
+      ],
+      "sampled_roof_palette": [
+        "0xaaaaac"
+      ],
+      "name": "Pike Place Market",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.19,
+        "streetTreeDensity": 0.97,
+        "streetTreeSpacing": 22.7,
+        "parkTreeDensity": 1.18,
+        "foliageScale": 1.14
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.37,
+        "wallEnclosure": 0.18,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.28,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.06,
+        "shrubDensity": 1.16
+      }
+    },
+    "seattle_center_space_needle": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x44484c"
+      ],
+      "sampled_roof_palette": [
+        "0x979e9b"
+      ],
+      "name": "Seattle Center & Space Needle",
+      "center": [
+        -541,
+        -1156
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.3,
+        "streetTreeDensity": 1.1,
+        "streetTreeSpacing": 20.0,
+        "parkTreeDensity": 1.29,
+        "foliageScale": 1.15
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.33,
+        "wallEnclosure": 0.48,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.28,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.06,
+        "shrubDensity": 1.16
+      }
+    },
+    "alaskan_way_waterfront": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xacadb0"
+      ],
+      "sampled_roof_palette": [
+        "0xa5abb2"
+      ],
+      "name": "Alaskan Way Waterfront",
+      "center": [
+        -150,
+        320
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.17,
+        "streetTreeDensity": 0.95,
+        "streetTreeSpacing": 23.2,
+        "parkTreeDensity": 1.16,
+        "foliageScale": 1.13
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.36,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.28,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.06,
+        "shrubDensity": 1.16
+      }
+    },
+    "downtown_columbia_center": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9a9995"
+      ],
+      "sampled_roof_palette": [
+        "0x9a9ea1"
+      ],
+      "name": "Downtown & Columbia Center",
+      "center": [
+        720,
+        480
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.63,
+        "streetTreeSpacing": 34.9,
+        "parkTreeDensity": 1.14,
+        "foliageScale": 1.09
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.49,
+        "wallEnclosure": 0.71,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.74,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 0.69,
+        "shrubDensity": 0.67
+      }
+    },
+    "south_lake_union": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7d7f7f"
+      ],
+      "sampled_roof_palette": [
+        "0xadb3b4"
+      ],
+      "name": "South Lake Union",
+      "center": [
+        480,
+        -1650
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.59,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.55,
+        "foliageScale": 1.19
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.36,
+        "wallEnclosure": 0.46,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.28,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.06,
+        "shrubDensity": 1.33
+      }
+    },
+    "capitol_hill": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x5c5952"
+      ],
+      "sampled_roof_palette": [
+        "0x9ea1a3"
+      ],
+      "name": "Capitol Hill",
+      "center": [
+        1502,
+        -456
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.36,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.35,
+        "foliageScale": 1.19
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.31,
+        "wallEnclosure": 0.37,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.18,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.19,
+        "shrubDensity": 1.33
+      }
+    },
+    "pioneer_square": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x52452a"
+      ],
+      "sampled_roof_palette": [
+        "0xa3a5a9"
+      ],
+      "name": "Pioneer Square",
+      "center": [
+        759,
+        1100
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.29,
+        "streetTreeDensity": 1.09,
+        "streetTreeSpacing": 20.2,
+        "parkTreeDensity": 1.28,
+        "foliageScale": 1.15
+      },
+      "housingDensity": {
+        "form": "urban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.4,
+        "wallEnclosure": 0.65,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.28,
+        "maxHouseHeight": 10.5,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.06,
+        "shrubDensity": 1.16
+      }
+    },
+    "queen_anne_kerry_park": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x757c73"
+      ],
+      "sampled_roof_palette": [
+        "0x99968f"
+      ],
+      "name": "Queen Anne & Kerry Park",
+      "center": [
+        -980,
+        -2150
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.6,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.55,
+        "foliageScale": 1.19
+      },
+      "housingDensity": {
+        "form": "suburban",
+        "buildingsPerKm2": 1780,
+        "footprintCoverage": 0.25,
+        "wallEnclosure": 0.12,
+        "lotInfill": 0.25,
+        "rowhouseAttachment": 0.18,
+        "maxHouseHeight": 9.8,
+        "maxHouseFootprint": 285,
+        "porchProbScale": 1.19,
+        "shrubDensity": 1.33
+      }
+    }
+  },
+  "landmarks": {
+    "Space Needle": {
+      "form": "observation_needle",
+      "x": -541,
+      "z": -1156,
+      "w": 44,
+      "d": 44,
+      "h": 184,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x77756c"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Columbia Center": {
+      "form": "stepped_bundled_tube",
+      "x": 811,
+      "z": 700,
+      "w": 64,
+      "d": 64,
+      "h": 284,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x96816b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Smith Tower": {
+      "form": "stepped_bundled_tube",
+      "x": 759,
+      "z": 1050,
+      "w": 38,
+      "d": 38,
+      "h": 148,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x83755e"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Seattle Great Wheel": {
+      "form": "ferris_wheel",
+      "x": -120,
+      "z": 280,
+      "w": 18,
+      "d": 54,
+      "h": 53,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x98938b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

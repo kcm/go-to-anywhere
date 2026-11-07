@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1026"/>
+      <stop offset="55%" stop-color="#1e2952"/>
+      <stop offset="100%" stop-color="#4c3563"/>
+    </linearGradient>
+    <linearGradient id="redSail" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff3b30"/>
+      <stop offset="65%" stop-color="#c81d25"/>
+      <stop offset="100%" stop-color="#7a0d14"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Victoria Peak ridge silhouette -->
+  <path d="M0 310 Q112 162 248 228 Q356 140 512 260 L512 372 L0 372 Z" fill="#16223d"/>
+  <!-- Hong Kong Skyline: IFC & Bank of China Prismatic Tower -->
+  <g fill="#22365e" stroke="#64d2ff" stroke-width="2" opacity="0.9">
+    <!-- IFC Tower -->
+    <rect x="92" y="136" width="44" height="236"/>
+    <polygon points="92,136 102,116 126,116 136,136"/>
+    <!-- Central Plaza -->
+    <rect x="164" y="178" width="38" height="194"/>
+    <!-- Bank of China Tower (I.M. Pei cross-braced prism) -->
+    <polygon points="348,372 348,142 382,108 382,372"/>
+    <polygon points="382,372 382,164 414,198 414,372"/>
+    <line x1="348" y1="142" x2="382" y2="210" stroke-width="2.5"/>
+    <line x1="382" y1="108" x2="348" y2="210" stroke-width="2.5"/>
+    <line x1="348" y1="210" x2="414" y2="278" stroke-width="2.5"/>
+    <line x1="414" y1="198" x2="348" y2="278" stroke-width="2.5"/>
+    <line x1="378" y1="112" x2="378" y2="68" stroke="#ffcf56" stroke-width="3"/>
+  </g>
+  <!-- Iconic Victoria Harbour Red-Sail Junk Boat (DukLing) -->
+  <!-- Centre main batten sail -->
+  <path d="M236 142 C308 164 338 242 326 346 L216 352 Z" fill="url(#redSail)" stroke="#ffba49" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Sail bamboo battens -->
+  <g stroke="#ffba49" stroke-width="2.5" opacity="0.85">
+    <line x1="233" y1="176" x2="298" y2="192"/>
+    <line x1="229" y1="212" x2="318" y2="228"/>
+    <line x1="225" y1="250" x2="328" y2="266"/>
+    <line x1="221" y1="288" x2="330" y2="302"/>
+    <line x1="218" y1="324" x2="328" y2="332"/>
+  </g>
+  <!-- Fore batten sail -->
+  <path d="M168 198 C214 214 232 268 224 348 L152 352 Z" fill="url(#redSail)" stroke="#ffba49" stroke-width="3" stroke-linejoin="round"/>
+  <g stroke="#ffba49" stroke-width="2.2" opacity="0.85">
+    <line x1="164" y1="232" x2="210" y2="244"/>
+    <line x1="160" y1="268" x2="220" y2="280"/>
+    <line x1="156" y1="306" x2="224" y2="316"/>
+  </g>
+  <!-- Aft small mizzen sail -->
+  <path d="M336 226 C374 238 386 286 378 342 L328 346 Z" fill="url(#redSail)" stroke="#ffba49" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Wooden junk boat hull -->
+  <path d="M114 350 L152 364 L352 360 L398 332 L374 398 L142 398 Z" fill="#5e3019" stroke="#ffba49" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Victoria Harbour water & neon reflections -->
+  <path d="M0 394 L512 394 L512 512 L0 512 Z" fill="#091933"/>
+  <path d="M78 424 Q168 412 258 424 T438 424" fill="none" stroke="#ff3b30" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  <path d="M114 456 Q204 444 294 456 T414 456" fill="none" stroke="#64d2ff" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+</svg>

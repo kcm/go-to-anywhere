@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Outer Florida Sunshine Gold-Coral frame -->
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="#f59e0b"/>
+  <!-- Deep Atlantic Ocean Teal-Navy background -->
+  <rect x="18" y="18" width="220" height="220" rx="44" fill="#072f3d"/>
+  <!-- Inner Coastal Turquoise pinstripe -->
+  <rect x="23" y="23" width="210" height="210" rx="40" fill="none" stroke="#5eead4" stroke-width="3"/>
+
+  <!-- Lighthouse Rotating Beacon Rays -->
+  <polygon points="120,66 44,44 44,78" fill="#fde68a" fill-opacity="0.32"/>
+  <polygon points="136,66 212,44 212,78" fill="#fde68a" fill-opacity="0.32"/>
+
+  <!-- Coastal Palm Silhouette (Left) -->
+  <path d="M 74 182 Q 70 150 80 126" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 80 126 Q 60 118 52 130" fill="none" stroke="#34d399" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 80 126 Q 64 108 58 112" fill="none" stroke="#34d399" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 80 126 Q 94 110 102 120" fill="none" stroke="#34d399" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Hillsboro Inlet Lighthouse -->
+  <!-- Base Foundation -->
+  <rect x="98" y="176" width="60" height="8" rx="3" fill="#f59e0b"/>
+  <!-- Lower White Section -->
+  <polygon points="106,176 112,118 144,118 150,176" fill="#f8fafc"/>
+  <!-- Upper Black Daymark Section (signature Hillsboro Lighthouse two-tone) -->
+  <polygon points="112,118 116,78 140,78 144,118" fill="#1e293b" stroke="#f8fafc" stroke-width="2"/>
+  <!-- Gallery Deck -->
+  <rect x="110" y="73" width="36" height="6" rx="2" fill="#f59e0b"/>
+  <!-- Lantern Room (Glowing Gold) -->
+  <rect x="117" y="56" width="22" height="17" rx="2" fill="#fde047"/>
+  <!-- Red/Coral Cupola Roof & Finial -->
+  <polygon points="113,56 128,42 143,56" fill="#ef4444"/>
+  <line x1="128" y1="36" x2="128" y2="44" stroke="#fde047" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Lattice Bracing Detail on Lower Tower -->
+  <line x1="112" y1="124" x2="146" y2="152" stroke="#072f3d" stroke-width="2.5"/>
+  <line x1="144" y1="124" x2="110" y2="152" stroke="#072f3d" stroke-width="2.5"/>
+  <line x1="110" y1="152" x2="148" y2="174" stroke="#072f3d" stroke-width="2.5"/>
+  <line x1="146" y1="152" x2="108" y2="174" stroke="#072f3d" stroke-width="2.5"/>
+
+  <!-- Atlantic Ocean / Intracoastal Wave Bars -->
+  <rect x="56" y="196" width="144" height="7" rx="3.5" fill="#38bdf8"/>
+  <rect x="76" y="212" width="104" height="7" rx="3.5" fill="#f59e0b"/>
+</svg>

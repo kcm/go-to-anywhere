@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1d33"/>
+      <stop offset="55%" stop-color="#194569"/>
+      <stop offset="100%" stop-color="#5f84a2"/>
+    </linearGradient>
+    <linearGradient id="saucer" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Snow-Capped Mount Rainier (Tahoma) in Background Right -->
+  <path d="M212 396 C268 336 308 258 344 234 L396 234 C432 258 468 336 504 396 Z" fill="#2c5270"/>
+  <polygon points="344,234 396,234 422,276 398,266 382,284 366,264 348,280 322,268" fill="#f8fafc"/>
+  <!-- Pacific Northwest Evergreen Pines at Base -->
+  <g fill="#1b4332">
+    <polygon points="48,396 76,308 104,396"/>
+    <polygon points="84,396 110,322 136,396"/>
+    <polygon points="396,396 422,318 448,396"/>
+  </g>
+  <!-- Iconic Seattle Space Needle -->
+  <!-- Spire & Warning Beacon -->
+  <line x1="232" y1="42" x2="232" y2="112" stroke="#f8fafc" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="232" cy="42" r="6" fill="#ef233c"/>
+  <!-- Galaxy Gold / Radiant Orange Upper Cap -->
+  <path d="M180 124 Q232 94 284 124 Z" fill="#f77f00" stroke="#1e293b" stroke-width="3"/>
+  <!-- Flying Saucer Halo Rim -->
+  <ellipse cx="232" cy="138" rx="96" ry="14" fill="url(#saucer)" stroke="#1e293b" stroke-width="3.5"/>
+  <!-- Observation Deck Slanted Windows -->
+  <polygon points="154,138 310,138 292,162 172,162" fill="#38bdf8" stroke="#1e293b" stroke-width="3"/>
+  <g stroke="#1e293b" stroke-width="2.5">
+    <line x1="184" y1="138" x2="192" y2="162"/>
+    <line x1="208" y1="138" x2="212" y2="162"/>
+    <line x1="232" y1="138" x2="232" y2="162"/>
+    <line x1="256" y1="138" x2="252" y2="162"/>
+    <line x1="280" y1="138" x2="272" y2="162"/>
+  </g>
+  <!-- Saucer Underside Dish -->
+  <polygon points="172,162 292,162 264,180 200,180" fill="#cbd5e1" stroke="#1e293b" stroke-width="3"/>
+  <!-- Hourglass Tripod Steel Legs & Central Elevator Core -->
+  <rect x="224" y="180" width="16" height="216" fill="#64748b" stroke="#1e293b" stroke-width="2.5"/>
+  <path d="M204 180 C218 244 218 282 164 396 H186 C230 292 228 248 220 180 Z" fill="url(#saucer)" stroke="#1e293b" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M260 180 C246 244 246 282 300 396 H278 C234 292 236 248 244 180 Z" fill="url(#saucer)" stroke="#1e293b" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Waist ring at narrowest point of hourglass -->
+  <rect x="208" y="254" width="48" height="10" rx="3" fill="#f8fafc" stroke="#1e293b" stroke-width="2.5"/>
+  <!-- SkyLine Level Platform at 100ft -->
+  <polygon points="182,342 282,342 290,354 174,354" fill="#f8fafc" stroke="#1e293b" stroke-width="2.5"/>
+  <!-- Elliott Bay / Puget Sound Water -->
+  <path d="M0 396 L512 396 L512 512 L0 512 Z" fill="#0a2540"/>
+  <path d="M76 432 Q166 420 256 432 T436 432" fill="none" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M116 468 Q206 456 296 468 T416 468" fill="none" stroke="#f77f00" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+</svg>

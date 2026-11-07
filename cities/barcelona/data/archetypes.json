@@ -1,0 +1,361 @@
+{
+  "city": "barcelona",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 10,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0xc0a67e",
+    "0x6d5237",
+    "0xa19e8f",
+    "0x4a3c30",
+    "0x9a8f81",
+    "0x7b6c63"
+  ],
+  "sampled_roof_palette": [
+    "0x8c9094",
+    "0x988c89",
+    "0x9ca09e",
+    "0x988a88"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.14,
+    "streetTreeDensity": 0.81,
+    "streetTreeSpacing": 27.2,
+    "parkTreeDensity": 0.94,
+    "foliageScale": 0.94
+  },
+  "housingDensity": {
+    "form": "rowhouse",
+    "buildingsPerKm2": 3100,
+    "footprintCoverage": 0.58,
+    "wallEnclosure": 0.94,
+    "lotInfill": 0.18,
+    "rowhouseAttachment": 0.88,
+    "maxHouseHeight": 12.2,
+    "maxHouseFootprint": 310,
+    "porchProbScale": 0.35,
+    "shrubDensity": 0.48
+  },
+  "neighborhoods": {
+    "placa_de_catalunya": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc0a67e"
+      ],
+      "sampled_roof_palette": [
+        "0x8c9094"
+      ],
+      "name": "Placa de Catalunya",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.83,
+        "streetTreeSpacing": 26.5,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.94
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3100,
+        "footprintCoverage": 0.57,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.18,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.35,
+        "shrubDensity": 0.48
+      }
+    },
+    "l_eixample_passeig_de_gracia": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x6d5237"
+      ],
+      "sampled_roof_palette": [
+        "0x988c89"
+      ],
+      "name": "L'Eixample & Passeig de Gracia",
+      "center": [
+        -351,
+        -420
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.12,
+        "streetTreeDensity": 0.78,
+        "streetTreeSpacing": 28.2,
+        "parkTreeDensity": 0.91,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3100,
+        "footprintCoverage": 0.66,
+        "wallEnclosure": 1.0,
+        "lotInfill": 0.18,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.35,
+        "shrubDensity": 0.48
+      }
+    },
+    "sagrada_familia": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa19e8f"
+      ],
+      "sampled_roof_palette": [
+        "0x9ca09e"
+      ],
+      "name": "Sagrada Familia",
+      "center": [
+        39,
+        -1489
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.15,
+        "streetTreeDensity": 0.83,
+        "streetTreeSpacing": 26.5,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.94
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3100,
+        "footprintCoverage": 0.59,
+        "wallEnclosure": 0.94,
+        "lotInfill": 0.18,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.35,
+        "shrubDensity": 0.48
+      }
+    },
+    "barri_gotic_la_rambla": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x4a3c30"
+      ],
+      "sampled_roof_palette": [
+        "0x988a88"
+      ],
+      "name": "Barri Gotic & La Rambla",
+      "center": [
+        48,
+        867
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.77,
+        "streetTreeSpacing": 28.6,
+        "parkTreeDensity": 0.9,
+        "foliageScale": 0.93
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3100,
+        "footprintCoverage": 0.68,
+        "wallEnclosure": 0.99,
+        "lotInfill": 0.18,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.35,
+        "shrubDensity": 0.48
+      }
+    },
+    "el_born_ciutadella": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9a8f81"
+      ],
+      "sampled_roof_palette": [
+        "0x96807f"
+      ],
+      "name": "El Born & Ciutadella",
+      "center": [
+        961,
+        450
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.13,
+        "streetTreeDensity": 0.8,
+        "streetTreeSpacing": 27.5,
+        "parkTreeDensity": 0.92,
+        "foliageScale": 0.94
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3100,
+        "footprintCoverage": 0.6,
+        "wallEnclosure": 0.95,
+        "lotInfill": 0.18,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.35,
+        "shrubDensity": 0.48
+      }
+    },
+    "la_barceloneta": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x7b6c63"
+      ],
+      "sampled_roof_palette": [
+        "0x9c8986"
+      ],
+      "name": "La Barceloneta",
+      "center": [
+        1688,
+        1345
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.14,
+        "streetTreeDensity": 0.81,
+        "streetTreeSpacing": 27.2,
+        "parkTreeDensity": 0.94,
+        "foliageScale": 0.94
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3100,
+        "footprintCoverage": 0.58,
+        "wallEnclosure": 0.94,
+        "lotInfill": 0.18,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.35,
+        "shrubDensity": 0.48
+      }
+    },
+    "glories_poblenou": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x9d958b"
+      ],
+      "sampled_roof_palette": [
+        "0x9ab3b6"
+      ],
+      "name": "Glories & Poblenou",
+      "center": [
+        1588,
+        -1478
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.2,
+        "streetTreeDensity": 0.9,
+        "streetTreeSpacing": 24.4,
+        "parkTreeDensity": 1.01,
+        "foliageScale": 0.95
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 3100,
+        "footprintCoverage": 0.53,
+        "wallEnclosure": 0.77,
+        "lotInfill": 0.18,
+        "rowhouseAttachment": 0.88,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.35,
+        "shrubDensity": 0.48
+      }
+    }
+  },
+  "landmarks": {
+    "Basilica de la Sagrada Familia": {
+      "form": "cathedral_spires",
+      "x": 39,
+      "z": -1489,
+      "w": 95,
+      "d": 95,
+      "h": 172,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x94928e"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Torre Glories": {
+      "form": "stepped_bundled_tube",
+      "x": 1588,
+      "z": -1478,
+      "w": 42,
+      "d": 42,
+      "h": 144,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x9a9ea0"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Barcelona Cathedral": {
+      "form": "cathedral_spires",
+      "x": 48,
+      "z": 745,
+      "w": 48,
+      "d": 92,
+      "h": 70,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x898478"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

@@ -1,0 +1,435 @@
+{
+  "city": "amsterdam",
+  "osm_sampled_walls": {},
+  "osm_sampled_roofs": {},
+  "street_view_samples": 12,
+  "building_count": 0,
+  "avg_height_m": 9.0,
+  "max_height_m": 18.0,
+  "walls": null,
+  "roofs": null,
+  "sampled_facade_palette": [
+    "0x73665d",
+    "0xa9988b",
+    "0x87847d",
+    "0xa4a6a4",
+    "0x6a6661",
+    "0xaeaea4"
+  ],
+  "sampled_roof_palette": [
+    "0x989789",
+    "0x6b7074",
+    "0x736a64",
+    "0x726c63"
+  ],
+  "treeCoverage": {
+    "canopyCover": 0.24,
+    "streetTreeDensity": 0.97,
+    "streetTreeSpacing": 22.7,
+    "parkTreeDensity": 1.1,
+    "foliageScale": 0.98
+  },
+  "housingDensity": {
+    "form": "rowhouse",
+    "buildingsPerKm2": 2950,
+    "footprintCoverage": 0.53,
+    "wallEnclosure": 0.69,
+    "lotInfill": 0.2,
+    "rowhouseAttachment": 0.9,
+    "maxHouseHeight": 12.2,
+    "maxHouseFootprint": 310,
+    "porchProbScale": 0.38,
+    "shrubDensity": 0.52
+  },
+  "neighborhoods": {
+    "dam_square": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x73665d"
+      ],
+      "sampled_roof_palette": [
+        "0x989789"
+      ],
+      "name": "Dam Square",
+      "center": [
+        0,
+        0
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.2,
+        "streetTreeDensity": 0.91,
+        "streetTreeSpacing": 24.2,
+        "parkTreeDensity": 1.06,
+        "foliageScale": 0.97
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.53,
+        "wallEnclosure": 0.68,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    },
+    "amsterdam_centraal": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa9988b"
+      ],
+      "sampled_roof_palette": [
+        "0x6b7074"
+      ],
+      "name": "Amsterdam Centraal",
+      "center": [
+        531,
+        -667
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.11,
+        "streetTreeDensity": 0.78,
+        "streetTreeSpacing": 28.2,
+        "parkTreeDensity": 0.95,
+        "foliageScale": 0.95
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.62,
+        "wallEnclosure": 0.96,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    },
+    "jordaan": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x87847d"
+      ],
+      "sampled_roof_palette": [
+        "0x736a64"
+      ],
+      "name": "Jordaan",
+      "center": [
+        -780,
+        -180
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.26,
+        "streetTreeDensity": 1.0,
+        "streetTreeSpacing": 22.0,
+        "parkTreeDensity": 1.13,
+        "foliageScale": 0.98
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.61,
+        "wallEnclosure": 0.71,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    },
+    "grachtengordel": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xa4a6a4"
+      ],
+      "sampled_roof_palette": [
+        "0x726c63"
+      ],
+      "name": "Grachtengordel",
+      "center": [
+        -280,
+        520
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.22,
+        "streetTreeDensity": 0.94,
+        "streetTreeSpacing": 23.4,
+        "parkTreeDensity": 1.08,
+        "foliageScale": 0.97
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.61,
+        "wallEnclosure": 0.69,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    },
+    "rembrandtplein": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x6a6661"
+      ],
+      "sampled_roof_palette": [
+        "0x7a7675"
+      ],
+      "name": "Rembrandtplein",
+      "center": [
+        260,
+        780
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.32,
+        "streetTreeDensity": 1.09,
+        "streetTreeSpacing": 20.2,
+        "parkTreeDensity": 1.2,
+        "foliageScale": 0.99
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.47,
+        "wallEnclosure": 0.38,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    },
+    "museumplein_rijksmuseum": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xaeaea4"
+      ],
+      "sampled_roof_palette": [
+        "0x817d70"
+      ],
+      "name": "Museumplein & Rijksmuseum",
+      "center": [
+        -265,
+        1479
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.4,
+        "streetTreeDensity": 1.21,
+        "streetTreeSpacing": 18.2,
+        "parkTreeDensity": 1.3,
+        "foliageScale": 1.0
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.46,
+        "wallEnclosure": 0.63,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    },
+    "vondelpark": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x887f7a"
+      ],
+      "sampled_roof_palette": [
+        "0x85847a"
+      ],
+      "name": "Vondelpark",
+      "center": [
+        -1130,
+        1668
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.43,
+        "streetTreeDensity": 1.38,
+        "streetTreeSpacing": 15.9,
+        "parkTreeDensity": 1.34,
+        "foliageScale": 1.02
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.53,
+        "wallEnclosure": 0.78,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.6
+      }
+    },
+    "de_pijp": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0x6c675f"
+      ],
+      "sampled_roof_palette": [
+        "0x7d7d79"
+      ],
+      "name": "De Pijp",
+      "center": [
+        220,
+        1850
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.21,
+        "streetTreeDensity": 0.93,
+        "streetTreeSpacing": 23.7,
+        "parkTreeDensity": 1.07,
+        "foliageScale": 0.97
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.63,
+        "wallEnclosure": 0.82,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    },
+    "oosterdok_plantage": {
+      "building_count": 0,
+      "avg_height_m": 9.0,
+      "max_height_m": 18.0,
+      "walls": null,
+      "roofs": null,
+      "sampled_facade_palette": [
+        "0xc0c8ce"
+      ],
+      "sampled_roof_palette": [
+        "0x89837f"
+      ],
+      "name": "Oosterdok & Plantage",
+      "center": [
+        1212,
+        180
+      ],
+      "treeCoverage": {
+        "canopyCover": 0.23,
+        "streetTreeDensity": 0.95,
+        "streetTreeSpacing": 23.2,
+        "parkTreeDensity": 1.09,
+        "foliageScale": 0.97
+      },
+      "housingDensity": {
+        "form": "rowhouse",
+        "buildingsPerKm2": 2950,
+        "footprintCoverage": 0.55,
+        "wallEnclosure": 0.53,
+        "lotInfill": 0.2,
+        "rowhouseAttachment": 0.9,
+        "maxHouseHeight": 12.2,
+        "maxHouseFootprint": 310,
+        "porchProbScale": 0.38,
+        "shrubDensity": 0.52
+      }
+    }
+  },
+  "landmarks": {
+    "Royal Palace Amsterdam": {
+      "form": "canal_palazzo",
+      "x": -45,
+      "z": 0,
+      "w": 80,
+      "d": 56,
+      "h": 52,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0xbab6aa"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Rijksmuseum": {
+      "form": "canal_palazzo",
+      "x": -265,
+      "z": 1405,
+      "w": 135,
+      "d": 85,
+      "h": 48,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x7e7c74"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    },
+    "Westerkerk": {
+      "form": "canal_palazzo",
+      "x": -586,
+      "z": -156,
+      "w": 32,
+      "d": 58,
+      "h": 85,
+      "matched_osm_elements": 0,
+      "parts_count": 0,
+      "dominant_materials": [],
+      "dominant_roof_shapes": [],
+      "sampled_colors": [
+        "0x7e7d7b"
+      ],
+      "sampled_roof_colors": [],
+      "tags": {},
+      "parts": []
+    }
+  }
+}

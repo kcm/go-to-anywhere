@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1931"/>
+      <stop offset="55%" stop-color="#183a64"/>
+      <stop offset="100%" stop-color="#3c6e9c"/>
+    </linearGradient>
+    <linearGradient id="obelisk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- Custom House Tower Neoclassical Pyramid Roof & Clock on Left -->
+  <g opacity="0.88">
+    <polygon points="82,196 112,138 142,196" fill="#d4a373" stroke="#47381f" stroke-width="2.5"/>
+    <rect x="86" y="196" width="52" height="176" fill="#e9edc9" stroke="#47381f" stroke-width="2.5"/>
+    <circle cx="112" cy="222" r="14" fill="#fff8dc" stroke="#b8860b" stroke-width="3"/>
+  </g>
+  <!--Leonard P. Zakim Bunker Hill Cable-Stayed Bridge (Twin Inverted-Y Obelisk Towers)-->
+  <!-- Stay Cables Fanning from Main Tower Apex (x=296, y=96) -->
+  <g stroke="#90e0ef" stroke-width="2.5" opacity="0.85">
+    <line x1="296" y1="104" x2="72" y2="356"/>
+    <line x1="296" y1="114" x2="108" y2="356"/>
+    <line x1="296" y1="124" x2="144" y2="356"/>
+    <line x1="296" y1="134" x2="180" y2="356"/>
+    <line x1="296" y1="144" x2="216" y2="356"/>
+    <line x1="296" y1="104" x2="466" y2="356"/>
+    <line x1="296" y1="116" x2="438" y2="356"/>
+    <line x1="296" y1="128" x2="410" y2="356"/>
+    <line x1="296" y1="140" x2="382" y2="356"/>
+  </g>
+  <!-- Secondary Distant Zakim Tower -->
+  <path d="M198 118 L210 82 L222 118 L224 226 L252 384 H232 L210 256 L188 384 H168 L196 226 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2.5"/>
+  <!-- Foreground Zakim Bunker Hill Obelisk Tower -->
+  <path d="M280 104 L296 54 L312 104 L316 224 L356 388 H330 L296 258 L262 388 H236 L276 224 Z" fill="url(#obelisk)" stroke="#1e293b" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Cross struts on Zakim Tower -->
+  <rect x="252" y="324" width="88" height="12" fill="#e2e8f0" stroke="#1e293b" stroke-width="2.5"/>
+  <!-- Bridge Roadway Deck -->
+  <rect x="36" y="352" width="440" height="16" rx="3" fill="#f8fafc" stroke="#1e293b" stroke-width="3"/>
+  <!-- Charles River & Boston Harbor Water -->
+  <path d="M0 388 L512 388 L512 512 L0 512 Z" fill="#072ac8"/>
+  <path d="M0 388 L512 388 L512 512 L0 512 Z" fill="#0a244d" opacity="0.75"/>
+  <path d="M76 426 Q166 414 256 426 T436 426" fill="none" stroke="#90e0ef" stroke-width="5" stroke-linecap="round"/>
+  <path d="M116 462 Q206 450 296 462 T416 462" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+</svg>
