@@ -273,8 +273,8 @@ class LightingSystem {
     this.sunLight = new SunLight(0xffca92, 5.8);
     this.sunLight.position.copy(TIME_PRESETS.golden.sunDir);
     this.sunLight.castShadow = Boolean(TIER.shadows);
-    // Two cascades share an atlas: use 1536px tiles in Full mode and 1024px in Lite/Firefox to cut shadow fill cost by 55%.
-    const tile = TIER.name === 'full' && !FIREFOX ? 1536 : 1024;
+    // Two cascades share an atlas: use 1536px tiles in Insanity mode and 1024px in Full mode to cut shadow fill cost by 55%.
+    const tile = TIER.name === 'insanity' && !FIREFOX ? 1536 : 1024;
     this.sunLight.shadow.mapSize.set(tile, tile);
     this.sunLight.shadow.camera.near = 0.5;
     this.sunLight.shadow.camera.far = 200;

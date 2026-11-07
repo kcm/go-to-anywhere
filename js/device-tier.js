@@ -7,14 +7,20 @@
 import { log } from '../lamp-game.js';
 
 const TIERS = {
-  full: { name: 'full', stream: 0, shadows: true, bloom: true, antialias: true, scale: 1, traffic: 1, people: 1, farCut: 1, outskirts: true },
+  // All-out showcase: full un-streamed city, 1536px shadow cascades, half-res SSR reflections, 11-pass HDR bloom & MSAA
+  insanity: { name: 'insanity', stream: 0, shadows: true, bloom: true, reflections: true, antialias: true, scale: 1, traffic: 1, people: 1, farCut: 1, outskirts: true },
+  // Whole city in memory at 1080p with 2-cascade sun shadows in a single direct swapchain pass (no offscreen bloom/SSR passes)
+  full: { name: 'full', stream: 0, shadows: true, bloom: false, reflections: false, antialias: true, scale: 1, traffic: 1, people: 1, farCut: 1, outskirts: true },
   // the ground and houses within 950 m built, the rest as the player comes near; no shadow cascades, MSAA or bloom offscreen passes to save GPU & battery
-  light: { name: 'light', stream: 950, shadows: false, bloom: false, antialias: false, scale: 0.75, traffic: 0.75, people: 0.75, farCut: 0.75, outskirts: true },
+  light: { name: 'light', stream: 950, shadows: false, bloom: false, reflections: false, antialias: false, scale: 0.75, traffic: 0.75, people: 0.75, farCut: 0.75, outskirts: true },
   // within about 1 km; trees, houses and street details drawn half as far; 1344x756; half the cars, a third of the people
-  phone: { name: 'phone', stream: 1000, shadows: false, bloom: false, antialias: false, scale: 0.7, traffic: 0.5, people: 0.35, farCut: 0.5, outskirts: true }
+  phone: { name: 'phone', stream: 1000, shadows: false, bloom: false, reflections: false, antialias: false, scale: 0.7, traffic: 0.5, people: 0.35, farCut: 0.5, outskirts: true }
 };
 
 const TIER_ALIASES = {
+  insanity: 'insanity',
+  insane: 'insanity',
+  ultra: 'insanity',
   full: 'full',
   light: 'light',
   lite: 'light',
@@ -73,11 +79,11 @@ async function chooseTier() {
     name = saved;
   }
   Object.assign(TIER, TIERS[name]);
-  // Firefox's macOS WebGL2 backend stalls heavily on 4x MSAA RGBA16F offscreen blits + 11-pass HDR bloom
+  // Firefox's macOS WebGL2 backend stalls heavily on 4x MSAA RGBA16F offscreen blits
   if (FIREFOX) {
     TIER.antialias = false;
-    if (name !== 'full') {
-      Object.assign(TIER, { bloom: false, scale: Math.min(TIER.scale, 0.75), farCut: Math.min(TIER.farCut, 0.65) });
+    if (name !== 'full' && name !== 'insanity') {
+      Object.assign(TIER, { bloom: false, reflections: false, scale: Math.min(TIER.scale, 0.75), farCut: Math.min(TIER.farCut, 0.65) });
     }
   }
   log(`[tier] ${name}${memory ? ` (${Math.round(memory)} GB)` : ''}${TOUCH_DEVICE ? ', a touch device' : ''}${FIREFOX ? ', firefox' : ''}`);

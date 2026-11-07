@@ -1086,7 +1086,7 @@ body[data-mode='helicopter'] .gauge-alt {
 .fullmap-title > div:not(.tier-switch) {
   flex: 1 1 auto;
   min-inline-size: 0;
-  max-inline-size: 320px;
+  max-inline-size: 250px;
 }
 
 .fullmap-title h2 {

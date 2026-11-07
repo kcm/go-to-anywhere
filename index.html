@@ -169,6 +169,39 @@
       font-weight: 750;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
     }
+    .tier-insanity {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px 2px 6px;
+      margin-left: 1px;
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.2;
+      color: var(--text-2);
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.15s ease, color 0.15s ease;
+    }
+    .tier-insanity:hover:not(.is-disabled) {
+      color: var(--text);
+    }
+    .tier-insanity.is-active {
+      color: var(--taxi);
+    }
+    .tier-insanity.is-disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+    }
+    .tier-insanity-cb {
+      width: 12px;
+      height: 12px;
+      margin: 0;
+      accent-color: var(--taxi);
+      cursor: inherit;
+    }
     .loader-tier-wrap {
       margin-top: 16px;
       display: flex;
@@ -358,8 +391,12 @@
       <div class="loader-tier-wrap">
         <span class="loader-tier-label">Mode:</span>
         <div id="loader-tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
-          <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
-          <button class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
+          <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, dynamic sun shadows, 100% traffic &amp; pedestrians">Full</button>
+          <button class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; battery draw">Lite</button>
+          <label class="tier-insanity is-disabled" title="Insanity Mode (requires Full): Enables 11-pass HDR Bloom, Screen-Space Reflections, 4x MSAA &amp; 3072x1536 shadow cascades">
+            <input type="checkbox" class="tier-insanity-cb" disabled />
+            <span>Insanity</span>
+          </label>
         </div>
       </div>
     </div>
@@ -428,7 +465,8 @@
       if (!activeTier) {
         try { activeTier = String(localStorage.getItem('gta-tier') || '').trim().toLowerCase(); } catch {}
       }
-      const isFull = activeTier === 'full';
+      const isInsanity = activeTier === 'insanity' || activeTier === 'insane' || activeTier === 'ultra';
+      const isFull = activeTier === 'full' || isInsanity;
       document.addEventListener('DOMContentLoaded', () => {
         for (const btn of document.querySelectorAll('.tier-btn[data-tier]')) {
           const btnFull = btn.dataset.tier === 'full';
@@ -437,6 +475,20 @@
           btn.addEventListener('click', () => {
             const target = btn.dataset.tier === 'full' ? 'full' : 'lite';
             try { localStorage.setItem('gta-tier', target === 'full' ? 'full' : 'light'); } catch {}
+            const url = new URL(location.href);
+            url.searchParams.set('tier', target);
+            location.href = url.toString();
+          });
+        }
+        for (const cb of document.querySelectorAll('.tier-insanity-cb')) {
+          cb.checked = isInsanity;
+          cb.disabled = !isFull;
+          cb.closest('.tier-insanity')?.classList.toggle('is-disabled', !isFull);
+          cb.closest('.tier-insanity')?.classList.toggle('is-active', isInsanity);
+          cb.addEventListener('change', () => {
+            if (!isFull) return;
+            const target = cb.checked ? 'insanity' : 'full';
+            try { localStorage.setItem('gta-tier', target); } catch {}
             const url = new URL(location.href);
             url.searchParams.set('tier', target);
             location.href = url.toString();
@@ -480,8 +532,12 @@
             <option value="tampa">Tampa, FL</option>
           </select>
           <div id="tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
-            <button id="tier-full" class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
-            <button id="tier-lite" class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
+            <button id="tier-full" class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, dynamic sun shadows, 100% traffic &amp; pedestrians">Full</button>
+            <button id="tier-lite" class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; battery draw">Lite</button>
+            <label class="tier-insanity is-disabled" title="Insanity Mode (requires Full): Enables 11-pass HDR Bloom, Screen-Space Reflections, 4x MSAA &amp; 3072x1536 shadow cascades">
+              <input id="tier-insanity" type="checkbox" class="tier-insanity-cb" disabled />
+              <span>Insanity</span>
+            </label>
           </div>
           <button id="btn-new-city" class="new-city-btn" type="button" title="Request &amp; build a new local city pack from OpenStreetMap" hidden>+ City</button>
           <a class="repo-link" href="https://github.com/kcm/go-to-anywhere" target="_blank" rel="noopener noreferrer" aria-label="Go To Anywhere (GTA) on GitHub (opens in your browser)">GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -687,8 +743,12 @@
           <option value="tampa">Tampa, FL</option>
         </select>
         <div id="map-tier-switch" class="tier-switch" role="group" aria-label="City Detail &amp; Memory Mode">
-          <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, 100% traffic &amp; pedestrians">Full</button>
-          <button class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; faster loading">Lite</button>
+          <button class="tier-btn" data-tier="full" type="button" title="Full Mode: Pre-builds the entire city in memory with maximum draw distance, dynamic sun shadows, 100% traffic &amp; pedestrians">Full</button>
+          <button class="tier-btn active" data-tier="light" type="button" title="Lite Mode: Streams ground &amp; houses within 950 m around you for lower memory &amp; battery draw">Lite</button>
+          <label class="tier-insanity is-disabled" title="Insanity Mode (requires Full): Enables 11-pass HDR Bloom, Screen-Space Reflections, 4x MSAA &amp; 3072x1536 shadow cascades">
+            <input type="checkbox" class="tier-insanity-cb" disabled />
+            <span>Insanity</span>
+          </label>
         </div>
         <button id="map-btn-new-city" class="new-city-btn" type="button" title="Request &amp; build a new local city pack from OpenStreetMap" hidden>+ City</button>
       </div>

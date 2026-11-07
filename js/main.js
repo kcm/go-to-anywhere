@@ -244,7 +244,8 @@ async function initApp() {
       logoEl.src = CITY_PACK.icon;
     }
   }
-  const isFullTier = TIER.name === 'full';
+  const isFullTier = TIER.name === 'full' || TIER.name === 'insanity';
+  const isInsanityTier = TIER.name === 'insanity';
   for (const btn of document.querySelectorAll('.tier-btn[data-tier]')) {
     const btnIsFull = btn.dataset.tier === 'full';
     btn.classList.toggle('active', btnIsFull === isFullTier);
@@ -252,6 +253,19 @@ async function initApp() {
     if (!btn.dataset.tierBound) {
       btn.dataset.tierBound = '1';
       btn.addEventListener('click', () => switchTier(btn.dataset.tier));
+    }
+  }
+  for (const cb of document.querySelectorAll('.tier-insanity-cb')) {
+    cb.checked = isInsanityTier;
+    cb.disabled = !isFullTier;
+    cb.closest('.tier-insanity')?.classList.toggle('is-disabled', !isFullTier);
+    cb.closest('.tier-insanity')?.classList.toggle('is-active', isInsanityTier);
+    if (!cb.dataset.tierBound) {
+      cb.dataset.tierBound = '1';
+      cb.addEventListener('change', () => {
+        if (!isFullTier) return;
+        switchTier(cb.checked ? 'insanity' : 'full');
+      });
     }
   }
   const openNewCityModal = setupNewCityModal();
@@ -445,14 +459,14 @@ async function initApp() {
     antialias: TIER.antialias,
     shadows: TIER.shadows,
     streetLights: false,
-    reflections: false,
+    reflections: Boolean(TIER.reflections),
     bloom: TIER.bloom,
     outskirts: TIER.outskirts
   };
   const renderer = await live.keep('renderer', async () => {
     const made = new THREE.WebGPURenderer({
       antialias: QUALITY.antialias,
-      powerPreference: QUALITY.tier === 'full' ? 'high-performance' : 'low-power',
+      powerPreference: (QUALITY.tier === 'full' || QUALITY.tier === 'insanity') ? 'high-performance' : 'low-power',
       reversedDepthBuffer: true,
       forceWebGL: false
     });
@@ -675,7 +689,7 @@ async function initApp() {
     if (group) group.visible = false;
   }
   console.log(`[quality] ${JSON.stringify(QUALITY)}`);
-  reportMemory(scene, renderer, log, TIER.name !== 'full');
+  reportMemory(scene, renderer, log, TIER.name !== 'full' && TIER.name !== 'insanity');
 
   if (renderer.backend.isWebGPUBackend) {
     scene.traverse((object) => {
@@ -842,7 +856,7 @@ async function initApp() {
       freedSinceReport += releaseUploaded(renderer);
       if (freedSinceReport > 0 && elapsed - reportedAt > 12) {
         reportedAt = elapsed; freedSinceReport = 0;
-        reportMemory(scene, renderer, log, TIER.name !== 'full');
+        reportMemory(scene, renderer, log, TIER.name !== 'full' && TIER.name !== 'insanity');
       }
     }
     for (const root of dynamicRoots) root.updateMatrixWorld();
