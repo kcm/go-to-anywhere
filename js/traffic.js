@@ -17,7 +17,7 @@ import {
   createCarWheelMaterial,
   createLoftedCarMaterial,
   carStyleCode,
-  annArborCar,
+  civilianCar,
   buildLightbarGeometry,
   createLightbarMaterial
 } from './cars.js';
@@ -38,7 +38,7 @@ import { loadACTransit, createSchedule, buildStopSigns } from './actransit.js';
 // Vehicles replenish around the player; pedestrian-system.js manages the nearby walking population.
 
 const NUM_CARS = Math.round(70 * TIER.traffic);
-const NUM_BUSES = Math.round(16 * Math.max(0.75, TIER.traffic)); // AC Transit buses on the road near the player, as the timetable has them (actransit.js)
+const NUM_BUSES = Math.round(16 * Math.max(0.75, TIER.traffic)); // Transit buses on the road near the player, as the timetable has them (actransit.js)
 
 // Intelligent Driver Model: max acceleration, comfortable braking, time headway, standstill gap; the sideways
 // acceleration drivers accept in bends, which sets how fast they take each turn or lane shift; and how hard they brake
@@ -83,7 +83,7 @@ const NEAR_RADIUS = 350;
 const VEHICLE_SPAWN_DISTANCE = 250;
 
 // Lamp: the buses' amber LED destination signs, a row of the atlas for each bus, written when it takes a trip: the
-// route's number and where it's going, as TheRide's signs show them
+// route's number and where it's going, as transit headsigns show them
 const SIGN_ROWS = 16;
 function createBusDestinationTexture() {
   const c = document.createElement('canvas');
@@ -179,7 +179,7 @@ function createTrafficSystem(scene, sidewalks, obstacles, signalIntersections) {
   };
 
   // =========================================================================
-  // 1. 3D LOFTED NYC YELLOW TAXIS, SEDANS, SUVS & NYPD CRUISERS (200 VEHICLES)
+  // 1. 3D LOFTED REGIONAL TAXIS, SEDANS, SUVS & POLICE CRUISERS
   // =========================================================================
   function createVehicle(bus, half, halfWidth, axle, driver, v0) {
     return {
@@ -245,9 +245,9 @@ function createTrafficSystem(scene, sidewalks, obstacles, signalIntersections) {
       style = carStyleCode({ livery: 1, metallic: 0, trim: 2, wheel: 3, plate: i });
       policeCounts[bodyType]++;
     } else {
-      const look = annArborCar(bodyType, counts[bodyType] * 7 + i);
+      const look = civilianCar(bodyType, counts[bodyType] * 7 + i);
       col = new THREE.Color(look.hex);
-      // U-M's blue vans and pickups carry the university fleet's maize badge
+      // Fleet blue vans and pickups carry the fleet's badge
       style = look.hex === 0x00274c ? (look.style & ~7) + 2 : look.style;
     }
     counts[bodyType]++;
@@ -2282,7 +2282,7 @@ function createHighwayTraffic(scene, lanes) {
       const h = rand();
       // Fewer vans than in town: commercial vehicles are barred from the parkways
       const kind = h < 0.025 ? 'sports' : h < 0.4 ? 'sedan' : h < 0.75 ? 'suv' : h < 0.84 ? 'minivan' : h < 0.96 ? 'pickup' : 'van';
-      const entry = annArborCar(kind, Math.floor(rand() * 1000));
+      const entry = civilianCar(kind, Math.floor(rand() * 1000));
       const col = new THREE.Color(entry.hex);
       const spec = BODY_SPECS[kind];
       // (float32 values, so update() can tell whether an instance slot's paint changes by comparing with the buffer)

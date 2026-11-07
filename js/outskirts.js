@@ -1,9 +1,10 @@
 import * as THREE from 'three/webgpu';
 import { positionWorld, vec2, vec3, float, floor, fract, sin, dot, mix, smoothstep, abs, fwidth, min } from 'three/tsl';
+import { ACTIVE_CITY_ID } from './city-packs.js';
 import { TOWN_BOUNDS } from './city-config.js';
 import { riverbedHeight as groundHeight } from './terrain.js';
 
-// Washtenaw County around the detailed city: the real hills and the Huron valley (terrain.js) as farm fields, woodlots
+// Surrounding countryside around the detailed city: the real hills and valleys (terrain.js) as farm fields, woodlots
 // and the suburbs' tree cover, out to the fogged horizon. Nothing here is driven on; the city's edge is a lawn border.
 
 const hash = (p) => fract(sin(dot(p, vec2(127.1, 311.7))).mul(43758.5453));
@@ -88,9 +89,9 @@ function buildOutskirts(scene) {
   for (let j = 0; j < fnz; j++) {
     for (let i = 0; i < fnx; i++) {
       const x = fx0 + i * FS, z = fz0 + j * FS, k = (j * fnx + i) * 3;
-      // by the Lake Merritt Channel, the lowest ground around, so it stays under its narrow channel between points
+      // in Oakland's Lake Merritt Channel, sample the lowest ground around so it stays under the narrow channel between points
       let y = groundHeight(x, z);
-      if (x > 850 && x < 1250 && z > 300 && z < 1650) {
+      if (ACTIVE_CITY_ID === 'oakland' && x > 850 && x < 1250 && z > 300 && z < 1650) {
         for (let u = -FS; u <= FS; u += FS / 2) for (let v = -FS; v <= FS; v += FS / 2) y = Math.min(y, groundHeight(x + u, z + v));
       }
       fpos[k] = x; fpos[k + 1] = y - 0.9; fpos[k + 2] = z;

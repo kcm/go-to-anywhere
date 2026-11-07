@@ -6,7 +6,7 @@ import { curbStalls } from './curb-parking.js';
 
 // Road markings generated from the drivable road network (js/road-network.js), so the paint matches where traffic
 // actually drives and stops: dashed lane lines, double yellow centre lines on two-way roads (Lamp: not on residential
-// streets, as in Ann Arbor), a centre turn lane's yellow lines, a one-way's yellow left edge, stop bars at the stop
+// streets), a centre turn lane's yellow lines, a one-way's yellow left edge, stop bars at the stop
 // lines, continental crosswalks where OpenStreetMap maps a painted crossing (and at traffic lights where it says nothing),
 // and the city's painted bike lanes (OpenStreetMap).
 

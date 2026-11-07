@@ -166,11 +166,8 @@ const BIG_PARK_BOUNDS = IS_GRID_CITY
       maxZ: streetZ(59) - 15
     }
   : { minX: FAR, maxX: FAR + 1, minZ: FAR, maxZ: FAR + 1 };
-const CENTRAL_PARK_BOUNDS = BIG_PARK_BOUNDS;
-
 // Outline of the detailed town / island
 const TOWN_EDGE = toPts(GEO.edge || GEO.manhattan || []);
-const MANHATTAN_COASTLINE = TOWN_EDGE;
 
 const TOWN_BOUNDS = (() => {
   let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
@@ -416,7 +413,7 @@ if (IS_GRID_CITY) {
       westX,
       eastX,
       runs,
-      splitByCentralPark: s.z > CENTRAL_PARK_BOUNDS.minZ && s.z < CENTRAL_PARK_BOUNDS.maxZ
+      splitByCentralPark: s.z > BIG_PARK_BOUNDS.minZ && s.z < BIG_PARK_BOUNDS.maxZ
     });
   }
   ALL_STREETS.sort((a, b) => a.z - b.z);
@@ -528,7 +525,7 @@ function districtAt(x, z) {
     if (x >= -550 && x <= 520 && z >= -1100 && z <= -250) return 'uptown';
   }
   if (IS_GRID_CITY) {
-    const cp = CENTRAL_PARK_BOUNDS;
+    const cp = BIG_PARK_BOUNDS;
     if (x > cp.minX && x < cp.maxX && z > cp.minZ && z < cp.maxZ) return 'central_park';
     if (z < streetZ(110)) return 'harlem';
     if (z < streetZ(59)) return x < cp.minX ? 'uws' : 'ues';
@@ -575,7 +572,6 @@ const LANDMARKS = (CITY_PACK.landmarks || []).map((l) => {
   const z = site && Number.isFinite(site.z) ? site.z : l.z;
   return { ...l, x, z, district: districtLabel(x, z) };
 });
-const NYC_LANDMARKS = LANDMARKS;
 
 function arrival(x, z, fallback = { x: 0, z: 0, heading: 0 }) {
   const near = nearestRoads(x, z, 260).filter((r) => !r.road.highway);
@@ -687,17 +683,16 @@ function walkSignal(time, isAvenue) {
 
 export {
   WATER_POLYGONS,
+  IS_GRID_CITY,
   PARKING_LOTS,
   PARKS,
   districtLabel,
   AVENUES,
   ALL_AVENUES,
   BIG_PARK_BOUNDS,
-  CENTRAL_PARK_BOUNDS,
   getTownBoundsAtZ,
   getIslandBoundsAtZ,
   TOWN_EDGE,
-  MANHATTAN_COASTLINE,
   getBroadwayX,
   BROADWAY_LINE,
   WATERFRONT_PIERS,
@@ -723,7 +718,6 @@ export {
   ALL_STREETS,
   ROADS,
   LANDMARKS,
-  NYC_LANDMARKS,
   LANDMARK_SITES,
   TELEPORT_LOCATIONS,
   TOWN_BOUNDS,

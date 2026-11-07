@@ -536,7 +536,7 @@ function createStorefront(facade, seed, local) {
   const signLod = log2(max(fw.x.mul(512).div(signWidth), fw.y.mul(64 / 0.6)));
   const signMask = band(signUV.x, 0, 1, fw.x.div(signWidth))
     .mul(band(signUV.y, 0, 1, fw.y.div(0.6))).mul(float(1).sub(smoothstep(4, 6, signLod)));
-  // Lamp: no painted sign names: Ann Arbor's shops hang their real signs (shop-signs.js)
+  // Lamp: no painted sign names: shops hang their real 3D signs (shop-signs.js)
   const signInk = !SIGN_NAMES ? float(0) : Fn(() => {
     const ink = float(0).toVar();
     If(mask.mul(signMask).greaterThan(0.001), () => {
@@ -1032,7 +1032,7 @@ function createPreWarBuildingMaterial(opts = {}) {
     const signFw = vec2(fwidth(su), fwidth(sv));
     const panel = boxCoverage(su, 0.0, 1.0, signFw.x.mul(0.5)).mul(boxCoverage(sv, 0.0, 1.0, signFw.y.mul(0.5))).mul(hasSign);
     const signPaint = vec4(0.0).toVar();
-    // Lamp: no faded made-up ads on Ann Arbor's walls
+    // Lamp: no faded made-up ghost ads on surveyed brick walls
     if (GHOST_ADS) If(panel.greaterThan(0.001), () => {
       const pal = fract(tone.mul(29.3));
       const ground = mix(mix(color(0xd3c9ae), color(0x86392b), step(0.5, pal)), color(0x2b3340), step(0.8, pal));
@@ -2987,13 +2987,13 @@ function createWaterMaterial() {
   mat.colorNode = Fn(() => {
     const silt = noise2D(positionWorld.xz.mul(0.0031).add(7.3));
     const body = mix(color(0x162d2c), color(0x2e3f36), smoothstep(0.25, 0.85, silt));
-    const lake = mix(color(0x2f4a3e), color(0x41583f), silt); // the Huron: clear green over its silt
+    const lake = mix(color(0x2f4a3e), color(0x41583f), silt); // inland river/lake: clear green over its silt
     const crestTint = smoothstep(0.6, 2.4, waves.w).mul(0.35).add(1.0);
     return mix(mix(body, lake, pond).mul(crestTint), color(0xdfe8e4), foam);
   })();
 
   // Night: the lit city seen along the reflected ray. The town is a stack of boxes inscribed in its edge, with a row of
-  // lit lots standing back from the water on either side, and around a big park's lakes its rim (none in Ann Arbor).
+  // lit lots standing back from the water on either side, and around a big park's lakes its rim.
   // Each is a row of lots with varied heights, lit windows, storefronts & riverside lamps, box-filtered by the unresolved
   // wave slopes (vertically) & the foreshortened lateral slopes (horizontally), so distant lights smear into streaks.
   // The boxes & shorelines come from the real geography (city-config.js): [minX, minZ, maxX, maxZ] slabs inscribed in

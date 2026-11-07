@@ -69,8 +69,8 @@ function placeStreetTrees(points, existingSites, isClear, kinds = null, heights 
     if (!edge) continue;
     let nx = -edge.dz, nz = edge.dx;
     if (blockAt(edge.x + nx * 0.9, edge.z + nz * 0.9) !== edge.block) { nx = -nx; nz = -nz; }
-    // Lamp: Ann Arbor's residential blocks have a grass tree lawn between the curb and the sidewalk (0.6 to 2.9 m in,
-    // build-annarbor.py TREE_LAWN): their trees stand in the grass, no pit
+    // Lamp: residential blocks have a grass tree lawn between the curb and the sidewalk (0.6 to 2.9 m in):
+    // their trees stand in the grass, no pit
     const treeLawn = edge.block.lawn && !edge.block.parkName && edge.block.area >= 600;
     const inset = treeLawn ? 1.75 : 0.9;
     const move = !originalBlock || edge.distance < inset || (treeLawn && edge.distance > 2.6);

@@ -1,6 +1,6 @@
 import * as THREE from 'three/webgpu';
 
-// Ann Arbor's churches: the survey's buildings on the city's religious parcels, drawn as churches rather than as
+// Surveyed churches: the buildings on the city's religious parcels, drawn as churches rather than as
 // windowed blocks. Stone or brick walls up to the eaves, a steep slate gable along the long side, a square bell tower
 // with a spire and a cross at one end, tall pointed stained-glass windows down the sides, a rose window over the
 // front and an arched door. Every church goes into two meshes (masonry and glass) for the whole city.

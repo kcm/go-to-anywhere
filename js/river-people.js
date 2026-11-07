@@ -1,4 +1,4 @@
-// People out on the Huron: kayakers paddling and tubers drifting down from the top of the Argo Cascades, through its
+// People out on the water: kayakers paddling and tubers drifting down from the top of the cascades channel, through its
 // chutes and on down the river, each put back in at the top when they reach the end of their run.
 //
 // Their way down is traced once from the river's flow (terrain.js's riverFlow, the cascades' channel and chutes in

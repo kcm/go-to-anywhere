@@ -556,7 +556,7 @@ class CityAudioSystem {
       if (source.player || source.kind === 'helicopter' || source.kind === 'cyclist') continue;
       const state = this.state(source, now);
       state.stopped = source.blocked ? state.stopped + dt : 0;
-      // Ann Arbor drivers wait: a short tap only after a long hold-up, not New York's leaning on the horn
+      // Drivers wait: a short horn tap only after a long hold-up
       if (state.stopped > 12 && now > state.horn && now - this.lastHorn > 15) {
         if (this.emit('horn', source, { intensity: 0.35 })) {
           state.horn = now + 60 + state.variation * 40;

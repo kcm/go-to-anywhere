@@ -108,10 +108,9 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
     query(x - clear, x + clear, z - clear, z + clear, (r) => !r.curb && !r.pedestrianOnly && (r.maxX - r.minX < 50 || r.maxZ - r.minZ < 50) && !medianBox(r));
 
   // 2. Avenue corridors: the most common curb-to-curb gap around each avenue's nominal x along its own stretches
-  //    (CSCL: an avenue only exists between its ends, e.g. Irving Pl 14th-20th St, so it never claims a neighbour's
-  //    roadway), and the stretches of z (at least 30 m long) where at least one of its lanes is clear. Each stretch
-  //    keeps its real direction: two-way stretches (Central Park West, West End Ave, York Ave...) carry half of the
-  //    lanes each way
+  //    (an avenue only exists between its ends, so it never claims a neighbour's roadway), and the stretches of z
+  //    (at least 30 m long) where at least one of its lanes is clear. Each stretch keeps its real direction:
+  //    two-way stretches carry half of the lanes each way
   const laneOffsets = (half) => (half >= 10.0 ? [-7.2, -3.6, 0, 3.6, 7.2]
     : half >= 8.5 ? [-5.4, -1.8, 1.8, 5.4]
       : half >= 6.8 ? [-3.6, 0, 3.6]
@@ -250,8 +249,8 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
     for (const n of [p.from, p.to]) n.hz = Math.max(n.hz, Math.abs(p.z - n.z) + Math.min(p.half, 13));
   }
 
-  // 4b. Non-grid streets: Lower Manhattan, Broadway and the curved avenues farther north, from
-  //     the street centreline graph (GEO.roadGraph, tools/geo-roadgraph.mjs), minus the links the grid corridors above
+  // 4b. Non-grid streets: diagonal, curved and irregular streets from the street centreline graph
+  //     (GEO.roadGraph, tools/geo-roadgraph.mjs), minus the links the grid corridors above
   //     already carry. Its junctions join the grid where they meet it (at a grid intersection, on an avenue corridor or a
   //     cross street); a street's bends get shape nodes, so every edge stays straight.
   const genRuns = centrelineStreets();
@@ -1088,10 +1087,10 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
     e.clx = flip ? -e.rx : e.rx;
     e.clz = flip ? -e.rz : e.rz;
   }
-  // 10. Lamp: Ann Arbor's traffic lights and stop & yield signs (OpenStreetMap, GEO.controls). A light makes the
+  // 10. Lamp: traffic lights and stop & yield signs (OpenStreetMap, GEO.controls). A light makes the
   //     intersection it stands at signalised; a sign stops the approach it stands beside (all of them at an all-way
   //     stop). Where the map has none, a side street (residential or service) meeting a bigger road unsignalised gets
-  //     a stop sign, as Ann Arbor's do.
+  //     a stop sign.
   const junctions = nodes.filter((n) => !n.shape && n.arms && n.arms.length >= 3);
   const JCELL = 50;
   const jgrid = new Map();

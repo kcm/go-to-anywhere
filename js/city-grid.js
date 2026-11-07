@@ -1549,7 +1549,7 @@ function buildCityGrid(scene) {
   const curbGeos = [];
   const hedgeGeos = [];
   const SW_TOP = 0.22;
-  // Ann Arbor: a park's or a golf course's slab (an odd-shaped lawn block) is only its sidewalk ring (and a little under the lawn's edge), so on a hill the
+  // A park's or a golf course's slab (an odd-shaped lawn block) is only its sidewalk ring (and a little under the lawn's edge), so on a hill the
   // concrete, draped on the ground apart from the lawn, can't show through it
   const bankLawn = []; // the lawn's edge along the river, where the ring has no sidewalk
   // an edge (p to q, inward normal n) with the river a few metres outside it
@@ -1736,9 +1736,9 @@ function buildCityGrid(scene) {
     return v - Math.floor(v);
   };
 
-  // Ann Arbor: green lawns inside the sidewalk ring of every residential, campus and park block, the surface parking
-  // lots on them, the Huron River & its ponds, and the trees of the parks, the Arb's woods and the front yards
-  // (city-config.js WATER_POLYGONS, PARKING_LOTS; GEO.lawns, GEO.woods from build-annarbor.py)
+  // Green lawns inside the sidewalk ring of every residential, campus and park block, the surface parking
+  // lots on them, the rivers, bays & ponds, and the trees of the parks, woods and front yards
+  // (city-config.js WATER_POLYGONS, PARKING_LOTS; GEO.lawns, GEO.woods)
   const toRing = (flat) => {
     const out = [];
     for (let i = 0; i < flat.length; i += 2) out.push({ x: flat[i], z: flat[i + 1] });
@@ -1807,7 +1807,7 @@ function buildCityGrid(scene) {
     mergeInto([g], cpLawnMat);
   }
   // Driveways, front walks and patios: the city's paved surfaces on each lot, in pale concrete or asphalt
-  // (GEO.driveways from build-annarbor.py, joined to the curb across the tree lawn and sidewalk)
+  // (GEO.driveways, joined to the curb across the tree lawn and sidewalk)
   const concreteGeos = [], blacktopGeos = [], plazaGeos = [];
   for (const rings of GEO.driveways || []) {
     const r = rings.map(toRing);
@@ -1834,7 +1834,7 @@ function buildCityGrid(scene) {
     const asphalt = big ? wide && !web || (!web && hashDrive(r[0][0].x, r[0][0].z) < 0.25)
       : !apron && hashDrive(r[0][0].x, r[0][0].z) < 0.25;
     const dg = flatGeo(r, LAWN_Y + 0.008);
-    // Lamp: a vast web of walks (the plazas around Michigan Stadium, its gates and concourses) in one flat pale gray
+    // Lamp: a vast web of walks (large stadium or civic plazas, gates and concourses) in one flat pale gray
     // read as a blank slab: it's laid in granite pavers, jointed and weathered, like the city's plazas
     if (web && Math.abs(area) / 2 > 5000) { plazaGeos.push(setPavingStyle(dg, 1)); continue; }
     (asphalt ? blacktopGeos : concreteGeos).push(dg);
@@ -1900,7 +1900,7 @@ function buildCityGrid(scene) {
   for (let i = 0; i < W.length; i += 3) {
     const x = W[i], z = W[i + 1], kind = W[i + 2];
     const r = prand(x, z, 2);
-    // woods: Michigan's oak-hickory and maple woods; parks and cemeteries: maples and oaks with some sycamores,
+    // woods: oak-hickory and maple woods; parks and cemeteries: maples and oaks with some sycamores,
     // locusts, elms and pines; yards: maples, flowering trees, spruces and an oak here and there
     const species = kind === 0 ? (r < 0.45 ? 3 : r < 0.85 ? 4 : 2)
       : kind === 1 ? (r < 0.3 ? 3 : r < 0.55 ? 4 : r < 0.65 ? 0 : r < 0.72 ? 1 : r < 0.86 ? 6 : 2)

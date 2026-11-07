@@ -191,7 +191,7 @@ function roofHeightAt(c, x, z) {
 // Where the car's wheels touch, [across, along] in metres from its middle
 const CAR_CORNERS = [[0, 0], [-0.8, 1.35], [0.8, 1.35], [-0.8, -1.35], [0.8, -1.35]];
 
-// Michigan Stadium's collider (landmarks.js), which keeps cars and people outside its wall but not the helicopter
+// Sunken stadium bowl collider (landmarks.js), which keeps cars and people outside its wall but not the helicopter
 const isStadium = (c) => !c.solid && (c.stadium || (c._bowl ??= !c.polygon && !c.obb
   && bowlSurface((c.minX + c.maxX) / 2, (c.minZ + c.maxZ) / 2) !== null));
 
@@ -316,7 +316,7 @@ class ThirdPersonControllerManager {
     this.scene = scene;
     this.colliders = colliders;
     this._colliderCells = null; // built on first use, see nearColliders()
-    this.riverScale = 1; // how fast the Huron runs against its usual flow, from the USGS gauge (river-gauge.js)
+    this.riverScale = 1; // how fast the river runs against its usual flow, from the USGS gauge (river-gauge.js)
     this.activeMode = 'car'; // 'person' | 'car' | 'cyclist' | 'helicopter'
 
     this.keys = {
@@ -493,7 +493,7 @@ class ThirdPersonControllerManager {
     this.resetInput();
     if (!Number.isFinite(heading)) heading = ent.heading;
     if (this.activeMode === 'kayak') {
-      // in the Argo Cascades' channel, shallower than the river, it stays where it was put and faces as it was asked
+      // in a cascades channel, shallower than the river, it stays where it was put and faces as it was asked
       const inChannel = Number.isFinite(x) && Number.isFinite(z) && inCascades(x, z);
       const water = inChannel ? null : Number.isFinite(x) && Number.isFinite(z) ? nearestWater(x, z, 2500) : null;
       if (inChannel) {
@@ -678,7 +678,7 @@ class ThirdPersonControllerManager {
     carBodyMesh.receiveShadow = true;
     chassisPivot.add(carBodyMesh);
 
-    // 3. Michigan license plates on the raked bumpers, tilted to follow the fascias
+    // 3. Regional license plates on the raked bumpers, tilted to follow the fascias
     const nyPlateTex = own ? (this._goBluPlate ??= createGoBluePlateTexture()) : null;
     const nyPlateMat = own ? new THREE.MeshStandardNodeMaterial({ map: nyPlateTex, roughness: 0.28 }) : null;
     for (const front of own ? [true, false] : []) {
@@ -1408,12 +1408,12 @@ class ThirdPersonControllerManager {
     // Lamp: the ground's own height there (terrain.js), with what's laid on it, and up on a road work's dirt pile
     // (road-work.js pileTop), which is driven and walked over like a ramp
     const ground = Math.max(groundHeight(x, z), mode === 'kayak' ? -Infinity : (this.roadWork?.pileTop(x, z) ?? -Infinity));
-    // Inside a big park drawn on its own (none in Ann Arbor: city-config.js BIG_PARK_BOUNDS is far away)
+    // Inside a big park drawn on its own (city-config.js BIG_PARK_BOUNDS)
     const cp = BIG_PARK_BOUNDS;
     if (x > cp.minX && x < cp.maxX && z > cp.minZ && z < cp.maxZ) {
       return ground + 1.24;
     }
-    // Inside Bryant Park's Great Lawn (west of the New York Public Library, 40th-42nd St), which stands level
+    // Inside a raised park lawn terrace (landmarks.js), which stands level
     const lawn = bryantParkLawn;
     if (lawn && x > lawn.minX && x < lawn.maxX && z > lawn.minZ && z < lawn.maxZ) {
       return lawn.top;
@@ -1424,7 +1424,7 @@ class ThirdPersonControllerManager {
     if (mode === 'kayak') return waterLevel(x, z) ?? ground;
     // over a railroad track: up on its ballast and ties, not sunk into them (railways.js)
     const track = this.railways ? this.railways.trackTop(x, z) : -Infinity;
-    // a car inside Michigan Stadium's wall is on its field, stands or parapet
+    // a car inside a sunken stadium bowl is on its field, stands or parapet
     if (mode === 'car') {
       const s = carSurface(x, z);
       if (s !== null) return stadiumGround() + s;
@@ -2279,7 +2279,7 @@ class ThirdPersonControllerManager {
     const still = this._still ??= { x: 0, z: 0, weight: 0 };
     if (!pondDraw(k.position.x, k.position.z, still)) still.weight = 0;
     else { cx += (still.x - cx) * still.weight; cz += (still.z - cz) * still.weight; }
-    // in the Argo Cascades: their own current, down the channel and quick through each chute, and rough below it
+    // in whitewater cascades: their own current, down the channel and quick through each chute, and rough below it
     const rapid = this._rapid ??= { x: 0, z: 0, rough: 0, weight: 0 };
     if (!cascadeCurrent(k.position.x, k.position.z, rapid)) rapid.rough = rapid.weight = 0;
     else { cx += (rapid.x - cx) * rapid.weight; cz += (rapid.z - cz) * rapid.weight; }
@@ -2293,7 +2293,7 @@ class ThirdPersonControllerManager {
       k.turnVel += ((bowX - sternX) * ch - (bowZ - sternZ) * sh) / 3.2 * Math.min(1, dt * 2.5) * (1 - still.weight);
     }
 
-    // afloat: the middle, the bow and the stern all over open water (the Argo Cascades' channel is open; the rocks of
+    // afloat: the middle, the bow and the stern all over open water (the cascades' channel is open; the rocks of
     // their weirs aren't, but for the chute through each)
     const open = (x, z) => (onWeirRocks(x, z) ? 0 : cascadeDepth(x, z, riverDepth(x, z)));
     const afloat = (x, z, h) => {

@@ -3,7 +3,7 @@ import { ACTIVE_CITY_ID } from './city-packs.js';
 import { nearDrop } from './cascades.js';
 import { riverbedHeight, riverDepth, waterLevel, bridgeDecks } from './terrain.js';
 
-// The Huron River and its ponds sunk into their banks (terrain.js digs the bed from data/river.bin.gz): grassy banks
+// Rivers, bays, canals and ponds sunk into their banks (terrain.js digs the bed from data/river.bin.gz): grassy banks
 // sloping down through mud to the silt of the bed, the water lying flat at the river's level over it, and the bridges
 // that cross it: the streets' concrete decks with sidewalks, parapets and piers, the railways' steel girders, and
 // footbridges with railings, all with open water under them to paddle through.
@@ -45,7 +45,7 @@ function meshOf(pos, material, name, colors = null, cullDist = 4500) {
 // The banks and bed, and the water over them. `geos` are the water's polygons, flat at y = 0
 function buildRiver(group, geos, waterMat, roadMat = null) {
   const river = new THREE.Group();
-  river.name = 'HuronRiver';
+  river.name = 'River';
   river.userData.terrain = 'set';
   // The banks: cut fine (3 m) where the ground slopes down to the bed, coarse (40 m) over the bed itself
   const bankPos = [], bankCol = [];
@@ -97,7 +97,7 @@ function buildRiver(group, geos, waterMat, roadMat = null) {
       else c.copy(silt).lerp(mud, Math.max(0, (above + 1.2) / 0.9));
       bankCol.push(c.r, c.g, c.b);
     }
-    // The water: flat at the river's level, cut every 20 m in Lake Merritt & the channel (120 m on the open Estuary)
+    // The water: flat at the waterway's level, cut every 30 m in channels & inland lakes (120 m on open bays)
     // and every 60 cm over the channel drops, so each step shows (cascades.js)
     const water = subdivide(geo, (a, b, k) => {
       const l = longest(a, b, k);

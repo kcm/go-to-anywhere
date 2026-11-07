@@ -1,15 +1,16 @@
 import * as THREE from 'three/webgpu';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { GEO } from './city-geodata.js';
+import { ACTIVE_CITY_ID } from './city-packs.js';
+import { LANDMARKS } from './city-config.js';
 import { groundHeight } from './terrain.js';
 import { localTime } from './actransit.js';
 
-// Ann Arbor's railroads (GEO.rail from build-annarbor.py, OpenStreetMap): every piece of track as ballast, ties and two
+// Railroads and transit lines (GEO.rail from OpenStreetMap): every piece of track as ballast, ties and two
 // steel rails, on the ground's heights smoothed along the line, and level across its bridges; and a train on each
-// long line: Amtrak's Wolverine (a locomotive and five silver cars) on the Michigan Line along the Huron, coming through
-// on Amtrak's timetable (data/wolverine.json, build-wolverine.py from Amtrak's GTFS feed) and stopping at the Depot
-// Street station; an Ann Arbor Railroad freight (two engines, boxcars and hoppers) and a short Great Lakes Central one
-// running back and forth.
+// long line: passenger intercity/commuter consists (a locomotive and five silver cars, or light-rail coaches) running
+// on the station timetable (data/wolverine.json) or shuttle loop, and freight consists (engines, boxcars, hoppers
+// and tank cars) running back and forth.
 
 const GAUGE = 1.435, TIE_STEP = 1.2, TOP = 0.42; // top of the rails above the ground
 
@@ -142,7 +143,7 @@ const CAR_KINDS = {
     parts.push(box(3.14, 0.14, L, 0, 2.1, 0, 0x1f4f99));
     return L;
   },
-  // Freight diesels: the Ann Arbor Railroad's blue with a yellow stripe
+  // Freight diesels: classic dark blue with a yellow stripe
   diesel(parts) {
     const L = 19.8;
     trucks(L, parts);
@@ -178,15 +179,38 @@ const CAR_KINDS = {
     return L;
   }
 };
-// Oakland's Jack London Square Amtrak station (OKJ), and how long before and after its stop a train is
+// Primary rail station platform coordinates per city, and how long before and after its stop a train is
 // looked for on the line (time enough to cross the town at line speed)
-const STATION = { x: -26, z: 1165 };
-const RUN_WINDOW = 420;
-const TRAINS = {
-  'Capitol Corridor': { cars: ['charger', 'coach', 'coach', 'coach', 'coach', 'coach'], speed: 18, wait: 25, horn: true, timetable: true },
-  'Union Pacific Niles Subdivision': { cars: ['diesel', 'diesel', 'boxcar', 'hopper', 'hopper', 'boxcar:0x2f5d3a', 'tank', 'tank', 'hopper:0x6b5a3a', 'boxcar', 'hopper', 'boxcar:0x3a4f6b'], speed: 11, wait: 40, horn: true },
-  'Port of Oakland Belt Line': { cars: ['diesel', 'boxcar', 'tank', 'boxcar:0x3a4f6b'], speed: 7, wait: 50, horn: false }
+const CITY_STATIONS = {
+  oakland: { x: -26, z: 1165 },
+  annarbor: { x: -93, z: -937 },
+  royaloak: { x: -190, z: 95 }
 };
+const STATION = CITY_STATIONS[ACTIVE_CITY_ID]
+  || LANDMARKS.find((l) => /amtrak|station|centraal|santa_lucia|waterfront|union/i.test(`${l.id} ${l.name}`))
+  || { x: 0, z: 0 };
+const RUN_WINDOW = 420;
+const PASSENGER_SPEC = { cars: ['charger', 'coach', 'coach', 'coach', 'coach', 'coach'], speed: 18, wait: 25, horn: true, timetable: true };
+const PASSENGER_LOOP_SPEC = { cars: ['charger', 'coach', 'coach', 'coach', 'coach', 'coach'], speed: 18, wait: 25, horn: true, timetable: false };
+const LIGHT_RAIL_SPEC = { cars: ['coach', 'coach', 'coach'], speed: 13, wait: 20, horn: false, timetable: false };
+const FREIGHT_MAIN_SPEC = { cars: ['diesel', 'diesel', 'boxcar', 'hopper', 'hopper', 'boxcar:0x2f5d3a', 'tank', 'tank', 'hopper:0x6b5a3a', 'boxcar', 'hopper', 'boxcar:0x3a4f6b'], speed: 11, wait: 40, horn: true };
+const FREIGHT_SHORT_SPEC = { cars: ['diesel', 'boxcar', 'tank', 'boxcar:0x3a4f6b'], speed: 7, wait: 50, horn: false };
+const TRAINS = {
+  'Capitol Corridor': PASSENGER_SPEC,
+  'Michigan Subdivision': PASSENGER_SPEC,
+  'Wolverine': PASSENGER_SPEC,
+  'Union Pacific Niles Subdivision': FREIGHT_MAIN_SPEC,
+  'Ann Arbor Railroad': FREIGHT_MAIN_SPEC,
+  'CN Holly Subdivision': FREIGHT_MAIN_SPEC,
+  'Port of Oakland Belt Line': FREIGHT_SHORT_SPEC,
+  'Great Lakes Central Railroad': FREIGHT_SHORT_SPEC
+};
+function trainSpecForRoute(name) {
+  if (TRAINS[name]) return TRAINS[name];
+  if (/freight|subdivision|belt|csx|union pacific|cn |bnsf|norfolk|fec freight/i.test(name)) return FREIGHT_MAIN_SPEC;
+  if (/tram|streetcar|light rail|metro|monorail|people mover|skytrain|corcovado|muni/i.test(name)) return LIGHT_RAIL_SPEC;
+  return PASSENGER_LOOP_SPEC;
+}
 
 function buildRailways(group, crossings = [], wolverine = null) {
   const rail = GEO.rail;
@@ -312,9 +336,10 @@ function buildRailways(group, crossings = [], wolverine = null) {
   trainsGroup.name = 'Trains';
   group.add(trainsGroup);
   for (const [name, flat] of rail.routes || []) {
-    const spec = TRAINS[name];
-    if (!spec) continue;
+    const spec = trainSpecForRoute(name);
+    if (!spec || !flat || flat.length < 4) continue;
     const path = railPath(flat, false);
+    if (!(path.length > 40)) continue;
     // a bridge on the route keeps its level deck, so the train doesn't dip under it
     const cars = spec.cars.map((c) => {
       const { geo, L } = carGeometry(c);
@@ -370,7 +395,7 @@ function buildRailways(group, crossings = [], wolverine = null) {
       s -= train.dir * (car.L + 1);
     }
   };
-  // A train on Amtrak's timetable: the stop at Ann Arbor in service today nearest the time now puts
+  // A train on the passenger timetable: the scheduled stop in service today nearest the time now puts
   // it braking down the line toward the platform, standing there between its arrival and departure, or pulling away;
   // with no train due it is off the end of the line, out of sight
   const runTimetable = (t, dt, onHorn) => {

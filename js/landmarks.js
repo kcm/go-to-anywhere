@@ -2815,6 +2815,7 @@ function buildArchetypeCityLandmarks(scene, baseResult = null, builtNames = new 
 }
 
 export function buildLandmarks(scene) {
+  bryantParkLawn = null;
   if (ACTIVE_CITY_ID === 'annarbor') return buildArchetypeCityLandmarks(scene, buildAnnArborLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
   if (ACTIVE_CITY_ID === 'newyork') return buildArchetypeCityLandmarks(scene, buildNewYorkLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));
   if (ACTIVE_CITY_ID === 'oakland') return buildArchetypeCityLandmarks(scene, buildOaklandLandmarks(scene), new Set((CITY_PACK.modelledLandmarks || []).map((e) => (Array.isArray(e) ? e[0] : e))));

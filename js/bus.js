@@ -636,7 +636,7 @@ function createLoftedBusMaterial() {
   body = mix(body, color(0x9e0e16), max(tailLamp, max(highBrake, rearIdLamps)));
   body = mix(body, color(0xd86e18), turnRear);
   body = mix(body, color(0xe8eef4), reverse);
-  body = mix(body, mix(color(0xeef1f4), color(0x182648), plateText.mul(0.65)), plate); // Lamp: a Michigan plate
+  body = mix(body, mix(color(0xeef1f4), color(0x182648), plateText.mul(0.65)), plate); // Lamp: rear license plate
   body = mix(body, glassTint, glass);
 
   const col = mix(mix(body, color(0x191d22), isTrim), color(0xd0d5dc), isPod);

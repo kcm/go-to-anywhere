@@ -103,7 +103,7 @@ function addBuildingDetails(b, detail, { masonry, rand, neighbours, waterTowerPr
         item = { x: x + e.nx * 2, y: 0.22, z: z + e.nz * 2, w: 3.8, d, ry };
         detail.scaffoldSheds.push(item);
       } else {
-        // Lamp: no canvas awnings: Ann Arbor's storefronts show their glass and their own signs (shop-signs.js)
+        // Lamp: no canvas awnings: storefronts show their glass and their own signs (shop-signs.js)
         rand();
         continue;
       }

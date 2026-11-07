@@ -3,7 +3,7 @@ import { attribute, float, vec2, vec3, fract, abs, smoothstep, fwidth, max, dot,
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { drawOver } from './terrain.js';
 
-// Ann Arbor's golf courses (GEO.golf from build-annarbor.py: OpenStreetMap's fairways, greens, tees and cart paths,
+// Golf courses (GEO.golf from OpenStreetMap's fairways, greens, tees and cart paths,
 // with fairways and bunkers filled in where a course isn't mapped): fairways mown in light and dark stripes along their
 // length, close-cut greens with a pin and flag on each, tees, sand bunkers and asphalt cart paths, all lying on the
 // lawn of the course.
@@ -155,7 +155,7 @@ function buildGolf(group, golf, flatGeo, toRing, y) {
   sticks.name = 'GolfPins';
 }
 
-// Trails through the parks, woods and campus lawns (GEO.trails from build-annarbor.py, OpenStreetMap's paths and
+// Trails through the parks, woods and campus lawns (GEO.trails from OpenStreetMap's paths and
 // footways): packed dirt or gravel on the woodland paths, pale gray paving on the park walks and bike paths
 function buildTrails(group, trails, y) {
   if (!trails) return;

@@ -8,12 +8,12 @@ import { riverbedHeight as groundHeight } from './terrain.js';
 import { GEO } from './city-geodata.js';
 import { CITY_PACK } from './city-packs.js';
 
-// Ann Arbor's houses, from the city's surveyed footprints and heights. Each footprint is split into its main block and
+// Surveyed residential houses, from the city's footprints and heights. Each footprint is split into its main block and
 // up to three wings (the largest rectangles inside it), so L-shapes, side wings and back additions keep their shape.
 // The main block gets the roof its shape and age suggest (a gable to the street on a narrow lot, a hip on a square
 // foursquare, a side gable with dormers on a storey-and-a-half bungalow), or the one OpenStreetMap's mappers tagged
 // (data/roof-shapes.json); wings get their own lower gables or lean-tos. Roofs overhang the walls with fascia, soffits
-// and rake boards. Walls are clapboard in Ann Arbor's colors, or brick, stone, stucco or shakes, with trim, sash
+// and rake boards. Walls are clapboard, brick, stone, stucco or shakes in regional palettes, with trim, sash
 // windows, shutters on some, a colored front door, and a foundation above the ground; most older houses have a porch
 // with posts, railings and steps, a light by the door, a chimney, a front walk to the sidewalk and shrubs.
 // Walls are one mesh per square kilometer, drawn by one shader from each wall's meters along and up (`wallInfo`);
@@ -21,7 +21,7 @@ import { CITY_PACK } from './city-packs.js';
 // instanced and only drawn up close (scene-culling.js). Every choice is seeded from the house's position, so a house
 // always looks the same.
 
-// Ann Arbor's siding: whites and creams, yellows, sage and olive greens, grays, muted blues, barn red, tan
+// Traditional siding palette: whites and creams, yellows, sage and olive greens, grays, muted blues, barn red, tan
 const SIDING = [
   0xf2efe7, 0xebe5d3, 0xe6dcc0, 0xf0ece2, 0xe4cd85, 0xd9bf72, 0xead9a0, 0xaab595, 0x8e9b74, 0x707d57, 0x5d6a4c,
   0xb9bbb7, 0x92989a, 0x6c7378, 0x9fb2c0, 0x7b91a3, 0x5a6f82, 0x8b3a2e, 0x75302a, 0xc8b391
@@ -1279,7 +1279,7 @@ function buildHouses(records, addresses = null, { quiet = false } = {}) {
   }
 
   const group = new THREE.Group();
-  group.name = 'AnnArborHouses';
+  group.name = 'Houses';
   for (const c of cells.values()) {
     if (c.idx.length) {
       const geo = new THREE.BufferGeometry();
@@ -1421,7 +1421,7 @@ function streamHouses(records, addresses, { radius, x, z, farCut = 1 }) {
     cells.get(key).push(r);
   }
   const group = new THREE.Group();
-  group.name = 'AnnArborHouses';
+  group.name = 'Houses';
   const built = new Map();
   const distance = (key, px, pz) => {
     const cx = Math.round(key / 100000), cz = key - cx * 100000;

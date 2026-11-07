@@ -2,7 +2,7 @@ import * as THREE from 'three/webgpu';
 import { GEO } from './city-geodata.js';
 import { CITY_PACK } from './city-packs.js';
 import { PARKING_LOTS } from './city-config.js';
-import { BODY_SPECS, buildCarGeometry, buildCarProxyGeometry, buildSteerableWheelGeo, createLoftedCarMaterial, annArborCar } from './cars.js';
+import { BODY_SPECS, buildCarGeometry, buildCarProxyGeometry, buildSteerableWheelGeo, createLoftedCarMaterial, civilianCar } from './cars.js';
 import { groundHeight, groundTilt } from './terrain.js';
 import { curbStalls } from './curb-parking.js';
 import { vehicleContact, resolveVehicleContact } from './vehicle-physics.js';
@@ -164,7 +164,7 @@ function buildParkedCars(group, nearTrack = null) {
   };
   const carOf = (s) => {
     const kind = kindAt(s);
-    const look = annArborCar(kind, Math.floor(hash(s.x, s.z, 5) * 1000));
+    const look = civilianCar(kind, Math.floor(hash(s.x, s.z, 5) * 1000));
     return record(s, kind, look.hex, look.style);
   };
   // streamed: the spots by cell, and the most cars of each kind there are ever within reach, for the meshes' room

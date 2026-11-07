@@ -1,5 +1,5 @@
-// Ann Arbor's land use parcels and historic districts (data/districts.json, Assets/Tools/build-districts.py), from
-// the City of Ann Arbor's open data. main.js hands the file to setDistricts before the city is built; until then
+// Land use parcels and historic districts (data/districts.json), from municipal and OpenStreetMap
+// open data. main.js hands the file to setDistricts before the city is built; until then
 // every lookup answers "nothing here".
 
 // Land use codes, as the build writes them

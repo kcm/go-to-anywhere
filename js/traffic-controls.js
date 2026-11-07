@@ -4,7 +4,7 @@ import { groundHeight } from './terrain.js';
 import { color, mix, uniform } from 'three/tsl';
 import { signalPhase } from './city-config.js';
 
-// Lamp: Ann Arbor's traffic lights and stop & yield signs, where the road network put them (road-network.js, from
+// Lamp: traffic lights and stop & yield signs, where the road network put them (road-network.js, from
 // OpenStreetMap): at a signalised intersection, a mast arm on the far right corner of every approach with a head over
 // each of its lanes, lit by the same clock traffic obeys (the lens material picks red / amber / green by height above
 // the ground: 5.78 / 5.42 / 5.06 m); at a sign, a post at the right curb by the stop line, facing the drivers coming

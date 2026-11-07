@@ -3,7 +3,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { positionWorld, floor, fract, sin, dot, vec2, mix, color } from 'three/tsl';
 import { drawOver } from './terrain.js';
 
-// Ann Arbor's park playgrounds, where OpenStreetMap has them (GEO.playgrounds from build-annarbor.py): wood-chip
+// Park playgrounds, where OpenStreetMap has them (GEO.playgrounds): wood-chip
 // ground on the real outline, a play tower with a slide in the middle, and a swing set beside it where there's room.
 // Each kind of equipment is one instanced mesh in vertex colours.
 

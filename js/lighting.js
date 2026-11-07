@@ -138,7 +138,7 @@ const TIME_PRESETS = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
-// The real sun over Oakland, worked out here (no network): where it is now, and when it rises and sets today
+// The real sun over the active city, worked out here (no network): where it is now, and when it rises and sets today
 // ---------------------------------------------------------------------------------------------------------------------
 const LAT = CITY_PACK.lat ?? 42.4895;
 const LON = CITY_PACK.lon ?? -83.1446;
@@ -332,7 +332,7 @@ class LightingSystem {
   }
 
   applyPreset(presetId, force = false) {
-    // Lamp: "Now" is Ann Arbor's real sky, with its weather (weather.js) on it
+    // Lamp: "Now" is the active city's real sky, with its weather (weather.js) on it
     const p = presetId === 'now' ? weatherPreset(presetForSun(sunPosition(Date.now())), this.weather)
       : TIME_PRESETS[presetId] || TIME_PRESETS.golden;
     if (!force && this.activePresetId === p.id && this.envRenderTarget !== null) {

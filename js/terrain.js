@@ -1,6 +1,6 @@
 // js/terrain.js
-// The height of the ground over Ann Arbor, in metres above the street level the rest of the city was drawn at (y = 0),
-// from data/elevation.bin.gz (made by Assets/Tools/build-annarbor.py from the open Terrain Tiles). Heights are 0 in the water and ease to 0
+// The height of the ground over the active city, in metres above the reference street level (y = 0),
+// from data/elevation.bin.gz (built from open Terrain Tiles). Heights are 0 in the water and ease to 0
 // near the shore, so whatever sits at the waterline (seawalls, waterfront highways, piers, bridge landings) stays
 // where it was drawn.
 //
@@ -238,8 +238,8 @@ function bridgeDecks() {
   return grid?.river?.bridges || [];
 }
 
-// Michigan Stadium sits in a bowl dug into the ground: the ground around its outer wall (the lowest of it) is where the
-// stadium is measured from (stadiumGround), and inside the wall the ground is dug out to 1.5 m under its stands and
+// A sunken stadium or amphitheater sits in a bowl dug into the ground: the ground around its outer wall (the lowest of it) is where the
+// bowl is measured from (stadiumGround), and inside the wall the ground is dug out to 1.5 m under its stands and
 // field (stadium-shape.js), so they show and nothing of the hill pokes through them.
 function digBowl(g) {
   if (bowlSurface(STADIUM.cx, STADIUM.cz) === null) {
@@ -276,7 +276,7 @@ function digBowl(g) {
   }
 }
 
-// The ground around Michigan Stadium, which its rim and field are measured from
+// The ground around the sunken stadium bowl, which its rim and field are measured from
 function stadiumGround() {
   return grid?.stadiumGround ?? 0;
 }
@@ -342,7 +342,7 @@ function flowField() {
     if (tail > bestSize) { bestSize = tail; best = i; }
   }
   if (best < 0) return (r.flow = null);
-  // each stretch runs to its own lowest point (a pond above a dam to the dam, the river on to Gallup)
+  // each stretch runs to its own lowest point (a pond above a dam to the dam, the river on downstream)
   const lows = new Map();
   for (let i = 0; i < n; i++) {
     if (part[i] < 0) continue;

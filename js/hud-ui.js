@@ -1,5 +1,6 @@
 import { log, input, onInput, label, glyph, BUTTON, STICK, TRIGGER } from '../lamp-game.js';
-import { CITY_PACK } from './city-packs.js';
+import { ACTIVE_CITY_ID, CITY_PACK, CITY_PACKS, switchCity } from './city-packs.js';
+import { TIER, switchTier } from './device-tier.js';
 import { getLocationLabel, isTypingInField, ROADS, LANDMARKS, TELEPORT_LOCATIONS } from './city-config.js';
 import { GamepadControls } from './gamepad-controls.js';
 import { CAMERA_PRESETS } from './cameras.js';
@@ -8,6 +9,263 @@ import { CityMapSystem } from './city-map.js';
 import { groundHeight, nearestWater } from './terrain.js';
 import { fetchWeather } from './weather.js';
 import { fetchRiverFlow } from './river-gauge.js';
+
+export async function probeServerConfig() {
+  try {
+    const res = await fetch('/api/server-config', { cache: 'no-store' });
+    if (!res.ok) return { allowCityRequests: false, locked: true };
+    const data = await res.json();
+    return {
+      allowCityRequests: Boolean(data && data.allowCityRequests),
+      locked: Boolean(!data || data.locked || !data.allowCityRequests)
+    };
+  } catch {
+    return { allowCityRequests: false, locked: true };
+  }
+}
+
+export async function triggerServerCityBuild(payload, onUpdate) {
+  const res = await fetch('/api/cities/build', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const initData = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(initData.error || `Server returned ${res.status}`);
+  }
+  const cityId = initData.id || payload.id;
+  for (;;) {
+    await new Promise((r) => setTimeout(r, 1200));
+    const stRes = await fetch(`/api/cities/status?id=${encodeURIComponent(cityId)}`, { cache: 'no-store' });
+    if (!stRes.ok) continue;
+    const job = await stRes.json();
+    if (onUpdate) onUpdate(job);
+    if (job.status === 'done') return cityId;
+    if (job.status === 'error') throw new Error(job.error || 'City pack build failed.');
+  }
+}
+
+export function setupNewCityModal() {
+  const modal = document.getElementById('new-city-modal');
+  const closeBtn = document.getElementById('new-city-close');
+  const searchInput = document.getElementById('new-city-search');
+  const searchBtn = document.getElementById('new-city-search-btn');
+  const resultsBox = document.getElementById('new-city-results');
+  const nameInput = document.getElementById('new-city-name');
+  const idInput = document.getElementById('new-city-id');
+  const latInput = document.getElementById('new-city-lat');
+  const lonInput = document.getElementById('new-city-lon');
+  const radiusInput = document.getElementById('new-city-radius');
+  const stateInput = document.getElementById('new-city-state');
+  const submitBtn = document.getElementById('new-city-submit');
+  const progressBox = document.getElementById('new-city-progress');
+  const stepEl = document.getElementById('new-city-step');
+  const logsEl = document.getElementById('new-city-logs');
+  if (!modal) return () => {};
+
+  const openModal = () => {
+    modal.classList.remove('hidden');
+    searchInput?.focus();
+  };
+  const closeModal = () => {
+    modal.classList.add('hidden');
+  };
+
+  closeBtn?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  nameInput?.addEventListener('input', () => {
+    if (!idInput.dataset.manual) {
+      const base = nameInput.value.split(',')[0] || '';
+      idInput.value = base.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 24);
+    }
+  });
+  idInput?.addEventListener('input', () => {
+    idInput.dataset.manual = idInput.value ? '1' : '';
+  });
+
+  async function runGeocode() {
+    const q = (searchInput?.value || '').trim();
+    if (q.length < 2 || !resultsBox) return;
+    resultsBox.hidden = false;
+    resultsBox.textContent = 'Searching OpenStreetMap Nominatim...';
+    try {
+      const res = await fetch(`/api/cities/geocode?q=${encodeURIComponent(q)}`);
+      const data = await res.json();
+      const list = data.results || [];
+      if (!list.length) {
+        resultsBox.textContent = 'No matching places found.';
+        return;
+      }
+      resultsBox.replaceChildren(
+        ...list.map((item) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'new-city-result-item';
+          btn.textContent = `${item.name} (${item.lat}, ${item.lon}) - ${item.fullLabel}`;
+          btn.addEventListener('click', () => {
+            if (nameInput) nameInput.value = item.name;
+            if (idInput) {
+              idInput.value = item.id;
+              idInput.dataset.manual = '1';
+            }
+            if (latInput) latInput.value = String(item.lat);
+            if (lonInput) lonInput.value = String(item.lon);
+            if (stateInput) stateInput.value = item.stateCode || '';
+            resultsBox.hidden = true;
+          });
+          return btn;
+        })
+      );
+    } catch (err) {
+      resultsBox.textContent = `Search failed: ${err.message}`;
+    }
+  }
+
+  searchBtn?.addEventListener('click', runGeocode);
+  searchInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      runGeocode();
+    }
+  });
+
+  submitBtn?.addEventListener('click', async () => {
+    const id = (idInput?.value || '').trim().toLowerCase().replace(/[^a-z0-9_-]+/g, '');
+    const name = (nameInput?.value || '').trim() || id;
+    const lat = parseFloat(latInput?.value || '');
+    const lon = parseFloat(lonInput?.value || '');
+    const radiusKm = parseFloat(radiusInput?.value || '2.0') || 2.0;
+    const stateCode = (stateInput?.value || '').trim();
+    if (!id || !Number.isFinite(lat) || !Number.isFinite(lon)) {
+      if (progressBox) progressBox.hidden = false;
+      if (stepEl) stepEl.textContent = 'Please search for a city or enter a valid Pack ID, Latitude, and Longitude.';
+      return;
+    }
+    submitBtn.disabled = true;
+    if (progressBox) progressBox.hidden = false;
+    if (stepEl) stepEl.textContent = `Building ${name} (${id})...`;
+    if (logsEl) logsEl.textContent = '';
+    try {
+      const builtId = await triggerServerCityBuild(
+        { id, name, lat, lon, radiusKm, stateCode },
+        (job) => {
+          if (stepEl && job.step) stepEl.textContent = job.step;
+          if (logsEl && Array.isArray(job.logs)) {
+            logsEl.textContent = job.logs.slice(-18).join('\n');
+            logsEl.scrollTop = logsEl.scrollHeight;
+          }
+        }
+      );
+      switchCity(builtId);
+    } catch (err) {
+      if (stepEl) stepEl.textContent = `Build error: ${err.message}`;
+      submitBtn.disabled = false;
+    }
+  });
+
+  for (const btnId of ['btn-new-city', 'map-btn-new-city']) {
+    const btn = document.getElementById(btnId);
+    if (btn) btn.addEventListener('click', openModal);
+  }
+  return openModal;
+}
+
+export function initCityAndTierControls(probeInstalledCities) {
+  document.title = `Go To Anywhere (GTA) - ${CITY_PACK.displayName}`;
+  const loaderSubtitle = document.getElementById('loader-subtitle');
+  if (loaderSubtitle) loaderSubtitle.textContent = CITY_PACK.displayName;
+  if (CITY_PACK.icon) {
+    const fav = document.getElementById('app-favicon');
+    if (fav) fav.href = CITY_PACK.icon;
+    for (const logoEl of document.querySelectorAll('.app-logo')) {
+      logoEl.src = CITY_PACK.icon;
+    }
+  }
+  const isFullTier = TIER.name === 'full' || TIER.name === 'insanity';
+  const isInsanityTier = TIER.name === 'insanity';
+  for (const btn of document.querySelectorAll('.tier-btn[data-tier]')) {
+    const btnIsFull = btn.dataset.tier === 'full';
+    btn.classList.toggle('active', btnIsFull === isFullTier);
+    btn.setAttribute('aria-pressed', String(btnIsFull === isFullTier));
+    if (!btn.dataset.tierBound) {
+      btn.dataset.tierBound = '1';
+      btn.addEventListener('click', () => switchTier(btn.dataset.tier));
+    }
+  }
+  for (const cb of document.querySelectorAll('.tier-insanity-cb')) {
+    cb.checked = isInsanityTier;
+    cb.disabled = !isFullTier;
+    cb.closest('.tier-insanity')?.classList.toggle('is-disabled', !isFullTier);
+    cb.closest('.tier-insanity')?.classList.toggle('is-active', isInsanityTier);
+    if (!cb.dataset.tierBound) {
+      cb.dataset.tierBound = '1';
+      cb.addEventListener('change', () => {
+        if (!isFullTier) return;
+        switchTier(cb.checked ? 'insanity' : 'full');
+      });
+    }
+  }
+  const openNewCityModal = setupNewCityModal();
+  for (const selId of ['city-select', 'map-city-select']) {
+    const sel = document.getElementById(selId);
+    if (sel) {
+      sel.replaceChildren(
+        ...Object.values(CITY_PACKS).map((pack) => {
+          const opt = document.createElement('option');
+          opt.value = pack.id;
+          opt.textContent = pack.isLocal ? `${pack.displayName} (local)` : pack.displayName;
+          return opt;
+        })
+      );
+      sel.value = ACTIVE_CITY_ID;
+      sel.addEventListener('change', (e) => {
+        if (e.target.value === '__new_city__') {
+          e.target.value = ACTIVE_CITY_ID;
+          openNewCityModal();
+          return;
+        }
+        switchCity(e.target.value);
+      });
+    }
+  }
+  Promise.all([probeInstalledCities(), probeServerConfig()]).then(([installedMap, serverCfg]) => {
+    const canRequestCity = Boolean(serverCfg && serverCfg.allowCityRequests);
+    for (const btnId of ['btn-new-city', 'map-btn-new-city']) {
+      const btn = document.getElementById(btnId);
+      if (btn) btn.hidden = !canRequestCity;
+    }
+    for (const selId of ['city-select', 'map-city-select']) {
+      const sel = document.getElementById(selId);
+      if (!sel) continue;
+      const visiblePacks = Object.values(CITY_PACKS).filter(
+        (pack) => canRequestCity || installedMap[pack.id] || pack.id === ACTIVE_CITY_ID
+      );
+      const options = visiblePacks.map((pack) => {
+        const opt = document.createElement('option');
+        opt.value = pack.id;
+        const isInstalled = installedMap[pack.id];
+        if (pack.isLocal) {
+          opt.textContent = isInstalled ? `${pack.displayName} (local)` : `${pack.displayName} (local, not installed)`;
+        } else {
+          opt.textContent = isInstalled ? pack.displayName : `${pack.displayName} (not installed)`;
+        }
+        return opt;
+      });
+      if (canRequestCity) {
+        const addOpt = document.createElement('option');
+        addOpt.value = '__new_city__';
+        addOpt.textContent = '+ Request / Build New City...';
+        options.push(addOpt);
+      }
+      sel.replaceChildren(...options);
+      sel.value = ACTIVE_CITY_ID;
+    }
+  });
+}
 
 /**
  * Populates city-specific labels, teleport popover items, and camera preset buttons.
@@ -21,6 +279,8 @@ export function initCityHeaderUI() {
   if (mapSearch && CITY_PACK.searchPlaceholder) mapSearch.placeholder = CITY_PACK.searchPlaceholder;
   const openMapBtnEl = document.getElementById('btn-open-map');
   if (openMapBtnEl) openMapBtnEl.title = `Full ${CITY_PACK.title} street map [M]`;
+  const timeNowBtnEl = document.getElementById('time-now');
+  if (timeNowBtnEl) timeNowBtnEl.title = `Now in ${CITY_PACK.title}`;
   const miniCardEl = document.getElementById('minimap-card');
   if (miniCardEl) {
     miniCardEl.setAttribute('aria-label', `Live ${CITY_PACK.title} Street Radar Minimap`);

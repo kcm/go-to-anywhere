@@ -4,6 +4,7 @@ import { groundHeight, groundHeightNode, groundStreamCenter } from './terrain.js
 import { TIER } from './device-tier.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import {
+  IS_GRID_CITY,
   AVENUES,
   STREETS,
   ALL_AVENUES,
@@ -597,27 +598,26 @@ function buildStreetDetails(scene, colliders = [], streetFurniture = null) {
   // =========================================================================
   const godRayMat = createGodRayMaterial();
   const godRayGeo = new THREE.PlaneGeometry(54, 92);
-  const canyonShafts = [
+  const canyonShafts = IS_GRID_CITY ? [
     { x: 0,    y: 42, z: 180,  rotY: 0.32,  rotZ: -0.46 }, // 34th St & 5th Ave (Empire State Canyon)
     { x: 0,    y: 44, z: 0,    rotY: 0.28,  rotZ: -0.44 }, // 42nd St & 5th Ave (NYPL / Bryant Park)
     { x: 165,  y: 46, z: 0,    rotY: 0.25,  rotZ: -0.45 }, // 42nd St & Park/Lexington (Grand Central & Chrysler)
     { x: -110, y: 42, z: -90,  rotY: 0.30,  rotZ: -0.44 }, // 47th St & 6th Ave (Rockefeller Center)
     { x: -215, y: 40, z: -45,  rotY: 0.35,  rotZ: -0.42 }, // Times Square / Broadway Canyon
     { x: -55,  y: 48, z: -360, rotY: 0.28,  rotZ: -0.46 }  // 59th St / Central Park South Canyon
-  ];
+  ] : [];
   for (const cs of canyonShafts) {
     const shaft = new THREE.Mesh(godRayGeo, godRayMat);
     shaft.name = 'CanyonSunShaft';
-    const at = fromOldFrame(cs.x, cs.z); // (authored on the former compressed grid)
+    const at = fromOldFrame(cs.x, cs.z);
     shaft.position.set(at.x, cs.y, at.z);
     shaft.rotation.set(0.12, cs.rotY, cs.rotZ);
     group.add(shaft);
   }
 
   // =========================================================================
-  // 3. STEAM STACKS & BARRICADES (New York's; none in Ann Arbor, see steamLocations)
+  // 3. STEAM STACKS & BARRICADES (see steamLocations)
   // =========================================================================
-  // Ann Arbor has no Con Edison steam: no striped stacks or steam clouds in the streets
   const steamLocations = [];
   // (authored on the former compressed grid: carried onto the real streets; the Financial District one by One WTC)
   for (const st of steamLocations) {
@@ -748,7 +748,7 @@ function buildStreetDetails(scene, colliders = [], streetFurniture = null) {
   if (totalSteamSprites > 0) group.add(steamInstancedSprites);
 
   // =========================================================================
-  // 5. STREET FOOD CARTS (none in Ann Arbor)
+  // 5. STREET FOOD CARTS
   // =========================================================================
   // Keep the whole prop on the sidewalk, outside building lots.
   const findPropSite = (x, z, width, depth) => {
@@ -777,7 +777,6 @@ function buildStreetDetails(scene, colliders = [], streetFurniture = null) {
     return null;
   };
 
-  // (New York's hot dog and halal carts: none in Ann Arbor)
   const cartLocations = [];
 
   const cartMatrices = [];

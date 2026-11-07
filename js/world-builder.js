@@ -210,7 +210,7 @@ export async function buildCityWorld({
     scene.add(part.group);
     cullAlso(part.culled);
   }
-  const houseStream = blocks.group.getObjectByName('AnnArborHouses')?.userData.stream;
+  const houseStream = blocks.group.getObjectByName('Houses')?.userData.stream;
   const partHooks = parts.map((part) => part.group).filter((g) => g.onBeforeRender !== THREE.Object3D.prototype.onBeforeRender);
   scene.onBeforeRender = (...args) => { for (const g of partHooks) g.onBeforeRender(...args); };
   markInit('ground');

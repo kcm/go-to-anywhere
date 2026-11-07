@@ -592,23 +592,15 @@
     <button id="reset-confirm" class="pop-item" type="button"><span class="pop-name">Reset game</span><span class="pop-sub">Your car, bike, kayak and helicopter go back to the start</span></button>
   </div>
 
-  <!-- Teleport Destinations (native popover: light-dismiss & Esc) -->
+  <!-- Teleport Destinations (native popover: light-dismiss & Esc; populated dynamically by initCityHeaderUI) -->
   <div id="teleport-popover" class="popover" popover data-side="below" data-anchor="hud-toolbar" aria-label="Teleport the active player">
     <div class="pop-title">Teleport to</div>
-    <button id="tp-main4th" class="pop-item tp-btn" data-teleport="main4th" type="button"><span class="pop-name">Main &amp; 4th</span><span class="pop-sub">Main &amp; 4th (Downtown Royal Oak)</span></button>
-    <button id="tp-music" class="pop-item tp-btn" data-teleport="music" type="button"><span class="pop-name">Music Theatre</span><span class="pop-sub">Royal Oak Music Theatre</span></button>
-    <button id="tp-cityhall" class="pop-item tp-btn" data-teleport="cityhall" type="button"><span class="pop-name">Centennial Commons</span><span class="pop-sub">Centennial Commons &amp; City Hall</span></button>
-    <button id="tp-farmers" class="pop-item tp-btn" data-teleport="farmers" type="button"><span class="pop-name">Farmers Market</span><span class="pop-sub">Royal Oak Farmers Market</span></button>
-    <button id="tp-amtrak" class="pop-item tp-btn" data-teleport="amtrak" type="button"><span class="pop-name">Amtrak Depot</span><span class="pop-sub">Royal Oak Amtrak Station</span></button>
-    <button id="tp-shrine" class="pop-item tp-btn" data-teleport="shrine" type="button"><span class="pop-name">Shrine Basilica</span><span class="pop-sub">National Shrine of the Little Flower Basilica</span></button>
-    <button id="tp-zoo" class="pop-item tp-btn" data-teleport="zoo" type="button"><span class="pop-name">Detroit Zoo</span><span class="pop-sub">Detroit Zoo &amp; Water Tower</span></button>
-    <button id="tp-vinsetta" class="pop-item tp-btn" data-teleport="vinsetta" type="button"><span class="pop-name">Woodward &amp; Vinsetta</span><span class="pop-sub">Woodward Ave &amp; Vinsetta Blvd</span></button>
   </div>
 
   <!-- Bottom-Left: Street-Name Signs & Live GPS Radar Minimap -->
   <div class="hud hud-bottom-left">
     <div id="hud-location" class="location" aria-live="off"></div>
-    <aside id="minimap-card" class="panel radar" aria-label="Live Royal Oak Street Radar Minimap" title="Open the full Royal Oak street map [M]">
+    <aside id="minimap-card" class="panel radar" aria-label="Live Street Radar Minimap" title="Open the full street map [M]">
       <canvas id="minimap-canvas"></canvas>
       <span class="radar-north" aria-hidden="true">N</span>
       <kbd class="radar-key" data-key="KeyM" data-pad="MENU">M</kbd>
@@ -688,20 +680,13 @@
     </div>
   </section>
 
-  <!-- All Cameras: 3 Follow Cameras + City Vantage Cameras + Auto-Director Drone -->
+  <!-- All Cameras: 3 Follow Cameras + City Vantage Cameras + Auto-Director Drone (populated dynamically by initCityHeaderUI) -->
   <div id="camera-popover" class="popover" popover data-side="above" data-anchor="hud-cluster" data-align="hud-cluster" aria-label="Multiple Camera Angles">
     <div class="pop-title">Follow</div>
     <button id="cam-chase" class="pop-item cam-btn active" data-camera="chase" type="button"><span class="pop-name">3rd-Person Chase</span><kbd data-key="Digit6">6</kbd></button>
     <button id="cam-action" class="pop-item cam-btn" data-camera="action" type="button"><span class="pop-name">Low-Angle Action</span><kbd data-key="Digit7">7</kbd></button>
     <button id="cam-pov" class="pop-item cam-btn" data-camera="pov" type="button"><span class="pop-name">First-Person / Cockpit</span><kbd data-key="Digit8">8</kbd></button>
     <div class="pop-title">Scenic</div>
-    <button id="cam-mainStreet" class="pop-item cam-btn" data-camera="mainStreet" type="button"><span class="pop-name">Main &amp; 4th Downtown</span><kbd data-key="Digit9">9</kbd></button>
-    <button id="cam-musicTheatre" class="pop-item cam-btn" data-camera="musicTheatre" type="button"><span class="pop-name">Royal Oak Music Theatre</span><kbd data-key="Digit0">0</kbd></button>
-    <button id="cam-shrine" class="pop-item cam-btn" data-camera="shrine" type="button"><span class="pop-name">Shrine of the Little Flower</span></button>
-    <button id="cam-shrineTop" class="pop-item cam-btn" data-camera="shrineTop" type="button"><span class="pop-name">Shrine Tower Panorama</span></button>
-    <button id="cam-detroitZoo" class="pop-item cam-btn" data-camera="detroitZoo" type="button"><span class="pop-name">Detroit Zoo &amp; Water Tower</span></button>
-    <button id="cam-woodward" class="pop-item cam-btn" data-camera="woodward" type="button"><span class="pop-name">Woodward Ave Cruise</span></button>
-    <button id="cam-royalOakAerial" class="pop-item cam-btn" data-camera="royalOakAerial" type="button"><span class="pop-name">Royal Oak Aerial</span></button>
     <button id="cam-drone" class="pop-item cam-btn" data-camera="drone" type="button"><span class="pop-name">Auto-Director Aerial</span></button>
   </div>
 
@@ -777,7 +762,7 @@
       </div>
       <div class="panel map-zoom">
         <button id="map-center-player" class="icon-btn" type="button" title="Street view around you" aria-label="Center on player"><svg class="icon" aria-hidden="true"><use href="#i-locate"/></svg></button>
-        <button id="map-view-all" class="icon-btn" type="button" title="All of Royal Oak" aria-label="Fit all of Royal Oak"><svg class="icon" aria-hidden="true"><use href="#i-fit"/></svg></button>
+        <button id="map-view-all" class="icon-btn" type="button" title="Fit entire city" aria-label="Fit entire city"><svg class="icon" aria-hidden="true"><use href="#i-fit"/></svg></button>
       </div>
     </div>
 

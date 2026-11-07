@@ -297,7 +297,7 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
       seed: 94.3
     }]
   ];
-  // Ann Arbor's houses: painted clapboard & siding in the old neighbourhoods' colours, two storeys
+  // Residential houses & low-rise apartments: painted clapboard & siding in neighbourhood colours, two storeys
   facades.push(
     // 5: White & cream clapboard
     [createPreWarBuildingMaterial, {
@@ -567,8 +567,8 @@ function buildCityBlocks(scene, landmarkColliders = [], addresses = null, gasSta
         footprints: b.polygons.map((p) => ({ h: b.height + 0.22, pts: p.outer, holes: p.holes })) });
       continue;
     }
-    // Lamp: Ann Arbor's survey says what each building is (1 house or apartments, 2 shops, 3 offices, 4 public) and
-    // who owns it (5 the University, 6 the city, county, schools or federal government), not when it was built
+    // Lamp: the building survey says what each building is (1 house or apartments, 2 shops, 3 offices, 4 public) and
+    // who owns it (5 university/campus, 6 municipal, schools or government), not when it was built
     const kind = b.kind || 1;
     let mat = kind === 1 ? (b.height < 13 ? (tone < 0.18 ? 1 : 5 + Math.floor(rand() * 3)) : (tone < 0.7 ? 1 : 0))
       : kind === 2 ? (b.height < 16 ? (tone < 0.65 ? 1 : 0) : (tone < 0.5 ? 2 : 3))

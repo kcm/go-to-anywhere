@@ -5,7 +5,7 @@ import { groundHeight } from './terrain.js';
 import { random, log, texture as loadTexture } from '../lamp-game.js';
 import { roundedBox, roundedRectShape } from './vehicles.js';
 
-// Michigan's other season: road work. A few dozen blocks around town are shut, a Type III "ROAD CLOSED" barricade
+// Road work zones: a few dozen blocks around town are shut, a Type III "ROAD CLOSED" barricade
 // line across each end with its amber lamps blinking, the dug-up patch in the middle ringed by orange-and-white drums,
 // a line of cones, a dump truck or an excavator and a pile of dirt, and "ROAD WORK AHEAD" diamonds on the streets
 // leading in. Traffic never turns into a closed block (traffic.js, `e.closed`); the player can drive straight
@@ -16,7 +16,7 @@ const hash = (x, z, k = 0) => { const v = Math.sin(x * 12.9898 + z * 78.233 + k 
 const MAX_CLOSURES = 18;
 const SPACING = 350; // metres between closed blocks, at the least
 
-// Which blocks are shut: side streets and collectors (never the main roads TheRide runs on) between junctions with
+// Which blocks are shut: side streets and collectors (never the main transit roads) between junctions with
 // other ways out, long enough to hold a work zone; picked the same every play, more of them toward the middle of town
 function planClosures(edges) {
   let mx = 0, mz = 0;
@@ -198,7 +198,7 @@ function fender(parts, x, y, z, r, w, hex, from = 0, to = Math.PI) {
   parts.push(piece(g, hex, x, y, z));
 }
 
-// a tandem-axle dump truck, the kind Ann Arbor's paving contractors run: a conventional cab behind a long hood,
+// a tandem-axle paving contractor dump truck: a conventional cab behind a long hood,
 // a ribbed steel box with a cab shield, its load heaped in it; facing +z, about 9 m long
 function dumpTruckGeo(withTyres = true) {
   const tyre = withTyres ? tyreAt : () => {};

@@ -214,7 +214,7 @@ function mapLayers() {
     L.bikePaths.line(pts);
   }
 
-  // The Huron River and its ponds, over the land
+  // Waterways, rivers and ponds, over the land
   L.river = new Path2D();
   for (const rings of WATER_POLYGONS || []) rings.forEach((r, i) => addRing(L.river, r, i > 0));
 
@@ -1065,7 +1065,7 @@ class CityMapSystem {
   }
 
   // =========================================================================
-  // 2. FULL NEW YORK CITY INTERACTIVE STREET MAP MODAL ([M])
+  // 2. FULL INTERACTIVE STREET MAP MODAL ([M])
   // =========================================================================
   renderFullMap() {
     this.clearRouteBtn?.classList.toggle('hidden', !this.waypoint);

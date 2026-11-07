@@ -13,34 +13,45 @@ const PED_SPAWN_DISTANCE = 150;
 const PED_AVOID_INTERVAL = 0.12;
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 
-// How busy each street's sidewalks are: Broadway, Telegraph, Chinatown, Lake Merritt and Grand/Lakeshore the most;
-// downtown and uptown side streets next; quiet residential streets and industrial port blocks less
+// How busy each street's sidewalks are: commercial corridors, downtowns and waterfront promenades the most;
+// central neighborhoods next; quiet residential streets and industrial blocks less.
 const PLACE_CROWD = {
   downtown: 0.85, uptown: 0.8, chinatown: 0.85, old_oakland: 0.65, jack_london: 0.6,
   lake_merritt: 0.75, grand_lake: 0.65, piedmont_ave: 0.55, temescal: 0.6,
-  adams_point: 0.35, west_oakland: 0.2, port_of_oakland: 0.05, oakland: 0.18
+  adams_point: 0.35, west_oakland: 0.2, port_of_oakland: 0.05, oakland: 0.18,
+  midtown: 0.95, fidi: 0.85, soho: 0.85, village: 0.8, flatiron: 0.85,
+  uws: 0.7, ues: 0.7, harlem: 0.65, central_park: 0.55
 };
-const CORE = new Set(['downtown', 'uptown', 'chinatown', 'old_oakland', 'jack_london', 'lake_merritt', 'grand_lake', 'piedmont_ave', 'temescal']);
+const CORE = new Set([
+  'downtown', 'uptown', 'chinatown', 'old_oakland', 'jack_london', 'lake_merritt', 'grand_lake', 'piedmont_ave', 'temescal',
+  'midtown', 'fidi', 'soho', 'village', 'flatiron', 'uws', 'ues', 'harlem'
+]);
 const STREET_CROWD = [
   [/\b(Broadway|Telegraph|Lakeshore|Grand)\b/i, 1],
   [/\b(14th|12th|17th|19th|8th|9th|7th|Webster|Franklin|Washington)\b/i, 0.9],
   [/\b(Harrison|Alice|Jackson|Madison|Oak|Clay|Jefferson|San Pablo|Piedmont|40th|51st|Embarcadero)\b/i, 0.75],
   [/\b(11th|13th|15th|16th|20th|21st|22nd|24th|27th|MacArthur|International|Adeline|Market|Mandela)\b/i, 0.6]
 ];
-const PLAZA = LANDMARKS.find((l) => l.id === 'city_hall') || { x: -89, z: -99 };
-const LAKE = LANDMARKS.find((l) => l.id === 'lake_merritt') || { x: 1050, z: -150 };
+const PLAZA = LANDMARKS.find((l) => l.id === 'city_hall') || LANDMARKS[0] || { x: 0, z: 0 };
+const LAKE = LANDMARKS.find((l) => l.id === 'lake_merritt') || null;
 function edgeCrowd(e) {
   if (e.crowd !== undefined) return e.crowd;
   const mx = (e.from.x + e.to.x) * 0.5, mz = (e.from.z + e.to.z) * 0.5;
   const district = districtAt(mx, mz);
-  let w = PLACE_CROWD[district] ?? 0.15;
-  if (CORE.has(district) && e.street) {
+  let w = PLACE_CROWD[district] ?? 0.35;
+  if ((CORE.has(district) || !(district in PLACE_CROWD)) && e.street) {
     for (const [re, v] of STREET_CROWD) if (re.test(e.street)) { w = Math.max(w, v); break; }
   }
   const dPlaza = Math.hypot(mx - PLAZA.x, mz - PLAZA.z);
   if (dPlaza < 280) w = Math.max(w, 1 - (dPlaza / 280) * 0.35);
-  const dLake = Math.hypot(mx - LAKE.x, mz - LAKE.z);
-  if (dLake < 750) w = Math.max(w, 0.75 - (dLake / 750) * 0.25);
+  if (LAKE) {
+    const dLake = Math.hypot(mx - LAKE.x, mz - LAKE.z);
+    if (dLake < 750) w = Math.max(w, 0.75 - (dLake / 750) * 0.25);
+  }
+  for (const lm of LANDMARKS) {
+    const dLm = Math.hypot(mx - lm.x, mz - lm.z);
+    if (dLm < 220) w = Math.max(w, 0.85 - (dLm / 220) * 0.3);
+  }
   return (e.crowd = w);
 }
 

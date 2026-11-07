@@ -3,7 +3,7 @@ import { color, smoothstep } from 'three/tsl';
 import { cityUniforms } from './tsl-materials.js';
 import { riverbedHeight as groundHeight } from './terrain.js';
 
-// Ann Arbor's gas stations (data/gas-stations.json, Assets/Tools/build-gas-stations.py): a flat white canopy on
+// Gas stations (data/gas-stations.json): a flat white canopy on
 // columns over pump islands, a colored band round its edge (plain colors, no brand), its underside lit at night.
 // Built in world space at the ground's height and merged into two meshes (the lit panels apart, for their glow).
 // Where the city's survey drew the canopy as a building (`replaces`), buildings.js leaves that building out.

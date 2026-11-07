@@ -1278,10 +1278,10 @@ function carStyleCode({ livery = 0, metallic = 0, trim = 0, wheel = 0, plate = 0
 // The same style on another of the plates
 const withPlate = (style, n) => (style & 255) + ((Math.floor(n) & 15) << 8);
 
-// Lamp: what Ann Arbor drives, by body kind (the sedan stands in for Priuses, Civics, Camrys and the odd Tesla, the
-// SUV for Subaru Outbacks and Foresters, RAV4s and CR-Vs): muted colours, plenty of silver, white, grey, dark blue and
-// green, a few reds; U-M's blue on some of the vans and pickups (the university's maintenance fleet). [hex, metallic]
-const ANN_ARBOR_PAINT = {
+// Civilian vehicle paint palette by body kind (the sedan stands in for Priuses, Civics, Camrys and the odd Tesla, the
+// SUV for Outbacks, Foresters, RAV4s and CR-Vs): muted colours, plenty of silver, white, grey, dark blue and
+// green, a few reds; fleet blue on some of the vans and pickups. [hex, metallic]
+const CIVILIAN_PAINT = {
   sedan: [[0xc8ced5, 1], [0xeef0f2, 0], [0x8e949b, 1], [0x4d535a, 1], [0x1f2a3c, 1], [0xbfc5cc, 1], [0x2c3a33, 1],
     [0x16191d, 1], [0xe9ebee, 1], [0x5d6670, 1], [0x6b2226, 1], [0xa9b0b7, 1], [0x3b4f63, 1], [0xf1f2f3, 0]],
   suv: [[0x3a4a3d, 1], [0xc3c9cf, 1], [0x5a6168, 1], [0x24344a, 1], [0xeceef0, 0], [0x8b939b, 1], [0x2e3b35, 1],
@@ -1291,8 +1291,8 @@ const ANN_ARBOR_PAINT = {
     [0x34433a, 1]],
   van: [[0xf3f4f5, 0], [0xf3f4f5, 0], [0x00274c, 0], [0xbcc2c8, 1], [0xf0f1f2, 0], [0x00274c, 0], [0x8e959c, 0]],
   taxi: [[0xc8ced5, 1]],
-  // the odd sports car, in the bold colours they're sold in: racing red, maize, orange, lime, bright blue, Michigan
-  // blue, purple, teal, white, black, silver (11, a prime, so traffic's every-7th numbering doesn't land on one colour)
+  // the odd sports car, in the bold colours they're sold in: racing red, yellow, orange, lime, bright blue, navy,
+  // purple, teal, white, black, silver (11, a prime, so traffic's every-7th numbering doesn't land on one colour)
   sports: [[0xc8102e, 1], [0xffcb05, 0], [0xf26a1b, 1], [0x7fbf2a, 1], [0x1e5bd8, 1], [0x00274c, 1], [0x5b2a86, 1],
     [0x0f8a8a, 1], [0xf2f3f4, 0], [0x121417, 1], [0xc3c8cd, 1]]
 };
@@ -1319,7 +1319,7 @@ const REGIONAL_TAXI_PAINT = {
 };
 
 // One of them for car number i (or a hash 0..1 times 1000), with its own trim, wheels and plate
-function annArborCar(kind, i) {
+function civilianCar(kind, i) {
   if (kind === 'taxi') {
     const tList = REGIONAL_TAXI_PAINT[ACTIVE_CITY_ID] || [[0xf7b512, 0], [0xc8ced5, 1]];
     const [hex, metallic, roofTwoTone] = tList[i % tList.length];
@@ -1335,7 +1335,7 @@ function annArborCar(kind, i) {
       })
     };
   }
-  const list = ANN_ARBOR_PAINT[kind] || ANN_ARBOR_PAINT.sedan;
+  const list = CIVILIAN_PAINT[kind] || CIVILIAN_PAINT.sedan;
   const [hex, metallic] = list[i % list.length];
   const twoTone = (kind === 'suv' && i % 9 === 4) || (ACTIVE_CITY_ID === 'tokyo' && kind === 'sedan' && i % 7 === 2);
   return {
@@ -2089,7 +2089,7 @@ export {
   createLoftedCarMaterial,
   createCarWheelMaterial,
   carStyleCode,
-  annArborCar,
+  civilianCar,
   withPlate,
   buildLightbarGeometry,
   createLightbarMaterial,
