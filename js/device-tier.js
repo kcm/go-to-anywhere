@@ -8,8 +8,8 @@ import { log } from '../lamp-game.js';
 
 const TIERS = {
   full: { name: 'full', stream: 0, shadows: true, bloom: true, antialias: true, scale: 1, traffic: 1, people: 1, farCut: 1, outskirts: true },
-  // the ground and houses within 950 m built, the rest as the player comes near; no MSAA/bloom offscreen passes to save GPU & battery
-  light: { name: 'light', stream: 950, shadows: true, bloom: false, antialias: false, scale: 0.75, traffic: 0.75, people: 0.75, farCut: 0.75, outskirts: true },
+  // the ground and houses within 950 m built, the rest as the player comes near; no shadow cascades, MSAA or bloom offscreen passes to save GPU & battery
+  light: { name: 'light', stream: 950, shadows: false, bloom: false, antialias: false, scale: 0.75, traffic: 0.75, people: 0.75, farCut: 0.75, outskirts: true },
   // within about 1 km; trees, houses and street details drawn half as far; 1344x756; half the cars, a third of the people
   phone: { name: 'phone', stream: 1000, shadows: false, bloom: false, antialias: false, scale: 0.7, traffic: 0.5, people: 0.35, farCut: 0.5, outskirts: true }
 };

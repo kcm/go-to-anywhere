@@ -7,6 +7,13 @@ import { createPostProcessing } from './post-processing.js';
  * Builds the TSL RenderPipeline with optional Half-Res Screen Space Reflections (SSRNode),
  * Bloom, and Filmic Color Grading.
  */
+const DIRECT_EXPOSURE = {
+  golden: 1.42,
+  midday: 1.15,
+  twilight: 1.85,
+  midnight: 2.1
+};
+
 export function createRenderPipeline({ renderer, scene, camera, quality }) {
   let renderPipeline;
   let scenePass;
@@ -14,7 +21,24 @@ export function createRenderPipeline({ renderer, scene, camera, quality }) {
   let ssrPass = null;
   let sceneMRT = null;
 
-  if (!quality.reflections) {
+  if (!quality.reflections && !quality.bloom) {
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = DIRECT_EXPOSURE.golden;
+    scenePass = { renderTarget: null, dispose() {} };
+    colorGrade = {
+      outputNode: null,
+      applyPreset(id) {
+        renderer.toneMappingExposure = DIRECT_EXPOSURE[id] ?? DIRECT_EXPOSURE.golden;
+      },
+      dispose() {}
+    };
+    renderPipeline = {
+      render() {
+        renderer.render(scene, camera);
+      },
+      dispose() {}
+    };
+  } else if (!quality.reflections) {
     scenePass = pass(scene, camera);
     scenePass.renderTarget.storeMultisampledColorBuffer = false;
     scenePass.renderTarget.storeMultisampledDepthBuffer = false;

@@ -272,7 +272,7 @@ class LightingSystem {
     // Two-cascade sunlight points from its position toward the origin; no target object is needed.
     this.sunLight = new SunLight(0xffca92, 5.8);
     this.sunLight.position.copy(TIME_PRESETS.golden.sunDir);
-    this.sunLight.castShadow = true;
+    this.sunLight.castShadow = Boolean(TIER.shadows);
     // Two cascades share an atlas: use 1536px tiles in Full mode and 1024px in Lite/Firefox to cut shadow fill cost by 55%.
     const tile = TIER.name === 'full' && !FIREFOX ? 1536 : 1024;
     this.sunLight.shadow.mapSize.set(tile, tile);
